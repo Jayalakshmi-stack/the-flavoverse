@@ -1,0 +1,2911 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Flavorverse | Tamil Nadu</title>
+<script src="recipe-actions.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#F7E7CE;
+color:#5B4A45;
+transition:.3s;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode{
+background:#241d23;
+color:#eee;
+}
+
+body.dark-mode .hero,
+body.dark-mode .about-text,
+body.dark-mode .recipe-section,
+body.dark-mode .fact-card,
+body.dark-mode .profile-card,
+body.dark-mode .explorer-box,
+body.dark-mode .review-box,
+body.dark-mode .recent-card{
+background:#342a32;
+color:#eee;
+}
+
+body.dark-mode .recipe-content h2,
+body.dark-mode .about-text h2,
+body.dark-mode .facts-section h2{
+color:#e9c9e4;
+}
+
+body.dark-mode .recipe-content h3{
+color:#d6aeca;
+}
+
+body.dark-mode .recipe-info div,
+body.dark-mode .chef-tip,
+body.dark-mode .fun-fact{
+background:#443640;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea{
+background:#443640;
+color:white;
+border-color:#80647b;
+}
+
+body.dark-mode .search-box{
+background:#342a32;
+}
+
+/* ================= HEADER ================= */
+
+header{
+background:#8E6C88;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+font-family:'Cinzel',serif;
+font-size:32px;
+font-weight:bold;
+color:white;
+}
+
+nav{display:flex;align-items:center;justify-content:flex-end;}
+
+/* ================= SCREENSHOT-STYLE HAMBURGER DRAWER ================= */
+.menu-open-btn{border:0;background:transparent;color:#fff;font-size:32px;line-height:1;cursor:pointer;padding:5px 8px;}
+.menu-backdrop{position:fixed;inset:0;background:rgba(25,16,28,.55);z-index:9998;opacity:0;visibility:hidden;transition:.25s;}
+.menu-backdrop.show{opacity:1;visibility:visible;}
+.explore-drawer{position:fixed;top:0;right:0;width:418px;max-width:88vw;height:100vh;background:#fff8ef;z-index:9999;transform:translateX(102%);transition:transform .3s ease;box-shadow:-8px 0 25px rgba(0,0,0,.2);overflow-y:auto;color:#5b4a45;}
+.explore-drawer.open{transform:translateX(0);}
+.drawer-heading{height:115px;background:#a083a2;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 35px;position:sticky;top:0;z-index:2;}
+.drawer-heading h2{font-family:'Cinzel',serif;font-size:32px;font-weight:700;}
+.drawer-close{border:0;background:transparent;color:#fff;font-size:34px;font-weight:300;cursor:pointer;line-height:1;}
+.drawer-links{padding:18px 27px 30px;}
+.drawer-link{display:flex;align-items:center;gap:22px;text-decoration:none;color:#654b70;padding:16px 12px;border-radius:8px;transition:background .2s;}
+.drawer-link:hover{background:#f0e3ed;}
+.drawer-icon{width:36px;flex:0 0 36px;text-align:center;font-size:25px;}
+.drawer-copy strong{display:block;font-family:'Cinzel',serif;font-size:18px;line-height:1.35;color:#654b70;}
+.drawer-copy small{display:block;font-family:'Poppins',sans-serif;font-size:13px;color:#806d91;line-height:1.5;}
+.drawer-divider{height:1px;background:#e4cedd;margin:10px 0 12px;}
+body.drawer-open{overflow:hidden;}
+
+.dark-toggle{
+margin-left:20px;
+border:none;
+background:#F4E5C5;
+color:#5B4A45;
+padding:9px 14px;
+border-radius:20px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+width:90%;
+margin:40px auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+display:flex;
+align-items:center;
+gap:40px;
+padding:40px;
+
+}
+
+.image-box{
+
+width:450px;
+height:350px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#fff8f2;
+border-radius:20px;
+flex:1;
+
+}
+
+.image-box img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+display:block;
+}
+
+.hero-content{
+
+padding:40px;
+flex:1;
+text-align:left;
+
+}
+
+.hero-content h1{
+
+font-family:'Cinzel',serif;
+font-size:58px;
+color:#6F4B72;
+
+}
+
+.hero-content h2{
+
+margin-top:15px;
+color:#B58A4D;
+font-size:30px;
+
+}
+
+.hero-content p{
+
+margin-top:18px;
+font-size:18px;
+line-height:1.8;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:25px;
+padding:14px 35px;
+background:#8E6C88;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#6F4B72;
+
+}
+
+/* ================= ABOUT ================= */
+
+.about-section{
+width:90%;
+margin:50px auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+
+.about-text{
+flex:2;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.about-text h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:20px;
+}
+
+.about-text p{
+line-height:1.9;
+font-size:17px;
+margin-bottom:18px;
+text-align:justify;
+}
+
+.about-box{
+flex:1;
+background:#8E6C88;
+color:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.about-box h3{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+text-align:center;
+}
+
+.about-box ul{
+list-style:none;
+}
+
+.about-box li{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.25);
+font-size:16px;
+}
+
+.about-box li:last-child{
+border-bottom:none;
+}
+
+/* =====================================================
+   RECIPE EXPLORER
+===================================================== */
+
+.explorer-section{
+width:90%;
+margin:60px auto;
+}
+
+.explorer-box{
+background:#FFF9F4;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.explorer-box h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.search-filter-row{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.search-box,
+.filter-box{
+padding:13px 18px;
+border:1px solid #D8C5B0;
+border-radius:25px;
+background:white;
+color:#5B4A45;
+font-family:'Poppins',sans-serif;
+outline:none;
+}
+
+.search-box{
+width:45%;
+min-width:250px;
+}
+
+.filter-box{
+min-width:180px;
+}
+
+.explorer-buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+.explorer-btn{
+border:none;
+padding:12px 22px;
+border-radius:25px;
+background:#8E6C88;
+color:white;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.explorer-btn:hover{
+background:#6F4B72;
+transform:translateY(-2px);
+}
+
+.explorer-btn.random{
+background:#B58A4D;
+}
+
+/* ================= POPULAR ================= */
+
+.popular-section{
+width:90%;
+margin:40px auto;
+}
+
+.popular-title{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:32px;
+margin-bottom:25px;
+}
+
+.popular-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.popular-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+text-align:center;
+transition:.3s;
+}
+
+.popular-card:hover{
+transform:translateY(-6px);
+}
+
+.popular-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.popular-card p{
+font-size:14px;
+line-height:1.6;
+}
+
+/* ================= SEARCH RESULT ================= */
+
+.search-result{
+text-align:center;
+margin-top:18px;
+font-weight:600;
+color:#8E6C88;
+}
+
+/* ================= RECIPE SECTION ================= */
+
+.recipe-section{
+width:90%;
+margin:60px auto;
+
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:40px;
+
+align-items:stretch;
+
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.recipe-image{
+grid-column:1;
+grid-row:1;
+}
+
+.recipe-image img{
+width:100%;
+border-radius:18px;
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+display:block;
+}
+
+.recipe-content{
+grid-column:2;
+grid-row:1;
+}
+
+.recipe-content h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:38px;
+margin-bottom:20px;
+}
+
+.recipe-content h3{
+margin-top:25px;
+margin-bottom:12px;
+color:#8E6C88;
+}
+
+.recipe-content p{
+line-height:1.8;
+text-align:justify;
+}
+
+.recipe-content ul,
+.recipe-content ol{
+margin-left:25px;
+line-height:1.9;
+}
+
+/* ================= RECIPE INFO ================= */
+
+.recipe-info{
+display:flex;
+justify-content:space-between;
+margin-top:25px;
+gap:20px;
+}
+
+.recipe-info div{
+flex:1;
+background:#F7E7CE;
+padding:18px;
+text-align:center;
+border-radius:15px;
+}
+
+/* ================= CHEF TIP + FUN FACT ================= */
+
+.chef-tip,
+.fun-fact{
+margin-top:25px;
+background:#F7E7CE;
+padding:20px;
+border-left:6px solid #8E6C88;
+border-radius:12px;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.recipe-actions{
+grid-column:1;
+grid-row:1;
+
+align-self:end;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-end;
+
+gap:15px;
+
+padding-bottom:5px;
+}
+
+.recipe-actions button{
+
+width:200px;
+padding:14px 18px;
+
+border:none;
+border-radius:30px;
+
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 6px 15px rgba(91,74,69,.18);
+
+}
+
+.favorite-btn{
+background:#8E6C88;
+color:white;
+}
+
+.stamp-btn{
+background:#F4E5C5;
+color:#5B4A45;
+}
+
+.recipe-actions button:hover{
+transform:translateY(-3px);
+box-shadow:0 9px 20px rgba(91,74,69,.22);
+}
+
+/* ================= RATING ================= */
+
+.rating-area{
+margin-top:22px;
+padding:20px;
+background:rgba(244,229,197,.55);
+border-radius:15px;
+}
+
+.rating-area h3{
+margin-top:0;
+}
+
+.stars{
+display:flex;
+gap:5px;
+margin-top:8px;
+}
+
+.star{
+font-size:28px;
+cursor:pointer;
+color:#c8b9aa;
+transition:.2s;
+}
+
+.star.active{
+color:#E5A82F;
+}
+
+.rating-message{
+font-size:13px;
+margin-top:7px;
+}
+
+/* ================= REVIEWS ================= */
+
+.review-box{
+margin-top:18px;
+padding:20px;
+background:#FFF9F4;
+border:1px solid #eadbc9;
+border-radius:15px;
+}
+
+.review-box h3{
+margin-top:0;
+}
+
+.review-input{
+width:100%;
+min-height:80px;
+resize:vertical;
+padding:12px;
+border:1px solid #D8C5B0;
+border-radius:12px;
+outline:none;
+font-family:'Poppins',sans-serif;
+margin-top:8px;
+}
+
+.review-submit{
+margin-top:10px;
+border:none;
+background:#8E6C88;
+color:white;
+padding:10px 20px;
+border-radius:22px;
+cursor:pointer;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+}
+
+.review-submit:hover{
+background:#6F4B72;
+}
+
+.reviews-list{
+margin-top:15px;
+}
+
+.single-review{
+padding:12px;
+margin-top:10px;
+background:#F7E7CE;
+border-radius:12px;
+}
+
+.single-review strong{
+color:#6F4B72;
+}
+
+.single-review small{
+display:block;
+margin-top:4px;
+opacity:.7;
+}
+
+.no-review{
+font-size:13px;
+opacity:.7;
+margin-top:10px;
+}
+
+/* =====================================================
+   REVERSE RECIPE
+===================================================== */
+
+.recipe-section.reverse{
+grid-template-columns:2fr 1fr;
+}
+
+.recipe-section.reverse .recipe-content{
+grid-column:1;
+grid-row:1;
+}
+
+.recipe-section.reverse .recipe-image{
+grid-column:2;
+grid-row:1;
+}
+
+.recipe-section.reverse .recipe-actions{
+grid-column:2;
+grid-row:1;
+}
+
+/* ================= FOOD FACTS ================= */
+
+.facts-section{
+width:90%;
+margin:60px auto;
+}
+
+.facts-section h2{
+text-align:center;
+font-family:'Cinzel',serif;
+font-size:40px;
+color:#6F4B72;
+margin-bottom:35px;
+}
+
+.facts-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.fact-card{
+background:#FFF9F4;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.fact-card:hover{
+transform:translateY(-8px);
+}
+
+.fact-card h3{
+color:#8E6C88;
+margin-bottom:15px;
+}
+
+.fact-card p{
+line-height:1.8;
+}
+
+/* ================= RECENTLY VIEWED ================= */
+
+.recent-section{
+width:90%;
+margin:60px auto;
+}
+
+.recent-section h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.recent-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.recent-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+}
+
+.recent-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.recent-card p{
+font-size:13px;
+}
+
+.recent-empty{
+text-align:center;
+opacity:.7;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-section{
+width:90%;
+margin:60px auto;
+}
+
+.profile-box{
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.profile-box h2{
+font-family:'Cinzel',serif;
+font-size:38px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.profile-name{
+text-align:center;
+font-size:20px;
+margin-bottom:30px;
+}
+
+.profile-email{
+text-align:center;
+opacity:.9;
+margin-bottom:25px;
+}
+
+.profile-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.profile-card{
+background:#FFF9F4;
+color:#5B4A45;
+padding:22px;
+border-radius:16px;
+text-align:center;
+}
+
+.profile-card .count{
+font-size:30px;
+font-weight:bold;
+color:#6F4B72;
+display:block;
+margin-bottom:5px;
+}
+
+.profile-card span:last-child{
+font-size:14px;
+}
+
+/* ================= CHEF ================= */
+
+.chef-section{
+width:90%;
+margin:60px auto;
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.chef-section h2{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+}
+
+.chef-section p{
+font-size:18px;
+line-height:1.8;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+background:#6F4B72;
+color:white;
+text-align:center;
+padding:40px 20px;
+margin-top:60px;
+}
+
+footer h2{
+font-family:'Cinzel',serif;
+margin-bottom:15px;
+}
+
+footer p{
+margin:10px 0;
+line-height:1.8;
+}
+
+.social{
+margin:25px 0;
+}
+
+.social a{
+text-decoration:none;
+font-size:30px;
+margin:0 12px;
+}
+
+.copy{
+margin-top:20px;
+font-size:15px;
+opacity:.9;
+}
+
+/* ================= HIDDEN SEARCH ================= */
+
+.recipe-section.hidden-recipe{
+display:none;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+.logo{
+font-size:25px;
+}
+
+nav{
+justify-content:center;
+}
+
+nav a{
+margin:5px 8px;
+font-size:14px;
+}
+
+.dark-toggle{
+margin:8px 0 0 0;
+}
+
+.hero{
+flex-direction:column;
+padding:20px;
+}
+
+.image-box{
+width:100%;
+height:280px;
+}
+
+.hero-content{
+padding:20px 5px;
+text-align:center;
+}
+
+.hero-content h1{
+font-size:42px;
+}
+
+.hero-content h2{
+font-size:24px;
+}
+
+.hero-content p{
+font-size:15px;
+text-align:justify;
+}
+
+.about-section{
+flex-direction:column;
+}
+
+.about-text,
+.about-box{
+width:100%;
+}
+
+.recipe-section,
+.recipe-section.reverse{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.recipe-image,
+.recipe-content{
+width:100%;
+}
+
+.recipe-info{
+flex-direction:column;
+}
+
+.recipe-actions,
+.recipe-section.reverse .recipe-actions{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:0;
+order:2;
+}
+
+.recipe-actions button{
+width:220px;
+}
+
+.profile-stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.search-box{
+width:100%;
+}
+
+}
+
+@media(max-width:450px){
+
+.profile-stats{
+grid-template-columns:1fr;
+}
+
+.hero-content h1{
+font-size:35px;
+}
+
+.recipe-content h2{
+font-size:30px;
+}
+
+}
+
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+</style>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header>
+<div class="logo">
+🍴 The Flavorverse
+</div>
+<nav><button class="menu-open-btn" id="openExploreMenu" aria-label="Open menu" aria-expanded="false">☰</button></nav>
+</header>
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<aside class="explore-drawer" id="exploreDrawer" aria-label="Explore menu" aria-hidden="true">
+  <div class="drawer-heading"><h2>Explore</h2><button class="drawer-close" id="closeExploreMenu" aria-label="Close menu">×</button></div>
+  <div class="drawer-links">
+    <a class="drawer-link" href="index.html"><span class="drawer-icon">🏠</span><span class="drawer-copy"><strong>Home</strong><small>Return to the homepage</small></span></a>
+    <a class="drawer-link" href="royal.html"><span class="drawer-icon">👑</span><span class="drawer-copy"><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+    <a class="drawer-link" href="movies&cartoons.html"><span class="drawer-icon">🎬</span><span class="drawer-copy"><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+    <a class="drawer-link" href="worldcuisine.html"><span class="drawer-icon">🌎</span><span class="drawer-copy"><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+    <a class="drawer-link" href="desertwrold.html"><span class="drawer-icon">🍰</span><span class="drawer-copy"><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+    <a class="drawer-link" href="gallery.html"><span class="drawer-icon">🖼️</span><span class="drawer-copy"><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="favourite.html"><span class="drawer-icon">💗</span><span class="drawer-copy"><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+    <a class="drawer-link" href="order.html"><span class="drawer-icon">🛒</span><span class="drawer-copy"><strong>Order</strong><small>Order ingredient kits</small></span></a>
+    <a class="drawer-link" href="stamp.html"><span class="drawer-icon">🎟️</span><span class="drawer-copy"><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+    <a class="drawer-link" href="contact.html"><span class="drawer-icon">💌</span><span class="drawer-copy"><strong>Contact</strong><small>Get in touch with us</small></span></a>
+  </div>
+</aside>
+<!-- ================= HERO ================= -->
+<section class="hero">
+<div class="image-box">
+<img alt="Tamil Nadu traditional cuisine" src="herotamilnadu2.png"/>
+</div>
+<div class="hero-content">
+<h1>🇮🇳 Tamil Nadu</h1>
+<h2>Traditional Royal Flavours</h2>
+<p>Experience the timeless taste of Tamil Nadu through its rich culinary traditions, temple recipes, Chettinad spices, and royal heritage dishes. Every recipe tells a story of culture, celebration, and authentic South Indian flavours.</p>
+<a class="btn" href="#tn-kadappa">Explore Recipes</a>
+</div>
+</section>
+<!-- ================= ABOUT KERALA ================= -->
+<section class="about-section" id="about">
+<div class="about-text">
+<h2>🏛️ About Tamil Nadu Cuisine</h2>
+<p>
+
+Tamil Nadu is one of India's oldest culinary regions, known for its rich traditions, aromatic spices, and flavorful dishes. The cuisine reflects centuries of culture, temple heritage, and royal hospitality. Every meal is carefully prepared using fresh ingredients, traditional cooking methods, and authentic South Indian spices.
+
+</p>
+<p>
+
+From the famous Chettinad cuisine to delicious temple prasadam, Tamil Nadu offers a wide variety of vegetarian and non-vegetarian dishes. Rice is the staple food and is often served with sambar, rasam, kootu, poriyal, and spicy curries. Traditional sweets such as Sakkarai Pongal and Akkaravadisal are prepared during festivals and special occasions.
+
+</p>
+<p>
+
+Each region of Tamil Nadu has its own unique cooking style. Kumbakonam is famous for Kadappa, Chettinad is known for its spicy chicken curry, while many temples preserve centuries-old recipes that continue to delight visitors today. These recipes are more than just food—they are a celebration of Tamil culture, family traditions, and hospitality.
+
+</p>
+</div>
+<div class="about-box">
+<h3>✨ Cuisine Highlights</h3>
+<ul>
+<li>🍛 Authentic South Indian Cuisine</li>
+<li>🌶️ Rich Chettinad Spices</li>
+<li>🏛️ Traditional Temple Recipes</li>
+<li>🍚 Rice-based Main Dishes</li>
+<li>🥥 Fresh Coconut &amp; Curry Leaves</li>
+<li>🧈 Pure Ghee &amp; Jaggery Sweets</li>
+<li>🎉 Festival Special Foods</li>
+<li>❤️ Healthy &amp; Nutritious Meals</li>
+</ul>
+</div>
+</section>
+<!-- =====================================================
+     RECIPE EXPLORER
+===================================================== -->
+<section class="explorer-section">
+<div class="explorer-box">
+<h2>🔍 Explore Tamil Nadu Recipes</h2>
+<div class="search-filter-row">
+<input class="search-box" id="recipeSearch" onkeyup="filterRecipes()" placeholder="🔍 Search recipe..." type="text"/>
+<select class="filter-box" id="categoryFilter" onchange="filterRecipes()">
+<option value="all">All Categories</option>
+<option value="main">Main Course</option>
+<option value="seafood">Non-Vegetarian</option>
+<option value="dessert">Sweets</option>
+<option value="vegetarian">Vegetarian</option>
+</select>
+<select class="filter-box" id="cuisineFilter" onchange="filterRecipes()">
+<option value="all">All Categories</option>
+<option value="tamilnadu">Tamil Nadu Cuisine</option>
+</select>
+</div>
+<div class="explorer-buttons">
+<button class="explorer-btn random" onclick="surpriseMe()">
+🎲 Surprise Me
+</button>
+<button class="explorer-btn" onclick="resetFilters()">
+↻ Show All Recipes
+</button>
+</div>
+<p class="search-result" id="searchResult">
+Showing all 4 Tamil Nadu recipes
+</p>
+</div>
+</section>
+<!-- ================= POPULAR RECIPES ================= -->
+<section class="popular-section">
+<h2 class="popular-title">🔥 Popular Tamil Nadu Recipes</h2>
+<div class="popular-container"><a class="popular-card" href="#tn-kadappa"><h3>🍲 Kumbakonam Kadappa</h3><p>Creamy traditional Kumbakonam breakfast curry.</p></a><a class="popular-card" href="#tn-chettinad-chicken"><h3>🍗 Chettinad Chicken Curry</h3><p>Bold roasted spices from the Chettinad region.</p></a><a class="popular-card" href="#tn-sakkarai-pongal"><h3>🍚 Sakkarai Pongal</h3><p>A festive sweet made with rice, jaggery and ghee.</p></a><a class="popular-card" href="#tn-akkaravadisal"><h3>🥛 Akkaravadisal</h3><p>A rich temple-style rice and milk sweet.</p></a></div>
+</section>
+<!-- =====================================================
+     MALABAR BIRYANI
+===================================================== -->
+<section class="recipe-section reverse" data-category="vegetarian" data-cuisine="tamilnadu" data-name="kumbakonam kadappa" id="tn-kadappa">
+<div class="recipe-image">
+<img alt="Kumbakonam Kadappa" src="kadapa.png"/>
+</div>
+<div class="recipe-content">
+<h2>🍲 Kumbakonam Kadappa</h2>
+<p class="recipe-about">
+<b>📖 About the Dish</b><br/><br/>
+
+Kumbakonam Kadappa is a famous traditional side dish from the temple town of Kumbakonam in Tamil Nadu. This creamy curry is prepared using potatoes, moong dal, coconut and aromatic spices. It is usually served with soft idli, crispy dosa or chapati. Its rich flavour and smooth texture make it one of the most loved breakfast dishes in Tamil Nadu.
+
+</p>
+<h3>🌍 Origin</h3>
+<ul>
+<li><b>State :</b> Tamil Nadu</li>
+<li><b>Region :</b> Kumbakonam</li>
+<li><b>Cuisine :</b> South Indian Temple Cuisine</li>
+</ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>2 Potatoes (Boiled)</li>
+<li>½ cup Moong Dal</li>
+<li>1 Onion (Chopped)</li>
+<li>2 Green Chillies</li>
+<li>½ cup Grated Coconut</li>
+<li>1 tsp Fennel Seeds</li>
+<li>½ tsp Turmeric Powder</li>
+<li>Curry Leaves</li>
+<li>Salt to Taste</li>
+<li>2 tbsp Oil</li>
+<li>Fresh Coriander Leaves</li>
+</ul>
+<h3>👨‍🍳 Preparation</h3>
+<ol>
+<li>Cook the moong dal until it becomes soft.</li>
+<li>Boil the potatoes, peel them and mash lightly.</li>
+<li>Grind coconut and fennel seeds into a smooth paste.</li>
+<li>Heat oil and sauté onions, green chillies and curry leaves.</li>
+<li>Add turmeric powder and mix well.</li>
+<li>Add the cooked dal and mashed potatoes.</li>
+<li>Mix in the coconut paste and simmer for 8–10 minutes.</li>
+<li>Garnish with coriander leaves and serve hot with idli or dosa.</li>
+</ol>
+<div class="recipe-info">
+<div>
+<h4>⏱ Cooking Time</h4>
+<p>40 Minutes</p>
+</div>
+<div>
+<h4>🍽 Serves</h4>
+<p>4 People</p>
+</div>
+<div>
+<h4>⭐ Difficulty</h4>
+<p>Easy</p>
+</div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Secret</h3>
+<p>
+
+For the authentic Kumbakonam taste, always use freshly grated coconut and freshly ground fennel seeds. Slow simmering makes the curry creamy and enhances its aroma.
+
+</p>
+</div>
+<div class="fun-fact">
+<h3>✨ Fun Fact</h3>
+<p>
+
+Kumbakonam Kadappa has been served in traditional hotels and homes for many decades. It is considered one of the signature breakfast dishes of the Kumbakonam region and is loved for its comforting flavour.
+
+</p>
+</div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="tn-kadappa">
+<span class="star" onclick="rateRecipe('tn-kadappa',1,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-kadappa',2,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-kadappa',3,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-kadappa',4,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-kadappa',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-tn-kadappa">
+Choose your rating
+</p>
+</div><div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-tn-kadappa" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('tn-kadappa','Kumbakonam Kadappa')">
+Post Review
+</button>
+<div class="reviews-list" id="reviews-tn-kadappa">
+</div>
+</div></div>
+<!-- BUTTONS -->
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="tn-kadappa" id="favorite-tn-kadappa" onclick="addToFavourite('tn-kadappa', 'Kumbakonam Kadappa', 'Royal Heritage', this)">
+♡ Add to Favourite
+</button>
+<button class="stamp-btn" data-stamp-id="tn-kadappa" id="stamp-tn-kadappa" onclick="addToStamp('tn-kadappa', 'Kumbakonam Kadappa', 'Royal Heritage', this)">
+🏷️ Add to Stamp
+</button>
+</div>
+</section>
+<!-- =====================================================
+     FISH MOLEE
+===================================================== -->
+<section class="recipe-section" data-category="main" data-cuisine="tamilnadu" data-name="chettinad chicken curry" id="tn-chettinad-chicken">
+<div class="recipe-image">
+<img alt="Chettinad Chicken Curry" src="chettinaduchicken.png"/>
+</div>
+<div class="recipe-content">
+<h2>🍗 Chettinad Chicken Curry</h2>
+<p class="recipe-about">
+<b>📖 About the Dish</b><br/><br/>
+
+Chettinad Chicken Curry is one of the most famous dishes from the Chettinad region of Tamil Nadu. It is known for its bold flavours, freshly roasted spices, and rich aroma. This traditional curry is prepared using authentic Chettinad masala, making it one of the spiciest and most delicious South Indian chicken dishes. It is commonly served during family gatherings and festive occasions with rice, parotta, dosa or chapati.
+
+</p>
+<h3>🌍 Origin</h3>
+<ul>
+<li><b>State :</b> Tamil Nadu</li>
+<li><b>Region :</b> Chettinad (Sivagangai District)</li>
+<li><b>Cuisine :</b> South Indian Non-Vegetarian Cuisine</li>
+</ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>500 g Chicken (cleaned)</li>
+<li>2 Onions (finely chopped)</li>
+<li>2 Tomatoes (chopped)</li>
+<li>2 tbsp Ginger-Garlic Paste</li>
+<li>2 tbsp Chettinad Masala Powder</li>
+<li>1 tsp Turmeric Powder</li>
+<li>1 tsp Red Chilli Powder</li>
+<li>Curry Leaves</li>
+<li>2 tbsp Oil</li>
+<li>Salt to Taste</li>
+<li>Fresh Coriander Leaves</li>
+</ul>
+<h3>👨‍🍳 Preparation</h3>
+<ol>
+<li>Wash and clean the chicken pieces thoroughly.</li>
+<li>Heat oil in a pan and sauté onions until golden brown.</li>
+<li>Add ginger-garlic paste and cook for 2 minutes.</li>
+<li>Add chopped tomatoes and cook until soft.</li>
+<li>Mix in turmeric, chilli powder and Chettinad masala.</li>
+<li>Add the chicken pieces and stir well until coated with the spices.</li>
+<li>Pour a little water, cover and cook for 25–30 minutes until the chicken is tender.</li>
+<li>Garnish with fresh coriander leaves and serve hot with rice, parotta or dosa.</li>
+</ol>
+<div class="recipe-info">
+<div>
+<h4>⏱ Cooking Time</h4>
+<p>50 Minutes</p>
+</div>
+<div>
+<h4>🍽 Serves</h4>
+<p>4 People</p>
+</div>
+<div>
+<h4>⭐ Difficulty</h4>
+<p>Medium</p>
+</div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Secret</h3>
+<p>
+
+Dry roast the whole spices before grinding them into masala. This gives the curry its authentic Chettinad aroma and deep flavour.
+
+</p>
+</div>
+<div class="fun-fact">
+<h3>✨ Fun Fact</h3>
+<p>
+
+Chettinad cuisine is famous around the world for its unique spice blends. Many international restaurants serve Chettinad Chicken Curry as one of India's signature dishes.
+
+</p>
+</div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="tn-chettinad-chicken">
+<span class="star" onclick="rateRecipe('tn-chettinad-chicken',1,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-chettinad-chicken',2,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-chettinad-chicken',3,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-chettinad-chicken',4,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-chettinad-chicken',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-tn-chettinad-chicken">
+Choose your rating
+</p>
+</div><div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-tn-chettinad-chicken" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('tn-chettinad-chicken','Chettinad Chicken Curry')">
+Post Review
+</button>
+<div class="reviews-list" id="reviews-tn-chettinad-chicken">
+</div>
+</div></div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="tn-chettinad-chicken" id="favorite-tn-chettinad-chicken" onclick="addToFavourite('tn-chettinad-chicken', 'Chettinad Chicken Curry', 'Royal Heritage', this)">
+♡ Add to Favourite
+</button>
+<button class="stamp-btn" data-stamp-id="tn-chettinad-chicken" id="stamp-tn-chettinad-chicken" onclick="addToStamp('tn-chettinad-chicken', 'Chettinad Chicken Curry', 'Royal Heritage', this)">
+🏷️ Add to Stamp
+</button>
+</div>
+</section>
+<!-- =====================================================
+     ADA PRADHAMAN
+===================================================== -->
+<section class="recipe-section reverse" data-category="dessert" data-cuisine="tamilnadu" data-name="sakkarai pongal" id="tn-sakkarai-pongal">
+<div class="recipe-image">
+<img alt="Sakkarai Pongal" src="sakaraipongal.jpeg"/>
+</div>
+<div class="recipe-content">
+<h2>🍚 Sakkarai Pongal</h2>
+<p class="recipe-about">
+<b>📖 About the Dish</b><br/><br/>
+
+Sakkarai Pongal is a traditional South Indian sweet prepared during the Pongal harvest festival and many temple celebrations. It is made with rice, moong dal, jaggery, milk, ghee and dry fruits. The rich aroma of cardamom and roasted cashews makes this dessert special. It is considered a symbol of prosperity, happiness and gratitude.
+
+</p>
+<h3>🌍 Origin</h3>
+<ul>
+<li><b>State :</b> Tamil Nadu</li>
+<li><b>Region :</b> Throughout Tamil Nadu</li>
+<li><b>Cuisine :</b> Traditional South Indian Sweet</li>
+</ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>1 cup Raw Rice</li>
+<li>¼ cup Moong Dal</li>
+<li>1½ cups Jaggery</li>
+<li>3 cups Milk</li>
+<li>2 tbsp Ghee</li>
+<li>10 Cashew Nuts</li>
+<li>10 Raisins</li>
+<li>½ tsp Cardamom Powder</li>
+<li>A few Saffron Strands (Optional)</li>
+</ul>
+<h3>👨‍🍳 Preparation</h3>
+<ol>
+<li>Wash the rice and moong dal thoroughly.</li>
+<li>Cook them together with milk until soft.</li>
+<li>Melt the jaggery in a little water and strain it.</li>
+<li>Add the jaggery syrup to the cooked rice mixture.</li>
+<li>Cook on low flame for 5–7 minutes while stirring.</li>
+<li>Heat ghee and fry the cashews and raisins until golden.</li>
+<li>Add cardamom powder and the fried nuts to the pongal.</li>
+<li>Mix well and serve warm.</li>
+</ol>
+<div class="recipe-info">
+<div>
+<h4>⏱ Cooking Time</h4>
+<p>45 Minutes</p>
+</div>
+<div>
+<h4>🍽 Serves</h4>
+<p>5 People</p>
+</div>
+<div>
+<h4>⭐ Difficulty</h4>
+<p>Easy</p>
+</div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Secret</h3>
+<p>
+
+Use fresh jaggery and pure ghee for the best taste. Cooking the pongal on low heat helps develop a rich flavour and creamy texture.
+
+</p>
+</div>
+<div class="fun-fact">
+<h3>✨ Fun Fact</h3>
+<p>
+
+Sakkarai Pongal is offered as a sacred prasadam in many famous temples of Tamil Nadu, including the Meenakshi Amman Temple and Srirangam Temple. It is especially prepared during the Pongal festival to celebrate a successful harvest.
+
+</p>
+</div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="tn-sakkarai-pongal">
+<span class="star" onclick="rateRecipe('tn-sakkarai-pongal',1,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-sakkarai-pongal',2,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-sakkarai-pongal',3,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-sakkarai-pongal',4,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-sakkarai-pongal',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-tn-sakkarai-pongal">
+Choose your rating
+</p>
+</div><div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-tn-sakkarai-pongal" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('tn-sakkarai-pongal','Sakkarai Pongal')">
+Post Review
+</button>
+<div class="reviews-list" id="reviews-tn-sakkarai-pongal">
+</div>
+</div></div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="tn-sakkarai-pongal" id="favorite-tn-sakkarai-pongal" onclick="addToFavourite('tn-sakkarai-pongal', 'Sakkarai Pongal', 'Royal Heritage', this)">
+♡ Add to Favourite
+</button>
+<button class="stamp-btn" data-stamp-id="tn-sakkarai-pongal" id="stamp-tn-sakkarai-pongal" onclick="addToStamp('tn-sakkarai-pongal', 'Sakkarai Pongal', 'Royal Heritage', this)">
+🏷️ Add to Stamp
+</button>
+</div>
+</section>
+<!-- =====================================================
+     KERALA STEW
+===================================================== -->
+<section class="recipe-section" data-category="dessert" data-cuisine="tamilnadu" data-name="akkaravadisal" id="tn-akkaravadisal">
+<div class="recipe-image">
+<img alt="Akkaravadisal" src="akkaravadisal.png"/>
+</div>
+<div class="recipe-content">
+<h2>🥛 Akkaravadisal</h2>
+<p class="recipe-about">
+<b>📖 About the Dish</b><br/><br/>
+
+Akkaravadisal is a rich and creamy traditional sweet from Tamil Nadu. It is prepared using rice, milk, jaggery, ghee and cardamom. This delicious dessert is closely associated with temple offerings, especially in the famous Sri Ranganathaswamy Temple at Srirangam. Its smooth texture and rich flavour make it one of the most loved festive sweets in South India.
+
+</p>
+<h3>🌍 Origin</h3>
+<ul>
+<li><b>State :</b> Tamil Nadu</li>
+<li><b>Region :</b> Srirangam</li>
+<li><b>Cuisine :</b> Traditional Temple Sweet</li>
+</ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>1 cup Raw Rice</li>
+<li>4 cups Full Cream Milk</li>
+<li>1½ cups Jaggery</li>
+<li>4 tbsp Ghee</li>
+<li>½ tsp Cardamom Powder</li>
+<li>10 Cashew Nuts</li>
+<li>10 Raisins</li>
+<li>A pinch of Saffron (Optional)</li>
+</ul>
+<h3>👨‍🍳 Preparation</h3>
+<ol>
+<li>Wash the rice thoroughly and cook it in milk until soft and creamy.</li>
+<li>Melt the jaggery in a little water and strain it to remove impurities.</li>
+<li>Add the jaggery syrup to the cooked rice and mix gently.</li>
+<li>Cook on low flame for 5–8 minutes while stirring continuously.</li>
+<li>Add ghee little by little to make the dessert rich and smooth.</li>
+<li>Mix in the cardamom powder and saffron for extra aroma.</li>
+<li>Fry the cashews and raisins in ghee and add them to the dessert.</li>
+<li>Serve warm as a festive sweet or temple-style prasadam.</li>
+</ol>
+<div class="recipe-info">
+<div>
+<h4>⏱ Cooking Time</h4>
+<p>50 Minutes</p>
+</div>
+<div>
+<h4>🍽 Serves</h4>
+<p>5 People</p>
+</div>
+<div>
+<h4>⭐ Difficulty</h4>
+<p>Easy</p>
+</div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Secret</h3>
+<p>
+
+Cook the rice slowly in full-cream milk instead of water to achieve the authentic temple-style taste. Adding ghee in small portions while stirring gives the dessert a smooth, rich texture.
+
+</p>
+</div>
+<div class="fun-fact">
+<h3>✨ Fun Fact</h3>
+<p>
+
+Akkaravadisal is believed to have been offered to Lord Ranganatha for centuries. It is one of the most famous temple sweets in Tamil Nadu and is cherished during festivals and special religious occasions.
+
+</p>
+</div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="tn-akkaravadisal">
+<span class="star" onclick="rateRecipe('tn-akkaravadisal',1,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-akkaravadisal',2,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-akkaravadisal',3,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-akkaravadisal',4,this)">★</span>
+<span class="star" onclick="rateRecipe('tn-akkaravadisal',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-tn-akkaravadisal">
+Choose your rating
+</p>
+</div><div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-tn-akkaravadisal" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('tn-akkaravadisal','Akkaravadisal')">
+Post Review
+</button>
+<div class="reviews-list" id="reviews-tn-akkaravadisal">
+</div>
+</div></div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="tn-akkaravadisal" id="favorite-tn-akkaravadisal" onclick="addToFavourite('tn-akkaravadisal', 'Akkaravadisal', 'Royal Heritage', this)">
+♡ Add to Favourite
+</button>
+<button class="stamp-btn" data-stamp-id="tn-akkaravadisal" id="stamp-tn-akkaravadisal" onclick="addToStamp('tn-akkaravadisal', 'Akkaravadisal', 'Royal Heritage', this)">
+🏷️ Add to Stamp
+</button>
+</div>
+</section>
+<!-- ================= KERALA FOOD FACTS ================= -->
+<section class="facts-section">
+<h2>⭐ Tamil Nadu Food Facts</h2>
+<div class="facts-container">
+<div class="fact-card">
+<h3>🏛 Temple Cuisine</h3>
+<p>
+
+Many traditional recipes of Tamil Nadu originated in ancient temples and are still prepared using centuries-old methods.
+
+</p>
+</div>
+<div class="fact-card">
+<h3>🌶 Chettinad Spices</h3>
+<p>
+
+Chettinad cuisine is famous worldwide for its unique blend of freshly roasted spices and aromatic masalas.
+
+</p>
+</div>
+<div class="fact-card">
+<h3>🍚 Rice Culture</h3>
+<p>
+
+Rice is the staple food of Tamil Nadu and is enjoyed with a variety of curries, gravies and traditional side dishes.
+
+</p>
+</div>
+<div class="fact-card">
+<h3>🎉 Festival Foods</h3>
+<p>
+
+Special dishes like Sakkarai Pongal and Akkaravadisal are prepared during festivals and temple celebrations.
+
+</p>
+</div>
+</div>
+</section>
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+<h2>🕐 Recently Viewed</h2>
+<div class="recent-container" id="recentContainer">
+<p class="recent-empty">
+Login to see your recently viewed recipes.
+</p>
+</div>
+</section>
+<!-- ================= MY FLAVORVERSE PROFILE ================= -->
+<section class="profile-section">
+<div class="profile-box">
+<h2>👤 My Flavorverse Profile</h2>
+<p class="profile-name" id="profileName">
+Guest
+</p>
+<p class="profile-email" id="profileEmail">
+Login to see your profile
+</p>
+<div class="profile-stats">
+<div class="profile-card">
+<span class="count" id="favouriteCount">
+0
+</span>
+<span>❤️ Favourites</span>
+</div>
+<div class="profile-card">
+<span class="count" id="stampCount">
+0
+</span>
+<span>🏷️ Stamps</span>
+</div>
+<div class="profile-card">
+<span class="count" id="ratingCount">
+0
+</span>
+<span>⭐ Ratings</span>
+</div>
+<div class="profile-card">
+<span class="count" id="reviewCount">
+0
+</span>
+<span>💬 Reviews</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= CHEF RECOMMENDATION ================= -->
+<section class="chef-section">
+<h2>👨‍🍳 Chef's Recommendation</h2>
+<p>For a complete Tamil Nadu dining experience, begin with creamy Kumbakonam Kadappa, enjoy the bold spices of Chettinad Chicken Curry, and finish with traditional Sakkarai Pongal or Akkaravadisal. These dishes celebrate the rich food heritage of Tamil Nadu.</p>
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+<!-- ================= FOOTER ================= -->
+<footer>
+<h2>🍴 The Flavorverse</h2>
+<p>
+
+Discover India's rich culinary heritage, one delicious recipe at a time.
+
+</p>
+<div class="social">
+<a href="#">📘</a>
+<a href="#">📸</a>
+<a href="#">▶️</a>
+<a href="#">🐦</a>
+</div>
+<p class="copy">
+
+© 2026 The Flavorverse | All Rights Reserved
+
+</p>
+</footer>
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+authDomain: "the-flavoverse.firebaseapp.com",
+
+projectId: "the-flavoverse",
+
+storageBucket: "the-flavoverse.firebasestorage.app",
+
+messagingSenderId: "1064022248292",
+
+appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+
+};
+
+if(!firebase.apps.length){
+
+firebase.initializeApp(firebaseConfig);
+
+}
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipes = [
+{
+id:"tn-kadappa",
+name:"Kumbakonam Kadappa",
+category:"vegetarian",
+cuisine:"tamilnadu"
+},
+{
+id:"tn-chettinad-chicken",
+name:"Chettinad Chicken Curry",
+category:"main",
+cuisine:"tamilnadu"
+},
+{
+id:"tn-sakkarai-pongal",
+name:"Sakkarai Pongal",
+category:"dessert",
+cuisine:"tamilnadu"
+},
+{
+id:"tn-akkaravadisal",
+name:"Akkaravadisal",
+category:"dessert",
+cuisine:"tamilnadu"
+}
+];
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function getCurrentUser(){
+
+return auth.currentUser;
+
+}
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function addToFavourite(id,name,category,button){
+
+const user = getCurrentUser();
+
+if(!user){
+
+alert("Please login first to add favourites ❤️");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const ref =
+db.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.doc(id);
+
+const existing = await ref.get();
+
+if(existing.exists){
+
+await ref.delete();
+
+button.innerHTML="♡ Add to Favourite";
+
+alert(name+" removed from favourites.");
+
+}
+
+else{
+
+await ref.set({
+
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+button.innerHTML="♥ Added to Favourite";
+
+alert(name+" added to favourites ❤️");
+
+}
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Favourite update failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function addToStamp(id,name,category,button){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to add stamps 🏷️");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const ref =
+db.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.doc(id);
+
+const existing=await ref.get();
+
+if(existing.exists){
+
+await ref.delete();
+
+button.innerHTML="🏷️ Add to Stamp";
+
+alert(name+" removed from passport.");
+
+}
+
+else{
+
+await ref.set({
+
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+button.innerHTML="🏷️ Stamped";
+
+alert(name+" added to your Flavorverse Passport 🏷️");
+
+}
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Stamp update failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function rateRecipe(recipeId,rating,element){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to rate recipes ⭐");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.doc(recipeId)
+.set({
+
+recipeId:recipeId,
+rating:rating,
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+const stars=element.parentElement.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+
+if(index<rating){
+
+star.classList.add("active");
+
+}
+else{
+
+star.classList.remove("active");
+
+}
+
+});
+
+document.getElementById("rating-"+recipeId).innerText =
+"You rated this recipe "+rating+"/5 ⭐";
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Rating failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD USER RATINGS
+===================================================== */
+
+async function loadRatings(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const doc=await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.doc(recipe.id)
+.get();
+
+if(doc.exists){
+
+const rating=doc.data().rating;
+
+const container=
+document.querySelector(
+'.stars[data-recipe="'+recipe.id+'"]'
+);
+
+if(container){
+
+const stars=container.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+
+if(index<rating){
+
+star.classList.add("active");
+
+}
+
+});
+
+}
+
+const text=document.getElementById(
+"rating-"+recipe.id
+);
+
+if(text){
+
+text.innerText=
+"You rated this recipe "+rating+"/5 ⭐";
+
+}
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+async function submitReview(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to post a review 💬");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+const textarea=document.getElementById(
+"review-text-"+recipeId
+);
+
+const text=textarea.value.trim();
+
+if(!text){
+
+alert("Please write a review first.");
+
+return;
+
+}
+
+try{
+
+const userDoc=
+await db.collection("users")
+.doc(user.uid)
+.get();
+
+let userName="Flavorverse User";
+
+if(userDoc.exists && userDoc.data().name){
+
+userName=userDoc.data().name;
+
+}
+
+await db
+.collection("recipes")
+.doc(recipeId)
+.collection("reviews")
+.doc(user.uid)
+.set({
+
+recipeId:recipeId,
+recipeName:recipeName,
+userId:user.uid,
+userName:userName,
+review:text,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+textarea.value="";
+
+alert("Review posted successfully! 💬");
+
+loadReviews(recipeId);
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Review failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(recipeId){
+
+const container=
+document.getElementById("reviews-"+recipeId);
+
+if(!container) return;
+
+try{
+
+const snapshot=
+await db
+.collection("recipes")
+.doc(recipeId)
+.collection("reviews")
+.orderBy("createdAt","desc")
+.limit(10)
+.get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+
+container.innerHTML=
+'<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const review=document.createElement("div");
+
+review.className="single-review";
+
+const name=document.createElement("strong");
+
+name.textContent=
+"💜 "+(data.userName || "Flavorverse User");
+
+const content=document.createElement("p");
+
+content.textContent=data.review || "";
+
+const date=document.createElement("small");
+
+if(data.createdAt){
+
+date.textContent=
+data.createdAt.toDate().toLocaleDateString();
+
+}
+
+review.appendChild(name);
+
+review.appendChild(content);
+
+review.appendChild(date);
+
+container.appendChild(review);
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+container.innerHTML=
+'<p class="no-review">Reviews will appear here.</p>';
+
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED — FIXED
+   Handles old Firestore records with different field names.
+===================================================== */
+
+function getRecipeNameFromData(data, documentId) {
+    data = data || {};
+
+    // First try the common name fields used by different page versions.
+    const savedName =
+        data.recipeName ||
+        data.name ||
+        data.title ||
+        data.dishName ||
+        data.foodName;
+
+    if (savedName && String(savedName).trim() &&
+        String(savedName).trim().toLowerCase() !== "undefined" &&
+        String(savedName).trim().toLowerCase() !== "null") {
+        return String(savedName).trim();
+    }
+
+    // Older records may only have a recipe ID.
+    const savedId =
+        data.recipeId ||
+        data.id ||
+        data.recipeID ||
+        documentId;
+
+    const matchedRecipe = recipes.find(function (recipe) {
+        return recipe.id === savedId;
+    });
+
+    if (matchedRecipe && matchedRecipe.name) {
+        return matchedRecipe.name;
+    }
+
+    // Last fallback: match by the Firestore document ID.
+    const matchedByDocumentId = recipes.find(function (recipe) {
+        return recipe.id === documentId;
+    });
+
+    return matchedByDocumentId ? matchedByDocumentId.name : "";
+}
+
+async function addRecentlyViewed(recipeId, recipeName) {
+    const user = getCurrentUser();
+    if (!user || !recipeId) return;
+
+    // Always get the official recipe name from the recipe list.
+    const matchedRecipe = recipes.find(function (recipe) {
+        return recipe.id === recipeId;
+    });
+
+    const safeName =
+        (matchedRecipe && matchedRecipe.name) ||
+        (recipeName && String(recipeName).trim()) ||
+        "";
+
+    // Never save a blank or "undefined" recipe name.
+    if (!safeName || safeName.toLowerCase() === "undefined") {
+        console.warn("Recently Viewed: recipe name missing for ID:", recipeId);
+        return;
+    }
+
+    try {
+        await db
+            .collection("users")
+            .doc(user.uid)
+            .collection("recentlyViewed")
+            .doc(recipeId)
+            .set({
+                recipeId: recipeId,
+                recipeName: safeName,
+                name: safeName,
+                viewedAt: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+    } catch (error) {
+        console.error("Could not save Recently Viewed recipe:", error);
+    }
+}
+
+async function loadRecentlyViewed() {
+    const container = document.getElementById("recentContainer");
+    if (!container) return;
+
+    const user = getCurrentUser();
+
+    if (!user) {
+        container.innerHTML =
+            '<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+        return;
+    }
+
+    container.innerHTML =
+        '<p class="recent-empty">Loading recently viewed recipes...</p>';
+
+    try {
+        const snapshot = await db
+            .collection("users")
+            .doc(user.uid)
+            .collection("recentlyViewed")
+            .limit(30)
+            .get();
+
+        if (snapshot.empty) {
+            container.innerHTML =
+                '<p class="recent-empty">No recently viewed recipes yet.</p>';
+            return;
+        }
+
+        // Convert old and new records into one consistent format.
+        const recentRecipes = [];
+
+        snapshot.forEach(function (doc) {
+            const data = doc.data() || {};
+            const name = getRecipeNameFromData(data, doc.id);
+
+            // Ignore records that cannot be matched to a real recipe.
+            if (!name) return;
+
+            const timestamp =
+                data.viewedAt && typeof data.viewedAt.toMillis === "function"
+                    ? data.viewedAt.toMillis()
+                    : 0;
+
+            recentRecipes.push({
+                id: data.recipeId || data.id || doc.id,
+                name: name,
+                timestamp: timestamp
+            });
+        });
+
+        // Newest first; records without a timestamp go to the end.
+        recentRecipes.sort(function (a, b) {
+            return b.timestamp - a.timestamp;
+        });
+
+        const visibleRecipes = recentRecipes.slice(0, 8);
+        container.innerHTML = "";
+
+        if (visibleRecipes.length === 0) {
+            container.innerHTML =
+                '<p class="recent-empty">No valid recently viewed recipes yet. Open a recipe to add it here.</p>';
+            return;
+        }
+
+        visibleRecipes.forEach(function (recipe) {
+            const card = document.createElement("div");
+            card.className = "recent-card";
+
+            const title = document.createElement("h3");
+            title.textContent = "🕐 " + recipe.name;
+
+            const description = document.createElement("p");
+            description.textContent = "You recently explored this recipe.";
+
+            card.appendChild(title);
+            card.appendChild(description);
+
+            // Clicking a card takes the visitor to that recipe on this page.
+            const section = document.getElementById(recipe.id);
+            if (section) {
+                card.style.cursor = "pointer";
+                card.title = "Open " + recipe.name;
+                card.addEventListener("click", function () {
+                    section.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+            }
+
+            container.appendChild(card);
+        });
+    } catch (error) {
+        console.error("Could not load Recently Viewed recipes:", error);
+        container.innerHTML =
+            '<p class="recent-empty">Recently Viewed could not be loaded. Please check your Firebase connection and Firestore rules.</p>';
+    }
+}
+
+/* =====================================================
+   TRACK RECIPE VIEW
+===================================================== */
+
+function setupRecentlyViewed() {
+    const recipeSections = document.querySelectorAll(".recipe-section");
+
+    if (!("IntersectionObserver" in window)) {
+        // Fallback for older browsers: record a recipe when its section is clicked.
+        recipeSections.forEach(function (section) {
+            section.addEventListener("click", function () {
+                const recipe = recipes.find(function (item) {
+                    return item.id === section.id;
+                });
+                if (recipe) addRecentlyViewed(recipe.id, recipe.name);
+            });
+        });
+        return;
+    }
+
+    const lastRecorded = new Map();
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+
+            const id = entry.target.id;
+            const recipe = recipes.find(function (item) {
+                return item.id === id;
+            });
+
+            if (!recipe) return;
+
+            // Avoid writing repeatedly while the same section stays visible.
+            const now = Date.now();
+            const previous = lastRecorded.get(id) || 0;
+            if (now - previous < 15000) return;
+
+            lastRecorded.set(id, now);
+            addRecentlyViewed(recipe.id, recipe.name);
+        });
+    }, { threshold: 0.35 });
+
+    recipeSections.forEach(function (section) {
+        observer.observe(section);
+    });
+}
+
+
+/* =====================================================
+   PROFILE COUNTS
+===================================================== */
+
+async function updateProfileCounts(){
+
+const user=getCurrentUser();
+
+if(!user){
+
+document.getElementById("favouriteCount").innerText="0";
+
+document.getElementById("stampCount").innerText="0";
+
+document.getElementById("ratingCount").innerText="0";
+
+document.getElementById("reviewCount").innerText="0";
+
+return;
+
+}
+
+try{
+
+const userDoc=
+await db.collection("users")
+.doc(user.uid)
+.get();
+
+if(userDoc.exists){
+
+const data=userDoc.data();
+
+document.getElementById("profileName").innerText=
+data.name || "Flavorverse User";
+
+document.getElementById("profileEmail").innerText=
+data.email || user.email;
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+user.email;
+
+document.getElementById("profileEmail").innerText=
+user.email;
+
+}
+
+
+const favourites=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.get();
+
+const stamps=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.get();
+
+const ratings=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.get();
+
+
+/*
+   Reviews are stored inside
+   recipes/{recipeId}/reviews/{uid}
+*/
+
+let reviewTotal=0;
+
+for(const recipe of recipes){
+
+const review=
+await db
+.collection("recipes")
+.doc(recipe.id)
+.collection("reviews")
+.doc(user.uid)
+.get();
+
+if(review.exists){
+
+reviewTotal++;
+
+}
+
+}
+
+
+document.getElementById("favouriteCount").innerText=
+favourites.size;
+
+document.getElementById("stampCount").innerText=
+stamps.size;
+
+document.getElementById("ratingCount").innerText=
+ratings.size;
+
+document.getElementById("reviewCount").innerText=
+reviewTotal;
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   UPDATE BUTTON STATUS
+===================================================== */
+
+async function updateButtons(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const fav=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.doc(recipe.id)
+.get();
+
+const favButton=
+document.querySelector(
+'[data-favourite-id="'+recipe.id+'"]'
+);
+
+if(fav.exists && favButton){
+
+favButton.innerHTML=
+"♥ Added to Favourite";
+
+}
+
+
+const stamp=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.doc(recipe.id)
+.get();
+
+const stampButton=
+document.querySelector(
+'[data-stamp-id="'+recipe.id+'"]'
+);
+
+if(stamp.exists && stampButton){
+
+stampButton.innerHTML=
+"🏷️ Stamped";
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   SEARCH + FILTER
+===================================================== */
+
+function filterRecipes(){
+
+const search=
+document.getElementById("recipeSearch")
+.value
+.toLowerCase()
+.trim();
+
+const category=
+document.getElementById("categoryFilter")
+.value;
+
+const cuisine=
+document.getElementById("cuisineFilter")
+.value;
+
+let count=0;
+
+document.querySelectorAll(".recipe-section")
+.forEach(section=>{
+
+const name=
+section.dataset.name.toLowerCase();
+
+const sectionCategory=
+section.dataset.category;
+
+const sectionCuisine=
+section.dataset.cuisine;
+
+const searchMatch=
+name.includes(search);
+
+const categoryMatch=
+category==="all" ||
+sectionCategory===category;
+
+const cuisineMatch=
+cuisine==="all" ||
+sectionCuisine===cuisine;
+
+if(
+searchMatch &&
+categoryMatch &&
+cuisineMatch
+){
+
+section.classList.remove("hidden-recipe");
+
+count++;
+
+}
+else{
+
+section.classList.add("hidden-recipe");
+
+}
+
+});
+
+document.getElementById("searchResult").innerText=
+"Showing "+count+" recipe"+(count!==1?"s":"");
+
+}
+
+
+/* =====================================================
+   RESET FILTER
+===================================================== */
+
+function resetFilters(){
+
+document.getElementById("recipeSearch").value="";
+
+document.getElementById("categoryFilter").value="all";
+
+document.getElementById("cuisineFilter").value="all";
+
+document.querySelectorAll(".recipe-section")
+.forEach(section=>{
+
+section.classList.remove("hidden-recipe");
+
+});
+
+document.getElementById("searchResult").innerText=
+"Showing all 4 Tamil Nadu recipes";
+
+}
+
+
+/* =====================================================
+   SURPRISE ME
+===================================================== */
+
+function surpriseMe(){
+
+const visibleRecipes=
+Array.from(
+document.querySelectorAll(".recipe-section")
+)
+.filter(recipe=>
+!recipe.classList.contains("hidden-recipe")
+);
+
+if(visibleRecipes.length===0){
+
+alert("No recipes available with the selected filter.");
+
+return;
+
+}
+
+const random=
+visibleRecipes[
+Math.floor(Math.random()*visibleRecipes.length)
+];
+
+random.scrollIntoView({
+
+behavior:"smooth",
+block:"center"
+
+});
+
+random.style.boxShadow=
+"0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+
+setTimeout(()=>{
+
+random.style.boxShadow=
+"0 8px 20px rgba(0,0,0,.12)";
+
+},2500);
+
+alert(
+"🎲 Surprise Recipe: "+
+random.dataset.name
+);
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+if(
+document.body.classList.contains("dark-mode")
+){
+
+localStorage.setItem(
+"flavorverseDarkMode",
+"on"
+);
+
+}
+else{
+
+localStorage.setItem(
+"flavorverseDarkMode",
+"off"
+);
+
+}
+
+}
+
+
+function loadDarkMode(){
+
+if(
+localStorage.getItem("flavorverseDarkMode")==="on"
+){
+
+document.body.classList.add("dark-mode");
+
+}
+
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(async function(user){
+
+if(user){
+
+try{
+
+const userDoc=
+await db
+.collection("users")
+.doc(user.uid)
+.get();
+
+if(userDoc.exists){
+
+const data=userDoc.data();
+
+document.getElementById("profileName").innerText=
+data.name || "Flavorverse User";
+
+document.getElementById("profileEmail").innerText=
+data.email || user.email;
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+user.email;
+
+document.getElementById("profileEmail").innerText=
+user.email;
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+updateButtons();
+
+updateProfileCounts();
+
+loadRatings();
+
+loadRecentlyViewed();
+
+recipes.forEach(recipe=>{
+
+loadReviews(recipe.id);
+
+});
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+"Guest";
+
+document.getElementById("profileEmail").innerText=
+"Login to see your profile";
+
+loadRecentlyViewed();
+
+}
+
+});
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+loadDarkMode();
+
+setupRecentlyViewed();
+
+});
+
+</script>
+<script>
+(function(){
+ const drawer=document.getElementById('exploreDrawer');
+ const backdrop=document.getElementById('menuBackdrop');
+ const openBtn=document.getElementById('openExploreMenu');
+ const closeBtn=document.getElementById('closeExploreMenu');
+ function openMenu(){drawer.classList.add('open');backdrop.classList.add('show');document.body.classList.add('drawer-open');drawer.setAttribute('aria-hidden','false');openBtn.setAttribute('aria-expanded','true');}
+ function closeMenu(){drawer.classList.remove('open');backdrop.classList.remove('show');document.body.classList.remove('drawer-open');drawer.setAttribute('aria-hidden','true');openBtn.setAttribute('aria-expanded','false');}
+ openBtn.addEventListener('click',openMenu);closeBtn.addEventListener('click',closeMenu);backdrop.addEventListener('click',closeMenu);
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+ drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+})();
+</script>
+</body>
+</html>

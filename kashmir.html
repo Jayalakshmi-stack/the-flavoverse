@@ -1,0 +1,4519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kashmir | The Flavorverse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#F7E7CE;
+    color:#5B4A45;
+}
+
+
+/* =====================================================
+   FLAVORVERSE HEADER + SLIDE MENU
+===================================================== */
+
+header{
+    width:100%;
+    height:90px;
+    background:#8E6C88;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    position:relative;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+    width:auto;
+    flex:0 0 auto;
+}
+
+.logo-icon{
+    font-size:30px;
+    line-height:1;
+}
+
+.logo-text{
+    font-family:'Cinzel',serif;
+    font-size:30px;
+    font-weight:700;
+    line-height:1.1;
+    letter-spacing:.3px;
+    text-transform:none;
+}
+
+.logo-text span{
+    display:inline;
+}
+
+.menu-open-btn{
+    width:52px;
+    height:52px;
+    border:none;
+    border-radius:13px;
+    background:#735267;
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+    transition:.3s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.menu-open-btn:hover{
+    background:#5B4056;
+    transform:scale(1.05);
+}
+
+.menu-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    opacity:0;
+    visibility:hidden;
+    transition:.35s ease;
+    z-index:2000;
+}
+
+.menu-overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.flavorverse-menu{
+    position:fixed;
+    top:0;
+    right:-440px;
+    width:420px;
+    max-width:92vw;
+    height:100vh;
+    background:#F7E7CE;
+    box-shadow:-8px 0 30px rgba(0,0,0,.25);
+    z-index:3000;
+    transition:right .4s ease;
+    overflow-y:auto;
+}
+
+.flavorverse-menu.active{
+    right:0;
+}
+
+.menu-top{
+    height:90px;
+    background:#8E6C88;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 24px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.menu-top h2{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    font-size:23px;
+    font-weight:600;
+}
+
+.menu-close-btn{
+    border:none;
+    background:transparent;
+    color:white;
+    font-size:32px;
+    font-weight:bold;
+    cursor:pointer;
+    line-height:1;
+}
+
+.menu-content{
+    padding:22px;
+}
+
+.menu-card{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    width:100%;
+    min-height:74px;
+    padding:14px 18px;
+    margin-bottom:12px;
+    background:white;
+    border-radius:17px;
+    text-decoration:none;
+    color:#4B3832;
+    box-shadow:0 5px 14px rgba(0,0,0,.08);
+    transition:.25s ease;
+}
+
+.menu-card:hover{
+    transform:translateX(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    background:#FFF9F4;
+}
+
+.menu-icon{
+    width:42px;
+    min-width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+}
+
+.menu-text{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.menu-text strong{
+    font-family:'Poppins',sans-serif;
+    font-size:17px;
+    font-weight:600;
+    color:#4B3832;
+}
+
+.menu-text small{
+    margin-top:2px;
+    font-family:'Poppins',sans-serif;
+    font-size:12px;
+    color:#8A716A;
+}
+
+.flavorverse-menu::-webkit-scrollbar{
+    width:7px;
+}
+
+.flavorverse-menu::-webkit-scrollbar-track{
+    background:#F7E7CE;
+}
+
+.flavorverse-menu::-webkit-scrollbar-thumb{
+    background:#8E6C88;
+    border-radius:10px;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    width:90%;
+    margin:40px auto;
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+    display:flex;
+    align-items:center;
+    gap:40px;
+    padding:40px;
+}
+
+.image-box{
+    width:450px;
+    height:350px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff8f2;
+    border-radius:20px;
+    flex:1;
+}
+
+.image-box img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+.hero-content{
+    padding:40px;
+    flex:1;
+    text-align:left;
+}
+
+.hero-content h1{
+    font-family:'Cinzel',serif;
+    font-size:58px;
+    color:#6F4B72;
+}
+
+.hero-content h2{
+    margin-top:15px;
+    color:#B58A4D;
+    font-size:30px;
+}
+
+.hero-content p{
+    margin-top:18px;
+    font-size:18px;
+    line-height:1.8;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:14px 35px;
+    background:#8E6C88;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#6F4B72;
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about-section{
+    width:90%;
+    margin:50px auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+}
+
+.about-text{
+    flex:2;
+    background:#FFF9F4;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.about-text h2{
+    font-family:'Cinzel',serif;
+    color:#6F4B72;
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.about-text p{
+    line-height:1.9;
+    font-size:17px;
+    margin-bottom:18px;
+    text-align:justify;
+}
+
+.about-box{
+    flex:1;
+    background:#8E6C88;
+    color:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.about-box h3{
+    font-family:'Cinzel',serif;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.about-box ul{
+    list-style:none;
+}
+
+.about-box li{
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,.25);
+    font-size:16px;
+}
+
+.about-box li:last-child{
+    border-bottom:none;
+}
+
+
+/* =====================================================
+   EXPLORER
+===================================================== */
+
+.explorer-section{
+    width:90%;
+    margin:35px auto;
+    background:#FFF9F4;
+    padding:30px;
+    border-radius:22px;
+    box-shadow:0 10px 25px rgba(0,0,0,.10);
+    text-align:center;
+}
+
+.explorer-section h2{
+    font-family:'Cinzel',serif;
+    color:#6F4B72;
+    margin-bottom:20px;
+}
+
+.explorer-controls{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.search-box,
+.filter-box{
+    padding:13px 16px;
+    border:1px solid #D8C5B0;
+    border-radius:25px;
+    font-family:'Poppins',sans-serif;
+    background:white;
+    color:#5B4A45;
+    outline:none;
+}
+
+.search-box{
+    width:280px;
+}
+
+.filter-box{
+    min-width:170px;
+}
+
+.explorer-buttons{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.explorer-btn{
+    border:none;
+    padding:12px 22px;
+    border-radius:25px;
+    background:#8E6C88;
+    color:white;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 5px 12px rgba(0,0,0,.12);
+}
+
+.explorer-btn.random{
+    background:#F4E5C5;
+    color:#5B4A45;
+}
+
+.search-result{
+    margin-top:15px;
+    font-size:14px;
+    opacity:.8;
+}
+
+
+/* =====================================================
+   POPULAR
+===================================================== */
+
+.popular-section{
+    width:90%;
+    margin:35px auto;
+}
+
+.popular-title{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    color:#6F4B72;
+    margin-bottom:22px;
+}
+
+.popular-container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.popular-card{
+    background:#FFF9F4;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 8px 18px rgba(0,0,0,.09);
+    text-align:center;
+}
+
+.popular-card h3{
+    color:#6F4B72;
+    margin-bottom:8px;
+}
+
+.popular-card p{
+    font-size:14px;
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   RECIPE SECTION
+===================================================== */
+
+.recipe-section{
+    width:90%;
+    margin:60px auto;
+
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:40px;
+    align-items:stretch;
+
+    background:#FFF9F4;
+    padding:35px;
+    border-radius:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.recipe-image{
+    grid-column:1;
+    grid-row:1;
+}
+
+.recipe-image img{
+    width:100%;
+    border-radius:18px;
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+    display:block;
+}
+
+.recipe-content{
+    grid-column:2;
+    grid-row:1;
+}
+
+.recipe-content h2{
+    font-family:'Cinzel',serif;
+    color:#6F4B72;
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+.recipe-content h3{
+    margin-top:25px;
+    margin-bottom:12px;
+    color:#8E6C88;
+}
+
+.recipe-content p{
+    line-height:1.8;
+    text-align:justify;
+}
+
+.recipe-content ul,
+.recipe-content ol{
+    margin-left:25px;
+    line-height:1.9;
+}
+
+.recipe-info{
+    display:flex;
+    justify-content:space-between;
+    margin-top:25px;
+    gap:20px;
+}
+
+.recipe-info div{
+    flex:1;
+    background:#F7E7CE;
+    padding:18px;
+    text-align:center;
+    border-radius:15px;
+}
+
+.chef-tip,
+.fun-fact{
+    margin-top:25px;
+    background:#F7E7CE;
+    padding:20px;
+    border-left:6px solid #8E6C88;
+    border-radius:12px;
+}
+
+
+/* =====================================================
+   RECIPE ACTIONS
+===================================================== */
+
+.recipe-actions{
+    grid-column:1;
+    grid-row:1;
+
+    align-self:end;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-end;
+
+    gap:15px;
+    padding-bottom:5px;
+    margin-top:0;
+}
+
+.recipe-actions button{
+    width:200px;
+    padding:14px 18px;
+    border:none;
+    border-radius:30px;
+
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.3s;
+
+    box-shadow:0 6px 15px rgba(91,74,69,.18);
+}
+
+.recipe-actions button:hover{
+    transform:translateY(-2px);
+}
+
+.favorite-btn{
+    background:#8E6C88;
+    color:white;
+}
+
+.stamp-btn{
+    background:#F4E5C5;
+    color:#5B4A45;
+}
+
+
+/* =====================================================
+   REVERSE RECIPE
+===================================================== */
+
+.recipe-section.reverse{
+    grid-template-columns:2fr 1fr;
+}
+
+.recipe-section.reverse .recipe-content{
+    grid-column:1;
+    grid-row:1;
+}
+
+.recipe-section.reverse .recipe-image{
+    grid-column:2;
+    grid-row:1;
+}
+
+.recipe-section.reverse .recipe-actions{
+    grid-column:2;
+    grid-row:1;
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.rating-area{
+    margin-top:20px;
+    padding:18px;
+    background:rgba(244,229,197,.55);
+    border-radius:15px;
+}
+
+.rating-area h3{
+    margin:0 0 8px;
+}
+
+.stars{
+    display:flex;
+    gap:5px;
+}
+
+.star{
+    font-size:28px;
+    cursor:pointer;
+    color:#C8B9AA;
+    user-select:none;
+    transition:.2s;
+}
+
+.star:hover{
+    transform:scale(1.15);
+    color:#E5A82F;
+}
+
+.star.active{
+    color:#E5A82F;
+}
+
+.rating-message{
+    font-size:13px;
+    margin-top:6px;
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+.review-box{
+    margin-top:16px;
+    padding:18px;
+    background:#FFF9F4;
+    border:1px solid #EADBC9;
+    border-radius:15px;
+}
+
+.review-box h3{
+    margin:0;
+}
+
+.review-input{
+    width:100%;
+    min-height:85px;
+    resize:vertical;
+
+    padding:12px;
+
+    border:1px solid #D8C5B0;
+    border-radius:12px;
+
+    font-family:'Poppins',sans-serif;
+    margin-top:8px;
+}
+
+.review-submit{
+    margin-top:10px;
+
+    border:none;
+    background:#8E6C88;
+    color:white;
+
+    padding:10px 20px;
+    border-radius:22px;
+
+    cursor:pointer;
+
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+}
+
+.reviews-list{
+    margin-top:15px;
+}
+
+.single-review{
+    padding:12px;
+    margin-top:10px;
+    background:#F7E7CE;
+    border-radius:12px;
+}
+
+.single-review strong{
+    color:#6F4B72;
+}
+
+.single-review small{
+    display:block;
+    margin-top:4px;
+    opacity:.7;
+}
+
+.no-review{
+    font-size:13px;
+    opacity:.7;
+    margin-top:10px;
+}
+
+
+/* =====================================================
+   FOOD FACTS
+===================================================== */
+
+.facts-section{
+    width:90%;
+    margin:60px auto;
+}
+
+.facts-section h2{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    font-size:40px;
+    color:#6F4B72;
+    margin-bottom:35px;
+}
+
+.facts-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.fact-card{
+    background:#FFF9F4;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+    transition:.3s;
+}
+
+.fact-card:hover{
+    transform:translateY(-8px);
+}
+
+.fact-card h3{
+    color:#8E6C88;
+    margin-bottom:15px;
+}
+
+.fact-card p{
+    line-height:1.8;
+}
+
+
+/* =====================================================
+   RECENT
+===================================================== */
+
+.recent-section{
+    width:90%;
+    margin:40px auto;
+}
+
+.recent-section h2{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    color:#6F4B72;
+    margin-bottom:20px;
+}
+
+.recent-container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.recent-card{
+    background:#FFF9F4;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 8px 18px rgba(0,0,0,.09);
+    text-align:center;
+}
+
+.recent-card h3{
+    color:#6F4B72;
+}
+
+.recent-empty{
+    text-align:center;
+    opacity:.7;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-section{
+    width:90%;
+    margin:40px auto;
+}
+
+.profile-box{
+    background:#8E6C88;
+    color:white;
+
+    padding:35px;
+    border-radius:22px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.profile-box h2{
+    font-family:'Cinzel',serif;
+    font-size:34px;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.profile-name,
+.profile-email{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+.profile-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.profile-card{
+    background:#FFF9F4;
+    color:#5B4A45;
+    padding:20px;
+    border-radius:16px;
+    text-align:center;
+}
+
+.profile-card .count{
+    font-size:30px;
+    font-weight:bold;
+    color:#6F4B72;
+    display:block;
+}
+
+
+/* =====================================================
+   CHEF
+===================================================== */
+
+.chef-section{
+    width:90%;
+    margin:60px auto;
+
+    background:#8E6C88;
+    color:white;
+
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.chef-section h2{
+    font-family:'Cinzel',serif;
+    margin-bottom:20px;
+}
+
+.chef-section p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    background:#6F4B72;
+    color:white;
+    text-align:center;
+
+    padding:40px 20px;
+    margin-top:60px;
+}
+
+footer h2{
+    font-family:'Cinzel',serif;
+    margin-bottom:15px;
+}
+
+footer p{
+    margin:10px 0;
+    line-height:1.8;
+}
+
+.social{
+    margin:25px 0;
+}
+
+.social a{
+    text-decoration:none;
+    font-size:30px;
+    margin:0 12px;
+}
+
+.copy{
+    margin-top:20px;
+    font-size:15px;
+    opacity:.9;
+}
+
+
+/* =====================================================
+   HIDDEN RECIPE
+===================================================== */
+
+.recipe-hidden{
+    display:none !important;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .popular-container,
+    .recent-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .profile-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:768px){
+
+    header{
+        height:75px;
+        padding:0 5%;
+    }
+
+    .logo{
+        width:auto;
+        flex:0 0 auto;
+    }
+
+    .logo-text{
+        font-size:23px;
+    }
+
+    .logo-icon{
+        font-size:24px;
+    }
+
+    .menu-open-btn{
+        width:45px;
+        height:45px;
+        font-size:23px;
+    }
+
+    .flavorverse-menu{
+        width:100%;
+        max-width:100%;
+    }
+
+    .menu-top{
+        height:75px;
+    }
+
+    .menu-top h2{
+        font-size:20px;
+    }
+
+    .hero{
+        flex-direction:column;
+    }
+
+    .image-box{
+        width:100%;
+    }
+
+    .hero-content{
+        padding:20px;
+    }
+
+    .hero-content h1{
+        font-size:40px;
+    }
+
+    .about-section{
+        flex-direction:column;
+    }
+
+    .about-text,
+    .about-box{
+        width:100%;
+    }
+
+    .recipe-section,
+    .recipe-section.reverse{
+        display:flex;
+        flex-direction:column;
+        gap:25px;
+    }
+
+    .recipe-image,
+    .recipe-content{
+        width:100%;
+    }
+
+    .recipe-actions,
+    .recipe-section.reverse .recipe-actions{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        padding:0;
+}
+
+
+    }
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <div class="logo-icon">🍴</div>
+        <div class="logo-text">The Flavorverse</div>
+    </div>
+
+    <button class="menu-open-btn" type="button" onclick="openFlavorverseMenu()" aria-label="Open Flavorverse menu">
+        ☰
+    </button>
+
+</header>
+
+<!-- DARK OVERLAY -->
+<div id="menuOverlay" class="menu-overlay" onclick="closeFlavorverseMenu()"></div>
+
+<!-- RIGHT SIDE FLAVORVERSE MENU -->
+<aside id="flavorverseMenu" class="flavorverse-menu" aria-label="Flavorverse Menu">
+
+    <div class="menu-top">
+        <h2>🍴 Flavorverse Menu</h2>
+        <button class="menu-close-btn" type="button" onclick="closeFlavorverseMenu()" aria-label="Close menu">×</button>
+    </div>
+
+    <div class="menu-content">
+
+        <a href="index.html" class="menu-card">
+            <div class="menu-icon">🏠</div>
+            <div class="menu-text"><strong>Home</strong><small>Welcome to The Flavorverse</small></div>
+        </a>
+
+        <a href="about.html" class="menu-card">
+            <div class="menu-icon">ℹ️</div>
+            <div class="menu-text"><strong>About</strong><small>Discover our food journey</small></div>
+        </a>
+
+        <a href="royal.html" class="menu-card">
+            <div class="menu-icon">👑</div>
+            <div class="menu-text"><strong>Royal Heritage</strong><small>Traditional Indian recipes</small></div>
+        </a>
+
+        <a href="movies&cartoons.html" class="menu-card">
+            <div class="menu-icon">🎬</div>
+            <div class="menu-text"><strong>movies&cartoons</strong></div>
+        </a>
+
+        <a href="worldcuisine.html" class="menu-card">
+            <div class="menu-icon">🌍</div>
+            <div class="menu-text"><strong>world-cuisine</strong></div>
+        </a>
+
+        <a href="desertwrold.html" class="menu-card">
+            <div class="menu-icon">🍰</div>
+            <div class="menu-text"><strong>dessert</strong></div>
+        </a>
+
+        <a href="favourite.html" class="menu-card">
+            <div class="menu-icon">💗</div>
+            <div class="menu-text"><strong>favourite</strong></div>
+        </a>
+
+        <a href="order.html" class="menu-card">
+            <div class="menu-icon">🍕</div>
+            <div class="menu-text"><strong>Rajasthan</strong></div>
+        </a>
+
+        <a href="stamp.html" class="menu-card">
+            <div class="menu-icon">🎟️</div>
+            <div class="menu-text"><strong>Punjab</strong></div>
+        </a>
+
+        <a href="contact.html" class="menu-card">
+            <div class="menu-icon">©️</div>
+            <div class="menu-text"><strong>contact</strong></div>
+        </a>
+
+    </div>
+</aside>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+<div class="image-box">
+
+<img
+src="kashmir.png"
+alt="Kashmir"
+>
+
+</div>
+
+
+<div class="hero-content">
+
+<h1>🏔️ Kashmir</h1>
+
+<h2>Royal Flavours of Paradise</h2>
+
+<p>
+
+Welcome to Kashmir, a land famous for its breathtaking valleys,
+rich culture, traditional hospitality, and aromatic cuisine.
+Kashmiri food is known for its delicate spices, fragrant rice,
+slow-cooked meat dishes, dry fruits, saffron, and traditional
+cooking techniques. Every dish reflects the beautiful heritage
+and royal culinary traditions of Kashmir.
+
+</p>
+
+<a class="btn" href="#recipes">
+
+Explore Recipes
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT KASHMIR
+===================================================== -->
+
+<section class="about-section" id="about">
+
+<div class="about-text">
+
+<h2>🏔️ About Kashmir Cuisine</h2>
+
+<p>
+
+Kashmiri cuisine is one of the most distinctive culinary traditions
+of India. It combines aromatic spices, saffron, yogurt, dry fruits,
+rice, and carefully selected herbs to create dishes with rich but
+balanced flavours.
+
+</p>
+
+<p>
+
+Kashmiri cooking is especially famous for its traditional
+Wazwan culture, where a variety of elaborate dishes are prepared
+and served during weddings, festivals, and special celebrations.
+Meat-based dishes are an important part of this culinary tradition.
+
+</p>
+
+<p>
+
+Popular dishes such as Rogan Josh and Yakhni showcase the delicate
+use of spices and yogurt, while Kashmiri Pulao and Modur Pulao
+highlight the region's love for fragrant rice, dry fruits, and
+sweet aromatic flavours.
+
+</p>
+
+<p>
+
+The cuisine of Kashmir beautifully represents the region's culture,
+hospitality, history, and connection with local ingredients.
+Every recipe carries a unique combination of aroma, tradition,
+and royal culinary heritage.
+
+</p>
+
+</div>
+
+
+<div class="about-box">
+
+<h3>🏔️ Kashmir Highlights</h3>
+
+<ul>
+
+<li>🏔️ Famous for its beautiful valleys and rich culture</li>
+
+<li>🍚 Fragrant rice dishes are an important part of the cuisine</li>
+
+<li>🥩 Rogan Josh is one of the most famous Kashmiri dishes</li>
+
+<li>🥣 Yakhni is known for its delicate yogurt-based flavour</li>
+
+<li>🌰 Dry fruits are widely used in Kashmiri recipes</li>
+
+<li>🌸 Saffron is an important ingredient</li>
+
+<li>🍲 Traditional cooking uses aromatic whole spices</li>
+
+<li>❤️ Food reflects Kashmir's royal heritage and hospitality</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RECIPE EXPLORER
+===================================================== -->
+
+<section class="explorer-section">
+
+<h2>🔎 Explore Kashmir Recipes</h2>
+
+<div class="explorer-controls">
+
+<input
+class="search-box"
+id="recipeSearch"
+type="text"
+placeholder="🔎 Search recipes..."
+oninput="filterRecipes()"
+>
+
+
+<select
+class="filter-box"
+id="categoryFilter"
+onchange="filterRecipes()"
+>
+
+<option value="all">
+🏷️ All Categories
+</option>
+
+<option value="main">
+Main Course
+</option>
+
+<option value="nonveg">
+Non-Vegetarian
+</option>
+
+<option value="dessert">
+Dessert
+</option>
+
+<option value="vegetarian">
+Vegetarian
+</option>
+
+</select>
+
+
+<select
+class="filter-box"
+id="cuisineFilter"
+onchange="filterRecipes()"
+>
+
+<option value="all">
+🌍 All Cuisine
+</option>
+
+<option value="kashmir">
+Kashmir Cuisine
+</option>
+
+</select>
+
+</div>
+
+
+<div class="explorer-buttons">
+
+<button
+class="explorer-btn random"
+onclick="surpriseMe()"
+>
+🎲 Surprise Me
+</button>
+
+<button
+class="explorer-btn"
+onclick="resetFilters()"
+>
+↻ Show All Recipes
+</button>
+
+</div>
+
+
+<p
+class="search-result"
+id="searchResult"
+>
+Showing all 4 Kashmir recipes
+</p>
+
+</section>
+
+
+<!-- =====================================================
+     POPULAR RECIPES
+===================================================== -->
+
+<section class="popular-section">
+
+<h2 class="popular-title">
+🔥 Popular Kashmir Recipes
+</h2>
+
+<div class="popular-container">
+
+
+<div class="popular-card">
+
+<h3>🍛 Rogan Josh</h3>
+
+<p>
+A rich and aromatic Kashmiri meat curry prepared with traditional spices.
+</p>
+
+</div>
+
+
+<div class="popular-card">
+
+<h3>🥣 Yakhni</h3>
+
+<p>
+A delicate yogurt-based Kashmiri dish with mild aromatic flavours.
+</p>
+
+</div>
+
+
+<div class="popular-card">
+
+<h3>🍚 Kashmiri Pulao</h3>
+
+<p>
+Fragrant rice enriched with dry fruits, saffron and aromatic ingredients.
+</p>
+
+</div>
+
+
+<div class="popular-card">
+
+<h3>🍚 Modur Pulao</h3>
+
+<p>
+A traditional sweet Kashmiri rice preparation with nuts and spices.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ROGAN JOSH
+===================================================== -->
+
+<section
+class="recipe-section"
+id="rogan-josh"
+data-name="Rogan Josh"
+data-category="nonveg"
+data-cuisine="kashmir"
+>
+
+<div class="recipe-image">
+
+<img
+src="rohanjose.jpg"
+alt="Rogan Josh"
+>
+
+</div>
+
+
+<div class="recipe-content">
+
+<h2>🍛 Rogan Josh</h2>
+
+<p>
+
+Rogan Josh is one of the most famous dishes of Kashmiri cuisine.
+It is a rich and aromatic curry traditionally prepared with tender
+meat, yogurt, Kashmiri chilli, and fragrant whole spices. The dish
+is known for its beautiful red colour, deep aroma, and balanced
+flavour. Rogan Josh is an important part of traditional Kashmiri
+feasts and is often enjoyed with steamed rice or traditional breads.
+
+</p>
+
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>500 g Mutton</li>
+
+<li>1 cup Yogurt</li>
+
+<li>2 tbsp Ginger-Garlic Paste</li>
+
+<li>2 tbsp Kashmiri Red Chilli Powder</li>
+
+<li>1 tsp Turmeric Powder</li>
+
+<li>1 tsp Garam Masala</li>
+
+<li>1 Cinnamon Stick</li>
+
+<li>4 Green Cardamom Pods</li>
+
+<li>3 Cloves</li>
+
+<li>1 Bay Leaf</li>
+
+<li>2 tbsp Mustard Oil</li>
+
+<li>Fresh Coriander Leaves</li>
+
+<li>Salt to Taste</li>
+
+</ul>
+
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Wash the mutton pieces and drain the excess water.</li>
+
+<li>Heat mustard oil in a heavy-bottomed pan.</li>
+
+<li>Add cinnamon, cardamom, cloves, and bay leaf.</li>
+
+<li>Add the mutton pieces and cook until lightly browned.</li>
+
+<li>Add ginger-garlic paste and cook until the raw smell disappears.</li>
+
+<li>Mix Kashmiri chilli powder and turmeric powder with a little water.</li>
+
+<li>Add the spice mixture to the mutton and cook well.</li>
+
+<li>Whisk the yogurt and slowly add it while stirring continuously.</li>
+
+<li>Add enough water, cover the pan, and cook until the meat becomes tender.</li>
+
+<li>Add garam masala and adjust the salt.</li>
+
+<li>Cook for a few more minutes until the gravy becomes aromatic.</li>
+
+<li>Garnish with fresh coriander and serve hot.</li>
+
+</ol>
+
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>90 Minutes</p>
+
+</div>
+
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Medium</p>
+
+</div>
+
+</div>
+
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Use good-quality Kashmiri chilli powder for the beautiful colour
+and aroma. Add yogurt slowly while stirring to keep the gravy smooth.
+
+</p>
+
+</div>
+
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Rogan Josh is one of the signature dishes associated with Kashmiri
+cuisine and is traditionally served as part of elaborate Kashmiri feasts.
+
+</p>
+
+</div>
+
+
+<!-- RATING -->
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div
+class="stars"
+data-recipe="rogan-josh"
+>
+
+<span
+class="star"
+onclick="rateRecipe('rogan-josh',1,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('rogan-josh',2,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('rogan-josh',3,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('rogan-josh',4,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('rogan-josh',5,this)"
+>★</span>
+
+</div>
+
+<p
+class="rating-message"
+id="rating-rogan-josh"
+>
+Choose your rating
+</p>
+
+</div>
+
+
+<!-- REVIEW -->
+
+<div class="review-box">
+
+<h3>💬 Reviews & Comments</h3>
+
+<textarea
+id="review-text-rogan-josh"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('rogan-josh','Rogan Josh')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-rogan-josh"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="rogan-josh"
+onclick="addToFavourite('rogan-josh','Rogan Josh','Royal Heritage',this)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="rogan-josh"
+onclick="addToStamp('rogan-josh','Rogan Josh','Royal Heritage',this)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     YAKHNI
+===================================================== -->
+
+<section
+class="recipe-section reverse"
+id="yakhni"
+data-name="Yakhni"
+data-category="nonveg"
+data-cuisine="kashmir"
+>
+
+<div class="recipe-image">
+
+<img
+src="yakhni.jpg"
+alt="Yakhni"
+>
+
+</div>
+
+
+<div class="recipe-content">
+
+<h2>🥣 Yakhni</h2>
+
+<p>
+
+Yakhni is a traditional Kashmiri preparation known for its delicate
+yogurt-based gravy and aromatic whole spices. It is usually prepared
+with tender meat, yogurt, fennel, ginger, cardamom, and other spices.
+Unlike heavily spiced curries, Yakhni has a mild and soothing flavour
+that allows the aroma of the spices and yogurt to stand out.
+
+</p>
+
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>500 g Mutton</li>
+
+<li>1½ cups Yogurt</li>
+
+<li>2 tbsp Fennel Powder</li>
+
+<li>1 tsp Dry Ginger Powder</li>
+
+<li>1 Cinnamon Stick</li>
+
+<li>4 Green Cardamom Pods</li>
+
+<li>3 Cloves</li>
+
+<li>1 Bay Leaf</li>
+
+<li>1 tsp Cumin Seeds</li>
+
+<li>2 tbsp Mustard Oil</li>
+
+<li>Fresh Coriander Leaves</li>
+
+<li>Salt to Taste</li>
+
+</ul>
+
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Wash the mutton pieces and keep them aside.</li>
+
+<li>Heat mustard oil in a heavy pan.</li>
+
+<li>Add cumin seeds, cinnamon, cardamom, cloves, and bay leaf.</li>
+
+<li>Add the mutton and lightly brown the pieces.</li>
+
+<li>Add enough water and cook until the meat becomes tender.</li>
+
+<li>Whisk the yogurt until smooth.</li>
+
+<li>Add fennel powder and dry ginger powder to the yogurt.</li>
+
+<li>Slowly add the yogurt mixture to the cooked mutton while stirring.</li>
+
+<li>Cook on low flame until the gravy becomes smooth and aromatic.</li>
+
+<li>Adjust salt and simmer for a few minutes.</li>
+
+<li>Garnish with coriander leaves and serve hot.</li>
+
+</ol>
+
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>70 Minutes</p>
+
+</div>
+
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Medium</p>
+
+</div>
+
+</div>
+
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Always add yogurt slowly over low heat while stirring continuously.
+This helps maintain a smooth and creamy gravy.
+
+</p>
+
+</div>
+
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Yakhni is loved for its mild flavour and aromatic gravy and is
+one of the well-known traditional preparations of Kashmiri cuisine.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div
+class="stars"
+data-recipe="yakhni"
+>
+
+<span
+class="star"
+onclick="rateRecipe('yakhni',1,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('yakhni',2,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('yakhni',3,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('yakhni',4,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('yakhni',5,this)"
+>★</span>
+
+</div>
+
+<p
+class="rating-message"
+id="rating-yakhni"
+>
+Choose your rating
+</p>
+
+</div>
+
+
+<div class="review-box">
+
+<h3>💬 Reviews & Comments</h3>
+
+<textarea
+id="review-text-yakhni"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('yakhni','Yakhni')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-yakhni"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="yakhni"
+onclick="addToFavourite('yakhni','Yakhni','Royal Heritage',this)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="yakhni"
+onclick="addToStamp('yakhni','Yakhni','Royal Heritage',this)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     KASHMIRI PULAO
+===================================================== -->
+
+<section
+class="recipe-section"
+id="kashmiri-pulao"
+data-name="Kashmiri Pulao"
+data-category="vegetarian"
+data-cuisine="kashmir"
+>
+
+<div class="recipe-image">
+
+<img
+src="kashmiripulav.jpg"
+alt="Kashmiri Pulao"
+>
+
+</div>
+
+
+<div class="recipe-content">
+
+<h2>🍚 Kashmiri Pulao</h2>
+
+<p>
+
+Kashmiri Pulao is a fragrant rice preparation famous for its
+beautiful combination of aromatic rice, saffron, dry fruits,
+nuts, and fresh fruits. It is lighter and sweeter than many
+spicy rice dishes and is often served during celebrations and
+special occasions.
+
+</p>
+
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>2 cups Basmati Rice</li>
+
+<li>3 cups Water</li>
+
+<li>1 Onion (Thinly Sliced)</li>
+
+<li>2 tbsp Ghee</li>
+
+<li>1 Cinnamon Stick</li>
+
+<li>3 Cardamom Pods</li>
+
+<li>3 Cloves</li>
+
+<li>A Few Saffron Strands</li>
+
+<li>¼ cup Cashew Nuts</li>
+
+<li>¼ cup Almonds</li>
+
+<li>2 tbsp Raisins</li>
+
+<li>½ cup Apple Pieces</li>
+
+<li>½ cup Pomegranate Seeds</li>
+
+<li>Fresh Mint Leaves</li>
+
+<li>Salt to Taste</li>
+
+</ul>
+
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Wash and soak the basmati rice for about 20 minutes.</li>
+
+<li>Heat ghee in a heavy pan.</li>
+
+<li>Add cinnamon, cardamom, and cloves.</li>
+
+<li>Add sliced onions and cook until golden brown.</li>
+
+<li>Add the soaked rice and gently mix.</li>
+
+<li>Add water and salt and cook until the rice is almost done.</li>
+
+<li>Add saffron soaked in warm water.</li>
+
+<li>Cover and cook on low flame until the rice becomes fluffy.</li>
+
+<li>Roast cashews, almonds, and raisins separately in a little ghee.</li>
+
+<li>Gently mix the roasted nuts with the rice.</li>
+
+<li>Garnish with apple pieces, pomegranate seeds, and mint leaves.</li>
+
+<li>Serve hot.</li>
+
+</ol>
+
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>40 Minutes</p>
+
+</div>
+
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Use long-grain basmati rice and soak it before cooking.
+Add saffron near the end to preserve its aroma and beautiful colour.
+
+</p>
+
+</div>
+
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Kashmiri Pulao is especially known for its colourful presentation,
+with dry fruits, nuts, fruits, and saffron giving the dish a festive appearance.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div
+class="stars"
+data-recipe="kashmiri-pulao"
+>
+
+<span
+class="star"
+onclick="rateRecipe('kashmiri-pulao',1,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('kashmiri-pulao',2,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('kashmiri-pulao',3,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('kashmiri-pulao',4,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('kashmiri-pulao',5,this)"
+>★</span>
+
+</div>
+
+<p
+class="rating-message"
+id="rating-kashmiri-pulao"
+>
+Choose your rating
+</p>
+
+</div>
+
+
+<div class="review-box">
+
+<h3>💬 Reviews & Comments</h3>
+
+<textarea
+id="review-text-kashmiri-pulao"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('kashmiri-pulao','Kashmiri Pulao')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-kashmiri-pulao"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="kashmiri-pulao"
+onclick="addToFavourite('kashmiri-pulao','Kashmiri Pulao','Royal Heritage',this)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="kashmiri-pulao"
+onclick="addToStamp('kashmiri-pulao','Kashmiri Pulao','Royal Heritage',this)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MODUR PULAO
+===================================================== -->
+
+<section
+class="recipe-section reverse"
+id="modur-pulao"
+data-name="Modur Pulao"
+data-category="dessert"
+data-cuisine="kashmir"
+>
+
+<div class="recipe-image">
+
+<img
+src="muttonpulav.jpg"
+alt="Modur Pulao"
+>
+
+</div>
+
+
+<div class="recipe-content">
+
+<h2>🍚 Modur Pulao</h2>
+
+<p>
+
+Modur Pulao is a traditional sweet Kashmiri rice preparation.
+The word "Modur" refers to sweetness, and this dish combines
+fragrant basmati rice with saffron, sugar, dry fruits, nuts,
+and aromatic spices. It is often prepared for festivals,
+celebrations, and special occasions.
+
+</p>
+
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>2 cups Basmati Rice</li>
+
+<li>3 cups Water</li>
+
+<li>½ cup Sugar</li>
+
+<li>3 tbsp Ghee</li>
+
+<li>A Few Saffron Strands</li>
+
+<li>1 Cinnamon Stick</li>
+
+<li>3 Cardamom Pods</li>
+
+<li>3 Cloves</li>
+
+<li>¼ cup Cashew Nuts</li>
+
+<li>¼ cup Almonds</li>
+
+<li>2 tbsp Raisins</li>
+
+<li>2 tbsp Desiccated Coconut</li>
+
+<li>1 tbsp Rose Water</li>
+
+<li>Salt – A Small Pinch</li>
+
+</ul>
+
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Wash and soak the basmati rice for about 20 minutes.</li>
+
+<li>Cook the rice until it is about 80% done and drain the excess water.</li>
+
+<li>Heat ghee in a heavy pan.</li>
+
+<li>Add cinnamon, cardamom, and cloves.</li>
+
+<li>Add the partially cooked rice.</li>
+
+<li>Add sugar and gently mix everything together.</li>
+
+<li>Add saffron soaked in warm water.</li>
+
+<li>Cover and cook on low flame until the rice becomes completely tender.</li>
+
+<li>Roast cashews, almonds, and raisins in a little ghee.</li>
+
+<li>Add the roasted nuts and raisins to the pulao.</li>
+
+<li>Add rose water and gently mix.</li>
+
+<li>Serve warm.</li>
+
+</ol>
+
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>40 Minutes</p>
+
+</div>
+
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Cook the rice gently on low flame after adding sugar.
+This helps the grains remain separate while absorbing the sweet aroma.
+
+</p>
+
+</div>
+
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Modur Pulao is a unique Kashmiri rice dish because it combines
+sweetness, saffron, nuts, and aromatic spices in one preparation.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div
+class="stars"
+data-recipe="modur-pulao"
+>
+
+<span
+class="star"
+onclick="rateRecipe('modur-pulao',1,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('modur-pulao',2,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('modur-pulao',3,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('modur-pulao',4,this)"
+>★</span>
+
+<span
+class="star"
+onclick="rateRecipe('modur-pulao',5,this)"
+>★</span>
+
+</div>
+
+<p
+class="rating-message"
+id="rating-modur-pulao"
+>
+Choose your rating
+</p>
+
+</div>
+
+
+<div class="review-box">
+
+<h3>💬 Reviews & Comments</h3>
+
+<textarea
+id="review-text-modur-pulao"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('modur-pulao','Modur Pulao')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-modur-pulao"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="modur-pulao"
+onclick="addToFavourite('modur-pulao','Modur Pulao','Royal Heritage',this)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="modur-pulao"
+onclick="addToStamp('modur-pulao','Modur Pulao','Royal Heritage',this)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     KASHMIR FOOD FACTS
+===================================================== -->
+
+<section class="facts-section">
+
+<h2>🏔️ Kashmir Food Facts</h2>
+
+<div class="facts-container">
+
+
+<div class="fact-card">
+
+<h3>🌸 Saffron</h3>
+
+<p>
+
+Kashmiri saffron is highly valued for its aroma, colour,
+and flavour and is used in several traditional dishes.
+
+</p>
+
+</div>
+
+
+<div class="fact-card">
+
+<h3>🌰 Dry Fruits</h3>
+
+<p>
+
+Almonds, walnuts, cashews, raisins, and other dry fruits
+are commonly used in Kashmiri dishes.
+
+</p>
+
+</div>
+
+
+<div class="fact-card">
+
+<h3>🍲 Wazwan Tradition</h3>
+
+<p>
+
+Wazwan is an important part of Kashmiri culinary culture,
+especially during weddings and special celebrations.
+
+</p>
+
+</div>
+
+
+<div class="fact-card">
+
+<h3>🌿 Aromatic Spices</h3>
+
+<p>
+
+Fennel, cardamom, cinnamon, cloves, and dry ginger are
+important ingredients in traditional Kashmiri cooking.
+
+</p>
+
+</div>
+
+
+<div class="fact-card">
+
+<h3>❤️ Royal Heritage</h3>
+
+<p>
+
+Kashmiri cuisine reflects centuries of cultural influences,
+traditional cooking methods, and warm hospitality.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RECENTLY VIEWED
+===================================================== -->
+
+<section class="recent-section">
+
+<h2>🕐 Recently Viewed</h2>
+
+<div
+class="recent-container"
+id="recentContainer"
+>
+
+<p class="recent-empty">
+Login to see your recently viewed recipes.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section class="profile-section">
+
+<div class="profile-box">
+
+<h2>👤 My Flavorverse Profile</h2>
+
+<p
+class="profile-name"
+id="profileName"
+>
+Guest
+</p>
+
+<p
+class="profile-email"
+id="profileEmail"
+>
+Login to see your profile
+</p>
+
+
+<div class="profile-stats">
+
+
+<div class="profile-card">
+
+<span
+class="count"
+id="favouriteCount"
+>
+0
+</span>
+
+<span>
+❤️ Favourites
+</span>
+
+</div>
+
+
+<div class="profile-card">
+
+<span
+class="count"
+id="stampCount"
+>
+0
+</span>
+
+<span>
+🏷️ Stamps
+</span>
+
+</div>
+
+
+<div class="profile-card">
+
+<span
+class="count"
+id="ratingCount"
+>
+0
+</span>
+
+<span>
+⭐ Ratings
+</span>
+
+</div>
+
+
+<div class="profile-card">
+
+<span
+class="count"
+id="reviewCount"
+>
+0
+</span>
+
+<span>
+💬 Reviews
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CHEF RECOMMENDATION
+===================================================== -->
+
+<section class="chef-section">
+
+<h2>👨‍🍳 Chef's Recommendation</h2>
+
+<p>
+
+Experience the flavours of Kashmir by beginning your meal with
+the rich and aromatic <b>Rogan Josh</b>, followed by the delicate
+<b>Yakhni</b>. Enjoy the fragrant <b>Kashmiri Pulao</b> and finish
+your meal with the sweet and aromatic <b>Modur Pulao</b>.
+Together, these dishes represent the beautiful culinary heritage
+of Kashmir.
+
+</p>
+
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<h2>🍴 The Flavorverse</h2>
+
+<p>
+
+Discover India's rich culinary heritage,
+one delicious recipe at a time.
+
+</p>
+
+<div class="social">
+
+<a href="#">📘</a>
+<a href="#">📸</a>
+<a href="#">▶️</a>
+<a href="#">🐦</a>
+
+</div>
+
+<p class="copy">
+
+© 2026 The Flavorverse | All Rights Reserved
+
+</p>
+
+</footer>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+    authDomain:
+    "the-flavoverse.firebaseapp.com",
+
+    projectId:
+    "the-flavoverse",
+
+    storageBucket:
+    "the-flavoverse.firebasestorage.app",
+
+    messagingSenderId:
+    "1064022248292",
+
+    appId:
+    "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+
+    measurementId:
+    "G-16Z0K1687Z"
+};
+
+
+if(!firebase.apps.length){
+
+    firebase.initializeApp(firebaseConfig);
+
+}
+
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+
+/* =====================================================
+   AUTH SESSION
+===================================================== */
+
+auth.setPersistence(
+    firebase.auth.Auth.Persistence.LOCAL
+).catch(function(error){
+
+    console.error(
+        "Firebase persistence error:",
+        error
+    );
+
+});
+
+
+let flavorverseUser = null;
+
+let flavorverseAuthResolved = false;
+
+let flavorverseAuthResolve;
+
+
+const flavorverseAuthReady =
+new Promise(function(resolve){
+
+    flavorverseAuthResolve = resolve;
+
+});
+
+
+auth.onAuthStateChanged(function(user){
+
+    flavorverseUser = user;
+
+    flavorverseAuthResolved = true;
+
+    flavorverseAuthResolve(user);
+
+});
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipes = [
+
+{
+    id:"rogan-josh",
+    name:"Rogan Josh",
+    category:"nonveg",
+    cuisine:"kashmir"
+},
+
+{
+    id:"yakhni",
+    name:"Yakhni",
+    category:"nonveg",
+    cuisine:"kashmir"
+},
+
+{
+    id:"kashmiri-pulao",
+    name:"Kashmiri Pulao",
+    category:"vegetarian",
+    cuisine:"kashmir"
+},
+
+{
+    id:"modur-pulao",
+    name:"Modur Pulao",
+    category:"dessert",
+    cuisine:"kashmir"
+}
+
+];
+
+
+/* =====================================================
+   GET CURRENT USER
+===================================================== */
+
+async function getCurrentUser(){
+
+    if(flavorverseAuthResolved){
+
+        return flavorverseUser;
+
+    }
+
+    const user =
+    await flavorverseAuthReady;
+
+    return user ||
+           auth.currentUser ||
+           null;
+}
+
+
+/* =====================================================
+   FAVOURITE TOGGLE
+===================================================== */
+
+async function addToFavourite(
+    id,
+    name,
+    category,
+    button
+){
+
+    const user =
+    await getCurrentUser();
+
+
+    if(!user){
+
+        alert(
+            "Please login first to add favourites ❤️"
+        );
+
+        window.location.href =
+        "login.html";
+
+        return;
+    }
+
+
+    try{
+
+        const ref =
+        db
+        .collection("users")
+        .doc(user.uid)
+        .collection("favourites")
+        .doc(id);
+
+
+        const existing =
+        await ref.get();
+
+
+        /* REMOVE */
+
+        if(existing.exists){
+
+            await ref.delete();
+
+            button.innerHTML =
+            "♡ Add to Favourite";
+
+            alert(
+                name +
+                " removed from favourites."
+            );
+
+        }
+
+
+        /* ADD */
+
+        else{
+
+            await ref.set({
+
+                recipeId:id,
+
+                recipeName:name,
+
+                category:category,
+
+                createdAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+            });
+
+
+            button.innerHTML =
+            "♥ Added to Favourite";
+
+            alert(
+                name +
+                " added to favourites ❤️"
+            );
+
+        }
+
+
+        updateProfileCounts();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Favourite update failed: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   STAMP TOGGLE
+===================================================== */
+
+async function addToStamp(
+    id,
+    name,
+    category,
+    button
+){
+
+    const user =
+    await getCurrentUser();
+
+
+    if(!user){
+
+        alert(
+            "Please login first to add stamps 🏷️"
+        );
+
+        window.location.href =
+        "login.html";
+
+        return;
+    }
+
+
+    try{
+
+        const ref =
+        db
+        .collection("users")
+        .doc(user.uid)
+        .collection("stamps")
+        .doc(id);
+
+
+        const existing =
+        await ref.get();
+
+
+        if(existing.exists){
+
+            await ref.delete();
+
+            button.innerHTML =
+            "🏷️ Add to Stamp";
+
+            alert(
+                name +
+                " removed from passport."
+            );
+
+        }
+
+        else{
+
+            await ref.set({
+
+                recipeId:id,
+
+                recipeName:name,
+
+                category:category,
+
+                createdAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+            });
+
+
+            button.innerHTML =
+            "🏷️ Stamped";
+
+            alert(
+                name +
+                " added to your Flavorverse Passport 🏷️"
+            );
+
+        }
+
+
+        updateProfileCounts();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Stamp update failed: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function rateRecipe(
+    recipeId,
+    rating,
+    element
+){
+
+    const user =
+    await getCurrentUser();
+
+
+    if(!user){
+
+        alert(
+            "Please login first to rate recipes ⭐"
+        );
+
+        window.location.href =
+        "login.html";
+
+        return;
+    }
+
+
+    try{
+
+        await db
+        .collection("users")
+        .doc(user.uid)
+        .collection("ratings")
+        .doc(recipeId)
+        .set({
+
+            recipeId:recipeId,
+
+            rating:rating,
+
+            updatedAt:
+            firebase.firestore
+            .FieldValue
+            .serverTimestamp()
+
+        });
+
+
+        const stars =
+        element
+        .parentElement
+        .querySelectorAll(".star");
+
+
+        stars.forEach(function(star,index){
+
+            if(index < rating){
+
+                star.classList.add("active");
+
+            }
+
+            else{
+
+                star.classList.remove("active");
+
+            }
+
+        });
+
+
+        const message =
+        document.getElementById(
+            "rating-" + recipeId
+        );
+
+
+        if(message){
+
+            message.innerText =
+            "You rated this recipe " +
+            rating +
+            "/5 ⭐";
+
+        }
+
+
+        updateProfileCounts();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Rating failed: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD RATINGS
+===================================================== */
+
+async function loadRatings(){
+
+    const user =
+    await getCurrentUser();
+
+
+    if(!user){
+
+        return;
+    }
+
+
+    for(const recipe of recipes){
+
+        try{
+
+            const doc =
+            await db
+            .collection("users")
+            .doc(user.uid)
+            .collection("ratings")
+            .doc(recipe.id)
+            .get();
+
+
+            const container =
+            document.querySelector(
+                '.stars[data-recipe="' +
+                recipe.id +
+                '"]'
+            );
+
+
+            if(container){
+
+                const stars =
+                container
+                .querySelectorAll(".star");
+
+
+                /* IMPORTANT:
+                   CLEAR OLD STAR STATUS
+                */
+
+                stars.forEach(function(star){
+
+                    star.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+                if(doc.exists){
+
+                    const rating =
+                    doc.data().rating;
+
+
+                    stars.forEach(
+                    function(star,index){
+
+                        if(index < rating){
+
+                            star.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                    });
+
+
+                    const message =
+                    document.getElementById(
+                        "rating-" +
+                        recipe.id
+                    );
+
+
+                    if(message){
+
+                        message.innerText =
+                        "You rated this recipe " +
+                        rating +
+                        "/5 ⭐";
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   SUBMIT REVIEW
+===================================================== */
+
+async function submitReview(
+    recipeId,
+    recipeName
+){
+
+    const user =
+    await getCurrentUser();
+
+
+    if(!user){
+
+        alert(
+            "Please login first to post a review 💬"
+        );
+
+        window.location.href =
+        "login.html";
+
+        return;
+    }
+
+
+    const textarea =
+    document.getElementById(
+        "review-text-" +
+        recipeId
+    );
+
+
+    if(!textarea){
+
+        console.error(
+            "Review textarea not found:",
+            recipeId
+        );
+
+        return;
+    }
+
+
+    const text =
+    textarea.value.trim();
+
+
+    if(!text){
+
+        alert(
+            "Please write a review first."
+        );
+
+        return;
+    }
+
+
+    try{
+
+        const userDoc =
+        await db
+        .collection("users")
+        .doc(user.uid)
+        .get();
+
+
+        let userName =
+        "Flavorverse User";
+
+
+        if(
+            userDoc.exists &&
+            userDoc.data().name
+        ){
+
+            userName =
+            userDoc.data().name;
+
+        }
+
+
+        await db
+        .collection("recipes")
+        .doc(recipeId)
+        .collection("reviews")
+        .doc(user.uid)
+        .set({
+
+            recipeId:recipeId,
+
+            recipeName:recipeName,
+
+            userId:user.uid,
+
+            userName:userName,
+
+            review:text,
+
+            createdAt:
+            firebase.firestore
+            .FieldValue
+            .serverTimestamp()
+
+        });
+
+
+        textarea.value = "";
+
+
+        alert(
+            "Review posted successfully! 💬"
+        );
+
+
+        loadReviews(recipeId);
+
+        updateProfileCounts();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Review failed: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(recipeId){
+
+    const container =
+    document.getElementById(
+        "reviews-" +
+        recipeId
+    );
+
+
+    if(!container){
+
+        return;
+    }
+
+
+    try{
+
+        const snapshot =
+        await db
+        .collection("recipes")
+        .doc(recipeId)
+        .collection("reviews")
+        .get();
+
+
+        container.innerHTML = "";
+
+
+        if(snapshot.empty){
+
+            container.innerHTML =
+            '<p class="no-review">' +
+            'No reviews yet. Be the first to review! 💜' +
+            '</p>';
+
+            return;
+        }
+
+
+        const reviews = [];
+
+
+        snapshot.forEach(function(doc){
+
+            reviews.push(doc.data());
+
+        });
+
+
+        reviews.sort(function(a,b){
+
+            const timeA =
+            a.createdAt ?
+            a.createdAt.toMillis() :
+            0;
+
+            const timeB =
+            b.createdAt ?
+            b.createdAt.toMillis() :
+            0;
+
+            return timeB - timeA;
+
+        });
+
+
+        reviews.slice(0,10)
+        .forEach(function(data){
+
+            const review =
+            document.createElement(
+                "div"
+            );
+
+            review.className =
+            "single-review";
+
+
+            const name =
+            document.createElement(
+                "strong"
+            );
+
+            name.textContent =
+            "💜 " +
+            (
+                data.userName ||
+                "Flavorverse User"
+            );
+
+
+            const content =
+            document.createElement(
+                "p"
+            );
+
+            content.textContent =
+            data.review || "";
+
+
+            const date =
+            document.createElement(
+                "small"
+            );
+
+
+            if(data.createdAt){
+
+                date.textContent =
+                data.createdAt
+                .toDate()
+                .toLocaleDateString();
+
+            }
+
+
+            review.appendChild(name);
+
+            review.appendChild(content);
+
+            review.appendChild(date);
+
+            container.appendChild(review);
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        container.innerHTML =
+        '<p class="no-review">' +
+        'Reviews will appear here.' +
+        '</p>';
+
+    }
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED
+===================================================== */
+
+async function addRecentlyViewed(
+    recipeId,
+    recipeName
+){
+
+    const user =
+    await getCurrentUser();
+
+
+    if(!user){
+
+        return;
+    }
+
+
+    try{
+
+        await db
+        .collection("users")
+        .doc(user.uid)
+        .collection("recentlyViewed")
+        .doc(recipeId)
+        .set({
+
+            recipeId:recipeId,
+
+            recipeName:recipeName,
+
+            viewedAt:
+            firebase.firestore
+            .FieldValue
+            .serverTimestamp()
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD RECENTLY VIEWED
+===================================================== */
+
+async function loadRecentlyViewed(){
+
+    const container =
+    document.getElementById(
+        "recentContainer"
+    );
+
+
+    const user =
+    await getCurrentUser();
+
+
+    if(!user){
+
+        container.innerHTML =
+        '<p class="recent-empty">' +
+        'Login to see your recently viewed recipes.' +
+        '</p>';
+
+        return;
+    }
+
+
+    try{
+
+        const snapshot =
+        await db
+        .collection("users")
+        .doc(user.uid)
+        .collection("recentlyViewed")
+        .orderBy("viewedAt","desc")
+        .limit(8)
+        .get();
+
+
+        container.innerHTML = "";
+
+
+        if(snapshot.empty){
+
+            container.innerHTML =
+            '<p class="recent-empty">' +
+            'No recently viewed recipes yet.' +
+            '</p>';
+
+            return;
+        }
+
+
+        snapshot.forEach(function(doc){
+
+            const data =
+            doc.data();
+
+
+            const card =
+            document.createElement(
+                "div"
+            );
+
+            card.className =
+            "recent-card";
+
+
+            const title =
+            document.createElement(
+                "h3"
+            );
+
+            title.textContent =
+            "🕐 " +
+            data.recipeName;
+
+
+            const text =
+            document.createElement(
+                "p"
+            );
+
+            text.textContent =
+            "You recently explored this recipe.";
+
+
+            card.appendChild(title);
+
+            card.appendChild(text);
+
+            container.appendChild(card);
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   TRACK RECIPE VIEW
+===================================================== */
+
+function setupRecentlyViewed(){
+
+    const sections =
+    document.querySelectorAll(
+        ".recipe-section"
+    );
+
+
+    const observer =
+    new IntersectionObserver(
+
+        function(entries){
+
+            entries.forEach(
+            function(entry){
+
+                if(entry.isIntersecting){
+
+                    const id =
+                    entry.target.id;
+
+
+                    const recipe =
+                    recipes.find(
+                    function(item){
+
+                        return item.id === id;
+
+                    });
+
+
+                    if(recipe){
+
+                        addRecentlyViewed(
+                            recipe.id,
+                            recipe.name
+                        );
+
+                    }
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold:0.35
+        }
+
+    );
+
+
+    sections.forEach(
+    function(section){
+
+        observer.observe(section);
+
+    });
+
+}
+
+
+/* =====================================================
+   PROFILE COUNTS
+===================================================== */
+
+async function updateProfileCounts(){
+
+    const user =
+    await getCurrentUser();
+
+
+    if(!user){
+
+        document.getElementById(
+            "favouriteCount"
+        ).innerText = "0";
+
+        document.getElementById(
+            "stampCount"
+        ).innerText = "0";
+
+        document.getElementById(
+            "ratingCount"
+        ).innerText = "0";
+
+        document.getElementById(
+            "reviewCount"
+        ).innerText = "0";
+
+        return;
+    }
+
+
+    try{
+
+        const userDoc =
+        await db
+        .collection("users")
+        .doc(user.uid)
+        .get();
+
+
+        if(userDoc.exists){
+
+            const data =
+            userDoc.data();
+
+
+            document.getElementById(
+                "profileName"
+            ).innerText =
+            data.name ||
+            "Flavorverse User";
+
+
+            document.getElementById(
+                "profileEmail"
+            ).innerText =
+            data.email ||
+            user.email;
+
+        }
+
+        else{
+
+            document.getElementById(
+                "profileName"
+            ).innerText =
+            user.email;
+
+
+            document.getElementById(
+                "profileEmail"
+            ).innerText =
+            user.email;
+
+        }
+
+
+        const favourites =
+        await db
+        .collection("users")
+        .doc(user.uid)
+        .collection("favourites")
+        .get();
+
+
+        const stamps =
+        await db
+        .collection("users")
+        .doc(user.uid)
+        .collection("stamps")
+        .get();
+
+
+        const ratings =
+        await db
+        .collection("users")
+        .doc(user.uid)
+        .collection("ratings")
+        .get();
+
+
+        let reviewTotal = 0;
+
+
+        for(
+            const recipe of recipes
+        ){
+
+            const review =
+            await db
+            .collection("recipes")
+            .doc(recipe.id)
+            .collection("reviews")
+            .doc(user.uid)
+            .get();
+
+
+            if(review.exists){
+
+                reviewTotal++;
+
+            }
+
+        }
+
+
+        document.getElementById(
+            "favouriteCount"
+        ).innerText =
+        favourites.size;
+
+
+        document.getElementById(
+            "stampCount"
+        ).innerText =
+        stamps.size;
+
+
+        document.getElementById(
+            "ratingCount"
+        ).innerText =
+        ratings.size;
+
+
+        document.getElementById(
+            "reviewCount"
+        ).innerText =
+        reviewTotal;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE BUTTON STATUS
+===================================================== */
+
+async function updateButtons(){
+
+    const user =
+    await getCurrentUser();
+
+
+    const favButtons =
+    document.querySelectorAll(
+        "[data-favourite-id]"
+    );
+
+
+    const stampButtons =
+    document.querySelectorAll(
+        "[data-stamp-id]"
+    );
+
+
+    /* LOGGED OUT */
+
+    if(!user){
+
+        favButtons.forEach(
+        function(button){
+
+            button.innerHTML =
+            "♡ Add to Favourite";
+
+        });
+
+
+        stampButtons.forEach(
+        function(button){
+
+            button.innerHTML =
+            "🏷️ Add to Stamp";
+
+        });
+
+        return;
+    }
+
+
+    for(
+        const recipe of recipes
+    ){
+
+        try{
+
+            const fav =
+            await db
+            .collection("users")
+            .doc(user.uid)
+            .collection("favourites")
+            .doc(recipe.id)
+            .get();
+
+
+            const favButton =
+            document.querySelector(
+                '[data-favourite-id="' +
+                recipe.id +
+                '"]'
+            );
+
+
+            if(favButton){
+
+                if(fav.exists){
+
+                    favButton.innerHTML =
+                    "♥ Added to Favourite";
+
+                }
+
+                else{
+
+                    favButton.innerHTML =
+                    "♡ Add to Favourite";
+
+                }
+
+            }
+
+
+            const stamp =
+            await db
+            .collection("users")
+            .doc(user.uid)
+            .collection("stamps")
+            .doc(recipe.id)
+            .get();
+
+
+            const stampButton =
+            document.querySelector(
+                '[data-stamp-id="' +
+                recipe.id +
+                '"]'
+            );
+
+
+            if(stampButton){
+
+                if(stamp.exists){
+
+                    stampButton.innerHTML =
+                    "🏷️ Stamped";
+
+                }
+
+                else{
+
+                    stampButton.innerHTML =
+                    "🏷️ Add to Stamp";
+
+                }
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   SEARCH + FILTER
+===================================================== */
+
+function filterRecipes(){
+
+    const search =
+    document
+    .getElementById("recipeSearch")
+    .value
+    .toLowerCase()
+    .trim();
+
+
+    const category =
+    document
+    .getElementById("categoryFilter")
+    .value;
+
+
+    const cuisine =
+    document
+    .getElementById("cuisineFilter")
+    .value;
+
+
+    let count = 0;
+
+
+    document
+    .querySelectorAll(".recipe-section")
+    .forEach(function(section){
+
+
+        const name =
+        section.dataset.name
+        .toLowerCase();
+
+
+        const sectionCategory =
+        section.dataset.category;
+
+
+        const sectionCuisine =
+        section.dataset.cuisine;
+
+
+        const searchMatch =
+        name.includes(search);
+
+
+        const categoryMatch =
+        category === "all" ||
+        sectionCategory === category;
+
+
+        const cuisineMatch =
+        cuisine === "all" ||
+        sectionCuisine === cuisine;
+
+
+        if(
+            searchMatch &&
+            categoryMatch &&
+            cuisineMatch
+        ){
+
+            section.classList.remove(
+                "recipe-hidden"
+            );
+
+            count++;
+
+        }
+
+        else{
+
+            section.classList.add(
+                "recipe-hidden"
+            );
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "searchResult"
+    ).innerText =
+    "Showing " +
+    count +
+    " recipe" +
+    (
+        count !== 1 ?
+        "s" :
+        ""
+    );
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetFilters(){
+
+    document.getElementById(
+        "recipeSearch"
+    ).value = "";
+
+
+    document.getElementById(
+        "categoryFilter"
+    ).value = "all";
+
+
+    document.getElementById(
+        "cuisineFilter"
+    ).value = "all";
+
+
+    document
+    .querySelectorAll(".recipe-section")
+    .forEach(function(section){
+
+        section.classList.remove(
+            "recipe-hidden"
+        );
+
+    });
+
+
+    document.getElementById(
+        "searchResult"
+    ).innerText =
+    "Showing all 4 Kashmir recipes";
+
+}
+
+
+/* =====================================================
+   SURPRISE ME
+===================================================== */
+
+function surpriseMe(){
+
+    const visibleRecipes =
+    Array.from(
+        document.querySelectorAll(
+            ".recipe-section"
+        )
+    )
+    .filter(function(recipe){
+
+        return !recipe.classList.contains(
+            "recipe-hidden"
+        );
+
+    });
+
+
+    if(visibleRecipes.length === 0){
+
+        alert(
+            "No recipes available with the selected filter."
+        );
+
+        return;
+    }
+
+
+    const random =
+    visibleRecipes[
+        Math.floor(
+            Math.random() *
+            visibleRecipes.length
+        )
+    ];
+
+
+    random.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"center"
+
+    });
+
+
+    random.style.boxShadow =
+    "0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+
+
+    setTimeout(function(){
+
+        random.style.boxShadow =
+        "0 8px 20px rgba(0,0,0,.12)";
+
+    },2500);
+
+
+    alert(
+        "🎲 Surprise Recipe: " +
+        random.dataset.name
+    );
+
+}
+
+
+/* =====================================================
+   AUTH READY
+===================================================== */
+
+flavorverseAuthReady.then(
+async function(user){
+
+    if(user){
+
+        try{
+
+            const userDoc =
+            await db
+            .collection("users")
+            .doc(user.uid)
+            .get();
+
+
+            if(userDoc.exists){
+
+                const data =
+                userDoc.data();
+
+
+                document.getElementById(
+                    "profileName"
+                ).innerText =
+                data.name ||
+                "Flavorverse User";
+
+
+                document.getElementById(
+                    "profileEmail"
+                ).innerText =
+                data.email ||
+                user.email;
+
+            }
+
+            else{
+
+                document.getElementById(
+                    "profileName"
+                ).innerText =
+                user.email;
+
+
+                document.getElementById(
+                    "profileEmail"
+                ).innerText =
+                user.email;
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+
+        updateButtons();
+
+        updateProfileCounts();
+
+        loadRatings();
+
+        loadRecentlyViewed();
+
+
+        recipes.forEach(
+        function(recipe){
+
+            loadReviews(
+                recipe.id
+            );
+
+        });
+
+    }
+
+    else{
+
+        document.getElementById(
+            "profileName"
+        ).innerText =
+        "Guest";
+
+
+        document.getElementById(
+            "profileEmail"
+        ).innerText =
+        "Login to see your profile";
+
+
+        loadRecentlyViewed();
+
+    }
+
+});
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+    setupRecentlyViewed();
+
+});
+
+
+
+/* =====================================================
+   FLAVORVERSE SIDE MENU
+===================================================== */
+
+function openFlavorverseMenu(){
+    const menu = document.getElementById('flavorverseMenu');
+    const overlay = document.getElementById('menuOverlay');
+
+    if(menu) menu.classList.add('active');
+    if(overlay) overlay.classList.add('active');
+
+    document.body.style.overflow = 'hidden';
+}
+
+function closeFlavorverseMenu(){
+    const menu = document.getElementById('flavorverseMenu');
+    const overlay = document.getElementById('menuOverlay');
+
+    if(menu) menu.classList.remove('active');
+    if(overlay) overlay.classList.remove('active');
+
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(event){
+    if(event.key === 'Escape'){
+        closeFlavorverseMenu();
+    }
+});
+
+</script>
+
+</body>
+</html>

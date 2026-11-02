@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Royal Heritage Flavors | The Flavorverse</title>
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#F8F3F1;
+    color:#5A4A4A;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+header{
+    background:#8B6F8E;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.menu-button{
+    background:transparent;
+    border:none;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    padding:10px 16px;
+    border-radius:25px;
+    transition:0.3s;
+}
+
+.menu-button:hover{
+    background:#715675;
+    color:#F7E7CE;
+}
+
+
+/* =========================
+   SIDE MENU
+========================= */
+
+.menu-panel{
+    position:fixed;
+    top:0;
+    right:-390px;
+
+    width:360px;
+    height:100vh;
+
+    background:#FDF6EC;
+
+    z-index:1002;
+
+    box-shadow:-8px 0 30px rgba(0,0,0,0.20);
+
+    transition:right 0.35s ease;
+
+    overflow-y:auto;
+}
+
+.menu-panel.active{
+    right:0;
+}
+
+
+/* MENU HEADER */
+
+.menu-header{
+    background:#8B6F8E;
+    color:white;
+
+    padding:22px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.menu-header h2{
+    font-size:23px;
+}
+
+.close-button{
+    border:none;
+    background:transparent;
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+}
+
+
+/* MENU ITEMS */
+
+.menu-items{
+    padding:20px;
+}
+
+.menu-items a{
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    text-decoration:none;
+
+    color:#5A4A4A;
+
+    padding:15px;
+
+    margin-bottom:10px;
+
+    border-radius:14px;
+
+    background:white;
+
+    box-shadow:0 3px 10px rgba(0,0,0,0.06);
+
+    transition:0.3s;
+}
+
+.menu-items a:hover{
+    background:#F7E7CE;
+
+    color:#7A5C74;
+
+    transform:translateX(-5px);
+}
+
+
+/* ICON */
+
+.menu-icon{
+    font-size:25px;
+    width:35px;
+    text-align:center;
+}
+
+
+/* MENU TEXT */
+
+.menu-text{
+    display:flex;
+    flex-direction:column;
+}
+
+.menu-text strong{
+    font-size:16px;
+    margin-bottom:3px;
+}
+
+.menu-text small{
+    font-size:12px;
+    color:#8A7777;
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
+
+.menu-overlay{
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.45);
+
+    z-index:1001;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:0.3s;
+}
+
+.menu-overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero{
+
+    width:90%;
+    max-width:1200px;
+
+    margin:40px auto;
+
+    background:#F7E7CE;
+
+    border-radius:20px;
+
+    padding:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:40px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+
+    color:#7A5C74;
+
+    font-size:46px;
+
+    margin-bottom:20px;
+}
+
+.hero-text p{
+
+    line-height:1.8;
+
+    font-size:17px;
+
+    margin-bottom:25px;
+}
+
+.button{
+
+    display:inline-block;
+
+    background:#8B6F8E;
+
+    color:white;
+
+    padding:12px 25px;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+    font-weight:bold;
+}
+
+.button:hover{
+    background:#715675;
+}
+
+.hero-image{
+    flex:1;
+}
+
+.hero-image img{
+
+    width:100%;
+
+    border-radius:18px;
+}
+
+
+/* =========================
+   INTRODUCTION
+========================= */
+
+.intro{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:60px auto;
+
+    text-align:center;
+}
+
+.intro h2{
+
+    color:#8B6F8E;
+
+    margin-bottom:20px;
+
+    font-size:34px;
+}
+
+.intro p{
+
+    line-height:1.9;
+
+    font-size:17px;
+}
+
+
+/* =========================
+   REGION
+========================= */
+
+.region-title{
+
+    text-align:center;
+
+    color:#8B6F8E;
+
+    font-size:36px;
+
+    margin-top:50px;
+
+    margin-bottom:35px;
+}
+
+
+/* =========================
+   STATE CONTAINER
+========================= */
+
+.state-container{
+
+    width:90%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+}
+
+
+/* =========================
+   STATE CARD
+========================= */
+
+.state-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 6px 18px rgba(0,0,0,0.12);
+
+    transition:0.3s;
+}
+
+.state-card:hover{
+
+    transform:translateY(-8px);
+}
+
+
+.state-card img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+
+/* =========================
+   STATE CONTENT
+========================= */
+
+.state-content{
+
+    padding:20px;
+}
+
+.state-content h3{
+
+    color:#7A5C74;
+
+    margin-bottom:15px;
+}
+
+.state-content p{
+
+    color:#666;
+
+    font-size:14px;
+
+    margin-bottom:15px;
+
+    line-height:1.6;
+}
+
+.state-content ul{
+
+    padding-left:20px;
+
+    line-height:1.8;
+
+    margin-bottom:18px;
+}
+
+
+/* =========================
+   EXPLORE BUTTON
+========================= */
+
+.btn{
+
+    display:inline-block;
+
+    background:#8B6F8E;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 20px;
+
+    border-radius:25px;
+
+    font-size:14px;
+
+    transition:0.3s;
+}
+
+.btn:hover{
+
+    background:#705674;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    background:#8E6C88;
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:20px;
+
+    margin-top:60px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+    header{
+        padding:15px 5%;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .menu-panel{
+        width:85%;
+    }
+
+    .hero{
+
+        flex-direction:column;
+
+        padding:25px;
+
+        text-align:center;
+    }
+
+    .hero-text h1{
+        font-size:34px;
+    }
+
+    .region-title{
+        font-size:30px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <button class="menu-button" onclick="toggleMenu()">
+        ☰ Menu
+    </button>
+
+</header>
+
+
+<!-- =========================
+     MENU OVERLAY
+========================= -->
+
+<div
+    class="menu-overlay"
+    id="menuOverlay"
+    onclick="toggleMenu()">
+</div>
+
+
+<!-- =========================
+     SIDE MENU
+========================= -->
+
+<div class="menu-panel" id="menuPanel">
+
+    <div class="menu-header">
+
+        <h2>🍴 Flavorverse Menu</h2>
+
+        <button
+            class="close-button"
+            onclick="toggleMenu()">
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="menu-items">
+
+
+        <!-- HOME -->
+
+        <a href="index.html">
+
+            <span class="menu-icon">🏠</span>
+
+            <span class="menu-text">
+
+                <strong>Home</strong>
+
+                <small>
+                    Welcome to The Flavorverse
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- ABOUT -->
+
+        <a href="about.html">
+
+            <span class="menu-icon">ℹ️</span>
+
+            <span class="menu-text">
+
+                <strong>About</strong>
+
+                <small>
+                    Discover our food journey
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- ROYAL -->
+
+        <a href="royal.html">
+
+            <span class="menu-icon">👑</span>
+
+            <span class="menu-text">
+
+                <strong>Royal Heritage</strong>
+
+                <small>
+                    Traditional Indian recipes
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- MOVIES -->
+
+        <a href="movies&cartoons.html">
+
+            <span class="menu-icon">🎬</span>
+
+            <span class="menu-text">
+
+                <strong>Movies & Cartoons</strong>
+
+                <small>
+                    Food inspired by entertainment
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- WORLD CUISINE -->
+
+        <a href="worldcuisine.html">
+
+            <span class="menu-icon">🌎</span>
+
+            <span class="menu-text">
+
+                <strong>World Cuisine</strong>
+
+                <small>
+                    Explore flavors around the world
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- DESSERTS -->
+
+        <a href="desertwrold.html">
+
+            <span class="menu-icon">🍰</span>
+
+            <span class="menu-text">
+
+                <strong>Desserts</strong>
+
+                <small>
+                    Sweet recipes and treats
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- GALLERY -->
+
+        <a href="gallery.html">
+
+            <span class="menu-icon">🖼️</span>
+
+            <span class="menu-text">
+
+                <strong>Gallery</strong>
+
+                <small>
+                    Explore our food collection
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- FAVOURITES -->
+
+        <a href="favourite.html">
+
+            <span class="menu-icon">❤️</span>
+
+            <span class="menu-text">
+
+                <strong>Favourites</strong>
+
+                <small>
+                    Your saved recipes
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- ORDER -->
+
+        <a href="order.html">
+
+            <span class="menu-icon">🛒</span>
+
+            <span class="menu-text">
+
+                <strong>Order</strong>
+
+                <small>
+                    Explore ingredient kits
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- STAMPED -->
+
+        <a href="stamped.html">
+
+            <span class="menu-icon">🏷️</span>
+
+            <span class="menu-text">
+
+                <strong>Stamped</strong>
+
+                <small>
+                    Your Flavorverse collection
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- CONTACT -->
+
+        <a href="contact.html">
+
+            <span class="menu-icon">📩</span>
+
+            <span class="menu-text">
+
+                <strong>Contact</strong>
+
+                <small>
+                    Get in touch with us
+                </small>
+
+            </span>
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     HERO SECTION
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>
+            👑 Royal Heritage
+            Flavors of India
+        </h1>
+
+        <p>
+
+            Experience the timeless recipes of India,
+            where every region tells a story through
+            its traditional dishes, royal kitchens,
+            aromatic spices and cultural heritage.
+
+        </p>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img
+            src="RH hero picture.png"
+            alt="Royal Heritage">
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTRODUCTION
+========================= -->
+
+<section class="intro">
+
+    <h2>
+        Welcome to India's Royal Kitchens
+    </h2>
+
+    <p>
+
+        Royal Heritage Flavors celebrates the
+        rich culinary traditions of India.
+        Explore famous recipes from different
+        regions, discover unique cooking styles,
+        and experience the taste of India's
+        royal heritage.
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     SOUTH INDIA
+========================= -->
+
+<h2 class="region-title">
+    🌴 South India
+</h2>
+
+
+<section class="state-container">
+
+
+    <!-- TAMIL NADU -->
+
+    <div class="state-card">
+
+        <img
+            src="tamil nadu.png"
+            alt="Tamil Nadu">
+
+        <div class="state-content">
+
+            <h3>🇮🇳 Tamil Nadu</h3>
+
+            <p>
+                Famous for temple cuisine,
+                Chettinad spices and traditional
+                royal recipes.
+            </p>
+
+            <ul>
+
+                <li>Kumbakonam Kadappa</li>
+
+                <li>Chettinad Chicken Curry</li>
+
+                <li>Sakkarai Pongal</li>
+
+                <li>Akkaravadisal</li>
+
+            </ul>
+
+            <a
+                href="tamilnadu.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- KERALA -->
+
+    <div class="state-card">
+
+        <img
+            src="kerala.png"
+            alt="Kerala">
+
+        <div class="state-content">
+
+            <h3>🌴 Kerala</h3>
+
+            <p>
+                Rich flavors made with coconut,
+                spices and fresh seafood.
+            </p>
+
+            <ul>
+
+                <li>Malabar Biryani</li>
+
+                <li>Fish Molee</li>
+
+                <li>Ada Pradhaman</li>
+
+                <li>Kerala Stew</li>
+
+            </ul>
+
+            <a
+                href="kerala.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- KARNATAKA -->
+
+    <div class="state-card">
+
+        <img
+            src="karnataka.png"
+            alt="Karnataka">
+
+        <div class="state-content">
+
+            <h3>🏰 Karnataka</h3>
+
+            <p>
+                Home of delicious sweets,
+                traditional meals and royal cuisine.
+            </p>
+
+            <ul>
+
+                <li>Mysore Pak</li>
+
+                <li>Bisi Bele Bath</li>
+
+                <li>Neer Dosa</li>
+
+                <li>Ragi Mudde</li>
+
+            </ul>
+
+            <a
+                href="karnataka.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ANDHRA PRADESH -->
+
+    <div class="state-card">
+
+        <img
+            src="andrapradesh.png"
+            alt="Andhra Pradesh">
+
+        <div class="state-content">
+
+            <h3>🌶️ Andhra Pradesh</h3>
+
+            <p>
+                Popular for spicy curries,
+                pickles and flavorful rice dishes.
+            </p>
+
+            <ul>
+
+                <li>Pulihora</li>
+
+                <li>Andhra Chicken Curry</li>
+
+                <li>Royyala Iguru</li>
+
+                <li>Pootharekulu</li>
+
+            </ul>
+
+            <a
+                href="Andrapradesh.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     NORTH INDIA
+========================= -->
+
+<h2 class="region-title">
+    🕌 North India
+</h2>
+
+
+<section class="state-container">
+
+
+    <!-- RAJASTHAN -->
+
+    <div class="state-card">
+
+        <img
+            src="rajasthan.png"
+            alt="Rajasthan">
+
+        <div class="state-content">
+
+            <h3>👑 Rajasthan</h3>
+
+            <p>
+                Rajasthan is famous for its rich royal cuisine,
+                prepared with traditional spices and authentic flavors.
+            </p>
+
+            <ul>
+
+                <li>Dal Baati Churma</li>
+
+                <li>Laal Maas</li>
+
+                <li>Gatte Ki Sabzi</li>
+
+                <li>Ghevar</li>
+
+            </ul>
+
+            <a
+                href="rajasthan.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PUNJAB -->
+
+    <div class="state-card">
+
+        <img
+            src="punjab1.png"
+            alt="Punjab">
+
+        <div class="state-content">
+
+            <h3>🌾 Punjab</h3>
+
+            <p>
+                Punjab offers rich and flavorful dishes prepared
+                with fresh dairy products and aromatic spices.
+            </p>
+
+            <ul>
+
+                <li>Sarson Ka Saag</li>
+
+                <li>Makki Ki Roti</li>
+
+                <li>Amritsari Chole</li>
+
+                <li>Phirni</li>
+
+            </ul>
+
+            <a
+                href="punjab.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- UTTAR PRADESH -->
+
+    <div class="state-card">
+
+        <img
+            src="uttarpradesh.png"
+            alt="Uttar Pradesh">
+
+        <div class="state-content">
+
+            <h3>🏛️ Uttar Pradesh</h3>
+
+            <p>
+                Uttar Pradesh is well known for Nawabi cuisine
+                and delicious Mughlai recipes.
+            </p>
+
+            <ul>
+
+                <li>Galouti Kebab</li>
+
+                <li>Lucknowi Biryani</li>
+
+                <li>Shahi Tukda</li>
+
+                <li>Kakori Kebab</li>
+
+            </ul>
+
+            <a
+                href="uttarpradesh.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- KASHMIR -->
+
+    <div class="state-card">
+
+        <img
+            src="kashmir.png"
+            alt="Kashmir">
+
+        <div class="state-content">
+
+            <h3>❄️ Kashmir</h3>
+
+            <p>
+                Kashmiri cuisine is known for its fragrant spices,
+                dry fruits and rich traditional dishes.
+            </p>
+
+            <ul>
+
+                <li>Rogan Josh</li>
+
+                <li>Yakhni</li>
+
+                <li>Kashmiri Pulao</li>
+
+                <li>Modur Pulao</li>
+
+            </ul>
+
+            <a
+                href="kashmir.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     EAST INDIA
+========================= -->
+
+<h2 class="region-title">
+    🌄 East India
+</h2>
+
+
+<section class="state-container">
+
+
+    <!-- WEST BENGAL -->
+
+    <div class="state-card">
+
+        <img
+            src="westbengal.png"
+            alt="West Bengal">
+
+        <div class="state-content">
+
+            <h3>🎭 West Bengal</h3>
+
+            <p>
+                West Bengal is famous for its sweets,
+                fish dishes and rich cultural cuisine.
+            </p>
+
+            <ul>
+
+                <li>Mishti Doi</li>
+
+                <li>Macher Jhol</li>
+
+                <li>Kosha Mangsho</li>
+
+                <li>Rasgulla</li>
+
+            </ul>
+
+            <a
+                href="westbengal.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ODISHA -->
+
+    <div class="state-card">
+
+        <img
+            src="odisha.png"
+            alt="Odisha">
+
+        <div class="state-content">
+
+            <h3>🛕 Odisha</h3>
+
+            <p>
+                Odisha's cuisine reflects temple traditions
+                with simple yet flavorful recipes.
+            </p>
+
+            <ul>
+
+                <li>Chhena Poda</li>
+
+                <li>Dalma</li>
+
+                <li>Kanika</li>
+
+                <li>Rasabali</li>
+
+            </ul>
+
+            <a
+                href="odisha.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ASSAM -->
+
+    <div class="state-card">
+
+        <img
+            src="assam.png"
+            alt="Assam">
+
+        <div class="state-content">
+
+            <h3>🍃 Assam</h3>
+
+            <p>
+                Assam is known for fresh herbs, unique
+                flavors and traditional rice-based dishes.
+            </p>
+
+            <ul>
+
+                <li>Khar</li>
+
+                <li>Masor Tenga</li>
+
+                <li>Duck Meat Curry</li>
+
+                <li>Pitha</li>
+
+            </ul>
+
+            <a
+                href="assam.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- BIHAR -->
+
+    <div class="state-card">
+
+        <img
+            src="bihar.png"
+            alt="Bihar">
+
+        <div class="state-content">
+
+            <h3>🛕 Bihar</h3>
+
+            <p>
+                Bihar is famous for its ancient heritage,
+                traditional sweets and authentic regional cuisine.
+            </p>
+
+            <ul>
+
+                <li>Litti Chokha</li>
+
+                <li>Khaja</li>
+
+                <li>Thekua</li>
+
+                <li>Malpua</li>
+
+            </ul>
+
+            <a
+                href="bihar.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     WEST INDIA
+========================= -->
+
+<h2 class="region-title">
+    🏜️ West India
+</h2>
+
+
+<section class="state-container">
+
+
+    <!-- GUJARAT -->
+
+    <div class="state-card">
+
+        <img
+            src="gujarat.png"
+            alt="Gujarat">
+
+        <div class="state-content">
+
+            <h3>🪔 Gujarat</h3>
+
+            <p>
+                Gujarat is famous for its delicious vegetarian
+                cuisine, sweet and spicy flavors, and traditional
+                festive recipes.
+            </p>
+
+            <ul>
+
+                <li>Undhiyu</li>
+
+                <li>Khandvi</li>
+
+                <li>Gujarati Kadhi</li>
+
+                <li>Basundi</li>
+
+            </ul>
+
+            <a
+                href="gujarat.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MAHARASHTRA -->
+
+    <div class="state-card">
+
+        <img
+            src="maharastra.png"
+            alt="Maharashtra">
+
+        <div class="state-content">
+
+            <h3>🏙️ Maharashtra</h3>
+
+            <p>
+                Maharashtra offers a perfect blend of spicy,
+                traditional and festive foods enjoyed across
+                the state.
+            </p>
+
+            <ul>
+
+                <li>Puran Poli</li>
+
+                <li>Misal Pav</li>
+
+                <li>Pav Bhaji</li>
+
+                <li>Modak</li>
+
+            </ul>
+
+            <a
+                href="maharastra.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- GOA -->
+
+    <div class="state-card">
+
+        <img
+            src="goa.png"
+            alt="Goa">
+
+        <div class="state-content">
+
+            <h3>🏖️ Goa</h3>
+
+            <p>
+                Goa is popular for seafood dishes, Portuguese
+                influences and delicious desserts.
+            </p>
+
+            <ul>
+
+                <li>Goan Fish Curry</li>
+
+                <li>Chicken Xacuti</li>
+
+                <li>Prawn Balchão</li>
+
+                <li>Bebinca</li>
+
+            </ul>
+
+            <a
+                href="goa.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MADHYA PRADESH -->
+
+    <div class="state-card">
+
+        <img
+            src="madhayapradesh.png"
+            alt="Madhya Pradesh">
+
+        <div class="state-content">
+
+            <h3>🏛️ Madhya Pradesh</h3>
+
+            <p>
+                Madhya Pradesh is known for its royal heritage,
+                rich culture and delicious traditional cuisine.
+            </p>
+
+            <ul>
+
+                <li>Poha Jalebi</li>
+
+                <li>Bhutte Ka Kees</li>
+
+                <li>Dal Bafla</li>
+
+                <li>Mawa Bati</li>
+
+            </ul>
+
+            <a
+                href="madhyapradesh.html"
+                class="btn">
+
+                Explore Heritage
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     DID YOU KNOW
+========================= -->
+
+<section class="intro">
+
+    <h2>
+        ✨ Did You Know?
+    </h2>
+
+    <p>
+
+        India's royal kitchens have preserved traditional recipes
+        for centuries. Every region has its own unique spices,
+        cooking techniques and festive dishes that reflect its
+        history and culture.
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026 The Flavorverse | Cook • Create • Celebrate
+
+</footer>
+
+
+
+<!-- =========================
+     MENU JAVASCRIPT
+========================= -->
+
+<script>
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById("menuPanel");
+
+    const overlay =
+        document.getElementById("menuOverlay");
+
+
+    menu.classList.toggle("active");
+
+    overlay.classList.toggle("active");
+
+}
+
+
+/* CLOSE MENU WHEN ESC IS PRESSED */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            const menu =
+                document.getElementById("menuPanel");
+
+            const overlay =
+                document.getElementById("menuOverlay");
+
+
+            menu.classList.remove("active");
+
+            overlay.classList.remove("active");
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

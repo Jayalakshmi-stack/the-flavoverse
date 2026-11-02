@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bihar | The Flavorverse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#F7E7CE;
+color:#5B4A45;
+}
+
+/* Header */
+
+header{
+background:#8E6C88;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+font-family:'Cinzel',serif;
+font-size:32px;
+font-weight:bold;
+color:white;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:28px;
+font-size:17px;
+transition:.3s;
+}
+
+nav a:hover{
+color:#FFD166;
+}
+
+/* Hero */
+
+.hero{
+
+width:90%;
+margin:40px auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+display:flex;
+align-items:center;
+gap:40px;
+padding:40px;
+
+}
+
+.image-box{
+
+    width:450px;
+    height:350px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff8f2;
+    border-radius:20px;
+    flex:1;
+
+}
+
+.image-box img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+.hero-content{
+
+padding:40px;
+flex:1;
+text-align:left;
+
+}
+
+.hero-content h1{
+
+font-family:'Cinzel',serif;
+font-size:58px;
+color:#6F4B72;
+
+}
+
+.hero-content h2{
+
+margin-top:15px;
+color:#B58A4D;
+font-size:30px;
+
+}
+
+.hero-content p{
+
+margin-top:18px;
+font-size:18px;
+line-height:1.8;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:25px;
+padding:14px 35px;
+background:#8E6C88;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#6F4B72;
+
+}
+/* ================= ABOUT SECTION ================= */
+
+.about-section{
+width:90%;
+margin:50px auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+
+.about-text{
+flex:2;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.about-text h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:20px;
+}
+
+.about-text p{
+line-height:1.9;
+font-size:17px;
+margin-bottom:18px;
+text-align:justify;
+}
+
+.about-box{
+flex:1;
+background:#8E6C88;
+color:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.about-box h3{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+text-align:center;
+}
+
+.about-box ul{
+list-style:none;
+}
+
+.about-box li{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.25);
+font-size:16px;
+}
+
+.about-box li:last-child{
+border-bottom:none;
+}
+
+@media(max-width:768px){
+
+.about-section{
+flex-direction:column;
+}
+
+.about-text,
+.about-box{
+width:100%;
+}
+
+}
+/* ================= RECIPE SECTION ================= */
+
+.recipe-section{
+
+width:90%;
+
+margin:60px auto;
+
+display:flex;
+
+gap:40px;
+
+align-items:flex-start;
+
+background:#FFF9F4;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.recipe-image{
+
+flex:1;
+
+}
+
+.recipe-image img{
+
+width:100%;
+
+border-radius:18px;
+
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+
+}
+
+.recipe-content{
+
+flex:2;
+
+}
+
+.recipe-content h2{
+
+font-family:'Cinzel',serif;
+
+color:#6F4B72;
+
+font-size:38px;
+
+margin-bottom:20px;
+
+}
+
+.recipe-content h3{
+
+margin-top:25px;
+
+margin-bottom:12px;
+
+color:#8E6C88;
+
+}
+
+.recipe-content p{
+
+line-height:1.8;
+
+text-align:justify;
+
+}
+
+.recipe-content ul,
+
+.recipe-content ol{
+
+margin-left:25px;
+
+line-height:1.9;
+
+}
+
+.recipe-info{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:25px;
+
+gap:20px;
+
+}
+
+.recipe-info div{
+
+flex:1;
+
+background:#F7E7CE;
+
+padding:18px;
+
+text-align:center;
+
+border-radius:15px;
+
+}
+
+.chef-tip,
+
+.fun-fact{
+
+margin-top:25px;
+
+background:#F7E7CE;
+
+padding:20px;
+
+border-left:6px solid #8E6C88;
+
+border-radius:12px;
+
+}
+
+@media(max-width:768px){
+
+.recipe-section{
+
+flex-direction:column;
+
+}
+
+.recipe-info{
+
+flex-direction:column;
+
+}
+
+}
+/* Reverse Layout for Alternate Recipe */
+
+.reverse{
+display:flex;
+flex-direction:row-reverse;
+}
+
+@media(max-width:768px){
+
+.reverse{
+flex-direction:column;
+}
+
+}
+/* ================= FOOD FACTS ================= */
+
+.facts-section{
+
+width:90%;
+margin:60px auto;
+
+}
+
+.facts-section h2{
+
+text-align:center;
+font-family:'Cinzel',serif;
+font-size:40px;
+color:#6F4B72;
+margin-bottom:35px;
+
+}
+
+.facts-container{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+
+}
+
+.fact-card{
+
+background:#FFF9F4;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+transition:.3s;
+
+}
+
+.fact-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.fact-card h3{
+
+color:#8E6C88;
+margin-bottom:15px;
+
+}
+
+.fact-card p{
+
+line-height:1.8;
+
+}
+
+/* ================= CHEF ================= */
+
+.chef-section{
+
+width:90%;
+margin:60px auto;
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+
+}
+
+.chef-section h2{
+
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+
+}
+
+.chef-section p{
+
+font-size:18px;
+line-height:1.8;
+
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+background:#6F4B72;
+color:white;
+text-align:center;
+padding:40px 20px;
+margin-top:60px;
+
+}
+
+footer h2{
+
+font-family:'Cinzel',serif;
+margin-bottom:15px;
+
+}
+
+footer p{
+
+margin:10px 0;
+line-height:1.8;
+
+}
+
+.social{
+
+margin:25px 0;
+
+}
+
+.social a{
+
+text-decoration:none;
+font-size:30px;
+margin:0 12px;
+
+}
+
+.copy{
+
+margin-top:20px;
+font-size:15px;
+opacity:.9;
+
+}
+
+
+/* ================= KERALA-STYLE COMMUNITY FEATURES ================= */
+body{transition:background .3s,color .3s}
+body.dark-mode{background:#241d23;color:#eee}
+body.dark-mode .hero,body.dark-mode .about-text,body.dark-mode .recipe-section,body.dark-mode .fact-card,body.dark-mode .explorer-box,body.dark-mode .review-box,body.dark-mode .recent-card{background:#342a32;color:#eee}
+body.dark-mode .recipe-content h2,body.dark-mode .about-text h2,body.dark-mode .facts-section h2,body.dark-mode .explorer-box h2{color:#e9c9e4}
+body.dark-mode .recipe-content h3{color:#d6aeca}
+body.dark-mode .recipe-info div,body.dark-mode .chef-tip,body.dark-mode .fun-fact,body.dark-mode .single-review{background:#443640;color:#eee}
+body.dark-mode input,body.dark-mode select,body.dark-mode textarea{background:#443640;color:white;border-color:#80647b}
+header{position:relative;gap:20px}
+.header-right{display:flex;align-items:center;gap:12px}
+.menu-toggle{border:0;background:#F4E5C5;color:#5B4A45;font-size:25px;width:46px;height:42px;border-radius:12px;cursor:pointer}
+/* Full-height Explore drawer matching the reference screenshot */
+.menu-backdrop{position:fixed;inset:0;background:rgba(25,17,28,.55);z-index:1998;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+.menu-backdrop.open{opacity:1;visibility:visible}
+nav#mainNav{display:flex;position:fixed;z-index:1999;top:0;right:0;bottom:0;width:min(420px,100vw);height:100vh;max-height:100vh;overflow-y:auto;padding:0;background:#FFF8F0;border-radius:0;box-shadow:-8px 0 28px rgba(0,0,0,.18);flex-direction:column;align-items:stretch;gap:0;transform:translateX(105%);visibility:hidden;transition:transform .28s ease,visibility .28s ease}
+nav#mainNav.open{transform:translateX(0);visibility:visible}
+.menu-heading{min-height:115px;background:#A184A2;color:#fff;padding:0 29px 0 35px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:2}
+.menu-heading h2{font-family:Georgia,'Times New Roman',serif;font-size:36px;font-weight:700;margin:0;color:#fff}
+.menu-close{border:0;background:transparent;color:#fff;font-size:35px;line-height:1;cursor:pointer;padding:8px}
+nav#mainNav a.menu-link{display:flex;align-items:center;gap:22px;margin:0;padding:16px 28px 16px 44px;min-height:77px;border-radius:0;color:#704B70;text-decoration:none;font-family:Georgia,'Times New Roman',serif;transition:background .2s ease}
+.menu-icon{width:31px;flex:0 0 31px;text-align:center;font-family:Arial,sans-serif;font-size:25px}
+.menu-copy{display:flex;flex-direction:column;gap:3px}
+.menu-copy strong{font-size:21px;line-height:1.15;font-weight:700}
+.menu-copy small{font-size:14px;line-height:1.25;color:#8A6587;font-weight:400}
+nav#mainNav a.menu-link:hover{background:#F2E5ED;color:#5C3E60}
+nav#mainNav a.menu-link.menu-divider{border-top:1px solid #E2D0DA;margin:8px 27px 0;padding-left:17px;padding-right:0}
+nav#mainNav a.menu-link.menu-divider:hover{margin-left:27px;margin-right:27px;padding-left:17px}
+.menu-bottom-space{height:20px;flex:0 0 20px}
+body.menu-open{overflow:hidden}
+.dark-toggle{border:0;background:#F4E5C5;color:#5B4A45;padding:10px 13px;border-radius:20px;cursor:pointer;font-weight:bold}
+.explorer-section,.recent-section,.profile-section{width:90%;margin:55px auto}
+.explorer-box{background:#FFF9F4;padding:30px;border-radius:20px;box-shadow:0 8px 20px #0002}
+.explorer-box h2,.recent-section h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:34px;margin-bottom:22px}
+.search-filter-row,.explorer-buttons{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.search-box,.filter-box{padding:13px 18px;border:1px solid #D8C5B0;border-radius:25px;background:white;color:#5B4A45;font-family:'Poppins',sans-serif;outline:none}
+.search-box{width:45%;min-width:230px}.filter-box{min-width:170px}
+.explorer-btn{border:0;padding:12px 22px;border-radius:25px;background:#8E6C88;color:white;font-weight:600;cursor:pointer;margin-top:18px}
+.explorer-btn.random{background:#B58A4D}.search-result{text-align:center;margin-top:15px;font-weight:600;color:#8E6C88}
+.recipe-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.recipe-actions button{border:0;border-radius:25px;padding:11px 16px;font-family:'Poppins',sans-serif;font-weight:600;cursor:pointer;transition:.2s}
+.favorite-btn{background:#8E6C88;color:white}.stamp-btn{background:#F4E5C5;color:#5B4A45}
+.recipe-actions button:hover{transform:translateY(-2px)}
+.rating-area{margin-top:22px;padding:18px;background:rgba(244,229,197,.55);border-radius:15px}
+.stars{display:flex;gap:5px;margin-top:7px}.star{font-size:28px;cursor:pointer;color:#c8b9aa}.star.active{color:#E5A82F}
+.rating-message{font-size:13px;margin-top:7px}
+.review-box{margin-top:18px;padding:20px;background:#FFF9F4;border:1px solid #eadbc9;border-radius:15px}
+.review-input{width:100%;min-height:75px;resize:vertical;padding:12px;border:1px solid #D8C5B0;border-radius:12px;font-family:'Poppins',sans-serif;margin-top:8px}
+.review-submit{margin-top:10px;border:0;background:#8E6C88;color:white;padding:10px 20px;border-radius:22px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600}
+.reviews-list{margin-top:12px}.single-review{padding:12px;margin-top:10px;background:#F7E7CE;border-radius:12px}.single-review strong{color:#6F4B72}.single-review small{display:block;margin-top:4px;opacity:.7}
+.recent-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.recent-card{background:#FFF9F4;padding:20px;border-radius:18px;box-shadow:0 7px 17px #0002}.recent-card h3{color:#8E6C88;margin-bottom:7px}.recent-empty{text-align:center;opacity:.7}
+.profile-box{background:#8E6C88;color:white;padding:35px;border-radius:22px;box-shadow:0 10px 25px #0002}
+.profile-box h2{text-align:center;font-family:'Cinzel',serif;margin-bottom:8px}.profile-name,.profile-email{text-align:center;margin-bottom:10px}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:25px}.profile-card{background:#FFF9F4;color:#5B4A45;padding:20px;border-radius:15px;text-align:center}.profile-card .count{display:block;font-size:28px;font-weight:bold;color:#6F4B72}
+@media(max-width:768px){header{flex-direction:row;padding:16px 5%}.logo{font-size:23px}.hero{flex-direction:column;padding:20px}.image-box{width:100%;height:260px}.hero-content{padding:20px 5px}.search-box{width:100%}.profile-stats{grid-template-columns:repeat(2,1fr)}nav#mainNav{width:min(420px,100vw)}}
+@media(max-width:450px){.profile-stats{grid-template-columns:1fr}.header-right{gap:6px}.dark-toggle{padding:8px;font-size:12px}}
+
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+</style>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<div id="menuBackdrop" class="menu-backdrop" onclick="toggleMenu(false)"></div>
+
+<header>
+
+<div class="logo">
+🍴 The Flavorverse
+</div>
+
+<div class="header-right"><button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button><button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">☰</button></div>
+
+<nav id="mainNav" aria-label="Explore menu">
+  <div class="menu-heading"><h2>Explore</h2><button class="menu-close" onclick="toggleMenu(false)" aria-label="Close menu">×</button></div>
+  <a class="menu-link" href="index.html" onclick="toggleMenu(false)"><span class="menu-icon">🏠</span><span class="menu-copy"><strong>Home</strong><small>Return to the homepage</small></span></a>
+  <a class="menu-link" href="royal.html" onclick="toggleMenu(false)"><span class="menu-icon">👑</span><span class="menu-copy"><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+  <a class="menu-link" href="movies.html" onclick="toggleMenu(false)"><span class="menu-icon">🎬</span><span class="menu-copy"><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+  <a class="menu-link" href="worldcuisine.html" onclick="toggleMenu(false)"><span class="menu-icon">🌎</span><span class="menu-copy"><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+  <a class="menu-link" href="desserts.html" onclick="toggleMenu(false)"><span class="menu-icon">🍰</span><span class="menu-copy"><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+  <a class="menu-link" href="gallery.html" onclick="toggleMenu(false)"><span class="menu-icon">🖼️</span><span class="menu-copy"><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+  <a class="menu-link menu-divider" href="favourites.html" onclick="toggleMenu(false)"><span class="menu-icon">💗</span><span class="menu-copy"><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+  <a class="menu-link" href="order.html" onclick="toggleMenu(false)"><span class="menu-icon">🛒</span><span class="menu-copy"><strong>Order</strong><small>Order ingredient kits</small></span></a>
+  <a class="menu-link" href="stamped.html" onclick="toggleMenu(false)"><span class="menu-icon">🎟️</span><span class="menu-copy"><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+  <a class="menu-link" href="contact.html" onclick="toggleMenu(false)"><span class="menu-icon">📩</span><span class="menu-copy"><strong>Contact</strong><small>Get in touch with us</small></span></a>
+  <a class="menu-link" href="about.html" onclick="toggleMenu(false)"><span class="menu-icon">ℹ️</span><span class="menu-copy"><strong>About</strong><small>Discover The Flavorverse</small></span></a>
+  <a class="menu-link" href="login.html" onclick="toggleMenu(false)"><span class="menu-icon">🔐</span><span class="menu-copy"><strong>Login</strong><small>Access your personal collection</small></span></a>
+  <div class="menu-bottom-space"></div>
+</nav>
+
+</header>
+
+
+<!-- ================= BIHAR HERO ================= -->
+
+<section class="hero">
+
+<div class="image-box">
+
+<img src="bihar.png" alt="Bihar">
+
+</div>
+
+<div class="hero-content">
+
+<h1>🏛️ Bihar</h1>
+
+<h2>Ancient Heritage & Traditional Flavours</h2>
+
+<p>
+
+Welcome to Bihar, a land of ancient history, spiritual heritage, vibrant festivals, and rich culinary traditions. Bihari cuisine is known for its wholesome ingredients, rustic cooking methods, aromatic spices, and comforting flavours. From the smoky Litti Chokha to the delicate Khaja, festive Thekua, and sweet Malpua, every dish reflects the diverse cultural heritage and traditional food practices of Bihar.
+
+</p>
+
+<a href="#bihar-recipes" class="btn">
+
+Explore Recipes
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ================= ABOUT BIHAR ================= -->
+
+<section id="about" class="about-section">
+
+<div class="about-text">
+
+<h2>🏛️ About Bihar Cuisine</h2>
+
+<p>
+
+Bihar has a rich culinary heritage shaped by its agricultural traditions, festivals, local ingredients, and cultural history. Traditional Bihari food is generally simple, wholesome, and flavourful, with wheat, rice, lentils, vegetables, dairy products, and seasonal ingredients forming an important part of everyday meals.
+
+</p>
+
+<p>
+
+Litti Chokha is one of Bihar's most iconic dishes. Litti consists of wheat flour dough filled with a roasted mixture of sattu, herbs, spices, and mustard oil. It is traditionally served with Chokha, a preparation made from roasted vegetables such as potato, brinjal, and tomato.
+
+</p>
+
+<p>
+
+Bihar is also famous for its traditional sweets and festive delicacies. Khaja is a layered, crispy sweet that is particularly associated with the town of Silao. Thekua is a popular traditional snack and sweet prepared especially during Chhath Puja using wheat flour, jaggery, ghee, and dry fruits.
+
+</p>
+
+<p>
+
+Malpua is another beloved sweet enjoyed during festivals and special occasions. These soft and sweet pancakes are prepared from a flour-based batter and are often served with thickened milk or other traditional accompaniments. Together, these dishes showcase the rich and diverse flavours of Bihar.
+
+</p>
+
+</div>
+
+
+<div class="about-box">
+
+<h3>🏛️ Bihar Highlights</h3>
+
+<ul>
+
+<li>🌾 Litti Chokha is Bihar's iconic traditional dish</li>
+
+<li>🥔 Chokha is prepared using roasted vegetables</li>
+
+<li>🍯 Khaja is a famous crispy layered sweet</li>
+
+<li>🌾 Thekua is especially associated with Chhath Puja</li>
+
+<li>🥞 Malpua is a popular traditional sweet</li>
+
+<li>🌶️ Sattu is an important ingredient in Bihari cuisine</li>
+
+<li>🪔 Food is closely connected with festivals and traditions</li>
+
+<li>❤️ Cuisine reflects Bihar's rich cultural heritage</li>
+
+</ul>
+
+</div>
+
+</section>
+
+<!-- ================= RECIPE EXPLORER ================= -->
+<section class="explorer-section" id="bihar-recipes">
+ <div class="explorer-box">
+  <h2>🔎 Explore Bihar Recipes</h2>
+  <div class="search-filter-row">
+   <input class="search-box" id="recipeSearch" type="search" placeholder="Search Litti Chokha, Khaja..." oninput="filterRecipes()">
+   <select class="filter-box" id="categoryFilter" onchange="filterRecipes()"><option value="all">All recipes</option><option value="main">Main Dish</option><option value="dessert">Dessert & Sweet</option><option value="snack">Traditional Snack</option></select>
+  </div>
+  <div class="explorer-buttons"><button class="explorer-btn" onclick="showAllRecipes()">Show All</button><button class="explorer-btn random" onclick="surpriseMe()">🎲 Surprise Me</button></div>
+  <p class="search-result" id="searchResult">Showing all 4 Bihar recipes</p>
+ </div>
+</section>
+
+<!-- ================= LITTI CHOKHA ================= -->
+
+<section class="recipe-section recipe-item" data-recipe-id="bihar-litti-chokha" data-category="main">
+
+<div class="recipe-image">
+
+<img src="Litti Chokha.png" alt="Bihar Litti Chokha">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🥔 Litti Chokha</h2>
+
+<p>
+
+Litti Chokha is one of the most famous traditional dishes of Bihar. Litti is made from wheat flour and filled with a flavourful mixture of roasted gram flour, known as sattu, along with spices, herbs, and mustard oil. It is traditionally served with Chokha, a rustic preparation of roasted potato, brinjal, and tomato. The smoky aroma and earthy flavours make Litti Chokha a beloved Bihari specialty.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>2 cups Wheat Flour</li>
+
+<li>1 cup Sattu (Roasted Gram Flour)</li>
+
+<li>1 Large Brinjal</li>
+
+<li>2 Medium Potatoes</li>
+
+<li>2 Tomatoes</li>
+
+<li>2 Green Chilies, Finely Chopped</li>
+
+<li>1 tbsp Ginger, Grated</li>
+
+<li>2 tbsp Mustard Oil</li>
+
+<li>1 tsp Ajwain</li>
+
+<li>1 tsp Cumin Seeds</li>
+
+<li>½ tsp Red Chili Powder</li>
+
+<li>½ tsp Turmeric Powder</li>
+
+<li>1 tbsp Lemon Juice</li>
+
+<li>Fresh Coriander Leaves</li>
+
+<li>Salt to Taste</li>
+
+<li>Water as Required</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Take wheat flour in a large bowl and add a little salt and ajwain.</li>
+
+<li>Add water gradually and knead into a soft dough.</li>
+
+<li>Cover the dough and allow it to rest for about 15 minutes.</li>
+
+<li>For the filling, mix sattu with chopped green chilies, ginger, cumin seeds, lemon juice, mustard oil, and salt.</li>
+
+<li>Add a little water if required and prepare a moist filling.</li>
+
+<li>Divide the wheat dough into small portions.</li>
+
+<li>Flatten each portion and place some sattu filling in the centre.</li>
+
+<li>Bring the edges together and seal the filling completely.</li>
+
+<li>Shape the filled dough into round balls.</li>
+
+<li>Cook the litti in a preheated oven, tandoor, or traditional roasting method until the outside becomes golden and cooked.</li>
+
+<li>For Chokha, roast the brinjal and tomatoes until their skin becomes charred and the vegetables are soft.</li>
+
+<li>Boil the potatoes until tender and peel them.</li>
+
+<li>Mash the roasted brinjal, tomatoes, and potatoes together.</li>
+
+<li>Add chopped green chilies, coriander, mustard oil, salt, and lemon juice.</li>
+
+<li>Mix everything well to prepare the Chokha.</li>
+
+<li>Serve the hot litti with freshly prepared Chokha.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>60 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Medium</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Keep the sattu filling slightly moist so that the litti remains flavourful inside. Roasting the vegetables well gives the Chokha its characteristic smoky taste. A little mustard oil adds an authentic Bihari flavour.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Litti Chokha is strongly associated with Bihar's traditional food culture. Litti can be roasted over charcoal or fire, giving it a distinctive smoky aroma and rustic character.
+
+</p>
+
+</div>
+
+
+<div class="recipe-actions">
+ <button class="favorite-btn" data-fav="bihar-litti-chokha" onclick="addToFavourite('bihar-litti-chokha','Litti Chokha','Bihar',this)">♡ Add to Favourite</button>
+ <button class="stamp-btn" data-stamp="bihar-litti-chokha" onclick="addToStamp('bihar-litti-chokha','Litti Chokha','Bihar',this)">🏷️ Add to Stamp</button>
+</div>
+<div class="rating-area">
+ <h3>⭐ Rate This Recipe</h3>
+ <div class="stars" data-recipe="bihar-litti-chokha"><span class="star" onclick="rateRecipe('bihar-litti-chokha',1,this)">★</span><span class="star" onclick="rateRecipe('bihar-litti-chokha',2,this)">★</span><span class="star" onclick="rateRecipe('bihar-litti-chokha',3,this)">★</span><span class="star" onclick="rateRecipe('bihar-litti-chokha',4,this)">★</span><span class="star" onclick="rateRecipe('bihar-litti-chokha',5,this)">★</span></div>
+ <p class="rating-message" id="rating-bihar-litti-chokha">Choose 1 to 5 stars.</p>
+</div>
+<div class="review-box">
+ <h3>💬 Reviews & Comments</h3>
+ <textarea class="review-input" id="review-text-bihar-litti-chokha" placeholder="Share your thoughts about Litti Chokha..."></textarea>
+ <button class="review-submit" onclick="submitReview('bihar-litti-chokha','Litti Chokha')">Post Review</button>
+ <div class="reviews-list" id="reviews-bihar-litti-chokha"><p class="no-review">Loading reviews...</p></div>
+</div>
+</div>
+
+</section>
+<!-- ================= KHAJA ================= -->
+
+<section class="recipe-section recipe-item reverse" data-recipe-id="bihar-khaja" data-category="dessert">
+
+<div class="recipe-image">
+
+<img src="chiti khaja.png" alt="Bihar Khaja">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🍯 Khaja</h2>
+
+<p>
+
+Khaja is a traditional layered sweet associated with Bihar and is especially famous in the town of Silao. It is made from thin layers of flour dough that are folded, shaped, and deep-fried until crisp and flaky. The fried sweet is then coated or soaked in sugar syrup, giving it a delicate sweetness and crunchy texture. Khaja is commonly enjoyed during festivals, celebrations, and special occasions.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>2 cups All-Purpose Flour</li>
+
+<li>3 tbsp Ghee</li>
+
+<li>½ cup Water</li>
+
+<li>1 cup Sugar</li>
+
+<li>½ cup Water for Sugar Syrup</li>
+
+<li>2 tbsp Cornflour</li>
+
+<li>½ tsp Cardamom Powder</li>
+
+<li>Oil for Deep Frying</li>
+
+<li>2 tbsp Chopped Pistachios</li>
+
+<li>2 tbsp Chopped Almonds</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Take all-purpose flour in a mixing bowl.</li>
+
+<li>Add two tablespoons of ghee and mix well.</li>
+
+<li>Gradually add water and knead into a smooth and firm dough.</li>
+
+<li>Cover the dough and allow it to rest for about 20 minutes.</li>
+
+<li>Divide the dough into equal portions.</li>
+
+<li>Roll each portion into a thin circular sheet.</li>
+
+<li>Brush the surface with ghee and sprinkle a little cornflour.</li>
+
+<li>Place another rolled sheet on top and repeat the process to create layers.</li>
+
+<li>Roll the layered sheets together and cut them into small pieces.</li>
+
+<li>Gently flatten each piece without destroying the layers.</li>
+
+<li>Heat oil in a deep pan over medium heat.</li>
+
+<li>Deep-fry the shaped dough pieces until they become crisp and golden.</li>
+
+<li>Remove them from the oil and drain the excess oil.</li>
+
+<li>For the syrup, heat sugar and water in another pan.</li>
+
+<li>Cook until a slightly sticky sugar syrup is formed.</li>
+
+<li>Add cardamom powder to the syrup.</li>
+
+<li>Dip the fried khaja into the warm sugar syrup for a short time.</li>
+
+<li>Remove and allow the excess syrup to drain.</li>
+
+<li>Garnish with chopped almonds and pistachios.</li>
+
+<li>Allow the khaja to cool before serving.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>50 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>6 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Medium</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Roll the dough into thin layers and handle them gently to create a flaky texture. Fry the khaja over medium heat so that the layers become crisp without browning too quickly.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Silao in Bihar is particularly famous for its traditional khaja. The sweet's distinctive flaky layers and crisp texture make it one of Bihar's well-known delicacies.
+
+</p>
+
+</div>
+
+
+<div class="recipe-actions">
+ <button class="favorite-btn" data-fav="bihar-khaja" onclick="addToFavourite('bihar-khaja','Khaja','Bihar',this)">♡ Add to Favourite</button>
+ <button class="stamp-btn" data-stamp="bihar-khaja" onclick="addToStamp('bihar-khaja','Khaja','Bihar',this)">🏷️ Add to Stamp</button>
+</div>
+<div class="rating-area">
+ <h3>⭐ Rate This Recipe</h3>
+ <div class="stars" data-recipe="bihar-khaja"><span class="star" onclick="rateRecipe('bihar-khaja',1,this)">★</span><span class="star" onclick="rateRecipe('bihar-khaja',2,this)">★</span><span class="star" onclick="rateRecipe('bihar-khaja',3,this)">★</span><span class="star" onclick="rateRecipe('bihar-khaja',4,this)">★</span><span class="star" onclick="rateRecipe('bihar-khaja',5,this)">★</span></div>
+ <p class="rating-message" id="rating-bihar-khaja">Choose 1 to 5 stars.</p>
+</div>
+<div class="review-box">
+ <h3>💬 Reviews & Comments</h3>
+ <textarea class="review-input" id="review-text-bihar-khaja" placeholder="Share your thoughts about Khaja..."></textarea>
+ <button class="review-submit" onclick="submitReview('bihar-khaja','Khaja')">Post Review</button>
+ <div class="reviews-list" id="reviews-bihar-khaja"><p class="no-review">Loading reviews...</p></div>
+</div>
+</div>
+
+</section>
+<!-- ================= THEKUA ================= -->
+
+<section class="recipe-section recipe-item" data-recipe-id="bihar-thekua" data-category="snack">
+
+<div class="recipe-image">
+
+<img src="Thekua.png" alt="Bihar Thekua">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🌾 Thekua</h2>
+
+<p>
+
+Thekua is a traditional Bihari sweet made mainly with wheat flour, jaggery, ghee, and dry fruits. It is especially associated with Chhath Puja and is prepared as an important festive offering. Thekua has a crisp outer texture with a mildly sweet and aromatic centre, making it a cherished traditional delicacy of Bihar.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>2 cups Wheat Flour</li>
+
+<li>1 cup Jaggery</li>
+
+<li>½ cup Water</li>
+
+<li>4 tbsp Ghee</li>
+
+<li>2 tbsp Grated Coconut</li>
+
+<li>2 tbsp Chopped Cashews</li>
+
+<li>2 tbsp Chopped Almonds</li>
+
+<li>1 tbsp Sesame Seeds</li>
+
+<li>½ tsp Cardamom Powder</li>
+
+<li>½ tsp Fennel Seeds</li>
+
+<li>Oil or Ghee for Frying</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Break the jaggery into small pieces and place it in a saucepan.</li>
+
+<li>Add water and heat gently until the jaggery dissolves completely.</li>
+
+<li>Strain the jaggery syrup to remove any impurities and keep it aside.</li>
+
+<li>Take wheat flour in a large mixing bowl.</li>
+
+<li>Add grated coconut, chopped cashews, almonds, sesame seeds, fennel seeds, and cardamom powder.</li>
+
+<li>Add ghee and mix everything well.</li>
+
+<li>Gradually add the warm jaggery syrup and combine the mixture.</li>
+
+<li>Knead gently to form a firm dough. Add only enough syrup to bring the dough together.</li>
+
+<li>Divide the dough into small portions.</li>
+
+<li>Shape each portion into a small thick disc.</li>
+
+<li>Press the surface gently using a traditional Thekua mould or fork to create a decorative pattern.</li>
+
+<li>Heat oil or ghee in a deep pan over medium-low heat.</li>
+
+<li>Carefully place the shaped Thekua into the oil.</li>
+
+<li>Fry slowly until the Thekua becomes deep golden brown and crisp.</li>
+
+<li>Remove from the oil and place on a plate lined with paper.</li>
+
+<li>Allow the Thekua to cool completely before serving.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>45 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>8 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Do not make the dough too soft. A firm dough helps the Thekua retain its shape and creates a crisp texture. Fry it slowly over medium-low heat for an even golden colour.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Thekua has a special place in Bihari culture and is strongly associated with Chhath Puja. It is traditionally prepared as a sacred offering and is also enjoyed as a festive sweet.
+
+</p>
+
+</div>
+
+
+<div class="recipe-actions">
+ <button class="favorite-btn" data-fav="bihar-thekua" onclick="addToFavourite('bihar-thekua','Thekua','Bihar',this)">♡ Add to Favourite</button>
+ <button class="stamp-btn" data-stamp="bihar-thekua" onclick="addToStamp('bihar-thekua','Thekua','Bihar',this)">🏷️ Add to Stamp</button>
+</div>
+<div class="rating-area">
+ <h3>⭐ Rate This Recipe</h3>
+ <div class="stars" data-recipe="bihar-thekua"><span class="star" onclick="rateRecipe('bihar-thekua',1,this)">★</span><span class="star" onclick="rateRecipe('bihar-thekua',2,this)">★</span><span class="star" onclick="rateRecipe('bihar-thekua',3,this)">★</span><span class="star" onclick="rateRecipe('bihar-thekua',4,this)">★</span><span class="star" onclick="rateRecipe('bihar-thekua',5,this)">★</span></div>
+ <p class="rating-message" id="rating-bihar-thekua">Choose 1 to 5 stars.</p>
+</div>
+<div class="review-box">
+ <h3>💬 Reviews & Comments</h3>
+ <textarea class="review-input" id="review-text-bihar-thekua" placeholder="Share your thoughts about Thekua..."></textarea>
+ <button class="review-submit" onclick="submitReview('bihar-thekua','Thekua')">Post Review</button>
+ <div class="reviews-list" id="reviews-bihar-thekua"><p class="no-review">Loading reviews...</p></div>
+</div>
+</div>
+
+</section>
+<!-- ================= MALPUA ================= -->
+
+<section class="recipe-section recipe-item reverse" data-recipe-id="bihar-malpua" data-category="dessert">
+
+<div class="recipe-image">
+
+<img src="Malpua.png" alt="Bihar Malpua">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🥞 Malpua</h2>
+
+<p>
+
+Malpua is a traditional Indian sweet pancake enjoyed across Bihar, especially during festivals and special occasions. It is prepared from a soft flour-based batter flavoured with cardamom and fennel, then gently fried until golden and soaked in sugar syrup. Malpua is often served warm with thickened milk or rabri, making it a rich and delicious festive dessert.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>1 cup All-Purpose Flour</li>
+
+<li>2 tbsp Semolina</li>
+
+<li>½ cup Milk</li>
+
+<li>½ cup Water</li>
+
+<li>½ cup Sugar</li>
+
+<li>½ tsp Cardamom Powder</li>
+
+<li>½ tsp Fennel Seeds</li>
+
+<li>1 tbsp Grated Khoya (Optional)</li>
+
+<li>Ghee or Oil for Frying</li>
+
+<li>2 tbsp Chopped Pistachios</li>
+
+<li>2 tbsp Chopped Almonds</li>
+
+</ul>
+
+<h3>🍯 For Sugar Syrup</h3>
+
+<ul>
+
+<li>1 cup Sugar</li>
+
+<li>½ cup Water</li>
+
+<li>2 Cardamom Pods</li>
+
+<li>A Few Saffron Strands</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Take all-purpose flour and semolina in a mixing bowl.</li>
+
+<li>Add cardamom powder and fennel seeds.</li>
+
+<li>Gradually add milk and water while whisking continuously.</li>
+
+<li>Mix until a smooth, lump-free batter is formed.</li>
+
+<li>Add grated khoya if desired and mix well.</li>
+
+<li>Allow the batter to rest for about 20–30 minutes.</li>
+
+<li>Meanwhile, prepare the sugar syrup by heating sugar and water in a saucepan.</li>
+
+<li>Add cardamom pods and saffron strands to the syrup.</li>
+
+<li>Cook until a slightly sticky sugar syrup is formed.</li>
+
+<li>Heat ghee or oil in a shallow pan over medium heat.</li>
+
+<li>Pour a small ladleful of batter into the pan.</li>
+
+<li>Spread it gently into a small round shape.</li>
+
+<li>Cook until the edges become golden and crisp.</li>
+
+<li>Flip carefully and cook the other side.</li>
+
+<li>Remove the golden malpua from the pan.</li>
+
+<li>Place it in the warm sugar syrup for a short time.</li>
+
+<li>Remove the malpua and allow the excess syrup to drain.</li>
+
+<li>Garnish with chopped almonds and pistachios.</li>
+
+<li>Serve warm with rabri or thickened milk if desired.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>40 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>6 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Medium</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Allowing the batter to rest helps develop a softer texture. Keep the frying temperature moderate so the malpua cooks evenly and develops a beautiful golden colour.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Malpua is enjoyed in Bihar during festivals and special occasions. It is often paired with rabri or thickened milk to create a rich and festive dessert.
+
+</p>
+
+</div>
+
+
+<div class="recipe-actions">
+ <button class="favorite-btn" data-fav="bihar-malpua" onclick="addToFavourite('bihar-malpua','Malpua','Bihar',this)">♡ Add to Favourite</button>
+ <button class="stamp-btn" data-stamp="bihar-malpua" onclick="addToStamp('bihar-malpua','Malpua','Bihar',this)">🏷️ Add to Stamp</button>
+</div>
+<div class="rating-area">
+ <h3>⭐ Rate This Recipe</h3>
+ <div class="stars" data-recipe="bihar-malpua"><span class="star" onclick="rateRecipe('bihar-malpua',1,this)">★</span><span class="star" onclick="rateRecipe('bihar-malpua',2,this)">★</span><span class="star" onclick="rateRecipe('bihar-malpua',3,this)">★</span><span class="star" onclick="rateRecipe('bihar-malpua',4,this)">★</span><span class="star" onclick="rateRecipe('bihar-malpua',5,this)">★</span></div>
+ <p class="rating-message" id="rating-bihar-malpua">Choose 1 to 5 stars.</p>
+</div>
+<div class="review-box">
+ <h3>💬 Reviews & Comments</h3>
+ <textarea class="review-input" id="review-text-bihar-malpua" placeholder="Share your thoughts about Malpua..."></textarea>
+ <button class="review-submit" onclick="submitReview('bihar-malpua','Malpua')">Post Review</button>
+ <div class="reviews-list" id="reviews-bihar-malpua"><p class="no-review">Loading reviews...</p></div>
+</div>
+</div>
+
+</section>
+<!-- ================= BIHAR FOOD FACTS ================= -->
+
+<section class="facts-section">
+
+<h2>🏛️ Bihar Food Facts</h2>
+
+<div class="facts-container">
+
+<div class="fact-card">
+
+<h3>🥔 Famous Litti Chokha</h3>
+
+<p>
+
+Litti Chokha is one of Bihar's most iconic dishes. Litti is traditionally stuffed with sattu and served with smoky Chokha made from roasted vegetables.
+
+</p>
+
+</div>
+
+<div class="fact-card">
+
+<h3>🍯 Traditional Khaja</h3>
+
+<p>
+
+Khaja is a famous layered sweet particularly associated with Silao. Its thin, flaky layers give it a distinctive crisp texture.
+
+</p>
+
+</div>
+
+
+<div class="fact-card">
+
+<h3>🥞 Delicious Malpua</h3>
+
+<p>
+
+Malpua is a traditional sweet pancake enjoyed during festivals and celebrations. It is often served with rabri or thickened milk.
+
+</p>
+
+</div>
+
+
+<div class="fact-card">
+
+<h3>🌶️ Rustic Flavours</h3>
+
+<p>
+
+Traditional Bihari cooking often combines simple ingredients with mustard oil, herbs, spices, and roasted vegetables to create distinctive earthy flavours.
+
+</p>
+
+</div>
+
+<div class="fact-card">
+
+<h3>❤️ Rich Food Heritage</h3>
+
+<p>
+
+Bihari cuisine reflects the state's agricultural traditions, festivals, regional diversity, and generations of traditional cooking practices.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+ <h2>🕒 Recently Viewed</h2>
+ <div class="recent-container" id="recentContainer"><p class="recent-empty">Your recently viewed Bihar recipes will appear here.</p></div>
+</section>
+<!-- ================= MY FLAVORVERSE PROFILE ================= -->
+<section class="profile-section">
+ <div class="profile-box">
+  <h2>👤 My Flavorverse Profile</h2>
+  <p class="profile-name" id="profileName">Guest Food Explorer</p>
+  <p class="profile-email" id="profileEmail">Login to see your personal recipe collection.</p>
+  <div class="profile-stats">
+   <div class="profile-card"><span class="count" id="favouriteCount">0</span><span>❤️ Favourites</span></div>
+   <div class="profile-card"><span class="count" id="stampCount">0</span><span>🏷️ Stamps</span></div>
+   <div class="profile-card"><span class="count" id="ratingCount">0</span><span>⭐ Ratings</span></div>
+   <div class="profile-card"><span class="count" id="reviewCount">0</span><span>💬 Reviews</span></div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= CHEF RECOMMENDATION ================= -->
+
+<section class="chef-section">
+
+<h2>👨‍🍳 Chef's Recommendation</h2>
+
+<p>
+
+Explore the authentic flavours of Bihar with the smoky and wholesome <b>Litti Chokha</b>, the crispy layered <b>Khaja</b>, the traditional festive <b>Thekua</b>, and the delicious <b>Malpua</b>. Together, these dishes showcase Bihar's rustic flavours, festive traditions, local ingredients, and rich culinary heritage.
+
+</p>
+
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<h2>🍴 The Flavorverse</h2>
+
+<p>
+
+Discover India's rich culinary heritage, one delicious recipe at a time.
+
+</p>
+
+<div class="social">
+
+<a href="#">📘</a>
+
+<a href="#">📸</a>
+
+<a href="#">▶️</a>
+
+<a href="#">🐦</a>
+
+</div>
+
+<p class="copy">
+
+© 2026 The Flavorverse | All Rights Reserved
+
+</p>
+
+</footer>
+
+
+<script>
+/* Firebase setup: uses the same Flavorverse project as the Kerala page. */
+const firebaseConfig={apiKey:"AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",authDomain:"the-flavoverse.firebaseapp.com",projectId:"the-flavoverse",storageBucket:"the-flavoverse.firebasestorage.app",messagingSenderId:"1064022248292",appId:"1:1064022248292:web:b2084d0ee1b4722d8bc871"};
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth(); const db=firebase.firestore();
+const biharRecipes=[{id:"bihar-litti-chokha",name:"Litti Chokha",category:"main"},{id:"bihar-khaja",name:"Khaja",category:"dessert"},{id:"bihar-thekua",name:"Thekua",category:"snack"},{id:"bihar-malpua",name:"Malpua",category:"dessert"}];
+function getCurrentUser(){return auth.currentUser;}
+function toggleMenu(force){const nav=document.getElementById('mainNav');const backdrop=document.getElementById('menuBackdrop');const shouldOpen=typeof force==='boolean'?force:!nav.classList.contains('open');nav.classList.toggle('open',shouldOpen);backdrop.classList.toggle('open',shouldOpen);document.body.classList.toggle('menu-open',shouldOpen);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleMenu(false);});
+function toggleDarkMode(){document.body.classList.toggle('dark-mode');localStorage.setItem('flavorverseDarkMode',document.body.classList.contains('dark-mode')?'on':'off');}
+if(localStorage.getItem('flavorverseDarkMode')==='on')document.body.classList.add('dark-mode');
+function filterRecipes(){const q=(document.getElementById('recipeSearch').value||'').toLowerCase();const cat=document.getElementById('categoryFilter').value;let count=0;document.querySelectorAll('.recipe-item').forEach(el=>{const name=el.querySelector('h2')?.innerText.toLowerCase()||'';const match=name.includes(q)&&(cat==='all'||el.dataset.category===cat);el.style.display=match?'':'none';if(match)count++;});document.getElementById('searchResult').innerText=`Showing ${count} of 4 Bihar recipes`;}
+function showAllRecipes(){document.getElementById('recipeSearch').value='';document.getElementById('categoryFilter').value='all';filterRecipes();document.querySelectorAll('.recipe-item').forEach(el=>el.style.display='');}
+function surpriseMe(){const items=[...document.querySelectorAll('.recipe-item')];const visible=items.filter(x=>x.style.display!=='none');const pool=visible.length?visible:items;const choice=pool[Math.floor(Math.random()*pool.length)];choice.scrollIntoView({behavior:'smooth',block:'center'});choice.style.outline='3px solid #B58A4D';setTimeout(()=>choice.style.outline='',1800);}
+async function addToFavourite(id,name,category,button){const user=getCurrentUser();if(!user){alert('Please login first to add favourites ❤️');location.href='login.html';return;}try{const ref=db.collection('users').doc(user.uid).collection('favourites').doc(id);const old=await ref.get();if(old.exists){await ref.delete();button.textContent='♡ Add to Favourite';}else{await ref.set({recipeId:id,recipeName:name,category,createdAt:firebase.firestore.FieldValue.serverTimestamp()});button.textContent='♥ Added to Favourite';}await updateProfileCounts();}catch(e){console.error(e);alert('Favourite update failed: '+e.message);}}
+async function addToStamp(id,name,category,button){const user=getCurrentUser();if(!user){alert('Please login first to add stamps 🏷️');location.href='login.html';return;}try{const ref=db.collection('users').doc(user.uid).collection('stamps').doc(id);const old=await ref.get();if(old.exists){await ref.delete();button.textContent='🏷️ Add to Stamp';}else{await ref.set({recipeId:id,recipeName:name,category,createdAt:firebase.firestore.FieldValue.serverTimestamp()});button.textContent='🏷️ Stamped';}await updateProfileCounts();}catch(e){console.error(e);alert('Stamp update failed: '+e.message);}}
+async function rateRecipe(id,rating,el){const user=getCurrentUser();if(!user){alert('Please login first to rate recipes ⭐');location.href='login.html';return;}try{await db.collection('users').doc(user.uid).collection('ratings').doc(id).set({recipeId:id,rating,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});const box=el.parentElement;box.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('active',i<rating));document.getElementById('rating-'+id).innerText=`You rated this recipe ${rating}/5 ⭐`;await updateProfileCounts();}catch(e){console.error(e);alert('Rating failed: '+e.message);}}
+async function submitReview(id,name){const user=getCurrentUser();if(!user){alert('Please login first to post a review 💬');location.href='login.html';return;}const field=document.getElementById('review-text-'+id);const review=field.value.trim();if(!review){alert('Please write a review first.');return;}try{let userName=user.displayName||'Flavorverse User';const userDoc=await db.collection('users').doc(user.uid).get();if(userDoc.exists&&userDoc.data().name)userName=userDoc.data().name;await db.collection('recipes').doc(id).collection('reviews').doc(user.uid).set({recipeId:id,recipeName:name,userId:user.uid,userName,review,createdAt:firebase.firestore.FieldValue.serverTimestamp()});field.value='';await loadReviews(id);await updateProfileCounts();alert('Review posted successfully! 💬');}catch(e){console.error(e);alert('Review failed: '+e.message);}}
+async function loadReviews(id){const list=document.getElementById('reviews-'+id);if(!list)return;try{const snap=await db.collection('recipes').doc(id).collection('reviews').orderBy('createdAt','desc').limit(20).get();if(snap.empty){list.innerHTML='<p class="no-review">No reviews yet. Be the first to share one!</p>';return;}list.innerHTML='';snap.forEach(doc=>{const d=doc.data();const item=document.createElement('div');item.className='single-review';const strong=document.createElement('strong');strong.textContent=d.userName||'Flavorverse User';const p=document.createElement('p');p.textContent=d.review||'';const small=document.createElement('small');small.textContent=d.createdAt?.toDate?d.createdAt.toDate().toLocaleString():'Recently';item.append(strong,p,small);list.appendChild(item);});}catch(e){console.error(e);list.innerHTML='<p class="no-review">Reviews could not be loaded. Check Firestore permissions.</p>';}}
+async function updateProfileCounts(){const user=getCurrentUser();if(!user){document.getElementById('profileName').textContent='Guest Food Explorer';document.getElementById('profileEmail').textContent='Login to see your personal recipe collection.';['favouriteCount','stampCount','ratingCount','reviewCount'].forEach(id=>document.getElementById(id).textContent='0');return;}document.getElementById('profileName').textContent=user.displayName||'Flavorverse Food Explorer';document.getElementById('profileEmail').textContent=user.email||'';try{const base=db.collection('users').doc(user.uid);const [f,s,r]=await Promise.all([base.collection('favourites').get(),base.collection('stamps').get(),base.collection('ratings').get()]);document.getElementById('favouriteCount').textContent=f.size;document.getElementById('stampCount').textContent=s.size;document.getElementById('ratingCount').textContent=r.size;let reviews=0;for(const recipe of biharRecipes){const d=await db.collection('recipes').doc(recipe.id).collection('reviews').doc(user.uid).get();if(d.exists)reviews++;}document.getElementById('reviewCount').textContent=reviews;}catch(e){console.error('Profile count error',e);}}
+function saveRecentlyViewed(recipe){let list=[];try{list=JSON.parse(localStorage.getItem('biharRecentlyViewed')||'[]')}catch(e){}list=[recipe,...list.filter(x=>x.id!==recipe.id)].slice(0,4);localStorage.setItem('biharRecentlyViewed',JSON.stringify(list));renderRecentlyViewed();}
+function renderRecentlyViewed(){const target=document.getElementById('recentContainer');let list=[];try{list=JSON.parse(localStorage.getItem('biharRecentlyViewed')||'[]')}catch(e){}if(!list.length){target.innerHTML='<p class="recent-empty">Your recently viewed Bihar recipes will appear here.</p>';return;}target.innerHTML=list.map(r=>`<article class="recent-card"><h3>${r.name}</h3><p>Bihar · ${r.category}</p><button class="explorer-btn" onclick="document.querySelector('[data-recipe-id=&quot;${r.id}&quot;]').scrollIntoView({behavior:'smooth'})">View Recipe</button></article>`).join('');}
+async function loadUserRecipeState(){const user=getCurrentUser();if(!user)return;for(const r of biharRecipes){try{const [fav,stamp,rating]=await Promise.all([db.collection('users').doc(user.uid).collection('favourites').doc(r.id).get(),db.collection('users').doc(user.uid).collection('stamps').doc(r.id).get(),db.collection('users').doc(user.uid).collection('ratings').doc(r.id).get()]);const fb=document.querySelector(`[data-fav="${r.id}"]`);const sb=document.querySelector(`[data-stamp="${r.id}"]`);if(fb&&fav.exists)fb.textContent='♥ Added to Favourite';if(sb&&stamp.exists)sb.textContent='🏷️ Stamped';if(rating.exists){const val=rating.data().rating;const box=document.querySelector(`.stars[data-recipe="${r.id}"]`);if(box)box.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('active',i<val));const label=document.getElementById('rating-'+r.id);if(label)label.textContent=`You rated this recipe ${val}/5 ⭐`;}}catch(e){console.error(e);}}await updateProfileCounts();}
+for(const r of biharRecipes){const el=document.querySelector(`[data-recipe-id="${r.id}"]`);if(el){const observer=new IntersectionObserver(entries=>{if(entries.some(x=>x.isIntersecting)){saveRecentlyViewed(r);observer.disconnect();}},{threshold:.2});observer.observe(el);}loadReviews(r.id);}
+renderRecentlyViewed();
+auth.onAuthStateChanged(async user=>{await updateProfileCounts();if(user)await loadUserRecipeState();});
+</script>
+</body>
+
+</html>

@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movies & Cartoons | The Flavorverse</title>
+
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+
+    background: #FFF9F4;
+
+    color: #5B4A45;
+
+    overflow-x: hidden;
+}
+
+
+
+/* =====================================================
+              HAMBURGER NAVIGATION MENU
+===================================================== */
+
+.main-header {
+    width: 100%;
+    padding: 14px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFF9F4;
+    border-bottom: 1px solid #F7E7CE;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 15px rgba(112, 70, 83, 0.08);
+}
+
+.main-header .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #6F4B72;
+}
+
+.menu-toggle {
+    width: 45px;
+    height: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #E6D3B8;
+    border-radius: 10px;
+    background: #F7E7CE;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+.menu-toggle span {
+    width: 23px;
+    height: 2.5px;
+    background: #6F4B72;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* Hide the original hamburger button while the drawer is open.
+   The Explore panel keeps only its own close (×) button. */
+.menu-toggle.active {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* RIGHT-SIDE EXPLORE DRAWER */
+.main-header nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    max-width: 90vw;
+    height: 100vh;
+    padding: 105px 22px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    background: #FFF8F0;
+    box-shadow: -8px 0 28px rgba(45, 25, 45, 0.18);
+    overflow-y: auto;
+    transform: translateX(105%);
+    visibility: hidden;
+    transition: transform 0.35s ease, visibility 0.35s ease;
+    z-index: 1001;
+}
+
+.main-header nav.show {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+.drawer-heading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 92px;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #987A98;
+    color: #FFF9F4;
+    font-family: Arial, sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.drawer-close {
+    border: 0;
+    background: transparent;
+    color: #FFF9F4;
+    font-size: 29px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.main-header nav a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-height: 58px;
+    padding: 9px 12px;
+    color: #674D69;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    border-radius: 11px;
+    transition: background 0.25s, color 0.25s;
+}
+
+.main-header nav a:hover,
+.main-header nav a.active {
+    background: #F0E0EE;
+    color: #674D69;
+}
+
+.drawer-icon {
+    width: 29px;
+    flex: 0 0 29px;
+    text-align: center;
+    font-size: 21px;
+}
+
+.drawer-link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.drawer-link-text strong {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.drawer-link-text small {
+    color: #987A98;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.drawer-divider {
+    height: 1px;
+    margin: 7px 0 8px;
+    background: #E7D1E1;
+    flex: 0 0 1px;
+}
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(48, 32, 45, 0.48);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 999;
+}
+
+.menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+@media (max-width: 480px) {
+    .main-header nav { padding: 100px 18px 22px; }
+    .drawer-heading { height: 86px; font-size: 25px; }
+    .main-header nav a { min-height: 55px; }
+}
+
+
+/* =====================================================
+                    HERO
+===================================================== */
+
+.hero {
+    min-height: 350px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 35px 8%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6F4B72 0%,
+            #805A7F 55%,
+            #98718F 100%
+        );
+
+    gap: 40px;
+}
+
+.hero-content {
+    flex: 1;
+
+    max-width: 560px;
+
+    color: #FFF9F4;
+}
+
+.hero-image {
+    flex: 0 0 43%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.hero-image img {
+    width: 100%;
+
+    max-width: 470px;
+
+    height: 270px;
+
+    object-fit: cover;
+
+    border-radius: 22px;
+
+    border: 3px solid
+        rgba(247,231,206,0.7);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,0.25);
+}
+
+.small-title {
+    color: #F7E7CE;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+}
+
+.hero h1 {
+    color: #FFF9F4;
+
+    font-size: 43px;
+
+    line-height: 1.05;
+
+    margin: 12px 0;
+}
+
+.hero-text {
+    max-width: 470px;
+
+    color: #FFF9F4;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+.explore-btn {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    padding: 10px 23px;
+
+    background: #F7E7CE;
+
+    color: #6F4B72;
+
+    border-radius: 25px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.explore-btn:hover {
+    background: #C596A8;
+
+    color: white;
+
+    transform: translateY(-3px);
+}
+
+
+
+/* =====================================================
+                    COLLECTION
+===================================================== */
+
+.collection {
+    padding: 75px 7%;
+
+    background: #FFF9F4;
+}
+
+.movies {
+    background:
+        linear-gradient(
+            180deg,
+            #F7E7CE 0%,
+            #FFF9F4 100%
+        );
+}
+
+
+
+/* =====================================================
+                SECTION HEADING
+===================================================== */
+
+.heading {
+    text-align: center;
+
+    margin-bottom: 55px;
+}
+
+.heading p {
+    color: #B58A4D;
+
+    font-size: 13px;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+}
+
+.heading h2 {
+    color: #6F4B72;
+
+    font-size: 40px;
+
+    margin: 12px 0;
+}
+
+.heading span {
+    display: block;
+
+    width: 90px;
+
+    height: 2px;
+
+    margin: 18px auto;
+
+    background: #B58A4D;
+}
+
+
+
+/* =====================================================
+                    CARD GRID
+===================================================== */
+
+.card-grid {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 65px 32px;
+
+    padding: 10px 15px;
+
+    align-items: start;
+}
+
+
+
+/* =====================================================
+            CARTOON
+        SPIRAL NOTEBOOK CARD
+===================================================== */
+
+.spiral-card {
+    position: relative;
+
+    width: 100%;
+
+    max-width: 350px;
+
+    margin: auto;
+
+    padding-left: 24px;
+
+    transition: 0.45s ease;
+}
+
+.spiral-card:hover {
+    transform:
+        translateY(-10px)
+        rotate(-1deg);
+}
+
+
+
+/* =====================================================
+                NOTEBOOK PAPER
+===================================================== */
+
+.spiral-paper {
+    position: relative;
+
+    background:
+        linear-gradient(
+            90deg,
+            #FFFDF8,
+            #FFF9F0
+        );
+
+    border:
+        1px solid #E4CFAF;
+
+    border-radius:
+        5px
+        20px
+        20px
+        5px;
+
+    padding: 15px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(112,70,83,0.16),
+
+        5px 5px 0
+        #E9D4BC,
+
+        10px 10px 0
+        rgba(181,138,77,0.20);
+
+    overflow: visible;
+}
+
+
+
+/* =====================================================
+                    SPIRAL RINGS
+===================================================== */
+
+.spirals {
+    position: absolute;
+
+    left: -7px;
+
+    top: 25px;
+
+    height: 80%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-around;
+
+    z-index: 20;
+}
+
+.spirals span {
+    display: block;
+
+    width: 32px;
+
+    height: 18px;
+
+    border:
+        3px solid #765467;
+
+    border-left: 0;
+
+    border-radius:
+        0 50% 50% 0;
+
+    background: transparent;
+
+    box-shadow:
+        0 2px 2px
+        rgba(0,0,0,0.12);
+}
+
+
+
+/* =====================================================
+                NOTEBOOK LINES
+===================================================== */
+
+.spiral-paper::before {
+    content: "";
+
+    position: absolute;
+
+    left: 18px;
+
+    right: 15px;
+
+    bottom: 15px;
+
+    height: 145px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 28px,
+            rgba(166,106,124,0.10) 29px,
+            transparent 30px
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+
+/* =====================================================
+                SMALL TAPE
+===================================================== */
+
+.paper-tape {
+    position: absolute;
+
+    top: -13px;
+
+    right: 25px;
+
+    width: 48px;
+
+    height: 26px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        #D7B894;
+
+    color: #6F4B72;
+
+    transform: rotate(5deg);
+
+    font-size: 13px;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,0.12);
+
+    z-index: 10;
+}
+
+
+
+/* =====================================================
+                NOTEBOOK IMAGE
+===================================================== */
+
+.spiral-image {
+    position: relative;
+
+    height: 205px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    border:
+        4px solid #E9D4BC;
+
+    background: #E6D4D8;
+
+    z-index: 2;
+}
+
+.spiral-image img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: 0.5s;
+}
+
+.spiral-card:hover
+.spiral-image img {
+    transform: scale(1.07);
+}
+
+
+
+/* =====================================================
+                NOTEBOOK IMAGE SHINE
+===================================================== */
+
+.spiral-image::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 45%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.45),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: 0.7s;
+}
+
+.spiral-card:hover
+.spiral-image::after {
+    left: 130%;
+}
+
+
+
+/* =====================================================
+                CARD CONTENT
+===================================================== */
+
+.card-content {
+    position: relative;
+
+    z-index: 2;
+
+    padding: 20px 12px 15px;
+
+    text-align: center;
+}
+
+.card-number {
+    color: #B58A4D;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+}
+
+.card-content h3 {
+    color: #6F4B72;
+
+    font-size: 21px;
+
+    margin: 9px 0;
+}
+
+.card-content p {
+    color: #5B4A45;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    margin-bottom: 16px;
+}
+
+
+
+/* =====================================================
+                    DISHES
+===================================================== */
+
+.dishes {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+}
+
+.dishes span {
+    padding: 8px 11px;
+
+    background:
+        rgba(247,231,206,0.65);
+
+    border:
+        1px solid #E6D3B8;
+
+    border-left:
+        4px solid #8E6C88;
+
+    border-radius: 6px;
+
+    color: #5B4A45;
+
+    font-size: 12px;
+}
+
+
+
+/* =====================================================
+                RECIPE BUTTON
+===================================================== */
+
+.card-content a,
+.portal-content a {
+    display: inline-block;
+
+    padding: 9px 20px;
+
+    border:
+        1px solid #8E6C88;
+
+    border-radius: 25px;
+
+    color: #6F4B72;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    transition: 0.3s;
+}
+
+.card-content a:hover,
+.portal-content a:hover {
+    background: #8E6C88;
+
+    color: #FFF9F4;
+
+    transform: translateY(-2px);
+}
+
+
+
+/* =====================================================
+        MOVIE
+        MAGICAL PORTAL CARD
+===================================================== */
+
+.portal-card {
+    position: relative;
+
+    width: 100%;
+
+    max-width: 350px;
+
+    min-height: 520px;
+
+    margin: auto;
+
+    padding: 22px 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #735078,
+            #9C7295 55%,
+            #6F4B72
+        );
+
+    border:
+        2px solid #D8B879;
+
+    border-radius:
+        28px
+        28px
+        55px
+        55px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 18px 40px
+        rgba(91,56,87,0.28),
+
+        inset 0 0 25px
+        rgba(255,255,255,0.08);
+
+    transition: 0.45s ease;
+}
+
+.portal-card:hover {
+    transform:
+        translateY(-12px)
+        scale(1.015);
+
+    box-shadow:
+        0 28px 55px
+        rgba(91,56,87,0.38),
+
+        0 0 30px
+        rgba(216,184,121,0.22);
+}
+
+
+
+/* =====================================================
+                    PORTAL STARS
+===================================================== */
+
+.portal-stars {
+    position: absolute;
+
+    top: 13px;
+
+    left: 0;
+
+    right: 0;
+
+    color: #F7E7CE;
+
+    font-size: 15px;
+
+    letter-spacing: 5px;
+
+    z-index: 5;
+}
+
+
+
+/* =====================================================
+                MAGICAL PORTAL RING
+===================================================== */
+
+.portal-ring {
+    position: relative;
+
+    width: 225px;
+
+    height: 225px;
+
+    margin: 18px auto 15px;
+
+    padding: 9px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            #F7E7CE,
+            #C49ACB,
+            #E6C88F,
+            #B786BD,
+            #F7E7CE
+        );
+
+    box-shadow:
+        0 0 12px #F7E7CE,
+        0 0 30px rgba(247,231,206,0.45),
+        0 0 55px rgba(173,122,190,0.45);
+
+    animation:
+        portalGlow 4s ease-in-out infinite;
+}
+
+@keyframes portalGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 12px #F7E7CE,
+            0 0 28px rgba(247,231,206,0.35),
+            0 0 45px rgba(173,122,190,0.35);
+    }
+
+    50% {
+        box-shadow:
+            0 0 18px #F7E7CE,
+            0 0 38px rgba(247,231,206,0.55),
+            0 0 65px rgba(173,122,190,0.55);
+    }
+}
+
+
+
+/* =====================================================
+                PORTAL INNER RING
+===================================================== */
+
+.portal-ring::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -8px;
+
+    border:
+        2px dashed
+        rgba(247,231,206,0.65);
+
+    border-radius: 50%;
+
+    animation:
+        rotatePortal 15s linear infinite;
+}
+
+@keyframes rotatePortal {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+/* =====================================================
+                PORTAL IMAGE
+===================================================== */
+
+.portal-image {
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    border:
+        4px solid #FFF9F4;
+
+    background: #3D293E;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.portal-image img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: 0.5s;
+}
+
+.portal-card:hover
+.portal-image img {
+    transform: scale(1.1);
+}
+
+
+
+/* =====================================================
+                PORTAL IMAGE GLOW
+===================================================== */
+
+.portal-image::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -120%;
+
+    width: 55%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.45),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: 0.8s;
+}
+
+.portal-card:hover
+.portal-image::after {
+    left: 130%;
+}
+
+
+
+/* =====================================================
+                PORTAL CONTENT
+===================================================== */
+
+.portal-content {
+    position: relative;
+
+    z-index: 4;
+
+    padding: 3px 5px 15px;
+
+    text-align: center;
+
+    color: #FFF9F4;
+}
+
+.portal-content .card-number {
+    color: #F7E7CE;
+}
+
+.portal-content h3 {
+    color: #FFF9F4;
+
+    font-size: 20px;
+
+    line-height: 1.25;
+
+    margin: 9px 0;
+}
+
+.portal-content p {
+    color: #F6E9EC;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+
+    margin-bottom: 15px;
+}
+
+
+
+/* =====================================================
+            MOVIE DISHES
+===================================================== */
+
+.portal-content .dishes {
+    gap: 7px;
+
+    margin-bottom: 17px;
+}
+
+.portal-content .dishes span {
+    color: #FFF9F4;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border:
+        1px solid
+        rgba(247,231,206,0.35);
+
+    border-left:
+        3px solid #F7E7CE;
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(5px);
+}
+
+
+
+/* =====================================================
+            PORTAL BUTTON
+===================================================== */
+
+.portal-content a {
+    color: #FFF9F4;
+
+    border-color: #F7E7CE;
+}
+
+.portal-content a:hover {
+    background: #F7E7CE;
+
+    color: #6F4B72;
+}
+
+
+
+/* =====================================================
+                    FOOTER
+===================================================== */
+
+footer {
+    padding: 42px 20px;
+
+    text-align: center;
+
+    background: #6F4B72;
+
+    color: #FFF9F4;
+
+    border-top: 4px solid #F7E7CE;
+}
+
+footer h3 {
+    color: #F7E7CE;
+
+    font-size: 24px;
+
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: #FFF9F4;
+
+    font-size: 14px;
+}
+
+
+
+/* =====================================================
+                    TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .card-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 55px 25px;
+    }
+
+    .hero {
+        min-height: 330px;
+    }
+
+    .hero h1 {
+        font-size: 39px;
+    }
+
+}
+
+
+
+/* =====================================================
+                    MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .main-header {
+        flex-direction: row;
+        gap: 10px;
+        padding: 12px 5%;
+    }
+
+    .main-header .logo {
+        font-size: 18px;
+    }
+
+    .main-header nav {
+        width: min(300px, 85vw);
+        right: calc(-1 * min(300px, 85vw));
+    }
+
+    .main-header nav.show {
+        right: 0;
+    }
+
+
+    .hero {
+        min-height: 500px;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        text-align: center;
+
+        padding: 35px 7%;
+
+        gap: 25px;
+    }
+
+    .hero-content {
+        max-width: 500px;
+    }
+
+    .hero-text {
+        margin: auto;
+    }
+
+    .hero-image {
+        flex: none;
+
+        width: 100%;
+    }
+
+    .hero-image img {
+        width: 90%;
+
+        max-width: 400px;
+
+        height: 190px;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+
+    .card-grid {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .spiral-card,
+    .portal-card {
+        max-width: 360px;
+    }
+
+
+    .heading h2 {
+        font-size: 31px;
+    }
+
+    .collection {
+        padding: 65px 5%;
+    }
+
+}
+
+
+
+/* =====================================================
+                    SMALL PHONE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .hero {
+        min-height: 470px;
+    }
+
+    .hero h1 {
+        font-size: 31px;
+    }
+
+    .hero-image img {
+        height: 165px;
+    }
+
+    .heading h2 {
+        font-size: 28px;
+    }
+
+    .spiral-paper {
+        padding: 12px;
+    }
+
+    .spiral-image {
+        height: 190px;
+    }
+
+    .portal-card {
+        min-height: 500px;
+    }
+
+    .portal-ring {
+        width: 205px;
+
+        height: 205px;
+    }
+
+}
+
+
+</style>
+
+
+    <link rel="stylesheet" href="page4.css">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+                    NAVBAR
+===================================================== -->
+
+<header class="main-header">
+
+    <div class="logo">🍴 The Flavorverse</div>
+
+    <button class="menu-toggle" id="menuToggle"
+            aria-label="Open navigation menu" aria-expanded="false"
+            aria-controls="navMenu" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav id="navMenu" aria-label="Explore navigation" inert>
+        <div class="drawer-heading">
+            <span>Explore</span>
+            <button class="drawer-close" id="drawerClose" type="button" aria-label="Close menu">×</button>
+        </div>
+        <a href="index.html"><span class="drawer-icon">🏠</span><span class="drawer-link-text"><strong>Home</strong><small>Return to the homepage</small></span></a>
+        <a href="royal.html"><span class="drawer-icon">👑</span><span class="drawer-link-text"><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+        <a href="movies&cartoon.html" class="active"><span class="drawer-icon">🎬</span><span class="drawer-link-text"><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+        <a href="worldcuisine.html"><span class="drawer-icon">🌍</span><span class="drawer-link-text"><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+        <a href="desertwrold.html"><span class="drawer-icon">🍰</span><span class="drawer-link-text"><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+        <a href="gallery.html"><span class="drawer-icon">🖼️</span><span class="drawer-link-text"><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+        <div class="drawer-divider" aria-hidden="true"></div>
+        <a href="favourite.html"><span class="drawer-icon">💗</span><span class="drawer-link-text"><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+        <a href="order.html"><span class="drawer-icon">🛒</span><span class="drawer-link-text"><strong>Order</strong><small>Order ingredient kits</small></span></a>
+        <a href="stamp.html"><span class="drawer-icon">🏷️</span><span class="drawer-link-text"><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+        <a href="contact.html"><span class="drawer-icon">📩</span><span class="drawer-link-text"><strong>Contact</strong><small>Get in touch with us</small></span></a>
+        <a href="about.html"><span class="drawer-icon">✨</span><span class="drawer-link-text"><strong>About</strong><small>Discover The Flavorverse</small></span></a>
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+                    HERO SECTION
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            THE FLAVORVERSE PRESENTS
+        </div>
+
+        <h1>
+            Flavours<br>
+            Beyond the Screen
+        </h1>
+
+        <p class="hero-text">
+            Step into a magical world where your favourite
+            cartoons and movies meet delicious flavours.
+        </p>
+
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img src="heroc&m.png"
+             alt="Movies and Cartoons">
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+                CARTOONS SECTION
+===================================================== -->
+
+<section class="collection" id="cartoons">
+
+    <div class="heading">
+        <p>🧸 CARTOON COLLECTION</p>
+        <h2>Favourite Cartoon Flavours</h2>
+        <span></span>
+    </div>
+
+    <div class="card-grid">
+
+        <!-- SHINCHAN -->
+        <div class="portal-card">
+            <div class="portal-stars">✦ &nbsp; ✧ &nbsp; ✦</div>
+            <div class="portal-ring">
+                <div class="portal-image">
+                    <img src="shinchan.png" alt="Shinchan">
+                </div>
+            </div>
+            <div class="portal-content">
+                <span class="card-number">CARTOON • 01</span>
+                <h3>🖍️ Shinchan</h3>
+                <p>Fun-filled flavours inspired by Shinchan's playful world.</p>
+                <div class="dishes">
+                    <span>🍫 Chocobi Cookies</span>
+                    <span>🍜 Noodle Bowl</span>
+                </div>
+                <a href="shinchanrecipe.html">VIEW RECIPES →</a>
+            </div>
+        </div>
+
+        <!-- DORAEMON -->
+        <div class="portal-card">
+            <div class="portal-stars">✦ &nbsp; ✧ &nbsp; ✦</div>
+            <div class="portal-ring">
+                <div class="portal-image">
+                    <img src="doreamon.png" alt="Doraemon">
+                </div>
+            </div>
+            <div class="portal-content">
+                <span class="card-number">CARTOON • 02</span>
+                <h3>🤖 Doraemon</h3>
+                <p>Delicious Japanese-inspired favourites from Doraemon's magical world.</p>
+                <div class="dishes">
+                    <span>🥞 Dorayaki</span>
+                    <span>🍜 Ramen</span>
+                </div>
+                <a href="doreamon.html">VIEW RECIPES →</a>
+            </div>
+        </div>
+
+        <!-- TOM & JERRY -->
+        <div class="portal-card">
+            <div class="portal-stars">✦ &nbsp; ✧ &nbsp; ✦</div>
+            <div class="portal-ring">
+                <div class="portal-image">
+                    <img src="tom&jerry.png" alt="Tom and Jerry">
+                </div>
+            </div>
+            <div class="portal-content">
+                <span class="card-number">CARTOON • 03</span>
+                <h3>🐱🐭 Tom & Jerry</h3>
+                <p>A playful food collection inspired by the classic cat and mouse duo.</p>
+                <div class="dishes">
+                    <span>🧀 Cheese Platter</span>
+                    <span>🥛 Milk &amp; Cookies</span>
+                </div>
+                <a href="tom&jerry.html">VIEW RECIPES →</a>
+            </div>
+        </div>
+
+        <!-- MASHA -->
+        <div class="portal-card">
+            <div class="portal-stars">✦ &nbsp; ✧ &nbsp; ✦</div>
+            <div class="portal-ring">
+                <div class="portal-image">
+                    <img src="masha&bear.png" alt="Masha and the Bear">
+                </div>
+            </div>
+            <div class="portal-content">
+                <span class="card-number">CARTOON • 04</span>
+                <h3>🐻 Masha &amp; the Bear</h3>
+                <p>Sweet and comforting flavours from the forest adventures.</p>
+                <div class="dishes">
+                    <span>🥧 Berry Pie</span>
+                    <span>🍯 Honey Pancakes</span>
+                </div>
+                <a href="masha&bear.html">VIEW RECIPES →</a>
+            </div>
+        </div>
+
+        <!-- CHHOTA BHEEM -->
+        <div class="portal-card">
+            <div class="portal-stars">✦ &nbsp; ✧ &nbsp; ✦</div>
+            <div class="portal-ring">
+                <div class="portal-image">
+                    <img src="chottabheem.png" alt="Chhota Bheem">
+                </div>
+            </div>
+            <div class="portal-content">
+                <span class="card-number">CARTOON • 05</span>
+                <h3>🥘 Chhota Bheem</h3>
+                <p>Indian flavours inspired by the adventurous world of Dholakpur.</p>
+                <div class="dishes">
+                    <span>🟠 Laddoo</span>
+                    <span>🥛 Badam Milk</span>
+                </div>
+                <a href="chottabheem.html">VIEW RECIPES →</a>
+            </div>
+        </div>
+
+        <!-- SPONGEBOB -->
+        <div class="portal-card">
+            <div class="portal-stars">✦ &nbsp; ✧ &nbsp; ✦</div>
+            <div class="portal-ring">
+                <div class="portal-image">
+                    <img src="spongebobhero.png" alt="SpongeBob">
+                </div>
+            </div>
+            <div class="portal-content">
+                <span class="card-number">CARTOON • 06</span>
+                <h3>🧽 SpongeBob</h3>
+                <p>Dive into Bikini Bottom for fun and colourful flavours.</p>
+                <div class="dishes">
+                    <span>🍔 Krabby Patty</span>
+                    <span>🍪 SpongeBob Cookies</span>
+                </div>
+                <a href="spongebob.html">VIEW RECIPES →</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+                MOVIES SECTION
+===================================================== -->
+
+<section class="collection movies"
+         id="movies">
+
+    <div class="heading">
+
+        <p>
+            🎬 CINEMA COLLECTION
+        </p>
+
+        <h2>
+            International Movie Flavours
+        </h2>
+
+        <span></span>
+
+    </div>
+
+
+    <div class="card-grid movie-grid">
+
+
+        <!-- =================================================
+                    HARRY POTTER
+        ================================================== -->
+
+        <div class="portal-card">
+
+            <div class="portal-stars">
+                ✦ &nbsp; ✧ &nbsp; ✦
+            </div>
+
+
+            <div class="portal-ring">
+
+                <div class="portal-image">
+
+                    <img src="harrypotterheromain.png"
+                         alt="Harry Potter">
+
+                </div>
+
+            </div>
+
+
+            <div class="portal-content">
+
+                <span class="card-number">
+                    MOVIE • 01
+                </span>
+
+                <h3>
+                    🪄 Harry Potter
+                </h3>
+
+                <p>
+                    Magical flavours inspired by
+                    the world of Hogwarts.
+                </p>
+
+
+                <div class="dishes">
+
+                    <span>
+                        🧈 Butterbeer
+                    </span>
+
+                    <span>
+                        🥧 Pumpkin Pasties
+                    </span>
+
+                </div>
+
+
+                <a href="harrypotter.html">
+                    VIEW RECIPES →
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+                    RATATOUILLE
+        ================================================== -->
+
+        <div class="portal-card">
+
+            <div class="portal-stars">
+                ✦ &nbsp; ✧ &nbsp; ✦
+            </div>
+
+
+            <div class="portal-ring">
+
+                <div class="portal-image">
+
+                    <img src="ratotoulieheromain.png"
+                         alt="Ratatouille">
+
+                </div>
+
+            </div>
+
+
+            <div class="portal-content">
+
+                <span class="card-number">
+                    MOVIE • 02
+                </span>
+
+                <h3>
+                    🐀 Ratatouille
+                </h3>
+
+                <p>
+                    French-inspired dishes from
+                    the world of Remy.
+                </p>
+
+
+                <div class="dishes">
+
+                    <span>
+                        🥘 Ratatouille
+                    </span>
+
+                    <span>
+                        🍮 Crème Brûlée
+                    </span>
+
+                </div>
+
+
+                <a href="ratotoulie.html">
+                    VIEW RECIPES →
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+                    CHARLIE
+        ================================================== -->
+
+        <div class="portal-card">
+
+            <div class="portal-stars">
+                ✦ &nbsp; ✧ &nbsp; ✦
+            </div>
+
+
+            <div class="portal-ring">
+
+                <div class="portal-image">
+
+                    <img src="charliehero.png"
+                         alt="Charlie Chocolate Factory">
+
+                </div>
+
+            </div>
+
+
+            <div class="portal-content">
+
+                <span class="card-number">
+                    MOVIE • 03
+                </span>
+
+                <h3>
+                    🍫 Charlie & the Chocolate Factory
+                </h3>
+
+                <p>
+                    A magical world filled with
+                    chocolate and sweet treats.
+                </p>
+
+
+                <div class="dishes">
+
+                    <span>
+                        🍫 Chocolate Fudge
+                    </span>
+
+                    <span>
+                        🧁 Chocolate Cupcakes
+                    </span>
+
+                </div>
+
+
+                <a href="charlie&thechocolate.html">
+                    VIEW RECIPES →
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+                    LION KING
+        ================================================== -->
+
+        <div class="portal-card">
+
+            <div class="portal-stars">
+                ✦ &nbsp; ✧ &nbsp; ✦
+            </div>
+
+
+            <div class="portal-ring">
+
+                <div class="portal-image">
+
+                    <img src="lionkinghero.jpg"
+                         alt="The Lion King">
+
+                </div>
+
+            </div>
+
+
+            <div class="portal-content">
+
+                <span class="card-number">
+                    MOVIE • 04
+                </span>
+
+                <h3>
+                    🦁 The Lion King
+                </h3>
+
+                <p>
+                    Bright tropical flavours inspired
+                    by the African savanna.
+                </p>
+
+
+                <div class="dishes">
+
+                    <span>
+                        🍉 Tropical Fruit Bowl
+                    </span>
+
+                    <span>
+                        🍌 Banana Pancakes
+                    </span>
+
+                </div>
+
+
+                <a href="thelionking.html">
+                    VIEW RECIPES →
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+                    KUNG FU PANDA
+        ================================================== -->
+
+        <div class="portal-card">
+
+            <div class="portal-stars">
+                ✦ &nbsp; ✧ &nbsp; ✦
+            </div>
+
+
+            <div class="portal-ring">
+
+                <div class="portal-image">
+
+                    <img src="kungfuhero.png"
+                         alt="Kung Fu Panda">
+
+                </div>
+
+            </div>
+
+
+            <div class="portal-content">
+
+                <span class="card-number">
+                    MOVIE • 05
+                </span>
+
+                <h3>
+                    🐼 Kung Fu Panda
+                </h3>
+
+                <p>
+                    Asian-inspired flavours from
+                    Po's delicious world.
+                </p>
+
+
+                <div class="dishes">
+
+                    <span>
+                        🥟 Dumplings
+                    </span>
+
+                    <span>
+                        🍜 Noodles
+                    </span>
+
+                </div>
+
+
+                <a href="Kung Fu Panda.html">
+                    VIEW RECIPES →
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+                    FROZEN
+        ================================================== -->
+
+        <div class="portal-card">
+
+            <div class="portal-stars">
+                ✦ &nbsp; ✧ &nbsp; ✦
+            </div>
+
+
+            <div class="portal-ring">
+
+                <div class="portal-image">
+
+                    <img src="frozenhero.jpg"
+                         alt="Frozen">
+
+                </div>
+
+            </div>
+
+
+            <div class="portal-content">
+
+                <span class="card-number">
+                    MOVIE • 06
+                </span>
+
+                <h3>
+                    ❄️ Frozen
+                </h3>
+
+                <p>
+                    A magical collection of winter
+                    inspired sweet treats.
+                </p>
+
+
+                <div class="dishes">
+
+                    <span>
+                        🧁 Snowflake Cupcakes
+                    </span>
+
+                    <span>
+                        🍪 Sugar Cookies
+                    </span>
+
+                </div>
+
+
+                <a href="forzen.html">
+                    VIEW RECIPES →
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+                    FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        🍴 The Flavorverse
+    </h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+<script>
+/* HAMBURGER / EXPLORE DRAWER INTERACTION */
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+const drawerClose = document.getElementById("drawerClose");
+const menuOverlay = document.createElement("div");
+
+menuOverlay.className = "menu-overlay";
+menuOverlay.setAttribute("aria-hidden", "true");
+document.body.appendChild(menuOverlay);
+
+function openMenu() {
+    navMenu.classList.add("show");
+    navMenu.removeAttribute("inert");
+    menuToggle.classList.add("active");
+    menuOverlay.classList.add("show");
+    document.body.classList.add("menu-open");
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute("aria-label", "Close navigation menu");
+}
+
+function closeMenu() {
+    navMenu.classList.remove("show");
+    navMenu.setAttribute("inert", "");
+    menuToggle.classList.remove("active");
+    menuOverlay.classList.remove("show");
+    document.body.classList.remove("menu-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+}
+
+menuToggle.addEventListener("click", function () {
+    navMenu.classList.contains("show") ? closeMenu() : openMenu();
+});
+
+drawerClose.addEventListener("click", closeMenu);
+menuOverlay.addEventListener("click", closeMenu);
+navMenu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", closeMenu);
+});
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeMenu();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Flavorverse | Dessert Cookbook</title>
+
+<!-- FIREBASE SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+:root {
+    --bg:#efe4d5;
+    --cream:#eadbc5;
+    --darkcream:#cdb493;
+    --card:#d8c2a5;
+    --mauve:#735267;
+    --deep:#4d3547;
+    --gold:#a98c69;
+    --text:#51463e;
+    --muted:#6f6258;
+}
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html {
+    scroll-behavior:smooth;
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% 10%,rgba(169,140,105,.15),transparent 28%),
+        radial-gradient(circle at 90% 90%,rgba(115,82,103,.10),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    font-family:Georgia,"Times New Roman",serif;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    background:var(--deep);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 5px 18px rgba(77,53,71,.18);
+}
+
+.nav-container {
+    max-width:1150px;
+    min-height:68px;
+    margin:auto;
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo {
+    color:#ead8bd;
+    text-decoration:none;
+    font-family:Arial,sans-serif;
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:2px;
+    white-space:nowrap;
+}
+
+.logo span {
+    color:white;
+    font-weight:normal;
+}
+
+.nav-links {
+    display:flex;
+    gap:5px;
+    list-style:none;
+}
+
+.nav-links a {
+    color:#f6eee8;
+    text-decoration:none;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:1px;
+    padding:10px 14px;
+    border-radius:20px;
+    transition:.3s;
+}
+
+.nav-links a:hover {
+    background:rgba(255,255,255,.08);
+    color:#ead8bd;
+}
+
+.nav-links .active {
+    background:#ead8bd;
+    color:var(--deep);
+    font-weight:bold;
+}
+
+/* HEADER */
+
+header {
+    background:var(--deep);
+    color:white;
+    text-align:center;
+    padding:55px 20px 48px;
+}
+
+.brand {
+    color:#ead8bd;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:6px;
+    margin-bottom:15px;
+}
+
+header h1 {
+    font-size:50px;
+    font-weight:normal;
+}
+
+.header-line {
+    width:70px;
+    height:2px;
+    background:#ead8bd;
+    margin:18px auto;
+}
+
+header p {
+    color:#ded4d1;
+    font-size:14px;
+    font-style:italic;
+}
+
+/* INTRO */
+
+.intro {
+    max-width:800px;
+    margin:auto;
+    text-align:center;
+    padding:45px 20px 10px;
+}
+
+.intro-small {
+    color:var(--gold);
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:4px;
+    margin-bottom:12px;
+}
+
+.intro h2 {
+    color:var(--mauve);
+    font-size:32px;
+    font-weight:normal;
+    margin-bottom:12px;
+}
+
+.intro p {
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.8;
+}
+
+.container {
+    width:94%;
+    max-width:1100px;
+    margin:45px auto;
+}
+
+/* COOKBOOK */
+
+.book {
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:var(--card);
+    border:1px solid var(--gold);
+    box-shadow:0 20px 42px rgba(77,53,71,.18);
+    overflow:hidden;
+    margin-bottom:15px;
+}
+
+.book::before {
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:50%;
+    width:5px;
+    transform:translateX(-50%);
+    background:linear-gradient(to right,#b69a78,#eadbc5,#b69a78);
+    z-index:5;
+}
+
+.bookmark {
+    position:absolute;
+    top:0;
+    left:calc(50% - 15px);
+    width:30px;
+    height:78px;
+    background:var(--mauve);
+    clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);
+    z-index:10;
+}
+
+.page {
+    min-height:640px;
+    padding:35px;
+}
+
+.left-page {
+    background:linear-gradient(100deg,#d8c2a5,#ddc9ad);
+    border-right:1px solid #b69a78;
+}
+
+.right-page {
+    background:linear-gradient(260deg,#cdb493,#d5bea0);
+}
+
+/* RECIPE LABELS */
+
+.chapter {
+    color:var(--mauve);
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:4px;
+    margin-bottom:10px;
+}
+
+.recipe-number {
+    color:#8e724f;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
+    margin-bottom:18px;
+}
+
+/* IMAGES */
+
+.image-frame {
+    width:100%;
+    max-width:440px;
+    height:330px;
+    margin:auto;
+    padding:9px;
+    background:#eadbc5;
+    border:1px solid #a98c69;
+    box-shadow:0 10px 22px rgba(77,53,71,.18);
+    border-radius:220px 220px 12px 12px;
+}
+
+.recipe-image {
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    border-radius:205px 205px 7px 7px;
+}
+
+/* TITLE */
+
+.title-area {
+    text-align:center;
+    margin-top:24px;
+}
+
+.title-area h2 {
+    color:var(--mauve);
+    font-size:38px;
+    line-height:1.05;
+    font-weight:normal;
+    text-transform:uppercase;
+}
+
+.subtitle {
+    color:#8e724f;
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:3px;
+    margin-top:12px;
+}
+
+.description {
+    max-width:420px;
+    margin:17px auto 0;
+    color:#66584b;
+    font-size:12px;
+    line-height:1.75;
+}
+
+/* INGREDIENTS AND PREPARATION */
+
+.section-title {
+    color:var(--mauve);
+    font-size:22px;
+    font-weight:normal;
+    padding-bottom:9px;
+    margin-bottom:15px;
+    border-bottom:1px solid var(--gold);
+}
+
+.ingredients {
+    margin-bottom:27px;
+}
+
+.ingredients ul {
+    list-style:none;
+}
+
+.ingredients li {
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    padding:7px 0;
+    border-bottom:1px dashed #b69a78;
+}
+
+.ingredients li::before {
+    content:"✦";
+    color:var(--mauve);
+    margin-right:8px;
+}
+
+.step {
+    display:grid;
+    grid-template-columns:30px 1fr;
+    gap:9px;
+    margin-bottom:13px;
+}
+
+.step-number {
+    color:var(--mauve);
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.step p {
+    color:#66584b;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    line-height:1.65;
+}
+
+.recipe-info {
+    display:flex;
+    gap:25px;
+    padding:15px 0;
+    margin-top:19px;
+    border-top:1px solid #b69a78;
+    border-bottom:1px solid #b69a78;
+}
+
+.info strong {
+    display:block;
+    color:var(--mauve);
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    margin-bottom:3px;
+}
+
+.info span {
+    color:#66584b;
+    font-family:Arial,sans-serif;
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.chef-note {
+    margin-top:17px;
+    padding:13px 15px;
+    background:#c5aa87;
+    border-left:3px solid var(--mauve);
+    color:#5e5045;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    line-height:1.65;
+}
+
+.chef-note strong {
+    color:var(--mauve);
+}
+
+/* FIREBASE COMMUNITY FEATURES */
+
+.community {
+    margin-top:25px;
+    padding:17px;
+    border-top:1px solid #b69a78;
+    background:rgba(255,250,242,.18);
+    font-family:Arial,sans-serif;
+}
+
+.community-heading {
+    color:var(--mauve);
+    font-family:Georgia,serif;
+    font-size:20px;
+    margin-bottom:13px;
+}
+
+.action-row {
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.action-btn {
+    border:1px solid var(--mauve);
+    border-radius:22px;
+    background:#f5e8d6;
+    color:var(--deep);
+    padding:9px 12px;
+    cursor:pointer;
+    font-size:11px;
+    transition:.25s;
+}
+
+.action-btn:hover,
+.action-btn.selected {
+    background:var(--mauve);
+    color:white;
+}
+
+.rating-summary {
+    color:#66584b;
+    font-size:12px;
+    margin:10px 0;
+}
+
+.rating-stars {
+    display:flex;
+    gap:5px;
+    margin:8px 0 14px;
+}
+
+.rating-stars button {
+    border:none;
+    background:transparent;
+    color:#a99b89;
+    font-size:26px;
+    cursor:pointer;
+}
+
+.rating-stars button.active {
+    color:#b89525;
+}
+
+.review-input {
+    display:block;
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #b69a78;
+    border-radius:5px;
+    background:#fffaf5;
+    color:var(--text);
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    resize:vertical;
+}
+
+.review-list {
+    margin-top:12px;
+    max-height:200px;
+    overflow-y:auto;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+}
+
+.review-item {
+    padding:10px 0;
+    border-bottom:1px dashed #b69a78;
+    overflow-wrap:anywhere;
+}
+
+.review-item strong {
+    color:var(--mauve);
+}
+
+.review-item p {
+    margin-top:5px;
+    line-height:1.6;
+    white-space:pre-wrap;
+}
+
+.status {
+    min-height:17px;
+    margin-top:9px;
+    font-size:11px;
+    line-height:1.5;
+    color:var(--deep);
+}
+
+.page-number {
+    max-width:1100px;
+    margin:0 auto 45px;
+    padding:0 5px;
+    display:flex;
+    justify-content:space-between;
+    color:#66584b;
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.page-number span:last-child {
+    color:var(--mauve);
+    font-weight:bold;
+}
+
+/* FOOTER */
+
+footer {
+    background:var(--deep);
+    color:#ded4d1;
+    text-align:center;
+    padding:45px 20px;
+}
+
+footer h2 {
+    color:#ead8bd;
+    font-size:28px;
+    font-weight:normal;
+}
+
+.footer-line {
+    width:60px;
+    height:2px;
+    background:#ead8bd;
+    margin:14px auto;
+}
+
+footer p {
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    margin-top:6px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px) {
+    .nav-container {
+        flex-direction:column;
+        justify-content:center;
+        padding:14px 20px;
+    }
+
+    .nav-links {
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .book {
+        grid-template-columns:1fr;
+    }
+
+    .book::before,
+    .bookmark {
+        display:none;
+    }
+
+    .left-page {
+        border-right:none;
+        border-bottom:1px solid #b69a78;
+    }
+}
+
+@media(max-width:600px) {
+    header h1 {
+        font-size:38px;
+    }
+
+    .intro h2 {
+        font-size:27px;
+    }
+
+    .page {
+        padding:25px 20px;
+        min-height:auto;
+    }
+
+    .image-frame {
+        height:270px;
+    }
+
+    .title-area h2 {
+        font-size:31px;
+    }
+
+    .recipe-info {
+        flex-wrap:wrap;
+        gap:18px;
+    }
+
+    .nav-links a {
+        font-size:9px;
+        padding:8px 10px;
+    }
+
+    .community {
+        padding:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            🍴 <span>THE</span> FLAVORVERSE
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="desserts.html" class="active">DESSERTS</a></li>
+            <li><a href="recipes.html">RECIPES</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+
+    </div>
+</nav>
+
+<header>
+    <div class="brand">🍴 THE FLAVORVERSE 🍴</div>
+    <h1>Dessert Cookbook</h1>
+    <div class="header-line"></div>
+    <p>Sweet recipes, beautifully served</p>
+</header>
+
+<section class="intro">
+    <div class="intro-small">SWEET COLLECTION • IV</div>
+
+    <h2>Five More Delicious Stories</h2>
+
+    <p>
+        Turn another page of The Flavorverse dessert cookbook
+        and discover five delightful favourites from around the world.
+    </p>
+</section>
+
+<main class="container" id="recipeContainer"></main>
+
+<footer>
+    <h2>🍴 The Flavorverse</h2>
+    <div class="footer-line"></div>
+    <p>Sweet moments • Delicious memories</p>
+    <p>© 2026 The Flavorverse | All Rights Reserved</p>
+</footer>
+
+<script>
+/* =====================================================
+   FIREBASE CONFIGURATION
+===================================================== */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+  authDomain: "the-flavoverse.firebaseapp.com",
+  projectId: "the-flavoverse",
+  storageBucket: "the-flavoverse.firebasestorage.app",
+  messagingSenderId: "1064022248292",
+  appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+  measurementId: "G-16Z0K1687Z"
+};
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+/* =====================================================
+   RECIPES 16–20
+===================================================== */
+
+const recipes = [
+
+{
+    id:"churros",
+    number:16,
+    chapter:"SPANISH STREET DESSERT",
+    name:"Churros",
+    plainName:"Churros",
+    subtitle:"CRISPY • CINNAMON • SWEET",
+    image:"recipechurrous.jpg",
+
+    description:
+        "Golden crispy Spanish pastries coated in cinnamon sugar and served with a rich chocolate dipping sauce.",
+
+    ingredients:[
+        "1 cup water",
+        "2 tbsp butter",
+        "1 tbsp sugar",
+        "1 cup all-purpose flour",
+        "1 egg, optional",
+        "Oil for frying",
+        "½ cup sugar for coating",
+        "1 tsp cinnamon powder",
+        "100 g dark chocolate",
+        "½ cup cream"
+    ],
+
+    steps:[
+        "Heat water, butter and sugar in a saucepan until the butter melts.",
+        "Add flour and stir continuously until a soft dough forms.",
+        "Allow the dough to cool slightly before handling.",
+        "Transfer the dough into a piping bag fitted with a star nozzle.",
+        "Pipe strips of dough carefully into warm oil.",
+        "Fry until golden brown and crispy on all sides.",
+        "Mix sugar and cinnamon powder in a shallow plate.",
+        "Roll the warm churros in the cinnamon sugar mixture.",
+        "Heat cream gently and pour it over chopped chocolate.",
+        "Stir until smooth and serve the chocolate sauce with churros."
+    ],
+
+    prep:"20 MIN",
+    prepLabel:"PREP",
+
+    cook:"20 MIN",
+    cookLabel:"COOK",
+
+    servings:"4",
+    servingsLabel:"SERVINGS",
+
+    note:"Coat the churros while they are still warm so the cinnamon sugar sticks well."
+},
+
+{
+    id:"baklava",
+    number:17,
+    chapter:"MIDDLE EASTERN CLASSIC",
+    name:"Baklava",
+    plainName:"Baklava",
+    subtitle:"FLAKY • NUTTY • HONEYED",
+    image:"recipebaklava.jpg",
+
+    description:
+        "A beautiful layered pastry filled with chopped nuts and finished with a fragrant sweet syrup.",
+
+    ingredients:[
+        "12–15 sheets phyllo pastry",
+        "150 g melted butter",
+        "1 cup chopped pistachios",
+        "1 cup chopped walnuts",
+        "½ tsp cinnamon powder",
+        "¾ cup sugar",
+        "½ cup water",
+        "½ cup honey",
+        "1 tsp lemon juice",
+        "½ tsp vanilla essence, optional"
+    ],
+
+    steps:[
+        "Preheat the oven to 180°C and grease a baking dish.",
+        "Combine chopped pistachios, walnuts and cinnamon powder.",
+        "Place one phyllo sheet in the dish and brush it with melted butter.",
+        "Repeat with several sheets, brushing each layer with butter.",
+        "Spread a portion of the nut mixture evenly over the pastry.",
+        "Add more buttered phyllo sheets and another layer of nuts.",
+        "Continue layering until the ingredients are used.",
+        "Cut the pastry into diamond-shaped pieces before baking.",
+        "Bake until the top becomes crisp and golden brown.",
+        "Boil sugar, water, honey and lemon juice to make a light syrup.",
+        "Pour the cooled syrup over the hot pastry and allow it to absorb."
+    ],
+
+    prep:"30 MIN",
+    prepLabel:"PREP",
+
+    cook:"40 MIN",
+    cookLabel:"BAKE",
+
+    servings:"12",
+    servingsLabel:"PIECES",
+
+    note:"Allow the baklava to rest for several hours so the syrup can soak into the layers."
+},
+
+{
+    id:"carrot-cake",
+    number:18,
+    chapter:"HOMESTYLE BAKERY FAVOURITE",
+    name:"Carrot<br>Cake",
+    plainName:"Carrot Cake",
+    subtitle:"MOIST • SPICED • CREAMY",
+    image:"recipecarrotcake.jpg",
+
+    description:
+        "A soft and moist cake made with freshly grated carrots, warm spices and a smooth cream cheese frosting.",
+
+    ingredients:[
+        "1½ cups all-purpose flour",
+        "1 cup grated carrots",
+        "¾ cup brown sugar",
+        "½ cup vegetable oil",
+        "2 eggs",
+        "1 tsp baking powder",
+        "½ tsp baking soda",
+        "1 tsp cinnamon powder",
+        "¼ tsp salt",
+        "½ cup chopped walnuts, optional",
+        "100 g cream cheese",
+        "½ cup icing sugar"
+    ],
+
+    steps:[
+        "Preheat the oven to 180°C and grease a cake tin.",
+        "Combine flour, baking powder, baking soda, cinnamon and salt.",
+        "Whisk eggs, brown sugar and oil in a separate bowl.",
+        "Add the dry ingredients to the wet mixture and combine gently.",
+        "Fold in the grated carrots and chopped walnuts.",
+        "Pour the batter into the prepared cake tin.",
+        "Bake for around 30–40 minutes until a skewer comes out clean.",
+        "Allow the cake to cool completely before decorating.",
+        "Beat cream cheese and icing sugar until smooth.",
+        "Spread the frosting over the cooled cake and serve."
+    ],
+
+    prep:"20 MIN",
+    prepLabel:"PREP",
+
+    cook:"35 MIN",
+    cookLabel:"BAKE",
+
+    servings:"8",
+    servingsLabel:"SLICES",
+
+    note:"Grate the carrots finely and avoid overmixing the batter to keep the cake moist."
+},
+
+{
+    id:"mango-pudding",
+    number:19,
+    chapter:"TROPICAL FRUIT DESSERT",
+    name:"Mango<br>Pudding",
+    plainName:"Mango Pudding",
+    subtitle:"FRUITY • SILKY • REFRESHING",
+    image:"recipemango.jpg",
+
+    description:
+        "A smooth tropical dessert prepared with ripe mango pulp, milk and cream for a refreshing finish.",
+
+    ingredients:[
+        "1 cup ripe mango pulp",
+        "½ cup fresh cream",
+        "½ cup milk",
+        "¼ cup sugar, adjust to taste",
+        "1 tsp gelatin",
+        "3 tbsp cold water",
+        "½ tsp vanilla essence, optional",
+        "Fresh mango pieces",
+        "Mint leaves for garnish"
+    ],
+
+    steps:[
+        "Sprinkle gelatin over cold water and allow it to bloom.",
+        "Blend ripe mango pulp until smooth.",
+        "Heat milk and sugar gently in a saucepan.",
+        "Remove from the heat and stir in the bloomed gelatin.",
+        "Mix until the gelatin dissolves completely.",
+        "Allow the milk mixture to cool slightly.",
+        "Stir in the mango pulp and fresh cream.",
+        "Pour the mixture into small serving glasses or moulds.",
+        "Refrigerate for at least four hours until set.",
+        "Garnish with fresh mango pieces and mint before serving."
+    ],
+
+    prep:"15 MIN",
+    prepLabel:"PREP",
+
+    cook:"4 HR",
+    cookLabel:"CHILL",
+
+    servings:"4",
+    servingsLabel:"SERVINGS",
+
+    note:"Use ripe, sweet mangoes for the best flavour and adjust the sugar to suit the fruit."
+},
+
+{
+    id:"red-velvet-cake",
+    number:20,
+    chapter:"ELEGANT CELEBRATION CAKE",
+    name:"Red Velvet<br>Cake",
+    plainName:"Red Velvet Cake",
+    subtitle:"VELVETY • COCOA • CREAMY",
+    image:"recipeered.jpg",
+
+    description:
+        "A soft red velvet cake with a gentle cocoa flavour, a tender crumb and a rich cream cheese frosting.",
+
+    ingredients:[
+        "1½ cups all-purpose flour",
+        "1 cup sugar",
+        "2 tbsp cocoa powder",
+        "½ cup vegetable oil",
+        "1 egg",
+        "½ cup buttermilk",
+        "1 tsp vanilla essence",
+        "1 tsp baking powder",
+        "½ tsp baking soda",
+        "1 tsp vinegar",
+        "Red food colouring, as needed",
+        "150 g cream cheese",
+        "½ cup icing sugar",
+        "2 tbsp butter for frosting"
+    ],
+
+    steps:[
+        "Preheat the oven to 180°C and grease a cake tin.",
+        "Sift flour, cocoa powder, baking powder and baking soda together.",
+        "Whisk sugar, oil and egg until well combined.",
+        "Add buttermilk, vanilla essence and red food colouring.",
+        "Fold the dry ingredients into the wet mixture gently.",
+        "Stir in vinegar and mix until the batter is smooth.",
+        "Pour the batter into the prepared cake tin.",
+        "Bake for around 25–35 minutes until a skewer comes out clean.",
+        "Cool the cake completely before frosting.",
+        "Beat cream cheese, butter and icing sugar until smooth.",
+        "Spread the frosting over the cake and decorate as desired."
+    ],
+
+    prep:"25 MIN",
+    prepLabel:"PREP",
+
+    cook:"30 MIN",
+    cookLabel:"BAKE",
+
+    servings:"8",
+    servingsLabel:"SLICES",
+
+    note:"Let the cake cool completely before frosting to prevent the cream cheese topping from melting."
+}
+
+];
+
+/* =====================================================
+   BUILD RECIPE PAGES
+===================================================== */
+
+function renderRecipes() {
+
+    const container = document.getElementById("recipeContainer");
+
+    container.innerHTML = recipes.map(recipe => `
+
+        <section class="book">
+
+            <div class="bookmark"></div>
+
+            <!-- LEFT PAGE -->
+
+            <div class="page left-page">
+
+                <div class="chapter">${recipe.chapter}</div>
+
+                <div class="recipe-number">
+                    RECIPE NO. ${recipe.number}
+                </div>
+
+                <div class="image-frame">
+
+                    <img
+                        src="${recipe.image}"
+                        alt="${recipe.plainName}"
+                        class="recipe-image"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="title-area">
+
+                    <h2>${recipe.name}</h2>
+
+                    <div class="subtitle">
+                        ${recipe.subtitle}
+                    </div>
+
+                    <p class="description">
+                        ${recipe.description}
+                    </p>
+
+                </div>
+
+                <!-- FIREBASE COMMUNITY -->
+
+                <section class="community">
+
+                    <h3 class="community-heading">
+                        Your Dessert Journal
+                    </h3>
+
+                    <div class="action-row">
+
+                        <button
+                            class="action-btn"
+                            id="fav-${recipe.id}"
+                            onclick="toggleFavourite('${recipe.id}')">
+
+                            ♡ Add to Favourite
+
+                        </button>
+
+                        <button
+                            class="action-btn"
+                            id="stamp-${recipe.id}"
+                            onclick="toggleStamp('${recipe.id}')">
+
+                            🏆 Collect Stamp
+
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="rating-summary"
+                        id="rating-summary-${recipe.id}">
+
+                        ⭐ Loading ratings...
+
+                    </div>
+
+                    <strong>Rate this dessert</strong>
+
+                    <div
+                        class="rating-stars"
+                        id="stars-${recipe.id}">
+
+                        ${[1,2,3,4,5].map(number => `
+                            <button
+                                type="button"
+                                aria-label="Rate ${number} out of 5"
+                                onclick="submitRating('${recipe.id}',${number})">
+
+                                ★
+
+                            </button>
+                        `).join("")}
+
+                    </div>
+
+                    <strong>Share your review</strong>
+
+                    <textarea
+                        class="review-input"
+                        id="review-${recipe.id}"
+                        rows="3"
+                        maxlength="500"
+                        placeholder="What did you think of this dessert?">
+                    </textarea>
+
+                    <button
+                        class="action-btn"
+                        onclick="submitReview('${recipe.id}')">
+
+                        💬 Post Review
+
+                    </button>
+
+                    <div
+                        class="status"
+                        id="status-${recipe.id}"
+                        aria-live="polite">
+                    </div>
+
+                    <div
+                        class="review-list"
+                        id="reviews-${recipe.id}">
+
+                        Loading reviews...
+
+                    </div>
+
+                </section>
+
+            </div>
+
+            <!-- RIGHT PAGE -->
+
+            <div class="page right-page">
+
+                <div class="ingredients">
+
+                    <h3 class="section-title">
+                        Ingredients
+                    </h3>
+
+                    <ul>
+                        ${recipe.ingredients.map(item => `
+                            <li>${item}</li>
+                        `).join("")}
+                    </ul>
+
+                </div>
+
+                <h3 class="section-title">
+                    Preparation
+                </h3>
+
+                ${recipe.steps.map((step,index) => `
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            ${String(index+1).padStart(2,"0")}
+                        </div>
+
+                        <p>${step}</p>
+
+                    </div>
+
+                `).join("")}
+
+                <div class="recipe-info">
+
+                    <div class="info">
+                        <strong>${recipe.prep}</strong>
+                        <span>${recipe.prepLabel}</span>
+                    </div>
+
+                    <div class="info">
+                        <strong>${recipe.cook}</strong>
+                        <span>${recipe.cookLabel}</span>
+                    </div>
+
+                    <div class="info">
+                        <strong>${recipe.servings}</strong>
+                        <span>${recipe.servingsLabel}</span>
+                    </div>
+
+                </div>
+
+                <div class="chef-note">
+
+                    <strong>Chef's Note:</strong>
+                    ${recipe.note}
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="page-number">
+
+            <span>THE FLAVORVERSE • DESSERTS</span>
+
+            <span>${recipe.number} / 20</span>
+
+        </div>
+
+    `).join("");
+
+}
+
+/* =====================================================
+   HELPER FUNCTIONS
+===================================================== */
+
+function needLogin() {
+
+    if (!auth.currentUser) {
+
+        alert("Please log in first to use this feature.");
+
+        return false;
+    }
+
+    return true;
+}
+
+function setStatus(id,message) {
+
+    const element = document.getElementById("status-" + id);
+
+    if (element) {
+        element.textContent = message;
+    }
+}
+
+function safeText(value) {
+
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+    })[character]);
+
+}
+
+/* =====================================================
+   FAVOURITES AND STAMPS
+===================================================== */
+
+async function toggleUserItem(collectionName,id) {
+
+    if (!needLogin()) return;
+
+    const user = auth.currentUser;
+
+    const recipe = recipes.find(item => item.id === id);
+
+    if (!recipe) return;
+
+    const reference = db.collection("users")
+        .doc(user.uid)
+        .collection(collectionName)
+        .doc(id);
+
+    try {
+
+        const snapshot = await reference.get();
+
+        if (snapshot.exists) {
+
+            await reference.delete();
+
+            setStatus(
+                id,
+                collectionName === "favourites"
+                    ? "Removed from your favourites."
+                    : "Stamp removed from your collection."
+            );
+
+        } else {
+
+            await reference.set({
+
+                recipeId:id,
+
+                recipeName:recipe.plainName,
+
+                createdAt:
+                    firebase.firestore.FieldValue.serverTimestamp()
+
+            });
+
+            setStatus(
+                id,
+                collectionName === "favourites"
+                    ? "❤️ Added to your favourites!"
+                    : "🏆 Stamp collected successfully!"
+            );
+
+        }
+
+        await loadUserButtons();
+
+    } catch (error) {
+
+        console.error("Favourite or stamp error:",error);
+
+        setStatus(
+            id,
+            "Unable to save. Please check your Firestore rules."
+        );
+
+    }
+}
+
+function toggleFavourite(id) {
+
+    return toggleUserItem("favourites",id);
+
+}
+
+function toggleStamp(id) {
+
+    return toggleUserItem("stamps",id);
+
+}
+
+async function loadUserButtons() {
+
+    const user = auth.currentUser;
+
+    for (const recipe of recipes) {
+
+        const favouriteButton =
+            document.getElementById("fav-" + recipe.id);
+
+        const stampButton =
+            document.getElementById("stamp-" + recipe.id);
+
+        if (!favouriteButton || !stampButton) continue;
+
+        favouriteButton.classList.remove("selected");
+
+        stampButton.classList.remove("selected");
+
+        favouriteButton.textContent = "♡ Add to Favourite";
+
+        stampButton.textContent = "🏆 Collect Stamp";
+
+        if (!user) continue;
+
+        try {
+
+            const userReference = db.collection("users")
+                .doc(user.uid);
+
+            const [favourite,stamp] = await Promise.all([
+
+                userReference
+                    .collection("favourites")
+                    .doc(recipe.id)
+                    .get(),
+
+                userReference
+                    .collection("stamps")
+                    .doc(recipe.id)
+                    .get()
+
+            ]);
+
+            if (favourite.exists) {
+
+                favouriteButton.classList.add("selected");
+
+                favouriteButton.textContent = "♥ Added to Favourite";
+
+            }
+
+            if (stamp.exists) {
+
+                stampButton.classList.add("selected");
+
+                stampButton.textContent = "🏆 Stamp Collected";
+
+            }
+
+        } catch (error) {
+
+            console.error("Could not load saved items:",error);
+
+        }
+
+    }
+
+}
+
+/* =====================================================
+   RATINGS
+===================================================== */
+
+async function submitRating(id,rating) {
+
+    if (!needLogin()) return;
+
+    const user = auth.currentUser;
+
+    try {
+
+        await db.collection("recipes")
+            .doc(id)
+            .collection("ratings")
+            .doc(user.uid)
+            .set({
+
+                uid:user.uid,
+
+                rating:rating,
+
+                updatedAt:
+                    firebase.firestore.FieldValue.serverTimestamp()
+
+            });
+
+        setStatus(id,"⭐ Your rating has been saved!");
+
+        await loadRating(id);
+
+    } catch (error) {
+
+        console.error("Rating error:",error);
+
+        setStatus(
+            id,
+            "Could not save rating. Please check Firestore rules."
+        );
+
+    }
+
+}
+
+async function loadRating(id) {
+
+    const summary =
+        document.getElementById("rating-summary-" + id);
+
+    const starButtons =
+        document.querySelectorAll("#stars-" + id + " button");
+
+    try {
+
+        const snapshot = await db.collection("recipes")
+            .doc(id)
+            .collection("ratings")
+            .get();
+
+        let total = 0;
+
+        snapshot.forEach(document => {
+
+            total += Number(document.data().rating) || 0;
+
+        });
+
+        const count = snapshot.size;
+
+        const average = count
+            ? (total / count).toFixed(1)
+            : "—";
+
+        if (summary) {
+
+            summary.textContent =
+                `⭐ ${average} / 5 · ${count} ${
+                    count === 1 ? "rating" : "ratings"
+                }`;
+
+        }
+
+        let selectedRating = 0;
+
+        if (auth.currentUser) {
+
+            const ownRating = snapshot.docs.find(
+                document => document.id === auth.currentUser.uid
+            );
+
+            if (ownRating) {
+
+                selectedRating =
+                    Number(ownRating.data().rating) || 0;
+
+            }
+
+        }
+
+        starButtons.forEach((button,index) => {
+
+            button.classList.toggle(
+                "active",
+                index < selectedRating
+            );
+
+        });
+
+    } catch (error) {
+
+        console.error("Rating loading error:",error);
+
+        if (summary) {
+
+            summary.textContent =
+                "Ratings unavailable. Check Firestore access.";
+
+        }
+
+    }
+
+}
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+async function submitReview(id) {
+
+    if (!needLogin()) return;
+
+    const input = document.getElementById("review-" + id);
+
+    const message = input.value.trim();
+
+    if (!message) {
+
+        setStatus(id,"Please write a review first.");
+
+        return;
+
+    }
+
+    if (message.length > 500) {
+
+        setStatus(
+            id,
+            "Your review must be 500 characters or fewer."
+        );
+
+        return;
+
+    }
+
+    const user = auth.currentUser;
+
+    try {
+
+        await db.collection("recipes")
+            .doc(id)
+            .collection("reviews")
+            .doc(user.uid)
+            .set({
+
+                uid:user.uid,
+
+                displayName:
+                    user.displayName ||
+                    (user.email
+                        ? user.email.split("@")[0]
+                        : "Flavorverse user"),
+
+                text:message,
+
+                createdAt:
+                    firebase.firestore.FieldValue.serverTimestamp()
+
+            });
+
+        input.value = "";
+
+        setStatus(id,"💬 Your review has been posted!");
+
+        await loadReviews(id);
+
+    } catch (error) {
+
+        console.error("Review error:",error);
+
+        setStatus(
+            id,
+            "Could not post review. Please check Firestore rules."
+        );
+
+    }
+
+}
+
+async function loadReviews(id) {
+
+    const container =
+        document.getElementById("reviews-" + id);
+
+    if (!container) return;
+
+    try {
+
+        const snapshot = await db.collection("recipes")
+            .doc(id)
+            .collection("reviews")
+            .orderBy("createdAt","desc")
+            .limit(20)
+            .get();
+
+        if (snapshot.empty) {
+
+            container.textContent =
+                "No reviews yet. Be the first to share your thoughts!";
+
+            return;
+
+        }
+
+        container.innerHTML = snapshot.docs.map(document => {
+
+            const review = document.data();
+
+            return `
+                <div class="review-item">
+
+                    <strong>
+                        ${safeText(
+                            review.displayName || "Flavorverse user"
+                        )}
+                    </strong>
+
+                    <p>${safeText(review.text || "")}</p>
+
+                </div>
+            `;
+
+        }).join("");
+
+    } catch (error) {
+
+        console.error("Review loading error:",error);
+
+        container.textContent =
+            "Reviews unavailable. Please check Firestore access.";
+
+    }
+
+}
+
+/* =====================================================
+   AUTHENTICATION STATE
+===================================================== */
+
+renderRecipes();
+
+auth.onAuthStateChanged(() => {
+
+    loadUserButtons();
+
+    recipes.forEach(recipe => {
+
+        loadRating(recipe.id);
+
+        loadReviews(recipe.id);
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

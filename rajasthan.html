@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rajasthan | The Flavorverse</title>
+<script src="recipe-actions.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#F7E7CE;
+color:#5B4A45;
+transition:.3s;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode{
+background:#241d23;
+color:#eee;
+}
+
+body.dark-mode .hero,
+body.dark-mode .about-text,
+body.dark-mode .recipe-section,
+body.dark-mode .fact-card,
+body.dark-mode .profile-card,
+body.dark-mode .explorer-box,
+body.dark-mode .review-box,
+body.dark-mode .recent-card{
+background:#342a32;
+color:#eee;
+}
+
+body.dark-mode .recipe-content h2,
+body.dark-mode .about-text h2,
+body.dark-mode .facts-section h2{
+color:#e9c9e4;
+}
+
+body.dark-mode .recipe-content h3{
+color:#d6aeca;
+}
+
+body.dark-mode .recipe-info div,
+body.dark-mode .chef-tip,
+body.dark-mode .fun-fact{
+background:#443640;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea{
+background:#443640;
+color:white;
+border-color:#80647b;
+}
+
+body.dark-mode .search-box{
+background:#342a32;
+}
+
+/* ================= HEADER ================= */
+
+header{
+background:#8E6C88;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+font-family:'Cinzel',serif;
+font-size:32px;
+font-weight:bold;
+color:white;
+}
+
+nav{
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.dark-toggle{
+margin-left:20px;
+border:none;
+background:#F4E5C5;
+color:#5B4A45;
+padding:9px 14px;
+border-radius:20px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* ================= EXPLORE SLIDE MENU ================= */
+
+.menu-btn{
+margin-left:15px;
+border:none;
+background:#F4E5C5;
+color:#5B4A45;
+width:44px;
+height:40px;
+border-radius:12px;
+font-size:22px;
+cursor:pointer;
+transition:.3s;
+line-height:1;
+}
+
+.menu-btn:hover{
+background:#FFD166;
+transform:translateY(-2px);
+}
+
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(36,29,35,.55);
+backdrop-filter:blur(2px);
+opacity:0;
+visibility:hidden;
+transition:.35s;
+z-index:9998;
+}
+
+.menu-overlay.open{
+opacity:1;
+visibility:visible;
+}
+
+.side-menu{
+position:fixed;
+top:0;
+right:0;
+height:100%;
+width:350px;
+max-width:88%;
+background:#FFF9F4;
+box-shadow:-10px 0 30px rgba(0,0,0,.3);
+transform:translateX(100%);
+transition:transform .4s ease;
+z-index:9999;
+display:flex;
+flex-direction:column;
+}
+
+.side-menu.open{
+transform:translateX(0);
+}
+
+.side-menu-head{
+background:#9B7A98;
+color:white;
+padding:32px 28px;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+
+.side-menu-head h2{
+font-size:28px;
+font-weight:600;
+}
+
+.menu-close{
+background:none;
+border:none;
+color:white;
+font-size:26px;
+cursor:pointer;
+transition:.3s;
+}
+
+.menu-close:hover{
+transform:rotate(90deg);
+}
+
+.side-menu-list{
+flex:1;
+overflow-y:auto;
+padding:14px 22px 24px;
+}
+
+.menu-item{
+display:flex;
+align-items:center;
+gap:18px;
+padding:12px 14px;
+border-radius:14px;
+text-decoration:none;
+color:#5B3F5C;
+transition:.25s;
+margin-bottom:2px;
+}
+
+.menu-item:hover,
+.menu-item.active{
+background:#EFE0EE;
+transform:translateX(4px);
+}
+
+.menu-icon{
+font-size:26px;
+width:32px;
+text-align:center;
+}
+
+.menu-item strong{
+display:block;
+font-size:15px;
+font-weight:600;
+color:#5B3F5C;
+}
+
+.menu-item small{
+display:block;
+font-size:12px;
+color:#7a6a74;
+margin-top:2px;
+}
+
+.menu-divider{
+height:1px;
+background:#E3CFE0;
+margin:12px 0;
+}
+
+body.menu-lock{
+overflow:hidden;
+}
+
+body.dark-mode .side-menu{
+background:#342a32;
+}
+
+body.dark-mode .menu-item strong{
+color:#e9c9e4;
+}
+
+body.dark-mode .menu-item small{
+color:#bfa9bb;
+}
+
+body.dark-mode .menu-item:hover,
+body.dark-mode .menu-item.active{
+background:#443640;
+}
+
+body.dark-mode .menu-divider{
+background:#5a4757;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+width:90%;
+margin:40px auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+display:flex;
+align-items:center;
+gap:40px;
+padding:40px;
+
+}
+
+.image-box{
+
+width:450px;
+height:350px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#fff8f2;
+border-radius:20px;
+flex:1;
+
+}
+
+.image-box img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+display:block;
+}
+
+.hero-content{
+
+padding:40px;
+flex:1;
+text-align:left;
+
+}
+
+.hero-content h1{
+
+font-family:'Cinzel',serif;
+font-size:58px;
+color:#6F4B72;
+
+}
+
+.hero-content h2{
+
+margin-top:15px;
+color:#B58A4D;
+font-size:30px;
+
+}
+
+.hero-content p{
+
+margin-top:18px;
+font-size:18px;
+line-height:1.8;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:25px;
+padding:14px 35px;
+background:#8E6C88;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#6F4B72;
+
+}
+
+/* ================= ABOUT ================= */
+
+.about-section{
+width:90%;
+margin:50px auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+
+.about-text{
+flex:2;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.about-text h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:20px;
+}
+
+.about-text p{
+line-height:1.9;
+font-size:17px;
+margin-bottom:18px;
+text-align:justify;
+}
+
+.about-box{
+flex:1;
+background:#8E6C88;
+color:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.about-box h3{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+text-align:center;
+}
+
+.about-box ul{
+list-style:none;
+}
+
+.about-box li{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.25);
+font-size:16px;
+}
+
+.about-box li:last-child{
+border-bottom:none;
+}
+
+/* =====================================================
+   RECIPE EXPLORER
+===================================================== */
+
+.explorer-section{
+width:90%;
+margin:60px auto;
+}
+
+.explorer-box{
+background:#FFF9F4;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.explorer-box h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.search-filter-row{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.search-box,
+.filter-box{
+padding:13px 18px;
+border:1px solid #D8C5B0;
+border-radius:25px;
+background:white;
+color:#5B4A45;
+font-family:'Poppins',sans-serif;
+outline:none;
+}
+
+.search-box{
+width:45%;
+min-width:250px;
+}
+
+.filter-box{
+min-width:180px;
+}
+
+.explorer-buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+.explorer-btn{
+border:none;
+padding:12px 22px;
+border-radius:25px;
+background:#8E6C88;
+color:white;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.explorer-btn:hover{
+background:#6F4B72;
+transform:translateY(-2px);
+}
+
+.explorer-btn.random{
+background:#B58A4D;
+}
+
+/* ================= POPULAR ================= */
+
+.popular-section{
+width:90%;
+margin:40px auto;
+}
+
+.popular-title{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:32px;
+margin-bottom:25px;
+}
+
+.popular-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.popular-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+text-align:center;
+transition:.3s;
+}
+
+.popular-card:hover{
+transform:translateY(-6px);
+}
+
+.popular-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.popular-card p{
+font-size:14px;
+line-height:1.6;
+}
+
+/* ================= SEARCH RESULT ================= */
+
+.search-result{
+text-align:center;
+margin-top:18px;
+font-weight:600;
+color:#8E6C88;
+}
+
+/* ================= RECIPE SECTION ================= */
+
+.recipe-section{
+width:90%;
+margin:60px auto;
+
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:40px;
+
+align-items:stretch;
+
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.recipe-image{
+grid-column:1;
+grid-row:1;
+}
+
+.recipe-image img{
+width:100%;
+border-radius:18px;
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+display:block;
+}
+
+.recipe-content{
+grid-column:2;
+grid-row:1;
+}
+
+.recipe-content h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:38px;
+margin-bottom:20px;
+}
+
+.recipe-content h3{
+margin-top:25px;
+margin-bottom:12px;
+color:#8E6C88;
+}
+
+.recipe-content p{
+line-height:1.8;
+text-align:justify;
+}
+
+.recipe-content ul,
+.recipe-content ol{
+margin-left:25px;
+line-height:1.9;
+}
+
+/* ================= RECIPE INFO ================= */
+
+.recipe-info{
+display:flex;
+justify-content:space-between;
+margin-top:25px;
+gap:20px;
+}
+
+.recipe-info div{
+flex:1;
+background:#F7E7CE;
+padding:18px;
+text-align:center;
+border-radius:15px;
+}
+
+/* ================= CHEF TIP + FUN FACT ================= */
+
+.chef-tip,
+.fun-fact{
+margin-top:25px;
+background:#F7E7CE;
+padding:20px;
+border-left:6px solid #8E6C88;
+border-radius:12px;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.recipe-actions{
+grid-column:1;
+grid-row:1;
+
+align-self:end;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-end;
+
+gap:15px;
+
+padding-bottom:5px;
+}
+
+.recipe-actions button{
+
+width:200px;
+padding:14px 18px;
+
+border:none;
+border-radius:30px;
+
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 6px 15px rgba(91,74,69,.18);
+
+}
+
+.favorite-btn{
+background:#8E6C88;
+color:white;
+}
+
+.stamp-btn{
+background:#F4E5C5;
+color:#5B4A45;
+}
+
+.recipe-actions button:hover{
+transform:translateY(-3px);
+box-shadow:0 9px 20px rgba(91,74,69,.22);
+}
+
+/* ================= RATING ================= */
+
+.rating-area{
+margin-top:22px;
+padding:20px;
+background:rgba(244,229,197,.55);
+border-radius:15px;
+}
+
+.rating-area h3{
+margin-top:0;
+}
+
+.stars{
+display:flex;
+gap:5px;
+margin-top:8px;
+}
+
+.star{
+font-size:28px;
+cursor:pointer;
+color:#c8b9aa;
+transition:.2s;
+}
+
+.star.active{
+color:#E5A82F;
+}
+
+.rating-message{
+font-size:13px;
+margin-top:7px;
+}
+
+/* ================= REVIEWS ================= */
+
+.review-box{
+margin-top:18px;
+padding:20px;
+background:#FFF9F4;
+border:1px solid #eadbc9;
+border-radius:15px;
+}
+
+.review-box h3{
+margin-top:0;
+}
+
+.review-input{
+width:100%;
+min-height:80px;
+resize:vertical;
+padding:12px;
+border:1px solid #D8C5B0;
+border-radius:12px;
+outline:none;
+font-family:'Poppins',sans-serif;
+margin-top:8px;
+}
+
+.review-submit{
+margin-top:10px;
+border:none;
+background:#8E6C88;
+color:white;
+padding:10px 20px;
+border-radius:22px;
+cursor:pointer;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+}
+
+.review-submit:hover{
+background:#6F4B72;
+}
+
+.reviews-list{
+margin-top:15px;
+}
+
+.single-review{
+padding:12px;
+margin-top:10px;
+background:#F7E7CE;
+border-radius:12px;
+}
+
+.single-review strong{
+color:#6F4B72;
+}
+
+.single-review small{
+display:block;
+margin-top:4px;
+opacity:.7;
+}
+
+.no-review{
+font-size:13px;
+opacity:.7;
+margin-top:10px;
+}
+
+/* =====================================================
+   REVERSE RECIPE
+===================================================== */
+
+.recipe-section.reverse{
+grid-template-columns:2fr 1fr;
+}
+
+.recipe-section.reverse .recipe-content{
+grid-column:1;
+grid-row:1;
+}
+
+.recipe-section.reverse .recipe-image{
+grid-column:2;
+grid-row:1;
+}
+
+.recipe-section.reverse .recipe-actions{
+grid-column:2;
+grid-row:1;
+}
+
+/* ================= FOOD FACTS ================= */
+
+.facts-section{
+width:90%;
+margin:60px auto;
+}
+
+.facts-section h2{
+text-align:center;
+font-family:'Cinzel',serif;
+font-size:40px;
+color:#6F4B72;
+margin-bottom:35px;
+}
+
+.facts-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.fact-card{
+background:#FFF9F4;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.fact-card:hover{
+transform:translateY(-8px);
+}
+
+.fact-card h3{
+color:#8E6C88;
+margin-bottom:15px;
+}
+
+.fact-card p{
+line-height:1.8;
+}
+
+/* ================= RECENTLY VIEWED ================= */
+
+.recent-section{
+width:90%;
+margin:60px auto;
+}
+
+.recent-section h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.recent-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.recent-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+}
+
+.recent-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.recent-card p{
+font-size:13px;
+}
+
+.recent-empty{
+text-align:center;
+opacity:.7;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-section{
+width:90%;
+margin:60px auto;
+}
+
+.profile-box{
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.profile-box h2{
+font-family:'Cinzel',serif;
+font-size:38px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.profile-name{
+text-align:center;
+font-size:20px;
+margin-bottom:30px;
+}
+
+.profile-email{
+text-align:center;
+opacity:.9;
+margin-bottom:25px;
+}
+
+.profile-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.profile-card{
+background:#FFF9F4;
+color:#5B4A45;
+padding:22px;
+border-radius:16px;
+text-align:center;
+}
+
+.profile-card .count{
+font-size:30px;
+font-weight:bold;
+color:#6F4B72;
+display:block;
+margin-bottom:5px;
+}
+
+.profile-card span:last-child{
+font-size:14px;
+}
+
+/* ================= CHEF ================= */
+
+.chef-section{
+width:90%;
+margin:60px auto;
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.chef-section h2{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+}
+
+.chef-section p{
+font-size:18px;
+line-height:1.8;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+background:#6F4B72;
+color:white;
+text-align:center;
+padding:40px 20px;
+margin-top:60px;
+}
+
+footer h2{
+font-family:'Cinzel',serif;
+margin-bottom:15px;
+}
+
+footer p{
+margin:10px 0;
+line-height:1.8;
+}
+
+.social{
+margin:25px 0;
+}
+
+.social a{
+text-decoration:none;
+font-size:30px;
+margin:0 12px;
+}
+
+.copy{
+margin-top:20px;
+font-size:15px;
+opacity:.9;
+}
+
+/* ================= HIDDEN SEARCH ================= */
+
+.recipe-section.hidden-recipe{
+display:none;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+.logo{
+font-size:25px;
+}
+
+nav{
+justify-content:center;
+}
+
+.dark-toggle{
+margin:8px 0 0 0;
+}
+
+.menu-btn{
+margin:8px 0 0 10px;
+}
+
+.hero{
+flex-direction:column;
+padding:20px;
+}
+
+.image-box{
+width:100%;
+height:280px;
+}
+
+.hero-content{
+padding:20px 5px;
+text-align:center;
+}
+
+.hero-content h1{
+font-size:42px;
+}
+
+.hero-content h2{
+font-size:24px;
+}
+
+.hero-content p{
+font-size:15px;
+text-align:justify;
+}
+
+.about-section{
+flex-direction:column;
+}
+
+.about-text,
+.about-box{
+width:100%;
+}
+
+.recipe-section,
+.recipe-section.reverse{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.recipe-image,
+.recipe-content{
+width:100%;
+}
+
+.recipe-info{
+flex-direction:column;
+}
+
+.recipe-actions,
+.recipe-section.reverse .recipe-actions{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:0;
+order:2;
+}
+
+.recipe-actions button{
+width:220px;
+}
+
+.profile-stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.search-box{
+width:100%;
+}
+
+}
+
+@media(max-width:450px){
+
+.profile-stats{
+grid-template-columns:1fr;
+}
+
+.hero-content h1{
+font-size:35px;
+}
+
+.recipe-content h2{
+font-size:30px;
+}
+
+}
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+
+</style>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header>
+<div class="logo">
+🍴 The Flavorverse
+</div>
+<nav>
+<button class="dark-toggle" onclick="toggleDarkMode()">
+🌙
+</button>
+<button class="menu-btn" onclick="openMenu()" aria-label="Open menu">☰</button>
+</nav>
+</header>
+
+<!-- ================= EXPLORE SLIDE MENU ================= -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+<aside class="side-menu" id="sideMenu">
+<div class="side-menu-head">
+<h2>Explore</h2>
+<button class="menu-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+</div>
+<div class="side-menu-list">
+<a class="menu-item" href="index.html"><span class="menu-icon">🏠</span><span><strong>Home</strong><small>Return to the homepage</small></span></a>
+<a class="menu-item active" href="royal.html"><span class="menu-icon">👑</span><span><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+<a class="menu-item" href="movies.html"><span class="menu-icon">🎬</span><span><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+<a class="menu-item" href="world.html"><span class="menu-icon">🌏</span><span><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+<a class="menu-item" href="desserts.html"><span class="menu-icon">🍰</span><span><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+<a class="menu-item" href="gallery.html"><span class="menu-icon">🖼️</span><span><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+<div class="menu-divider"></div>
+<a class="menu-item" href="favourites.html"><span class="menu-icon">❤️</span><span><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+<a class="menu-item" href="order.html"><span class="menu-icon">🛒</span><span><strong>Order</strong><small>Order ingredient kits</small></span></a>
+<a class="menu-item" href="stamped.html"><span class="menu-icon">🏷️</span><span><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+<a class="menu-item" href="contact.html"><span class="menu-icon">📩</span><span><strong>Contact</strong><small>Get in touch with us</small></span></a>
+<a class="menu-item" href="about.html"><span class="menu-icon">✨</span><span><strong>About</strong><small>Discover The Flavorverse</small></span></a>
+<a class="menu-item" href="profile.html"><span class="menu-icon">👤</span><span><strong>My Flavorverse</strong><small>Your personal food profile</small></span></a>
+</div>
+</aside>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+<div class="image-box">
+<img alt="Rajasthan" src="rajasthanhero.png"/>
+</div>
+<div class="hero-content">
+<h1>🏰 Rajasthan</h1>
+<h2>Royal Flavours of Rajasthan</h2>
+<p>Experience the royal taste of Rajasthan through its rich spices, hearty dishes, traditional sweets, and age-old cooking traditions. Rajasthan cuisine reflects the state's royal heritage, desert landscape, and vibrant culture. From the iconic Dal Baati Churma to spicy Laal Maas and festive Ghevar, every recipe tells a story of tradition and hospitality.</p>
+<a class="btn" href="#recipes">
+
+Explore Recipes
+
+</a>
+</div>
+</section>
+<!-- ================= ABOUT RAJASTHAN ================= -->
+<section class="about-section" id="about">
+<div class="about-text">
+<h2>🏰 About Rajasthan Cuisine</h2>
+<p>Rajasthan, known for its magnificent forts, palaces, colourful traditions, and desert landscapes, has a distinctive cuisine shaped by its climate and royal heritage. Rajasthan food is famous for bold spices, long-lasting ingredients, ghee, gram flour, lentils, millet, and dried vegetables. Traditional cooking methods have helped create dishes that are both flavorful and practical.</p>
+<p>Wheat, bajra, lentils, gram flour, and dairy products are important parts of Rajasthan's everyday food. Traditional meals often include dal, roti, vegetables, chutneys, and pickles. The famous Dal Baati Churma is a celebrated combination of baked wheat baati, spicy dal, and sweet churma, representing the hearty character of Rajasthani cuisine.</p>
+<p>Rajasthan also offers a variety of vegetarian specialties such as Gatte Ki Sabzi, Ker Sangri, and Bajra Roti. Royal kitchens are known for rich non-vegetarian dishes such as Laal Maas, prepared with meat and aromatic spices. Sweets like Ghevar and Mawa Kachori are enjoyed during festivals, weddings, and family celebrations.</p>
+<p>The cuisine of Rajasthan is a beautiful combination of bold flavors, traditional ingredients, and royal culinary heritage. Whether it is the comforting Dal Baati Churma, creamy Gatte Ki Sabzi, fiery Laal Maas, or festive Ghevar, every recipe reflects the history, culture, and hospitality of Rajasthan.</p>
+</div>
+<div class="about-box">
+<h3>🏰 Rajasthan Highlights</h3>
+<ul>
+<li>🏰 Famous for royal forts and palaces</li>
+<li>🌾 Bajra, wheat and lentils are widely used</li>
+<li>🌶️ Known for bold and aromatic spices</li>
+<li>🥘 Dal Baati Churma is a signature dish</li>
+<li>🥬 Gatte and Ker Sangri are popular vegetarian dishes</li>
+<li>🍖 Laal Maas is a famous royal-style meat dish</li>
+<li>🍯 Ghevar and Mawa Kachori are beloved sweets</li>
+<li>❤️ Known for rich culinary heritage and hospitality</li>
+</ul>
+</div>
+</section>
+<!-- =====================================================
+     RECIPE EXPLORER
+===================================================== -->
+<section class="explorer-section">
+<div class="explorer-box">
+<h2>🔍 Explore Rajasthan Recipes</h2>
+<div class="search-filter-row">
+<input class="search-box" id="recipeSearch" onkeyup="filterRecipes()" placeholder="🔍 Search recipe..." type="text"/>
+<select class="filter-box" id="categoryFilter" onchange="filterRecipes()">
+<option value="all">🏷️ All Categories</option>
+<option value="main">Main Course</option>
+<option value="nonveg">Non-Vegetarian</option>
+<option value="dessert">Dessert</option>
+<option value="vegetarian">Vegetarian</option>
+</select>
+<select class="filter-box" id="cuisineFilter" onchange="filterRecipes()">
+<option value="all">🌍 All Cuisine</option>
+<option value="rajasthan">Rajasthan Cuisine</option>
+</select>
+</div>
+<div class="explorer-buttons">
+<button class="explorer-btn random" onclick="surpriseMe()">
+🎲 Surprise Me
+</button>
+<button class="explorer-btn" onclick="resetFilters()">
+↻ Show All Recipes
+</button>
+</div>
+<p class="search-result" id="searchResult">Showing all 4 Rajasthan recipes</p>
+</div>
+</section>
+<!-- ================= POPULAR RECIPES ================= -->
+<section class="popular-section">
+<h2 class="popular-title">🔥 Popular Rajasthan Recipes</h2>
+<div class="popular-container">
+<div class="popular-card">
+<h3>🥘 Dal Baati Churma</h3>
+<p>Rajasthan’s iconic combination of dal, baked baati, and sweet churma.</p>
+</div>
+<div class="popular-card">
+<h3>🥣 Gatte Ki Sabzi</h3>
+<p>Soft gram-flour dumplings cooked in a rich spiced gravy.</p>
+</div>
+<div class="popular-card">
+<h3>🍖 Laal Maas</h3>
+<p>A traditional spicy meat curry from Rajasthan.</p>
+</div>
+<div class="popular-card">
+<h3>🍯 Ghevar</h3>
+<p>A festive Rajasthani sweet with a delicate honeycomb texture.</p>
+</div>
+</div>
+</section>
+<!-- =====================================================
+     DAL BAATI CHURMA
+===================================================== -->
+<section class="recipe-section" data-category="main" data-cuisine="rajasthan" data-name="Dal Baati Churma" id="rajasthan-dal-baati-churma">
+<div class="recipe-image">
+<img alt="dal baati churuma" src="Dal Baati Churma.png"/>
+</div>
+<div class="recipe-content"><h2>🥘 Dal Baati Churma</h2><p>Dal Baati Churma is one of Rajasthan's most famous traditional dishes. It combines baked wheat baati, flavorful lentil dal, and sweet churma made from crushed baati, ghee, and sugar or jaggery. Traditionally served with generous amounts of ghee, this hearty meal is closely associated with Rajasthani celebrations and royal hospitality.</p><h3>🥘 Ingredients</h3><ul><li>2 cups Wheat Flour</li><li>1 cup Mixed Dal (Toor, Moong &amp; Chana Dal)</li><li>½ cup Semolina</li><li>4 tbsp Ghee</li><li>1 Onion (chopped)</li><li>2 Tomatoes (chopped)</li><li>2 Green Chilies</li><li>Ginger-Garlic Paste</li><li>Turmeric Powder</li><li>Red Chilli Powder</li><li>Coriander Powder</li><li>Garam Masala</li><li>Cumin Seeds</li><li>Salt to Taste</li><li>Sugar or Jaggery for Churma</li></ul><h3>👩‍🍳 Preparation</h3><ol><li>Mix wheat flour, semolina, ghee and salt with water to make a firm dough.</li><li>Shape the dough into round baatis and bake them until golden and cooked through.</li><li>Wash and cook the mixed dals until soft.</li><li>Heat ghee, add cumin, onion, ginger-garlic, tomatoes and spices, then add the cooked dal and simmer.</li><li>For churma, crush a few cooked baatis and mix with ghee and sugar or jaggery.</li><li>Serve hot dal with baati and churma, topped with ghee.</li></ol><div class="recipe-info"><div><h4>⏱ Cooking Time</h4><p>1 Hour 15 Minutes</p></div><div><h4>🍽 Serves</h4><p>4 People</p></div><div><h4>⭐ Difficulty</h4><p>Medium</p></div></div><div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Bake the baatis until evenly golden and serve them warm with plenty of ghee for the traditional texture and flavor.</p></div><div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Dal Baati Churma is one of Rajasthan’s best-known traditional meals and is commonly prepared for festivals, weddings, and special occasions.</p></div><div class="rating-area"><h3>⭐ Rate This Recipe</h3><div class="stars" data-recipe="rajasthan-dal-baati-churma"><span class="star" onclick="rateRecipe('rajasthan-dal-baati-churma',1,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-dal-baati-churma',2,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-dal-baati-churma',3,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-dal-baati-churma',4,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-dal-baati-churma',5,this)">★</span></div><p class="rating-message" id="rating-rajasthan-dal-baati-churma">Choose your rating</p></div><div class="review-box"><h3>💬 Reviews &amp; Comments</h3><textarea class="review-input" id="review-text-rajasthan-dal-baati-churma" placeholder="Write your review..."></textarea><button class="review-submit" onclick="submitReview('rajasthan-dal-baati-churma','Dal Baati Churma')">Post Review</button><div class="reviews-list" id="reviews-rajasthan-dal-baati-churma"></div></div></div>
+<!-- BUTTONS -->
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="rajasthan-dal-baati-churma" onclick="addToFavourite('rajasthan-dal-baati-churma','Dal Baati Churma','Royal Heritage',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="rajasthan-dal-baati-churma" onclick="addToStamp('rajasthan-dal-baati-churma','Dal Baati Churma','Royal Heritage',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+<!-- =====================================================
+     GATTE KI SABZI
+===================================================== -->
+<section class="recipe-section reverse" data-category="vegetarian" data-cuisine="rajasthan" data-name="Gatte Ki Sabzi" id="rajasthan-gatte-ki-sabzi">
+<div class="recipe-image">
+<img alt="Gatte Ki Sabzi" src="gaati ki saabze.png"/>
+</div>
+<div class="recipe-content"><h2>🥣 Gatte Ki Sabzi</h2><p>Gatte Ki Sabzi is a classic Rajasthani vegetarian dish made with gram-flour dumplings cooked in a spiced yogurt-based gravy. The soft gatte absorb the rich gravy, creating a comforting dish that is often served with roti, bajra roti, or steamed rice. It is a popular example of Rajasthan's creative use of pantry-friendly ingredients.</p><h3>🥘 Ingredients</h3><ul><li>1½ cups Gram Flour (Besan)</li><li>½ cup Yogurt</li><li>1 Onion (finely chopped)</li><li>1 Tomato (chopped)</li><li>2 Green Chilies</li><li>Ginger-Garlic Paste</li><li>Turmeric Powder</li><li>Red Chilli Powder</li><li>Coriander Powder</li><li>Garam Masala</li><li>Cumin Seeds</li><li>Carom Seeds (Ajwain)</li><li>2 tbsp Oil</li><li>Salt to Taste</li><li>Fresh Coriander Leaves</li></ul><h3>👩‍🍳 Preparation</h3><ol><li>Mix gram flour with spices, carom seeds, oil, salt and a little yogurt to form a firm dough.</li><li>Roll the dough into long cylinders and boil them until cooked.</li><li>Cool the cylinders and cut them into bite-sized gatte.</li><li>Heat oil, add cumin, onion, ginger-garlic and tomato, then cook with the spices.</li><li>Lower the heat and add whisked yogurt gradually while stirring continuously.</li><li>Add the gatte and simmer gently so they absorb the gravy.</li><li>Garnish with coriander and serve hot with roti or rice.</li></ol><div class="recipe-info"><div><h4>⏱ Cooking Time</h4><p>45 Minutes</p></div><div><h4>🍽 Serves</h4><p>4 People</p></div><div><h4>⭐ Difficulty</h4><p>Easy</p></div></div><div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Keep the yogurt at room temperature and add it on low heat while stirring continuously to keep the gravy smooth.</p></div><div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Gatte Ki Sabzi is especially popular in Rajasthan because gram flour and other shelf-stable ingredients are easy to store and use in the region’s dry climate.</p></div><div class="rating-area"><h3>⭐ Rate This Recipe</h3><div class="stars" data-recipe="rajasthan-gatte-ki-sabzi"><span class="star" onclick="rateRecipe('rajasthan-gatte-ki-sabzi',1,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-gatte-ki-sabzi',2,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-gatte-ki-sabzi',3,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-gatte-ki-sabzi',4,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-gatte-ki-sabzi',5,this)">★</span></div><p class="rating-message" id="rating-rajasthan-gatte-ki-sabzi">Choose your rating</p></div><div class="review-box"><h3>💬 Reviews &amp; Comments</h3><textarea class="review-input" id="review-text-rajasthan-gatte-ki-sabzi" placeholder="Write your review..."></textarea><button class="review-submit" onclick="submitReview('rajasthan-gatte-ki-sabzi','Gatte Ki Sabzi')">Post Review</button><div class="reviews-list" id="reviews-rajasthan-gatte-ki-sabzi"></div></div></div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="rajasthan-gatte-ki-sabzi" onclick="addToFavourite('rajasthan-gatte-ki-sabzi','Gatte Ki Sabzi','Royal Heritage',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="rajasthan-gatte-ki-sabzi" onclick="addToStamp('rajasthan-gatte-ki-sabzi','Gatte Ki Sabzi','Royal Heritage',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+<!-- =====================================================
+     LAAL MAAS
+===================================================== -->
+<section class="recipe-section" data-category="nonveg" data-cuisine="rajasthan" data-name="Laal Maas" id="rajasthan-laal-maas">
+<div class="recipe-image">
+<img alt="Laal Maas" src="laal maas.png"/>
+</div>
+<div class="recipe-content"><h2>🍖 Laal Maas</h2><p>Laal Maas is a famous Rajasthani meat curry known for its deep red colour and bold, spicy flavor. Traditionally prepared with mutton, dried red chillies, yogurt, garlic, and aromatic spices, it is associated with the royal kitchens of Rajasthan. It is usually enjoyed with bajra roti, wheat roti, or rice.</p><h3>🥘 Ingredients</h3><ul><li>500 g Mutton</li><li>8–10 Dried Red Chillies</li><li>1 cup Yogurt</li><li>2 Onions (sliced)</li><li>1 tbsp Ginger-Garlic Paste</li><li>1 tsp Coriander Powder</li><li>½ tsp Turmeric Powder</li><li>1 tsp Cumin Seeds</li><li>4 Cloves</li><li>2 Cardamom Pods</li><li>1 Cinnamon Stick</li><li>3 tbsp Ghee or Oil</li><li>Salt to Taste</li><li>Fresh Coriander Leaves</li></ul><h3>👩‍🍳 Preparation</h3><ol><li>Soak dried red chillies in warm water and grind them into a smooth paste.</li><li>Heat ghee or oil and add cumin, cloves, cardamom and cinnamon.</li><li>Add onions and cook until golden, then add ginger-garlic paste.</li><li>Add mutton, turmeric, coriander powder and salt. Sauté well.</li><li>Add the red chilli paste and yogurt gradually while stirring.</li><li>Cover and cook until the mutton becomes tender, adding water as needed.</li><li>Simmer until the gravy becomes rich and glossy.</li><li>Garnish with coriander and serve hot.</li></ol><div class="recipe-info"><div><h4>⏱ Cooking Time</h4><p>1 Hour 10 Minutes</p></div><div><h4>🍽 Serves</h4><p>4 People</p></div><div><h4>⭐ Difficulty</h4><p>Medium</p></div></div><div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Use good-quality dried red chillies for colour and aroma, and cook the mutton slowly so it becomes tender and absorbs the spices.</p></div><div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Laal Maas is strongly associated with Rajasthan’s royal culinary traditions and is known for its distinctive red colour and bold chilli flavor.</p></div><div class="rating-area"><h3>⭐ Rate This Recipe</h3><div class="stars" data-recipe="rajasthan-laal-maas"><span class="star" onclick="rateRecipe('rajasthan-laal-maas',1,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-laal-maas',2,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-laal-maas',3,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-laal-maas',4,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-laal-maas',5,this)">★</span></div><p class="rating-message" id="rating-rajasthan-laal-maas">Choose your rating</p></div><div class="review-box"><h3>💬 Reviews &amp; Comments</h3><textarea class="review-input" id="review-text-rajasthan-laal-maas" placeholder="Write your review..."></textarea><button class="review-submit" onclick="submitReview('rajasthan-laal-maas','Laal Maas')">Post Review</button><div class="reviews-list" id="reviews-rajasthan-laal-maas"></div></div></div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="rajasthan-laal-maas" onclick="addToFavourite('rajasthan-laal-maas','Laal Maas','Royal Heritage',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="rajasthan-laal-maas" onclick="addToStamp('rajasthan-laal-maas','Laal Maas','Royal Heritage',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+<!-- =====================================================
+     GHEVAR
+===================================================== -->
+<section class="recipe-section reverse" data-category="dessert" data-cuisine="rajasthan" data-name="Ghevar" id="rajasthan-ghevar">
+<div class="recipe-image">
+<img alt="Ghevar" src="ghewar.png"/>
+</div>
+<div class="recipe-content"><h2>🍯 Ghevar</h2><p>Ghevar is a famous Rajasthani festive sweet with a delicate honeycomb-like texture. It is made from a thin batter that is poured into hot ghee or oil to form a lacy round sweet. Ghevar is often soaked or topped with sugar syrup, rabri, nuts, or saffron and is especially popular during Teej, Raksha Bandhan, and other celebrations.</p><h3>🥘 Ingredients</h3><ul><li>1 cup All-Purpose Flour</li><li>2 tbsp Ghee</li><li>2 cups Chilled Water</li><li>½ cup Milk</li><li>1 cup Sugar</li><li>Saffron Strands</li><li>Cardamom Powder</li><li>Ghee or Oil for Frying</li><li>Chopped Almonds</li><li>Chopped Pistachios</li><li>Rabri (optional)</li></ul><h3>👩‍🍳 Preparation</h3><ol><li>Whisk ghee until light and creamy, then gradually mix in chilled water and milk.</li><li>Add flour little by little to make a smooth, thin batter without lumps.</li><li>Heat ghee or oil in a deep round pan.</li><li>Pour the batter slowly in the centre from a height to create the honeycomb pattern.</li><li>Repeat the pouring carefully until the ghevar reaches the desired thickness.</li><li>Cook until crisp and golden, then remove and drain.</li><li>Prepare sugar syrup and drizzle it over the ghevar.</li><li>Garnish with saffron, nuts and rabri if desired.</li></ol><div class="recipe-info"><div><h4>⏱ Cooking Time</h4><p>50 Minutes</p></div><div><h4>🍽 Serves</h4><p>6 People</p></div><div><h4>⭐ Difficulty</h4><p>Medium</p></div></div><div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Keep the batter thin and chilled, and pour it slowly into hot fat from a little height to create the characteristic lacy texture.</p></div><div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Ghevar is a signature Rajasthani festival sweet and is especially associated with Teej and Raksha Bandhan celebrations.</p></div><div class="rating-area"><h3>⭐ Rate This Recipe</h3><div class="stars" data-recipe="rajasthan-ghevar"><span class="star" onclick="rateRecipe('rajasthan-ghevar',1,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-ghevar',2,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-ghevar',3,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-ghevar',4,this)">★</span><span class="star" onclick="rateRecipe('rajasthan-ghevar',5,this)">★</span></div><p class="rating-message" id="rating-rajasthan-ghevar">Choose your rating</p></div><div class="review-box"><h3>💬 Reviews &amp; Comments</h3><textarea class="review-input" id="review-text-rajasthan-ghevar" placeholder="Write your review..."></textarea><button class="review-submit" onclick="submitReview('rajasthan-ghevar','Ghevar')">Post Review</button><div class="reviews-list" id="reviews-rajasthan-ghevar"></div></div></div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="rajasthan-ghevar" onclick="addToFavourite('rajasthan-ghevar','Ghevar','Royal Heritage',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="rajasthan-ghevar" onclick="addToStamp('rajasthan-ghevar','Ghevar','Royal Heritage',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+<!-- ================= RAJASTHAN FOOD FACTS ================= -->
+<section class="facts-section">
+<h2>🏰 Rajasthan Food Facts</h2>
+<div class="facts-container">
+<div class="fact-card">
+<h3>🌾 Desert Cuisine</h3>
+<p>Rajasthan cuisine developed with ingredients that can be stored for longer periods, including wheat, millet, gram flour, lentils, and dried vegetables.</p>
+</div>
+<div class="fact-card">
+<h3>🌶️ Bold Spices</h3>
+<p>Cumin, coriander, chilli, turmeric, cloves, cardamom and other spices give many Rajasthani dishes their distinctive aroma and flavour.</p>
+</div>
+<div class="fact-card">
+<h3>🥘 Dal Baati Churma</h3>
+<p>Dal Baati Churma is a celebrated traditional combination of lentils, baked baati and sweet churma, often enjoyed during special occasions.</p>
+</div>
+<div class="fact-card">
+<h3>🥬 Ker Sangri</h3>
+<p>Ker Sangri is a traditional Rajasthani preparation made with dried berries and beans and is an important example of desert-region cooking.</p>
+</div>
+<div class="fact-card">
+<h3>🍯 Festive Sweets</h3>
+<p>Ghevar, Mawa Kachori and other sweets are popular during festivals, weddings and family celebrations across Rajasthan.</p>
+</div>
+</div>
+</section>
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+<h2>🕐 Recently Viewed</h2>
+<div class="recent-container" id="recentContainer">
+<p class="recent-empty">
+Login to see your recently viewed recipes.
+</p>
+</div>
+</section>
+<!-- ================= MY FLAVORVERSE PROFILE ================= -->
+<section class="profile-section">
+<div class="profile-box">
+<h2>👤 My Flavorverse Profile</h2>
+<p class="profile-name" id="profileName">
+Guest
+</p>
+<p class="profile-email" id="profileEmail">
+Login to see your profile
+</p>
+<div class="profile-stats">
+<div class="profile-card">
+<span class="count" id="favouriteCount">
+0
+</span>
+<span>❤️ Favourites</span>
+</div>
+<div class="profile-card">
+<span class="count" id="stampCount">
+0
+</span>
+<span>🏷️ Stamps</span>
+</div>
+<div class="profile-card">
+<span class="count" id="ratingCount">
+0
+</span>
+<span>⭐ Ratings</span>
+</div>
+<div class="profile-card">
+<span class="count" id="reviewCount">
+0
+</span>
+<span>💬 Reviews</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= CHEF RECOMMENDATION ================= -->
+<section class="chef-section">
+<h2>👨‍🍳 Chef's Recommendation</h2>
+<p>For a complete Rajasthan dining experience, begin with hearty Dal Baati Churma, enjoy the comforting Gatte Ki Sabzi, taste the bold Laal Maas, and finish your meal with festive Ghevar. This combination showcases the rich flavors, traditional ingredients, and royal culinary heritage of Rajasthan.</p>
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+<!-- ================= FOOTER ================= -->
+<footer>
+<h2>🍴 The Flavorverse</h2>
+<p>
+
+Discover India's rich culinary heritage, one delicious recipe at a time.
+
+</p>
+<div class="social">
+<a href="#">📘</a>
+<a href="#">📸</a>
+<a href="#">▶️</a>
+<a href="#">🐦</a>
+</div>
+<p class="copy">
+
+© 2026 The Flavorverse | All Rights Reserved
+
+</p>
+</footer>
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+authDomain: "the-flavoverse.firebaseapp.com",
+projectId: "the-flavoverse",
+storageBucket: "the-flavoverse.firebasestorage.app",
+messagingSenderId: "1064022248292",
+appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+};
+
+if(!firebase.apps.length){
+firebase.initializeApp(firebaseConfig);
+}
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+
+/* =====================================================
+   EXPLORE SLIDE MENU
+===================================================== */
+
+function openMenu(){
+document.getElementById("menuOverlay").classList.add("open");
+document.getElementById("sideMenu").classList.add("open");
+document.body.classList.add("menu-lock");
+}
+
+function closeMenu(){
+document.getElementById("menuOverlay").classList.remove("open");
+document.getElementById("sideMenu").classList.remove("open");
+document.body.classList.remove("menu-lock");
+}
+
+document.addEventListener("keydown",function(e){
+if(e.key==="Escape") closeMenu();
+});
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipes = [
+{id:"rajasthan-dal-baati-churma",name:"Dal Baati Churma",category:"main",cuisine:"rajasthan"},
+{id:"rajasthan-gatte-ki-sabzi",name:"Gatte Ki Sabzi",category:"vegetarian",cuisine:"rajasthan"},
+{id:"rajasthan-laal-maas",name:"Laal Maas",category:"nonveg",cuisine:"rajasthan"},
+{id:"rajasthan-ghevar",name:"Ghevar",category:"dessert",cuisine:"rajasthan"}
+];
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function getCurrentUser(){
+return auth.currentUser;
+}
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function addToFavourite(id,name,category,button){
+
+const user = getCurrentUser();
+
+if(!user){
+alert("Please login first to add favourites ❤️");
+window.location.href="login.html";
+return;
+}
+
+try{
+
+const ref = db.collection("users").doc(user.uid).collection("favourites").doc(id);
+const existing = await ref.get();
+
+if(existing.exists){
+await ref.delete();
+button.innerHTML="♡ Add to Favourite";
+alert(name+" removed from favourites.");
+}
+else{
+await ref.set({
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+button.innerHTML="♥ Added to Favourite";
+alert(name+" added to favourites ❤️");
+}
+
+updateProfileCounts();
+
+}
+catch(error){
+console.error(error);
+alert("Favourite update failed: "+error.message);
+}
+
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function addToStamp(id,name,category,button){
+
+const user=getCurrentUser();
+
+if(!user){
+alert("Please login first to add stamps 🏷️");
+window.location.href="login.html";
+return;
+}
+
+try{
+
+const ref = db.collection("users").doc(user.uid).collection("stamps").doc(id);
+const existing=await ref.get();
+
+if(existing.exists){
+await ref.delete();
+button.innerHTML="🏷️ Add to Stamp";
+alert(name+" removed from passport.");
+}
+else{
+await ref.set({
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+button.innerHTML="🏷️ Stamped";
+alert(name+" added to your Flavorverse Passport 🏷️");
+}
+
+updateProfileCounts();
+
+}
+catch(error){
+console.error(error);
+alert("Stamp update failed: "+error.message);
+}
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function rateRecipe(recipeId,rating,element){
+
+const user=getCurrentUser();
+
+if(!user){
+alert("Please login first to rate recipes ⭐");
+window.location.href="login.html";
+return;
+}
+
+try{
+
+await db.collection("users").doc(user.uid).collection("ratings").doc(recipeId).set({
+recipeId:recipeId,
+rating:rating,
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+
+const stars=element.parentElement.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+if(index<rating){
+star.classList.add("active");
+}
+else{
+star.classList.remove("active");
+}
+});
+
+document.getElementById("rating-"+recipeId).innerText =
+"You rated this recipe "+rating+"/5 ⭐";
+
+updateProfileCounts();
+
+}
+catch(error){
+console.error(error);
+alert("Rating failed: "+error.message);
+}
+
+}
+
+
+/* =====================================================
+   LOAD USER RATINGS
+===================================================== */
+
+async function loadRatings(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const doc=await db.collection("users").doc(user.uid).collection("ratings").doc(recipe.id).get();
+
+if(doc.exists){
+
+const rating=doc.data().rating;
+
+const container=document.querySelector('.stars[data-recipe="'+recipe.id+'"]');
+
+if(container){
+const stars=container.querySelectorAll(".star");
+stars.forEach((star,index)=>{
+if(index<rating){
+star.classList.add("active");
+}
+});
+}
+
+const text=document.getElementById("rating-"+recipe.id);
+
+if(text){
+text.innerText="You rated this recipe "+rating+"/5 ⭐";
+}
+
+}
+
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+async function submitReview(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user){
+alert("Please login first to post a review 💬");
+window.location.href="login.html";
+return;
+}
+
+const textarea=document.getElementById("review-text-"+recipeId);
+const text=textarea.value.trim();
+
+if(!text){
+alert("Please write a review first.");
+return;
+}
+
+try{
+
+const userDoc=await db.collection("users").doc(user.uid).get();
+
+let userName="Flavorverse User";
+
+if(userDoc.exists && userDoc.data().name){
+userName=userDoc.data().name;
+}
+
+await db.collection("recipes").doc(recipeId).collection("reviews").doc(user.uid).set({
+recipeId:recipeId,
+recipeName:recipeName,
+userId:user.uid,
+userName:userName,
+review:text,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+
+textarea.value="";
+
+alert("Review posted successfully! 💬");
+
+loadReviews(recipeId);
+
+updateProfileCounts();
+
+}
+catch(error){
+console.error(error);
+alert("Review failed: "+error.message);
+}
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(recipeId){
+
+const container=document.getElementById("reviews-"+recipeId);
+
+if(!container) return;
+
+try{
+
+const snapshot=await db.collection("recipes").doc(recipeId).collection("reviews")
+.orderBy("createdAt","desc").limit(10).get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+container.innerHTML='<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+return;
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const review=document.createElement("div");
+review.className="single-review";
+
+const name=document.createElement("strong");
+name.textContent="💜 "+(data.userName || "Flavorverse User");
+
+const content=document.createElement("p");
+content.textContent=data.review || "";
+
+const date=document.createElement("small");
+if(data.createdAt){
+date.textContent=data.createdAt.toDate().toLocaleDateString();
+}
+
+review.appendChild(name);
+review.appendChild(content);
+review.appendChild(date);
+container.appendChild(review);
+
+});
+
+}
+catch(error){
+console.error(error);
+container.innerHTML='<p class="no-review">Reviews will appear here.</p>';
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED
+===================================================== */
+
+async function addRecentlyViewed(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+try{
+await db.collection("users").doc(user.uid).collection("recentlyViewed").doc(recipeId).set({
+recipeId:recipeId,
+recipeName:recipeName,
+viewedAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED DISPLAY
+===================================================== */
+
+async function loadRecentlyViewed(){
+
+const container=document.getElementById("recentContainer");
+
+const user=getCurrentUser();
+
+if(!user){
+container.innerHTML='<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+return;
+}
+
+try{
+
+const snapshot=await db.collection("users").doc(user.uid).collection("recentlyViewed")
+.orderBy("viewedAt","desc").limit(8).get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+container.innerHTML='<p class="recent-empty">No recently viewed recipes yet.</p>';
+return;
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const card=document.createElement("div");
+card.className="recent-card";
+
+const title=document.createElement("h3");
+title.textContent="🕐 "+data.recipeName;
+
+const text=document.createElement("p");
+text.textContent="You recently explored this recipe.";
+
+card.appendChild(title);
+card.appendChild(text);
+container.appendChild(card);
+
+});
+
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+
+/* =====================================================
+   TRACK RECIPE VIEW
+===================================================== */
+
+function setupRecentlyViewed(){
+
+const recipeSections=document.querySelectorAll(".recipe-section");
+
+const observer=new IntersectionObserver(
+
+entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const id=entry.target.id;
+const recipe=recipes.find(item=>item.id===id);
+
+if(recipe){
+addRecentlyViewed(recipe.id,recipe.name);
+}
+
+}
+
+});
+
+},
+
+{threshold:0.35}
+
+);
+
+recipeSections.forEach(section=>{
+observer.observe(section);
+});
+
+}
+
+
+/* =====================================================
+   PROFILE COUNTS
+===================================================== */
+
+async function updateProfileCounts(){
+
+const user=getCurrentUser();
+
+if(!user){
+document.getElementById("favouriteCount").innerText="0";
+document.getElementById("stampCount").innerText="0";
+document.getElementById("ratingCount").innerText="0";
+document.getElementById("reviewCount").innerText="0";
+return;
+}
+
+try{
+
+const userDoc=await db.collection("users").doc(user.uid).get();
+
+if(userDoc.exists){
+const data=userDoc.data();
+document.getElementById("profileName").innerText=data.name || "Flavorverse User";
+document.getElementById("profileEmail").innerText=data.email || user.email;
+}
+else{
+document.getElementById("profileName").innerText=user.email;
+document.getElementById("profileEmail").innerText=user.email;
+}
+
+const favourites=await db.collection("users").doc(user.uid).collection("favourites").get();
+const stamps=await db.collection("users").doc(user.uid).collection("stamps").get();
+const ratings=await db.collection("users").doc(user.uid).collection("ratings").get();
+
+/* Reviews are stored inside recipes/{recipeId}/reviews/{uid} */
+
+let reviewTotal=0;
+
+for(const recipe of recipes){
+
+const review=await db.collection("recipes").doc(recipe.id).collection("reviews").doc(user.uid).get();
+
+if(review.exists){
+reviewTotal++;
+}
+
+}
+
+document.getElementById("favouriteCount").innerText=favourites.size;
+document.getElementById("stampCount").innerText=stamps.size;
+document.getElementById("ratingCount").innerText=ratings.size;
+document.getElementById("reviewCount").innerText=reviewTotal;
+
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+
+/* =====================================================
+   UPDATE BUTTON STATUS
+===================================================== */
+
+async function updateButtons(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const fav=await db.collection("users").doc(user.uid).collection("favourites").doc(recipe.id).get();
+const favButton=document.querySelector('[data-favourite-id="'+recipe.id+'"]');
+
+if(fav.exists && favButton){
+favButton.innerHTML="♥ Added to Favourite";
+}
+
+const stamp=await db.collection("users").doc(user.uid).collection("stamps").doc(recipe.id).get();
+const stampButton=document.querySelector('[data-stamp-id="'+recipe.id+'"]');
+
+if(stamp.exists && stampButton){
+stampButton.innerHTML="🏷️ Stamped";
+}
+
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+}
+
+
+/* =====================================================
+   SEARCH + FILTER
+===================================================== */
+
+function filterRecipes(){
+
+const search=document.getElementById("recipeSearch").value.toLowerCase().trim();
+const category=document.getElementById("categoryFilter").value;
+const cuisine=document.getElementById("cuisineFilter").value;
+
+let count=0;
+
+document.querySelectorAll(".recipe-section").forEach(section=>{
+
+const name=section.dataset.name.toLowerCase();
+const sectionCategory=section.dataset.category;
+const sectionCuisine=section.dataset.cuisine;
+
+const searchMatch=name.includes(search);
+const categoryMatch=category==="all" || sectionCategory===category;
+const cuisineMatch=cuisine==="all" || sectionCuisine===cuisine;
+
+if(searchMatch && categoryMatch && cuisineMatch){
+section.classList.remove("hidden-recipe");
+count++;
+}
+else{
+section.classList.add("hidden-recipe");
+}
+
+});
+
+document.getElementById("searchResult").innerText=
+"Showing "+count+" recipe"+(count!==1?"s":"");
+
+}
+
+
+/* =====================================================
+   RESET FILTER
+===================================================== */
+
+function resetFilters(){
+
+document.getElementById("recipeSearch").value="";
+document.getElementById("categoryFilter").value="all";
+document.getElementById("cuisineFilter").value="all";
+
+document.querySelectorAll(".recipe-section").forEach(section=>{
+section.classList.remove("hidden-recipe");
+});
+
+document.getElementById("searchResult").innerText="Showing all 4 Rajasthan recipes";
+
+}
+
+
+/* =====================================================
+   SURPRISE ME
+===================================================== */
+
+function surpriseMe(){
+
+const visibleRecipes=Array.from(document.querySelectorAll(".recipe-section"))
+.filter(recipe=>!recipe.classList.contains("hidden-recipe"));
+
+if(visibleRecipes.length===0){
+alert("No recipes available with the selected filter.");
+return;
+}
+
+const random=visibleRecipes[Math.floor(Math.random()*visibleRecipes.length)];
+
+random.scrollIntoView({behavior:"smooth",block:"center"});
+
+random.style.boxShadow="0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+
+setTimeout(()=>{
+random.style.boxShadow="0 8px 20px rgba(0,0,0,.12)";
+},2500);
+
+alert("🎲 Surprise Recipe: "+random.dataset.name);
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+if(document.body.classList.contains("dark-mode")){
+localStorage.setItem("flavorverseDarkMode","on");
+}
+else{
+localStorage.setItem("flavorverseDarkMode","off");
+}
+
+}
+
+function loadDarkMode(){
+if(localStorage.getItem("flavorverseDarkMode")==="on"){
+document.body.classList.add("dark-mode");
+}
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(async function(user){
+
+if(user){
+
+try{
+
+const userDoc=await db.collection("users").doc(user.uid).get();
+
+if(userDoc.exists){
+const data=userDoc.data();
+document.getElementById("profileName").innerText=data.name || "Flavorverse User";
+document.getElementById("profileEmail").innerText=data.email || user.email;
+}
+else{
+document.getElementById("profileName").innerText=user.email;
+document.getElementById("profileEmail").innerText=user.email;
+}
+
+}
+catch(error){
+console.error(error);
+}
+
+updateButtons();
+updateProfileCounts();
+loadRatings();
+loadRecentlyViewed();
+
+recipes.forEach(recipe=>{
+loadReviews(recipe.id);
+});
+
+}
+else{
+
+document.getElementById("profileName").innerText="Guest";
+document.getElementById("profileEmail").innerText="Login to see your profile";
+
+loadRecentlyViewed();
+
+}
+
+});
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+loadDarkMode();
+setupRecentlyViewed();
+});
+
+</script>
+</body>
+</html>

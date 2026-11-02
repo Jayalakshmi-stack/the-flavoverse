@@ -1,0 +1,4143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Lion King Recipes | The Flavorverse</title>
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:#eadbea;
+    color:#5d4b5f;
+    overflow-x:hidden;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+header{
+    width:100%;
+    padding:15px 7%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:#684c6b;
+
+    border-bottom:2px solid #d6b979;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:#f5dda2;
+    font-size:23px;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-toggle{
+
+    width:42px;
+    height:36px;
+
+    border:1px solid #d6b979;
+    border-radius:8px;
+
+    background:#684c6b;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    gap:5px;
+
+    cursor:pointer;
+}
+
+.menu-toggle span{
+
+    width:20px;
+    height:2px;
+
+    background:#f5dda2;
+
+    display:block;
+
+    border-radius:5px;
+}
+
+
+/* =====================================================
+   MENU OVERLAY
+===================================================== */
+
+.menu-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(40,25,45,.55);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:1998;
+}
+
+.menu-overlay.show{
+
+    opacity:1;
+    visibility:visible;
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu{
+    position:fixed;
+    top:0;
+    right:-365px;
+    width:350px;
+    max-width:88vw;
+    height:100vh;
+    background:#fff8ef;
+    z-index:1999;
+    box-shadow:-12px 0 30px rgba(40,25,45,.20);
+    transition:.35s ease;
+    overflow-y:auto;
+}
+
+.side-menu.show{
+    right:0;
+}
+
+/* MENU HEADER */
+.menu-top{
+    position:sticky;
+    top:0;
+    z-index:2;
+    background:#9b7b9c;
+    min-height:92px;
+    padding:22px 24px 20px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.menu-top h2{
+    color:#fff8ef;
+    font-size:27px;
+    font-weight:700;
+    margin:0;
+}
+
+.menu-close{
+    border:none;
+    background:none;
+    color:white;
+    font-size:29px;
+    cursor:pointer;
+    line-height:1;
+    padding:0;
+}
+
+/* MENU LINKS */
+.menu-links{
+    padding:14px 22px 25px;
+}
+
+.menu-link{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    min-height:62px;
+    padding:8px 10px;
+    text-decoration:none;
+    color:#684c6b;
+    transition:.25s;
+    border-radius:11px;
+}
+
+.menu-link:hover{
+    background:#f0e1ed;
+}
+
+.menu-icon{
+    width:32px;
+    flex:0 0 32px;
+    text-align:center;
+    font-size:22px;
+}
+
+.menu-text{
+    min-width:0;
+}
+
+.menu-text strong{
+    display:block;
+    font-size:15px;
+    line-height:1.25;
+    margin-bottom:2px;
+    color:#684c6b;
+}
+
+.menu-text small{
+    display:block;
+    color:#8b7189;
+    font-size:11px;
+    line-height:1.3;
+}
+
+.menu-divider{
+    height:1px;
+    background:#e3d0d9;
+    margin:8px 0 7px;
+}
+
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+
+.hero-section{
+
+    min-height:470px;
+
+    padding:55px 7%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#eadbea;
+}
+
+
+/* =====================================================
+   HERO CARD
+===================================================== */
+
+.hero-card{
+
+    width:100%;
+
+    max-width:1050px;
+
+    min-height:350px;
+
+    padding:40px 55px;
+
+    border-radius:32px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:40px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(221,159,61,0.28),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(255,255,255,0.75),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fff8ec,
+            #f5e7d4,
+            #f1dfc1,
+            #fff4e4
+        );
+
+    border:2px solid #d6b979;
+
+    box-shadow:
+        0 25px 55px
+        rgba(104,76,107,0.22);
+
+    animation:
+        heroCardGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes heroCardGlow{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    100%{
+        background-position:100% 50%;
+    }
+}
+
+
+/* =====================================================
+   HERO MOVING LIGHT
+===================================================== */
+
+.hero-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+        rgba(221,159,61,0.22);
+
+    filter:blur(25px);
+
+    top:-80px;
+    left:-60px;
+
+    animation:
+        heroLight 6s infinite alternate;
+}
+
+.hero-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+
+    background:
+        rgba(197,151,102,0.18);
+
+    filter:blur(25px);
+
+    right:-50px;
+    bottom:-50px;
+
+    animation:
+        heroLight 7s infinite alternate-reverse;
+}
+
+@keyframes heroLight{
+
+    from{
+        transform:
+            translate(0,0)
+            scale(1);
+    }
+
+    to{
+        transform:
+            translate(80px,40px)
+            scale(1.3);
+    }
+}
+
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
+
+.hero-content{
+
+    position:relative;
+
+    z-index:5;
+
+    max-width:560px;
+}
+
+.hero-small{
+
+    color:#b27628;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    font-weight:bold;
+
+    margin-bottom:14px;
+}
+
+.hero-content h1{
+
+    color:#684c6b;
+
+    font-size:46px;
+
+    line-height:1.15;
+
+    margin-bottom:15px;
+}
+
+.hero-content h1 span{
+
+    color:#b27628;
+}
+
+.hero-content p{
+
+    color:#745f72;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+    max-width:480px;
+
+    margin-bottom:22px;
+}
+
+
+/* =====================================================
+   HERO BUTTON
+===================================================== */
+
+.hero-btn{
+
+    display:inline-block;
+
+    padding:11px 23px;
+
+    border-radius:25px;
+
+    background:#684c6b;
+
+    color:#f5dda2;
+
+    border:1px solid #d6b979;
+
+    text-decoration:none;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+
+    transition:.4s;
+}
+
+.hero-btn:hover{
+
+    background:#d6b979;
+
+    color:#684c6b;
+
+    transform:translateY(-3px);
+}
+
+
+/* =====================================================
+   HERO IMAGE
+===================================================== */
+
+.hero-image{
+
+    width:300px;
+    height:300px;
+
+    position:relative;
+
+    z-index:5;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 18px 25px
+            rgba(104,76,107,0.25)
+        );
+
+    animation:
+        heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+
+/* =====================================================
+   HERO PARTICLES
+===================================================== */
+
+.hero-star{
+
+    position:absolute;
+
+    color:#c58a32;
+
+    font-size:20px;
+
+    opacity:.6;
+
+    animation:
+        starFloat 5s infinite ease-in-out;
+
+    z-index:4;
+}
+
+.hero-star.one{
+    top:15%;
+    left:8%;
+}
+
+.hero-star.two{
+    top:20%;
+    right:42%;
+
+    animation-delay:1s;
+}
+
+.hero-star.three{
+    bottom:15%;
+    left:45%;
+
+    animation-delay:2s;
+}
+
+.hero-star.four{
+    bottom:20%;
+    right:8%;
+
+    animation-delay:3s;
+}
+
+@keyframes starFloat{
+
+    0%{
+        transform:
+            translateY(0)
+            rotate(0);
+
+        opacity:.3;
+    }
+
+    50%{
+        transform:
+            translateY(-20px)
+            rotate(180deg);
+
+        opacity:.9;
+    }
+
+    100%{
+        transform:
+            translateY(0)
+            rotate(360deg);
+
+        opacity:.3;
+    }
+}
+
+
+/* =====================================================
+   RECIPE SECTION
+===================================================== */
+
+.recipes{
+
+    position:relative;
+
+    padding:90px 6% 110px;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(221,159,61,.25),
+            transparent 22%
+        ),
+
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(197,151,102,.20),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #76657b,
+            #88788d,
+            #9a8b9c,
+            #88788d,
+            #76657b
+        );
+
+    background-size:200% 200%;
+
+    animation:
+        magicalBackground 14s ease infinite;
+
+    overflow:hidden;
+}
+
+@keyframes magicalBackground{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+
+/* =====================================================
+   MAGIC PARTICLES
+===================================================== */
+
+.magic{
+
+    position:absolute;
+
+    color:#f2d18b;
+
+    font-size:21px;
+
+    opacity:.55;
+
+    animation:
+        floatMagic 7s infinite ease-in-out;
+
+    pointer-events:none;
+}
+
+.magic:nth-child(1){
+    top:8%;
+    left:8%;
+}
+
+.magic:nth-child(2){
+    top:20%;
+    right:10%;
+
+    animation-delay:2s;
+}
+
+.magic:nth-child(3){
+    top:50%;
+    left:3%;
+
+    animation-delay:1s;
+}
+
+.magic:nth-child(4){
+    top:72%;
+    right:5%;
+
+    animation-delay:3s;
+}
+
+.magic:nth-child(5){
+    top:35%;
+    left:48%;
+
+    animation-delay:2.5s;
+}
+
+.magic:nth-child(6){
+    bottom:8%;
+    left:20%;
+
+    animation-delay:4s;
+}
+
+@keyframes floatMagic{
+
+    0%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity:.25;
+    }
+
+    50%{
+        transform:
+            translateY(-35px)
+            rotate(180deg);
+
+        opacity:.85;
+    }
+
+    100%{
+        transform:
+            translateY(0)
+            rotate(360deg);
+
+        opacity:.25;
+    }
+}
+
+
+/* =====================================================
+   RECIPE HEADING
+===================================================== */
+
+.recipe-heading{
+
+    position:relative;
+
+    z-index:5;
+
+    text-align:center;
+
+    margin-bottom:70px;
+}
+
+.recipe-heading span{
+
+    color:#f2d18b;
+
+    font-size:11px;
+
+    letter-spacing:5px;
+
+    font-weight:bold;
+}
+
+.recipe-heading h1{
+
+    margin-top:15px;
+
+    color:#fff3df;
+
+    font-size:46px;
+}
+
+.recipe-heading p{
+
+    margin:15px auto 0;
+
+    max-width:600px;
+
+    color:#eadde8;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+
+/* =====================================================
+   CARD WRAPPER
+===================================================== */
+
+.recipe-wrapper{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:55px;
+
+    position:relative;
+
+    z-index:10;
+}
+
+
+/* =====================================================
+   3D FLIP CARD
+===================================================== */
+
+.recipe-card{
+
+    height:520px;
+
+    perspective:1200px;
+
+    position:relative;
+}
+
+.card-inner{
+
+    width:100%;
+    height:100%;
+
+    position:relative;
+
+    transform-style:preserve-3d;
+
+    transition:
+        transform .9s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+.recipe-card:hover .card-inner{
+
+    transform:
+        rotateY(180deg);
+}
+
+
+/* =====================================================
+   CARD SIDES
+===================================================== */
+
+.card-front,
+.card-back{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    border-radius:25px;
+
+    backface-visibility:hidden;
+
+    -webkit-backface-visibility:hidden;
+
+    overflow:hidden;
+
+    border:2px solid #d6b979;
+
+    box-shadow:
+        0 25px 50px
+        rgba(40,25,45,.38);
+}
+
+
+/* =====================================================
+   FRONT
+===================================================== */
+
+.card-front{
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f3e8d7,
+            #ead8bd,
+            #dfc29d
+        );
+
+    display:flex;
+
+    flex-direction:column;
+
+    transform:
+        rotateY(0deg);
+}
+
+
+/* =====================================================
+   CARD IMAGE
+===================================================== */
+
+.card-image{
+
+    height:58%;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#c49b61;
+}
+
+.card-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.8s;
+}
+
+.recipe-card:hover
+.card-image img{
+
+    transform:scale(1.08);
+}
+
+.card-image::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+            to top,
+            rgba(70,45,60,.48),
+            transparent 55%
+        );
+}
+
+
+/* =====================================================
+   CARD TAG
+===================================================== */
+
+.card-tag{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    padding:8px 14px;
+
+    background:#684c6b;
+
+    color:#f5dda2;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    font-weight:bold;
+
+    border-radius:20px;
+
+    z-index:5;
+}
+
+
+/* =====================================================
+   FRONT CONTENT
+===================================================== */
+
+.card-content{
+
+    flex:1;
+
+    padding:22px 27px;
+
+    position:relative;
+}
+
+.card-content small{
+
+    color:#b27628;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+}
+
+.card-content h2{
+
+    margin:8px 0;
+
+    color:#684c6b;
+
+    font-size:27px;
+}
+
+.card-content p{
+
+    color:#675568;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   CARD INFO
+===================================================== */
+
+.card-info{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-top:14px;
+}
+
+.card-info span{
+
+    padding:7px 12px;
+
+    border-radius:20px;
+
+    background:#ead9c0;
+
+    color:#684c6b;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   GOLD LINE
+===================================================== */
+
+.gold-line{
+
+    width:55px;
+
+    height:2px;
+
+    background:#b48a4c;
+
+    margin-top:13px;
+
+    transition:.5s;
+}
+
+.recipe-card:hover
+.gold-line{
+
+    width:120px;
+}
+
+
+/* =====================================================
+   STAR
+===================================================== */
+
+.front-star{
+
+    position:absolute;
+
+    right:22px;
+    bottom:20px;
+
+    color:#b27628;
+
+    font-size:22px;
+
+    animation:
+        starGlow 2s infinite alternate;
+}
+
+@keyframes starGlow{
+
+    from{
+        opacity:.4;
+        transform:scale(.9);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.2);
+    }
+}
+
+
+/* =====================================================
+   BACK CARD
+===================================================== */
+
+.card-back{
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #eadbc5,
+            #ddc4a0,
+            #cfad80
+        );
+
+    transform:
+        rotateY(180deg);
+
+    padding:30px;
+
+    color:#5d4b5f;
+}
+
+
+/* =====================================================
+   BACK INNER
+===================================================== */
+
+.back-inner{
+
+    height:100%;
+
+    border:
+        1px solid #b48a4c;
+
+    border-radius:17px;
+
+    padding:25px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.back-inner::before{
+
+    content:"☀";
+
+    position:absolute;
+
+    top:-25px;
+    right:20px;
+
+    font-size:100px;
+
+    color:
+        rgba(178,118,40,.10);
+}
+
+.back-inner h3{
+
+    color:#684c6b;
+
+    font-size:25px;
+
+    margin-bottom:15px;
+}
+
+.back-inner h4{
+
+    color:#a56d28;
+
+    margin-top:15px;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+}
+
+.back-inner ul,
+.back-inner ol{
+
+    padding-left:20px;
+}
+
+.back-inner li{
+
+    color:#5f5550;
+
+    font-size:11px;
+
+    line-height:1.5;
+
+    margin-bottom:5px;
+}
+
+
+/* =====================================================
+   FLIP HINT
+===================================================== */
+
+.flip-hint{
+
+    position:absolute;
+
+    bottom:20px;
+    right:25px;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#a56d28;
+}
+
+
+/* =====================================================
+   FEATURE AREA
+===================================================== */
+
+.recipe-feature-area{
+
+    margin-top:15px;
+
+    background:rgba(255,255,255,.94);
+
+    border:1px solid #c8a75d;
+
+    border-radius:20px;
+
+    padding:15px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(104,76,107,.12);
+
+    position:relative;
+
+    z-index:30;
+}
+
+.feature-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.feature-btn{
+
+    padding:10px 16px;
+
+    border:none;
+
+    border-radius:25px;
+
+    font-family:Georgia,serif;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.feature-btn:hover{
+
+    transform:translateY(-2px);
+}
+
+.favourite-btn{
+
+    background:#f1dce9;
+
+    color:#684c6b;
+}
+
+.stamp-btn{
+
+    background:#f3e6c9;
+
+    color:#684c6b;
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.rating-box{
+
+    text-align:center;
+
+    margin-top:12px;
+}
+
+.rating-stars{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:2px;
+}
+
+.rating-star{
+
+    border:none;
+
+    background:transparent;
+
+    font-size:23px;
+
+    cursor:pointer;
+
+    color:#d8cfc8;
+
+    padding:0 2px;
+
+    transition:.2s;
+}
+
+.rating-star.active{
+
+    color:#d6b979;
+}
+
+.rating-star:hover{
+
+    transform:scale(1.15);
+}
+
+.rating-message{
+
+    font-size:10px;
+
+    color:#765f68;
+
+    margin-top:4px;
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+.activity{
+
+    max-width:900px;
+
+    margin:65px auto 0;
+
+    padding:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8ef,
+            #eadbea
+        );
+
+    border:2px solid #d6b979;
+
+    border-radius:28px;
+
+    box-shadow:
+        0 18px 40px
+        rgba(104,76,107,.15);
+}
+
+.activity h2{
+
+    text-align:center;
+
+    color:#684c6b;
+
+    font-size:28px;
+
+    margin-bottom:25px;
+}
+
+.activity-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+}
+
+.activity-item{
+
+    background:#fff;
+
+    border:1px solid #d6b979;
+
+    border-radius:18px;
+
+    padding:18px 10px;
+
+    text-align:center;
+}
+
+.activity-item .icon{
+
+    font-size:24px;
+}
+
+.activity-item .count{
+
+    font-size:24px;
+
+    font-weight:600;
+
+    color:#684c6b;
+
+    margin:5px 0;
+}
+
+.activity-item small{
+
+    font-size:10px;
+
+    color:#765f68;
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+.reviews{
+
+    max-width:900px;
+
+    margin:35px auto 0;
+
+    padding:30px;
+
+    background:rgba(255,255,255,.95);
+
+    border:2px solid #d6b979;
+
+    border-radius:28px;
+
+    box-shadow:
+        0 18px 40px
+        rgba(104,76,107,.12);
+}
+
+.reviews h2{
+
+    text-align:center;
+
+    color:#684c6b;
+
+    font-size:28px;
+
+    margin-bottom:22px;
+}
+
+.review-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.review-form select,
+.review-form textarea{
+
+    width:100%;
+
+    border:1px solid #d8c4c9;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    font-family:Georgia,"Times New Roman",serif;
+
+    color:#5b4a45;
+
+    outline:none;
+
+    background:#fffaf6;
+}
+
+.review-form textarea{
+
+    min-height:100px;
+
+    resize:vertical;
+}
+
+.review-form button{
+
+    align-self:center;
+
+    border:none;
+
+    background:#684c6b;
+
+    color:#f5dda2;
+
+    padding:11px 25px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-family:Georgia,serif;
+
+    font-weight:bold;
+}
+
+.review-list{
+
+    margin-top:25px;
+}
+
+.review-item{
+
+    background:#f8edf8;
+
+    border-left:4px solid #c8a75d;
+
+    border-radius:12px;
+
+    padding:13px 15px;
+
+    margin-bottom:10px;
+}
+
+.review-user{
+
+    color:#684c6b;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+.review-text{
+
+    color:#5b4a45;
+
+    font-size:12px;
+
+    line-height:1.6;
+
+    margin-top:4px;
+}
+
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quote{
+
+    position:relative;
+
+    padding:65px 20px 75px;
+
+    text-align:center;
+
+    background:transparent;
+
+    border:none;
+}
+
+.quote span{
+
+    color:#f2d18b;
+
+    font-size:22px;
+
+    letter-spacing:7px;
+}
+
+.quote h2{
+
+    max-width:700px;
+
+    margin:18px auto;
+
+    color:#fff3df;
+
+    font-size:28px;
+
+    line-height:1.6;
+
+    font-style:italic;
+
+    font-weight:normal;
+}
+
+.quote p{
+
+    color:#eadde8;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    position:relative;
+
+    z-index:100;
+
+    padding:48px 20px;
+
+    text-align:center;
+
+    background:#684c6b;
+
+    color:white;
+
+    border-top:
+        2px solid #d6b979;
+}
+
+footer h3{
+
+    color:#f3dda5;
+
+    font-size:22px;
+
+    margin-bottom:10px;
+}
+
+footer p{
+
+    color:#eadde8;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+
+    position:fixed;
+
+    bottom:25px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%)
+        translateY(100px);
+
+    background:#684c6b;
+
+    color:#fff8ef;
+
+    border:1px solid #d6b979;
+
+    padding:13px 22px;
+
+    border-radius:25px;
+
+    font-size:12px;
+
+    z-index:3000;
+
+    opacity:0;
+
+    transition:.35s;
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-movies{
+
+    width:100%;
+
+    padding:0 6% 25px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    background:transparent;
+}
+
+.back-movies a{
+
+    display:inline-block;
+
+    padding:11px 20px;
+
+    border:1px solid #d6b979;
+
+    border-radius:25px;
+
+    background:#684c6b;
+
+    color:#f5dda2;
+
+    text-decoration:none;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+
+    transition:.4s;
+}
+
+.back-movies a:hover{
+
+    background:#d6b979;
+
+    color:#684c6b;
+
+    transform:translateY(-3px);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+    .hero-card{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:40px 30px;
+    }
+
+    .hero-content p{
+
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-image{
+
+        width:240px;
+        height:240px;
+    }
+
+    .recipe-wrapper{
+
+        grid-template-columns:1fr;
+
+        max-width:600px;
+    }
+
+    .activity-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+
+@media(max-width:600px){
+
+    .feature-buttons{
+
+        flex-direction:column;
+    }
+
+    .feature-btn{
+
+        width:100%;
+    }
+
+    .activity,
+    .reviews{
+
+        padding:22px 17px;
+    }
+
+    .side-menu{
+
+        width:280px;
+    }
+}
+
+
+@media(max-width:500px){
+
+    .hero-section{
+
+        padding:35px 5%;
+    }
+
+    .hero-card{
+
+        min-height:570px;
+
+        padding:35px 22px;
+    }
+
+    .hero-content h1{
+
+        font-size:36px;
+    }
+
+    .hero-image{
+
+        width:220px;
+        height:220px;
+    }
+
+    .recipes{
+
+        padding:
+            70px 6%
+            90px;
+    }
+
+    .recipe-heading h1{
+
+        font-size:34px;
+    }
+
+    .recipe-card{
+
+        height:560px;
+    }
+
+    .card-content h2{
+
+        font-size:24px;
+    }
+
+    .card-back{
+
+        padding:20px;
+    }
+
+    .back-inner{
+
+        padding:18px;
+    }
+
+    .quote h2{
+
+        font-size:22px;
+    }
+
+    .activity-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <button
+        class="menu-toggle"
+        onclick="toggleMenu()"
+        aria-label="Open Menu"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+</header>
+
+
+<div
+    class="menu-overlay"
+    id="menuOverlay"
+    onclick="closeMenu()"
+></div>
+
+
+<div
+    class="side-menu"
+    id="mainMenu"
+>
+
+    <div class="menu-top">
+
+        <h2>
+            Explore
+        </h2>
+
+        <button
+            class="menu-close"
+            onclick="closeMenu()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="menu-links">
+
+        <a class="menu-link" href="index.html">
+            <div class="menu-icon">🏠</div>
+            <div class="menu-text">
+                <strong>Home</strong>
+                <small>Return to the homepage</small>
+            </div>
+        </a>
+
+        <a class="menu-link" href="royal.html">
+
+            <div class="menu-icon">
+                👑
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    Royal Heritage
+                </strong>
+
+                <small>
+                    Traditional royal recipes
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="menu-link"
+            href="movies&cartoons.html"
+        >
+
+            <div class="menu-icon">
+                🎬
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    Movies & Cartoons
+                </strong>
+
+                <small>
+                    Recipes inspired by magical worlds
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="menu-link"
+            href="worldcuisine.html"
+        >
+
+            <div class="menu-icon">
+                🌎
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    World Cuisine
+                </strong>
+
+                <small>
+                    Flavours from around the world
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="menu-link"
+            href="desertwrold.html"
+        >
+
+            <div class="menu-icon">
+                🍰
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    Desserts
+                </strong>
+
+                <small>
+                    Sweet treats and desserts
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="menu-link"
+            href="gallery.html"
+        >
+
+            <div class="menu-icon">
+                🖼️
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    Gallery
+                </strong>
+
+                <small>
+                    Explore our food gallery
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <div class="menu-divider"></div>
+
+
+        <a
+            class="menu-link"
+            href="favourite.html"
+        >
+
+            <div class="menu-icon">
+                💗
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    Favourites
+                </strong>
+
+                <small>
+                    Your favourite recipes
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="menu-link"
+            href="order.html"
+        >
+
+            <div class="menu-icon">
+                🛒
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    Order
+                </strong>
+
+                <small>
+                    Order ingredient kits
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="menu-link"
+            href="stamp.html"
+        >
+
+            <div class="menu-icon">
+                🎟️
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    Stamped
+                </strong>
+
+                <small>
+                    Your stamped recipes
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="menu-link"
+            href="contact.html"
+        >
+
+            <div class="menu-icon">
+                📩
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    Contact
+                </strong>
+
+                <small>
+                    Get in touch with us
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            class="menu-link"
+            href="about.html"
+        >
+
+            <div class="menu-icon">
+                ✨
+            </div>
+
+            <div class="menu-text">
+
+                <strong>
+                    About
+                </strong>
+
+                <small>
+                    Discover The Flavorverse
+                </small>
+
+            </div>
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero-section">
+
+    <div class="hero-card">
+
+        <div class="hero-star one">✦</div>
+
+        <div class="hero-star two">✧</div>
+
+        <div class="hero-star three">☀</div>
+
+        <div class="hero-star four">✦</div>
+
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                ✦ THE SAVANNA KITCHEN ✦
+            </div>
+
+            <h1>
+                A Taste of
+                <span>The Lion King</span>
+            </h1>
+
+            <p>
+                Step into the warm and colourful world
+                of the African savanna and discover
+                bright tropical flavours inspired by
+                Simba's unforgettable journey.
+            </p>
+
+            <a
+                href="#recipes"
+                class="hero-btn"
+            >
+                ✦ EXPLORE RECIPES
+            </a>
+
+        </div>
+
+
+        <div class="hero-image">
+
+            <img
+                src="the lion king hero.jpg"
+                alt="The Lion King"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RECIPE SECTION
+===================================================== -->
+
+<section
+    class="recipes"
+    id="recipes"
+>
+
+    <div class="magic">✦</div>
+    <div class="magic">✧</div>
+    <div class="magic">☀</div>
+    <div class="magic">✦</div>
+    <div class="magic">✧</div>
+    <div class="magic">☀</div>
+
+
+    <div class="recipe-heading">
+
+        <span>
+            ✦ SIMBA'S KITCHEN ✦
+        </span>
+
+        <h1>
+            Savanna Inspired Recipes
+        </h1>
+
+        <p>
+            Discover colourful tropical flavours
+            inspired by the bright landscapes and
+            adventurous spirit of The Lion King.
+        </p>
+
+    </div>
+
+
+    <div class="recipe-wrapper">
+
+
+        <!-- =================================================
+             TROPICAL FRUIT BOWL
+        ================================================== -->
+
+        <div>
+
+            <div class="recipe-card">
+
+                <div class="card-inner">
+
+                    <div class="card-front">
+
+                        <div class="card-image">
+
+                            <div class="card-tag">
+                                ✦ TROPICAL SPECIAL
+                            </div>
+
+                            <img
+                                src="lionking fruit bowl.png"
+                                alt="Tropical Fruit Bowl"
+                            >
+
+                        </div>
+
+
+                        <div class="card-content">
+
+                            <small>
+                                RECIPE • 01
+                            </small>
+
+                            <h2>
+                                🍉 Tropical Fruit Bowl
+                            </h2>
+
+                            <p>
+                                A refreshing mix of juicy
+                                tropical fruits with bright
+                                colours and natural sweetness.
+                            </p>
+
+                            <div class="gold-line"></div>
+
+                            <div class="card-info">
+
+                                <span>
+                                    ⏱ 10 MIN
+                                </span>
+
+                                <span>
+                                    ✦ EASY
+                                </span>
+
+                            </div>
+
+                            <span class="front-star">
+                                ✦
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-back">
+
+                        <div class="back-inner">
+
+                            <h3>
+                                🍉 Tropical Fruit Bowl
+                            </h3>
+
+                            <h4>
+                                ✦ Ingredients
+                            </h4>
+
+                            <ul>
+
+                                <li>1 cup watermelon</li>
+                                <li>1 banana</li>
+                                <li>1 cup pineapple</li>
+                                <li>½ cup papaya</li>
+                                <li>½ cup mango</li>
+                                <li>1 tbsp honey</li>
+                                <li>Fresh mint leaves</li>
+
+                            </ul>
+
+
+                            <h4>
+                                ✦ Preparation
+                            </h4>
+
+                            <ol>
+
+                                <li>
+                                    Wash and cut all fruits
+                                    into small pieces.
+                                </li>
+
+                                <li>
+                                    Add watermelon,
+                                    pineapple and papaya.
+                                </li>
+
+                                <li>
+                                    Add mango and banana.
+                                </li>
+
+                                <li>
+                                    Drizzle honey over
+                                    the fruits.
+                                </li>
+
+                                <li>
+                                    Mix gently.
+                                </li>
+
+                                <li>
+                                    Garnish with fresh
+                                    mint leaves.
+                                </li>
+
+                                <li>
+                                    Serve chilled.
+                                </li>
+
+                            </ol>
+
+
+                            <div class="flip-hint">
+                                HOVER TO RETURN ✦
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FEATURE AREA -->
+
+            <div class="recipe-feature-area">
+
+                <div class="feature-buttons">
+
+                    <button
+                        class="feature-btn favourite-btn"
+                        id="fav-tropical"
+                        onclick="toggleFavourite(
+                            'lionking-tropical-fruit-bowl',
+                            'Tropical Fruit Bowl',
+                            this
+                        )"
+                    >
+                        ♡ Add to Favourite
+                    </button>
+
+
+                    <button
+                        class="feature-btn stamp-btn"
+                        id="stamp-tropical"
+                        onclick="toggleStamp(
+                            'lionking-tropical-fruit-bowl',
+                            'Tropical Fruit Bowl',
+                            this
+                        )"
+                    >
+                        🏷️ Add to Stamp
+                    </button>
+
+                </div>
+
+
+                <div class="rating-box">
+
+                    <div
+                        class="rating-stars"
+                        id="stars-tropical"
+                    >
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-tropical-fruit-bowl',
+                                1,
+                                'Tropical Fruit Bowl'
+                            )"
+                        >★</button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-tropical-fruit-bowl',
+                                2,
+                                'Tropical Fruit Bowl'
+                            )"
+                        >★</button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-tropical-fruit-bowl',
+                                3,
+                                'Tropical Fruit Bowl'
+                            )"
+                        >★</button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-tropical-fruit-bowl',
+                                4,
+                                'Tropical Fruit Bowl'
+                            )"
+                        >★</button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-tropical-fruit-bowl',
+                                5,
+                                'Tropical Fruit Bowl'
+                            )"
+                        >★</button>
+
+                    </div>
+
+                    <div
+                        class="rating-message"
+                        id="rating-message-tropical"
+                    >
+                        Rate this recipe
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             BANANA PANCAKES
+        ================================================== -->
+
+        <div>
+
+            <div class="recipe-card">
+
+                <div class="card-inner">
+
+                    <div class="card-front">
+
+                        <div class="card-image">
+
+                            <div class="card-tag">
+                                ✦ SAVANNA BREAKFAST
+                            </div>
+
+                            <img
+                                src="lionkingpancake.png"
+                                alt="Banana Pancakes"
+                            >
+
+                        </div>
+
+
+                        <div class="card-content">
+
+                            <small>
+                                RECIPE • 02
+                            </small>
+
+                            <h2>
+                                🍌 Banana Pancakes
+                            </h2>
+
+                            <p>
+                                Soft and fluffy banana
+                                pancakes with a naturally
+                                sweet tropical flavour.
+                            </p>
+
+                            <div class="gold-line"></div>
+
+                            <div class="card-info">
+
+                                <span>
+                                    ⏱ 25 MIN
+                                </span>
+
+                                <span>
+                                    ✦ EASY
+                                </span>
+
+                            </div>
+
+                            <span class="front-star">
+                                ✧
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-back">
+
+                        <div class="back-inner">
+
+                            <h3>
+                                🍌 Banana Pancakes
+                            </h3>
+
+                            <h4>
+                                ✦ Ingredients
+                            </h4>
+
+                            <ul>
+
+                                <li>2 ripe bananas</li>
+                                <li>1 cup all-purpose flour</li>
+                                <li>1 egg</li>
+                                <li>¾ cup milk</li>
+                                <li>1 tbsp sugar</li>
+                                <li>1 tsp baking powder</li>
+                                <li>1 tsp vanilla essence</li>
+                                <li>1 tbsp butter</li>
+
+                            </ul>
+
+
+                            <h4>
+                                ✦ Preparation
+                            </h4>
+
+                            <ol>
+
+                                <li>
+                                    Mash the bananas
+                                    in a bowl.
+                                </li>
+
+                                <li>
+                                    Add egg and milk.
+                                </li>
+
+                                <li>
+                                    Add flour, sugar and
+                                    baking powder.
+                                </li>
+
+                                <li>
+                                    Add vanilla essence
+                                    and mix gently.
+                                </li>
+
+                                <li>
+                                    Heat a pan and add
+                                    a little butter.
+                                </li>
+
+                                <li>
+                                    Pour batter and cook
+                                    both sides until golden.
+                                </li>
+
+                                <li>
+                                    Serve warm with
+                                    banana slices.
+                                </li>
+
+                            </ol>
+
+
+                            <div class="flip-hint">
+                                HOVER TO RETURN ✦
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FEATURE AREA -->
+
+            <div class="recipe-feature-area">
+
+                <div class="feature-buttons">
+
+                    <button
+                        class="feature-btn favourite-btn"
+                        id="fav-banana"
+                        onclick="toggleFavourite(
+                            'lionking-banana-pancakes',
+                            'Banana Pancakes',
+                            this
+                        )"
+                    >
+                        ♡ Add to Favourite
+                    </button>
+
+
+                    <button
+                        class="feature-btn stamp-btn"
+                        id="stamp-banana"
+                        onclick="toggleStamp(
+                            'lionking-banana-pancakes',
+                            'Banana Pancakes',
+                            this
+                        )"
+                    >
+                        🏷️ Add to Stamp
+                    </button>
+
+                </div>
+
+
+                <div class="rating-box">
+
+                    <div
+                        class="rating-stars"
+                        id="stars-banana"
+                    >
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-banana-pancakes',
+                                1,
+                                'Banana Pancakes'
+                            )"
+                        >★</button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-banana-pancakes',
+                                2,
+                                'Banana Pancakes'
+                            )"
+                        >★</button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-banana-pancakes',
+                                3,
+                                'Banana Pancakes'
+                            )"
+                        >★</button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-banana-pancakes',
+                                4,
+                                'Banana Pancakes'
+                            )"
+                        >★</button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'lionking-banana-pancakes',
+                                5,
+                                'Banana Pancakes'
+                            )"
+                        >★</button>
+
+                    </div>
+
+                    <div
+                        class="rating-message"
+                        id="rating-message-banana"
+                    >
+                        Rate this recipe
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FLAVORVERSE ACTIVITY
+    ===================================================== -->
+
+    <div class="activity">
+
+        <h2>
+            Your Flavorverse Activity
+        </h2>
+
+        <div class="activity-grid">
+
+            <div class="activity-item">
+
+                <div class="icon">❤️</div>
+
+                <div
+                    class="count"
+                    id="fav-count"
+                >
+                    0
+                </div>
+
+                <small>
+                    Favourites
+                </small>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="icon">🏷️</div>
+
+                <div
+                    class="count"
+                    id="stamp-count"
+                >
+                    0
+                </div>
+
+                <small>
+                    Stamped
+                </small>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="icon">⭐</div>
+
+                <div
+                    class="count"
+                    id="rating-count"
+                >
+                    0
+                </div>
+
+                <small>
+                    Ratings
+                </small>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="icon">💬</div>
+
+                <div
+                    class="count"
+                    id="review-count"
+                >
+                    0
+                </div>
+
+                <small>
+                    Reviews
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         REVIEWS
+    ===================================================== -->
+
+    <div class="reviews">
+
+        <h2>
+            Share Your Lion King Review
+        </h2>
+
+
+        <div class="review-form">
+
+            <select id="reviewRecipe">
+
+                <option value="">
+                    Select a recipe
+                </option>
+
+                <option value="lionking-tropical-fruit-bowl">
+                    Tropical Fruit Bowl
+                </option>
+
+                <option value="lionking-banana-pancakes">
+                    Banana Pancakes
+                </option>
+
+            </select>
+
+
+            <textarea
+                id="reviewText"
+                placeholder="Write your review..."
+            ></textarea>
+
+
+            <button
+                onclick="submitReview()"
+            >
+                Submit Review
+            </button>
+
+        </div>
+
+
+        <div
+            class="review-list"
+            id="reviewList"
+        ></div>
+
+    </div>
+
+
+    <!-- QUOTE -->
+
+    <div class="quote">
+
+        <span>
+            ✦ ☀ ✦
+        </span>
+
+        <h2>
+            "In every bite, discover
+            a little taste of the
+            wild and wonderful."
+        </h2>
+
+        <p>
+            — The Flavorverse
+        </p>
+
+    </div>
+
+
+</section>
+
+
+<!-- BACK TO MOVIES -->
+
+<div class="back-movies">
+
+    <a href="movies&cartoons.html">
+        ← BACK TO MOVIES & CARTOONS
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        🍴 The Flavorverse
+    </h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<!-- =====================================================
+     FIREBASE + FEATURES
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu(){
+
+    document
+        .getElementById("mainMenu")
+        .classList.toggle("show");
+
+    document
+        .getElementById("menuOverlay")
+        .classList.toggle("show");
+
+}
+
+function closeMenu(){
+
+    document
+        .getElementById("mainMenu")
+        .classList.remove("show");
+
+    document
+        .getElementById("menuOverlay")
+        .classList.remove("show");
+
+}
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+            closeMenu();
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+    authDomain:
+    "the-flavoverse.firebaseapp.com",
+
+    projectId:
+    "the-flavoverse",
+
+    storageBucket:
+    "the-flavoverse.firebasestorage.app",
+
+    messagingSenderId:
+    "1064022248292",
+
+    appId:
+    "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+
+    measurementId:
+    "G-16Z0K1687Z"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth =
+    firebase.auth();
+
+const db =
+    firebase.firestore();
+
+let currentUser = null;
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipeNames = {
+
+    "lionking-tropical-fruit-bowl":
+        "Tropical Fruit Bowl",
+
+    "lionking-banana-pancakes":
+        "Banana Pancakes"
+
+};
+
+const recipeIds =
+    Object.keys(recipeNames);
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    setTimeout(
+        function(){
+
+            toast.classList.remove("show");
+
+        },
+        2500
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function checkLogin(){
+
+    if(!currentUser){
+
+        showToast(
+            "Please login first 🔐"
+        );
+
+        setTimeout(
+            function(){
+
+                window.location.href =
+                    "login.html";
+
+            },
+            900
+        );
+
+        return false;
+    }
+
+    return true;
+
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(
+    async function(user){
+
+        currentUser =
+            user;
+
+        if(user){
+
+            loadFavouriteStatus();
+
+            loadStampStatus();
+
+            loadMyRatings();
+
+            loadActivity();
+
+            loadReviews();
+
+            saveRecentlyViewed();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   RECENTLY VIEWED
+===================================================== */
+
+async function saveRecentlyViewed(){
+
+    if(!currentUser)
+        return;
+
+    try{
+
+        const ref =
+            db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("recentlyViewed")
+            .doc("lionking");
+
+        await ref.set({
+
+            page:
+                "The Lion King Recipes",
+
+            category:
+                "Movies & Cartoons",
+
+            url:
+                window.location.pathname,
+
+            viewedAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Recently viewed error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function toggleFavourite(
+    recipeId,
+    recipeName,
+    button
+){
+
+    if(!checkLogin())
+        return;
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("favourites")
+        .doc(recipeId);
+
+    try{
+
+        const snap =
+            await ref.get();
+
+        if(snap.exists){
+
+            await ref.delete();
+
+            button.innerHTML =
+                "♡ Add to Favourite";
+
+            showToast(
+                recipeName +
+                " removed from favourites"
+            );
+
+        }
+
+        else{
+
+            await ref.set({
+
+                recipeId:
+                    recipeId,
+
+                name:
+                    recipeName,
+
+                category:
+                    "Movies & Cartoons",
+
+                page:
+                    "The Lion King",
+
+                addedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+            button.innerHTML =
+                "♥ Added to Favourite";
+
+            showToast(
+                recipeName +
+                " added to favourites ❤️"
+            );
+
+        }
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Something went wrong"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD FAVOURITE STATUS
+===================================================== */
+
+async function loadFavouriteStatus(){
+
+    if(!currentUser)
+        return;
+
+    for(
+        const id of recipeIds
+    ){
+
+        try{
+
+            const snap =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("favourites")
+                .doc(id)
+                .get();
+
+            const buttonId =
+                id ===
+                "lionking-tropical-fruit-bowl"
+                ?
+                "fav-tropical"
+                :
+                "fav-banana";
+
+            const button =
+                document.getElementById(
+                    buttonId
+                );
+
+            if(
+                button &&
+                snap.exists
+            ){
+
+                button.innerHTML =
+                    "♥ Added to Favourite";
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function toggleStamp(
+    recipeId,
+    recipeName,
+    button
+){
+
+    if(!checkLogin())
+        return;
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("stamps")
+        .doc(recipeId);
+
+    try{
+
+        const snap =
+            await ref.get();
+
+        if(snap.exists){
+
+            await ref.delete();
+
+            button.innerHTML =
+                "🏷️ Add to Stamp";
+
+            showToast(
+                recipeName +
+                " removed from stamps"
+            );
+
+        }
+
+        else{
+
+            await ref.set({
+
+                recipeId:
+                    recipeId,
+
+                name:
+                    recipeName,
+
+                category:
+                    "Movies & Cartoons",
+
+                page:
+                    "The Lion King",
+
+                stampedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+            button.innerHTML =
+                "🏷️ Stamped";
+
+            showToast(
+                recipeName +
+                " added to stamps 🏷️"
+            );
+
+        }
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Something went wrong"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD STAMP STATUS
+===================================================== */
+
+async function loadStampStatus(){
+
+    if(!currentUser)
+        return;
+
+    for(
+        const id of recipeIds
+    ){
+
+        try{
+
+            const snap =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("stamps")
+                .doc(id)
+                .get();
+
+            const buttonId =
+                id ===
+                "lionking-tropical-fruit-bowl"
+                ?
+                "stamp-tropical"
+                :
+                "stamp-banana";
+
+            const button =
+                document.getElementById(
+                    buttonId
+                );
+
+            if(
+                button &&
+                snap.exists
+            ){
+
+                button.innerHTML =
+                    "🏷️ Stamped";
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE RATING
+===================================================== */
+
+async function saveRating(
+    recipeId,
+    rating,
+    shortName
+){
+
+    if(!checkLogin())
+        return;
+
+    try{
+
+        await db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("ratings")
+        .doc(recipeId)
+        .set({
+
+            rating:
+                rating,
+
+            recipeName:
+                shortName,
+
+            ratedAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+        updateStars(
+            recipeId,
+            rating
+        );
+
+        const messageId =
+            recipeId ===
+            "lionking-tropical-fruit-bowl"
+            ?
+            "rating-message-tropical"
+            :
+            "rating-message-banana";
+
+        const message =
+            document.getElementById(
+                messageId
+            );
+
+        if(message){
+
+            message.textContent =
+                "You rated this recipe " +
+                rating +
+                "/5 ⭐";
+
+        }
+
+        showToast(
+            "Rating saved ⭐"
+        );
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to save rating"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE STARS
+===================================================== */
+
+function updateStars(
+    recipeId,
+    rating
+){
+
+    const containerId =
+        recipeId ===
+        "lionking-tropical-fruit-bowl"
+        ?
+        "stars-tropical"
+        :
+        "stars-banana";
+
+    const container =
+        document.getElementById(
+            containerId
+        );
+
+    if(!container)
+        return;
+
+    const stars =
+        container.querySelectorAll(
+            ".rating-star"
+        );
+
+    stars.forEach(
+        function(
+            star,
+            index
+        ){
+
+            if(index < rating){
+
+                star.classList.add(
+                    "active"
+                );
+
+            }
+
+            else{
+
+                star.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOAD MY RATINGS
+===================================================== */
+
+async function loadMyRatings(){
+
+    if(!currentUser)
+        return;
+
+    for(
+        const id of recipeIds
+    ){
+
+        try{
+
+            const snap =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("ratings")
+                .doc(id)
+                .get();
+
+            if(snap.exists){
+
+                const rating =
+                    snap.data().rating;
+
+                updateStars(
+                    id,
+                    rating
+                );
+
+                const messageId =
+                    id ===
+                    "lionking-tropical-fruit-bowl"
+                    ?
+                    "rating-message-tropical"
+                    :
+                    "rating-message-banana";
+
+                const message =
+                    document.getElementById(
+                        messageId
+                    );
+
+                if(message){
+
+                    message.textContent =
+                        "You rated this recipe " +
+                        rating +
+                        "/5 ⭐";
+
+                }
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+async function loadActivity(){
+
+    if(!currentUser)
+        return;
+
+    try{
+
+        const userRef =
+            db
+            .collection("users")
+            .doc(currentUser.uid);
+
+        const favSnap =
+            await userRef
+            .collection("favourites")
+            .get();
+
+        const stampSnap =
+            await userRef
+            .collection("stamps")
+            .get();
+
+        const ratingSnap =
+            await userRef
+            .collection("ratings")
+            .get();
+
+        document.getElementById(
+            "fav-count"
+        ).textContent =
+            favSnap.size;
+
+        document.getElementById(
+            "stamp-count"
+        ).textContent =
+            stampSnap.size;
+
+        document.getElementById(
+            "rating-count"
+        ).textContent =
+            ratingSnap.size;
+
+        let reviewCount = 0;
+
+        for(
+            const id of recipeIds
+        ){
+
+            const snap =
+                await db
+                .collection("recipes")
+                .doc(id)
+                .collection("reviews")
+                .where(
+                    "userId",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+            reviewCount +=
+                snap.size;
+
+        }
+
+        document.getElementById(
+            "review-count"
+        ).textContent =
+            reviewCount;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   SUBMIT REVIEW
+===================================================== */
+
+async function submitReview(){
+
+    if(!checkLogin())
+        return;
+
+    const recipeId =
+        document.getElementById(
+            "reviewRecipe"
+        ).value;
+
+    const text =
+        document.getElementById(
+            "reviewText"
+        ).value.trim();
+
+    if(!recipeId){
+
+        showToast(
+            "Please select a recipe"
+        );
+
+        return;
+
+    }
+
+    if(!text){
+
+        showToast(
+            "Please write a review"
+        );
+
+        return;
+
+    }
+
+    try{
+
+        const userName =
+            currentUser.displayName ||
+            currentUser.email ||
+            "Flavorverse User";
+
+        await db
+        .collection("recipes")
+        .doc(recipeId)
+        .collection("reviews")
+        .add({
+
+            userId:
+                currentUser.uid,
+
+            userName:
+                userName,
+
+            text:
+                text,
+
+            createdAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+        document.getElementById(
+            "reviewText"
+        ).value = "";
+
+        document.getElementById(
+            "reviewRecipe"
+        ).value = "";
+
+        showToast(
+            "Review submitted 💬"
+        );
+
+        loadReviews();
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to submit review"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(text){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(){
+
+    if(!currentUser)
+        return;
+
+    const reviewList =
+        document.getElementById(
+            "reviewList"
+        );
+
+    reviewList.innerHTML = "";
+
+    let allReviews = [];
+
+    for(
+        const id of recipeIds
+    ){
+
+        try{
+
+            const snap =
+                await db
+                .collection("recipes")
+                .doc(id)
+                .collection("reviews")
+                .get();
+
+            snap.forEach(
+                function(doc){
+
+                    const data =
+                        doc.data();
+
+                    allReviews.push({
+
+                        recipeName:
+                            recipeNames[id],
+
+                        userName:
+                            data.userName ||
+                            "Flavorverse User",
+
+                        text:
+                            data.text ||
+                            "",
+
+                        createdAt:
+                            data.createdAt
+                            ?
+                            data.createdAt.toMillis()
+                            :
+                            0
+
+                    });
+
+                }
+            );
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+
+    allReviews.sort(
+        function(a,b){
+
+            return
+                b.createdAt -
+                a.createdAt;
+
+        }
+    );
+
+
+    if(
+        allReviews.length === 0
+    ){
+
+        reviewList.innerHTML = `
+
+            <div class="review-item">
+
+                <div class="review-text">
+
+                    No reviews yet.
+                    Be the first to share
+                    your experience! 💜
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    allReviews.forEach(
+        function(review){
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "review-item";
+
+            item.innerHTML = `
+
+                <div class="review-user">
+
+                    ${escapeHtml(
+                        review.userName
+                    )}
+
+                    ·
+
+                    ${escapeHtml(
+                        review.recipeName
+                    )}
+
+                </div>
+
+                <div class="review-text">
+
+                    ${escapeHtml(
+                        review.text
+                    )}
+
+                </div>
+
+            `;
+
+            reviewList.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

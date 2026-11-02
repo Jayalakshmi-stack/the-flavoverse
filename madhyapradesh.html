@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flavorverse | Madhya Pradesh</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:20px;}
+body{font-family:'Poppins',sans-serif;background:#F7E7CE;color:#5B4A45;transition:.3s;}
+
+/* ===== DARK MODE ===== */
+body.dark-mode{background:#241d23;color:#eee;}
+body.dark-mode .hero,body.dark-mode .about-text,body.dark-mode .recipe-section,body.dark-mode .fact-card,body.dark-mode .profile-card,body.dark-mode .explorer-box,body.dark-mode .review-box,body.dark-mode .recent-card,body.dark-mode .popular-card{background:#342a32;color:#eee;}
+body.dark-mode .recipe-content h2,body.dark-mode .about-text h2,body.dark-mode .facts-section h2,body.dark-mode .explorer-box h2,body.dark-mode .popular-title,body.dark-mode .recent-section h2{color:#e9c9e4;}
+body.dark-mode .recipe-content h3{color:#d6aeca;}
+body.dark-mode .recipe-info div,body.dark-mode .chef-tip,body.dark-mode .fun-fact,body.dark-mode .single-review{background:#443640;}
+body.dark-mode .rating-area{background:rgba(68,54,64,.7);}
+body.dark-mode .image-box{background:#443640;}
+body.dark-mode .profile-card{color:#eee;}
+body.dark-mode .profile-card .count{color:#e9c9e4;}
+body.dark-mode input,body.dark-mode select,body.dark-mode textarea,body.dark-mode .search-box{background:#443640;color:white;border-color:#80647b;}
+
+/* ===== HEADER ===== */
+header{background:#8E6C88;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 5px 15px rgba(0,0,0,.15);}
+.logo{font-family:'Cinzel',serif;font-size:32px;font-weight:bold;color:white;}
+nav{display:flex;align-items:center;justify-content:flex-end;}
+.dark-toggle{margin-right:12px;border:none;background:#F4E5C5;color:#5B4A45;padding:9px 14px;border-radius:20px;cursor:pointer;font-weight:bold;}
+
+/* ===== HAMBURGER DRAWER ===== */
+.menu-open-btn{border:0;background:transparent;color:#fff;font-size:32px;line-height:1;cursor:pointer;padding:5px 8px;}
+.menu-backdrop{position:fixed;inset:0;background:rgba(25,16,28,.55);z-index:9998;opacity:0;visibility:hidden;transition:.25s;}
+.menu-backdrop.show{opacity:1;visibility:visible;}
+.explore-drawer{position:fixed;top:0;right:0;width:418px;max-width:88vw;height:100vh;background:#fff8ef;z-index:9999;transform:translateX(102%);transition:transform .3s ease;box-shadow:-8px 0 25px rgba(0,0,0,.2);overflow-y:auto;color:#5b4a45;}
+.explore-drawer.open{transform:translateX(0);}
+.drawer-heading{height:115px;background:#a083a2;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 35px;position:sticky;top:0;z-index:2;}
+.drawer-heading h2{font-family:'Cinzel',serif;font-size:32px;font-weight:700;}
+.drawer-close{border:0;background:transparent;color:#fff;font-size:34px;font-weight:300;cursor:pointer;line-height:1;}
+.drawer-links{padding:18px 27px 30px;}
+.drawer-link{display:flex;align-items:center;gap:22px;text-decoration:none;color:#654b70;padding:16px 12px;border-radius:8px;transition:background .2s;}
+.drawer-link:hover{background:#f0e3ed;}
+.drawer-icon{width:36px;flex:0 0 36px;text-align:center;font-size:25px;}
+.drawer-copy strong{display:block;font-family:'Cinzel',serif;font-size:18px;line-height:1.35;color:#654b70;}
+.drawer-copy small{display:block;font-size:13px;color:#806d91;line-height:1.5;}
+.drawer-divider{height:1px;background:#e4cedd;margin:10px 0 12px;}
+body.drawer-open{overflow:hidden;}
+
+/* ===== HERO ===== */
+.hero{width:90%;margin:40px auto;background:white;border-radius:25px;overflow:hidden;box-shadow:0 12px 25px rgba(0,0,0,.15);display:flex;align-items:center;gap:40px;padding:40px;}
+.image-box{width:450px;height:350px;display:flex;justify-content:center;align-items:center;background:#fff8f2;border-radius:20px;flex:1;}
+.image-box img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.hero-content{padding:40px;flex:1;text-align:left;}
+.hero-content h1{font-family:'Cinzel',serif;font-size:58px;color:#6F4B72;}
+.hero-content h2{margin-top:15px;color:#B58A4D;font-size:30px;}
+.hero-content p{margin-top:18px;font-size:18px;line-height:1.8;}
+.btn{display:inline-block;margin-top:25px;padding:14px 35px;background:#8E6C88;color:white;text-decoration:none;border-radius:30px;font-weight:bold;transition:.3s;}
+.btn:hover{background:#6F4B72;}
+
+/* ===== ABOUT ===== */
+.about-section{width:90%;margin:50px auto;display:flex;justify-content:space-between;align-items:center;gap:40px;}
+.about-text{flex:2;background:#FFF9F4;padding:35px;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.12);}
+.about-text h2{font-family:'Cinzel',serif;color:#6F4B72;font-size:36px;margin-bottom:20px;}
+.about-text p{line-height:1.9;font-size:17px;margin-bottom:18px;text-align:justify;}
+.about-box{flex:1;background:#8E6C88;color:white;padding:30px;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.15);}
+.about-box h3{font-family:'Cinzel',serif;margin-bottom:20px;text-align:center;}
+.about-box ul{list-style:none;}
+.about-box li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.25);font-size:16px;}
+.about-box li:last-child{border-bottom:none;}
+
+/* ===== EXPLORER ===== */
+.explorer-section{width:90%;margin:60px auto;}
+.explorer-box{background:#FFF9F4;padding:30px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.explorer-box h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:36px;margin-bottom:25px;}
+.search-filter-row{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+.search-box,.filter-box{padding:13px 18px;border:1px solid #D8C5B0;border-radius:25px;background:white;color:#5B4A45;font-family:'Poppins',sans-serif;outline:none;}
+.search-box{width:45%;min-width:250px;}
+.filter-box{min-width:180px;}
+.explorer-buttons{display:flex;justify-content:center;gap:15px;margin-top:20px;flex-wrap:wrap;}
+.explorer-btn{border:none;padding:12px 22px;border-radius:25px;background:#8E6C88;color:white;font-family:'Poppins',sans-serif;font-weight:600;cursor:pointer;transition:.3s;}
+.explorer-btn:hover{background:#6F4B72;transform:translateY(-2px);}
+.explorer-btn.random{background:#B58A4D;}
+.search-result{text-align:center;margin-top:18px;font-weight:600;color:#8E6C88;}
+
+/* ===== POPULAR ===== */
+.popular-section{width:90%;margin:40px auto;}
+.popular-title{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:32px;margin-bottom:25px;}
+.popular-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.popular-card{display:block;text-decoration:none;color:inherit;background:#FFF9F4;padding:22px;border-radius:18px;box-shadow:0 7px 17px rgba(0,0,0,.12);text-align:center;transition:.3s;}
+.popular-card:hover{transform:translateY(-6px);}
+.popular-card h3{color:#8E6C88;margin-bottom:8px;}
+.popular-card p{font-size:14px;line-height:1.6;}
+
+/* ===== RECIPE ===== */
+.recipe-section{width:90%;margin:60px auto;display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:stretch;background:#FFF9F4;padding:35px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.12);transition:box-shadow .3s;}
+.recipe-image{grid-column:1;grid-row:1;}
+.recipe-image img{width:100%;border-radius:18px;box-shadow:0 6px 15px rgba(0,0,0,.15);display:block;}
+.recipe-content{grid-column:2;grid-row:1;}
+.recipe-content h2{font-family:'Cinzel',serif;color:#6F4B72;font-size:38px;margin-bottom:20px;}
+.recipe-content h3{margin-top:25px;margin-bottom:12px;color:#8E6C88;}
+.recipe-content p{line-height:1.8;text-align:justify;}
+.recipe-content ul,.recipe-content ol{margin-left:25px;line-height:1.9;}
+.recipe-info{display:flex;justify-content:space-between;margin-top:25px;gap:20px;}
+.recipe-info div{flex:1;background:#F7E7CE;padding:18px;text-align:center;border-radius:15px;}
+.chef-tip,.fun-fact{margin-top:25px;background:#F7E7CE;padding:20px;border-left:6px solid #8E6C88;border-radius:12px;}
+.recipe-section.reverse{grid-template-columns:2fr 1fr;}
+.recipe-section.reverse .recipe-content{grid-column:1;grid-row:1;}
+.recipe-section.reverse .recipe-image{grid-column:2;grid-row:1;}
+.recipe-section.reverse .recipe-actions{grid-column:2;grid-row:1;}
+.recipe-section.hidden-recipe{display:none;}
+
+/* ===== BUTTONS ===== */
+.recipe-actions{grid-column:1;grid-row:1;align-self:end;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:15px;padding-bottom:5px;}
+.recipe-actions button{width:200px;padding:14px 18px;border:none;border-radius:30px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;box-shadow:0 6px 15px rgba(91,74,69,.18);}
+.favorite-btn{background:#8E6C88;color:white;}
+.stamp-btn{background:#F4E5C5;color:#5B4A45;}
+.recipe-actions button:hover{transform:translateY(-3px);box-shadow:0 9px 20px rgba(91,74,69,.22);}
+
+/* ===== RATING ===== */
+.rating-area{margin-top:22px;padding:20px;background:rgba(244,229,197,.55);border-radius:15px;}
+.rating-area h3{margin-top:0;}
+.stars{display:flex;gap:5px;margin-top:8px;}
+.star{font-size:28px;cursor:pointer;color:#c8b9aa;transition:.2s;}
+.star.active{color:#E5A82F;}
+.rating-message{font-size:13px;margin-top:7px;}
+
+/* ===== REVIEWS ===== */
+.review-box{margin-top:18px;padding:20px;background:#FFF9F4;border:1px solid #eadbc9;border-radius:15px;}
+.review-box h3{margin-top:0;}
+.review-input{width:100%;min-height:80px;resize:vertical;padding:12px;border:1px solid #D8C5B0;border-radius:12px;outline:none;font-family:'Poppins',sans-serif;margin-top:8px;}
+.review-submit{margin-top:10px;border:none;background:#8E6C88;color:white;padding:10px 20px;border-radius:22px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;}
+.review-submit:hover{background:#6F4B72;}
+.reviews-list{margin-top:15px;}
+.single-review{padding:12px;margin-top:10px;background:#F7E7CE;border-radius:12px;}
+.single-review strong{color:#6F4B72;}
+body.dark-mode .single-review strong{color:#e9c9e4;}
+.single-review small{display:block;margin-top:4px;opacity:.7;}
+.no-review{font-size:13px;opacity:.7;margin-top:10px;}
+
+/* ===== FACTS ===== */
+.facts-section{width:90%;margin:60px auto;}
+.facts-section h2{text-align:center;font-family:'Cinzel',serif;font-size:40px;color:#6F4B72;margin-bottom:35px;}
+.facts-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.fact-card{background:#FFF9F4;padding:25px;border-radius:20px;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,.12);transition:.3s;}
+.fact-card:hover{transform:translateY(-8px);}
+.fact-card h3{color:#8E6C88;margin-bottom:15px;}
+.fact-card p{line-height:1.8;}
+
+/* ===== RECENTLY VIEWED ===== */
+.recent-section{width:90%;margin:60px auto;}
+.recent-section h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:36px;margin-bottom:25px;}
+.recent-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.recent-card{background:#FFF9F4;padding:22px;border-radius:18px;box-shadow:0 7px 17px rgba(0,0,0,.12);}
+.recent-card h3{color:#8E6C88;margin-bottom:8px;}
+.recent-card p{font-size:13px;}
+.recent-empty{text-align:center;opacity:.7;grid-column:1/-1;}
+
+/* ===== PROFILE ===== */
+.profile-section{width:90%;margin:60px auto;}
+.profile-box{background:#8E6C88;color:white;padding:40px;border-radius:22px;box-shadow:0 10px 25px rgba(0,0,0,.15);}
+.profile-box h2{font-family:'Cinzel',serif;font-size:38px;text-align:center;margin-bottom:10px;}
+.profile-name{text-align:center;font-size:20px;margin-bottom:10px;}
+.profile-email{text-align:center;opacity:.9;margin-bottom:25px;}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.profile-card{background:#FFF9F4;color:#5B4A45;padding:22px;border-radius:16px;text-align:center;}
+.profile-card .count{font-size:30px;font-weight:bold;color:#6F4B72;display:block;margin-bottom:5px;}
+.profile-card span:last-child{font-size:14px;}
+
+/* ===== CHEF + FOOTER ===== */
+.chef-section{width:90%;margin:60px auto;background:#8E6C88;color:white;padding:40px;border-radius:20px;text-align:center;}
+.chef-section h2{font-family:'Cinzel',serif;margin-bottom:20px;}
+.chef-section p{font-size:18px;line-height:1.8;}
+footer{background:#6F4B72;color:white;text-align:center;padding:40px 20px;margin-top:60px;}
+footer h2{font-family:'Cinzel',serif;margin-bottom:15px;}
+footer p{margin:10px 0;line-height:1.8;}
+.social{margin:25px 0;}
+.social a{text-decoration:none;font-size:30px;margin:0 12px;}
+.copy{margin-top:20px;font-size:15px;opacity:.9;}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+header{padding:14px 5%;}
+.logo{font-size:22px;}
+.hero{flex-direction:column;padding:20px;gap:20px;}
+.image-box{width:100%;height:280px;flex:none;}
+.hero-content{padding:20px 5px;text-align:center;}
+.hero-content h1{font-size:42px;}
+.hero-content h2{font-size:24px;}
+.hero-content p{font-size:15px;text-align:justify;}
+.about-section{flex-direction:column;}
+.about-text,.about-box{width:100%;}
+.recipe-section,.recipe-section.reverse{display:flex;flex-direction:column;gap:25px;}
+.recipe-image,.recipe-content{width:100%;}
+.recipe-info{flex-direction:column;}
+.recipe-actions,.recipe-section.reverse .recipe-actions{width:100%;padding:0;order:2;}
+.recipe-actions button{width:220px;}
+.profile-stats{grid-template-columns:repeat(2,1fr);}
+.search-box{width:100%;}
+}
+@media(max-width:450px){
+.profile-stats{grid-template-columns:1fr;}
+.hero-content h1{font-size:35px;}
+.recipe-content h2{font-size:30px;}
+}
+
+.back-heritage {
+    display: inline-block;
+    margin: 20px;
+    padding: 12px 22px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+</style>
+</head>
+<body>
+
+  
+</a>
+<!-- ================= HEADER ================= -->
+<header>
+<div class="logo">🍴 The Flavorverse</div>
+<nav>
+<button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
+<button class="menu-open-btn" id="openExploreMenu" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav>
+</header>
+
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<aside class="explore-drawer" id="exploreDrawer" aria-label="Explore menu" aria-hidden="true">
+<div class="drawer-heading"><h2>Explore</h2><button class="drawer-close" id="closeExploreMenu" aria-label="Close menu">×</button></div>
+<div class="drawer-links">
+<a class="drawer-link" href="index.html"><span class="drawer-icon">🏠</span><span class="drawer-copy"><strong>Home</strong><small>Return to the homepage</small></span></a>
+<a class="drawer-link" href="royal.html"><span class="drawer-icon">👑</span><span class="drawer-copy"><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+<a class="drawer-link" href="movies.html"><span class="drawer-icon">🎬</span><span class="drawer-copy"><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+<a class="drawer-link" href="world.html"><span class="drawer-icon">🌎</span><span class="drawer-copy"><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+<a class="drawer-link" href="desserts.html"><span class="drawer-icon">🍰</span><span class="drawer-copy"><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+<a class="drawer-link" href="gallery.html"><span class="drawer-icon">🖼️</span><span class="drawer-copy"><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+<div class="drawer-divider"></div>
+<a class="drawer-link" href="favourites.html"><span class="drawer-icon">💗</span><span class="drawer-copy"><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+<a class="drawer-link" href="order.html"><span class="drawer-icon">🛒</span><span class="drawer-copy"><strong>Order</strong><small>Order ingredient kits</small></span></a>
+<a class="drawer-link" href="stamped.html"><span class="drawer-icon">🎟️</span><span class="drawer-copy"><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+<a class="drawer-link" href="contact.html"><span class="drawer-icon">💌</span><span class="drawer-copy"><strong>Contact</strong><small>Get in touch with us</small></span></a>
+</div>
+</aside>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+<div class="image-box"><img src="madhayapradesh.png" alt="Madhya Pradesh"></div>
+<div class="hero-content">
+<h1>🏰 Madhya Pradesh</h1>
+<h2>Heart of India &amp; Hearty Flavours</h2>
+<p>Welcome to Madhya Pradesh, the "Heart of India", known for its historic forts, ancient temples, forests, and a food culture that is as warm as its people. Cuisine here ranges from the crunchy, savoury street snacks of Indore to the rustic wheat-and-ghee meals of the Malwa region. From the beloved Indori Poha to the creamy Bhutte Ka Kees, the hearty Dal Bafla, and the rich, melt-in-the-mouth Mawa Bati, every dish reflects the culinary heritage of Madhya Pradesh.</p>
+<a href="#mp-poha" class="btn">Explore Recipes</a>
+</div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="about-section">
+<div class="about-text">
+<h2>🏰 About Madhya Pradesh Cuisine</h2>
+<p>Madhya Pradesh cuisine is shaped by its central location, fertile farmland, and the traditions of its many regions. Wheat, corn, lentils, milk, ghee, and everyday spices form the base of traditional cooking. The food is known for being wholesome, comforting, and often lightly sweet and savoury at the same time.</p>
+<p>Indori Poha is one of the state's most popular breakfast dishes. Flattened rice is gently cooked with onions, peanuts, curry leaves, and turmeric, and is traditionally finished with a squeeze of lemon, a sprinkle of sev, and a dash of jeeravan masala.</p>
+<p>Bhutte Ka Kees is a creamy snack made from grated corn cooked in milk with mild spices, especially enjoyed during the monsoon season. Dal Bafla is a classic rustic meal of baked wheat dough balls dipped in ghee and served with spiced dal.</p>
+<p>Mawa Bati is one of the region's well-loved sweets. Soft, khoya-based dumplings stuffed with dry fruits are fried and soaked in fragrant sugar syrup, making them a favourite during festivals and celebrations.</p>
+</div>
+<div class="about-box">
+<h3>🏰 Madhya Pradesh Highlights</h3>
+<ul>
+<li>🥣 Indori Poha is a famous breakfast speciality</li>
+<li>🌽 Bhutte Ka Kees is a creamy grated-corn snack</li>
+<li>🍞 Dal Bafla is a hearty ghee-rich wheat meal</li>
+<li>🍮 Mawa Bati is a traditional khoya-based sweet</li>
+<li>🌾 Wheat, corn, and lentils are staple ingredients</li>
+<li>🧈 Ghee and milk feature in many dishes</li>
+<li>🌶️ Mild to medium spices create comforting flavours</li>
+<li>❤️ Cuisine reflects the heart of India's food heritage</li>
+</ul>
+</div>
+</section>
+
+<!-- ================= RECIPE EXPLORER ================= -->
+<section class="explorer-section">
+<div class="explorer-box">
+<h2>🔍 Explore Madhya Pradesh Recipes</h2>
+<div class="search-filter-row">
+<input class="search-box" id="recipeSearch" onkeyup="filterRecipes()" placeholder="🔍 Search recipe..." type="text">
+<select class="filter-box" id="categoryFilter" onchange="filterRecipes()">
+<option value="all">All Categories</option>
+<option value="main">Main Course</option>
+<option value="dessert">Sweets</option>
+</select>
+</div>
+<div class="explorer-buttons">
+<button class="explorer-btn random" onclick="surpriseMe()">🎲 Surprise Me</button>
+<button class="explorer-btn" onclick="resetFilters()">↻ Show All Recipes</button>
+</div>
+<p class="search-result" id="searchResult">Showing all 4 Madhya Pradesh recipes</p>
+</div>
+</section>
+
+<!-- ================= POPULAR ================= -->
+<section class="popular-section">
+<h2 class="popular-title">🔥 Popular Madhya Pradesh Recipes</h2>
+<div class="popular-container"><a class="popular-card" href="#mp-poha"><h3>🥣 Indori Poha</h3><p>Light, flavourful flattened rice topped with sev and lemon.</p></a><a class="popular-card" href="#mp-bhutte"><h3>🌽 Bhutte Ka Kees</h3><p>Creamy grated corn cooked in milk with mild spices.</p></a><a class="popular-card" href="#mp-dalbafla"><h3>🍞 Dal Bafla</h3><p>Baked wheat balls dipped in ghee, served with spiced dal.</p></a><a class="popular-card" href="#mp-mawabati"><h3>🍮 Mawa Bati</h3><p>Stuffed khoya dumplings soaked in fragrant sugar syrup.</p></a></div>
+</section>
+
+<!-- ================= RECIPES ================= -->
+
+<!-- ===== Indori Poha ===== -->
+<section class="recipe-section" data-category="main" data-cuisine="mp" data-name="indori poha" id="mp-poha">
+<div class="recipe-image"><img alt="Indori Poha" src="Indori Poha.png"></div>
+<div class="recipe-content">
+<h2>🥣 Indori Poha</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Indori Poha is the most loved breakfast of Indore and Madhya Pradesh. Flattened rice is cooked with onions, peanuts, curry leaves, turmeric, and a hint of sugar and lemon for a perfectly balanced sweet, tangy, and savoury taste. It is traditionally topped with fine sev, chopped onions, fresh coriander, and a sprinkle of jeeravan masala, and is often enjoyed with a hot cup of tea.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Madhya Pradesh</li><li><b>Cuisine :</b> Traditional Malwa Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>2 cups Thick Poha (Flattened Rice)</li>
+<li>1 Potato, Finely Diced</li>
+<li>1 Onion, Finely Chopped</li>
+<li>2 tbsp Raw Peanuts</li>
+<li>1 tsp Mustard Seeds</li>
+<li>8–10 Curry Leaves</li>
+<li>2 Green Chilies, Chopped</li>
+<li>½ tsp Turmeric Powder</li>
+<li>1 tsp Sugar</li>
+<li>1 tbsp Lemon Juice</li>
+<li>2 tbsp Oil</li>
+<li>Salt to Taste</li>
+<li>Fresh Coriander Leaves</li>
+<li>Sev, for Topping</li>
+<li>Jeeravan Masala, for Sprinkling</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Place the poha in a strainer and rinse it quickly under running water.</li>
+<li>Drain well and let it rest for about 5 minutes until it turns soft.</li>
+<li>Mix in salt, sugar, and half of the turmeric powder gently.</li>
+<li>Heat oil in a pan or kadai.</li>
+<li>Add the peanuts and fry until they turn crisp, then keep them aside.</li>
+<li>In the same oil, add mustard seeds and let them splutter.</li>
+<li>Add curry leaves and green chilies.</li>
+<li>Add the diced potato and cook with a lid on until tender.</li>
+<li>Add the chopped onions and sauté until soft and translucent.</li>
+<li>Add the remaining turmeric powder and mix well.</li>
+<li>Add the prepared poha and mix gently without mashing it.</li>
+<li>Cover and steam on low heat for 2–3 minutes.</li>
+<li>Add the fried peanuts and lemon juice and mix lightly.</li>
+<li>Turn off the heat and garnish with fresh coriander.</li>
+<li>Serve hot topped with sev, chopped onions, and a sprinkle of jeeravan masala.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>25 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>3 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Easy</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Use thick poha and do not soak it for too long, otherwise it turns mushy. A little sugar and a final squeeze of lemon give Indori Poha its signature sweet-and-tangy taste.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Poha with jalebi is a popular breakfast combination in Indore, and the dish is a way of life in the city's morning food culture.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="mp-poha">
+<span class="star" onclick="rateRecipe('mp-poha',1,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-poha',2,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-poha',3,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-poha',4,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-poha',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-mp-poha">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-mp-poha" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('mp-poha','Indori Poha')">Post Review</button>
+<div class="reviews-list" id="reviews-mp-poha"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="mp-poha" onclick="addToFavourite('mp-poha','Indori Poha','Madhya Pradesh Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="mp-poha" onclick="addToStamp('mp-poha','Indori Poha','Madhya Pradesh Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Bhutte Ka Kees ===== -->
+<section class="recipe-section reverse" data-category="main" data-cuisine="mp" data-name="bhutte ka kees" id="mp-bhutte">
+<div class="recipe-image"><img alt="Bhutte Ka Kees" src="Bhutte Ka Kees.png"></div>
+<div class="recipe-content">
+<h2>🌽 Bhutte Ka Kees</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Bhutte Ka Kees is a famous Indori snack made from freshly grated corn cooked in milk with ghee, mild spices, and green chilies. The corn is slowly simmered until the mixture turns soft, creamy, and lightly spicy. It is garnished with coriander, grated coconut, and a squeeze of lemon, and is especially popular during the rainy season.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Madhya Pradesh</li><li><b>Cuisine :</b> Traditional Malwa Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>4 Fresh Corn Cobs, Grated</li>
+<li>2 cups Milk</li>
+<li>2 tbsp Ghee</li>
+<li>1 tsp Mustard Seeds</li>
+<li>½ tsp Cumin Seeds</li>
+<li>2 Green Chilies, Finely Chopped</li>
+<li>1 tsp Grated Ginger</li>
+<li>¼ tsp Turmeric Powder</li>
+<li>1 tsp Sugar</li>
+<li>1 tbsp Lemon Juice</li>
+<li>2 tbsp Fresh Grated Coconut</li>
+<li>Salt to Taste</li>
+<li>Fresh Coriander Leaves</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Remove the kernels from the corn cobs and grate them into a coarse pulp.</li>
+<li>Heat ghee in a heavy-bottomed pan.</li>
+<li>Add mustard seeds and cumin seeds and let them splutter.</li>
+<li>Add the green chilies and grated ginger and sauté briefly.</li>
+<li>Add the grated corn and mix well.</li>
+<li>Sauté the corn on low heat for 5–6 minutes to remove the raw smell.</li>
+<li>Add turmeric powder and mix thoroughly.</li>
+<li>Pour in the milk gradually while stirring.</li>
+<li>Cover and cook on low heat, stirring occasionally.</li>
+<li>Continue cooking until the corn turns soft and the milk reduces to a creamy consistency.</li>
+<li>Add salt and sugar and mix well.</li>
+<li>Turn off the heat and add the lemon juice.</li>
+<li>Garnish with grated coconut and fresh coriander leaves.</li>
+<li>Serve hot.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>30 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>3 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Easy</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Use fresh, tender corn and keep stirring on low heat so the milk does not catch at the bottom. Add lemon juice only after turning off the heat to keep the milk from splitting.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Bhutte Ka Kees is a signature street snack of Indore, and is closely associated with the city's famous evening food markets.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="mp-bhutte">
+<span class="star" onclick="rateRecipe('mp-bhutte',1,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-bhutte',2,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-bhutte',3,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-bhutte',4,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-bhutte',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-mp-bhutte">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-mp-bhutte" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('mp-bhutte','Bhutte Ka Kees')">Post Review</button>
+<div class="reviews-list" id="reviews-mp-bhutte"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="mp-bhutte" onclick="addToFavourite('mp-bhutte','Bhutte Ka Kees','Madhya Pradesh Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="mp-bhutte" onclick="addToStamp('mp-bhutte','Bhutte Ka Kees','Madhya Pradesh Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Dal Bafla ===== -->
+<section class="recipe-section" data-category="main" data-cuisine="mp" data-name="dal bafla" id="mp-dalbafla">
+<div class="recipe-image"><img alt="Dal Bafla" src="Dal Bafla.png"></div>
+<div class="recipe-content">
+<h2>🍞 Dal Bafla</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Dal Bafla is a rustic and satisfying meal from the Malwa region of Madhya Pradesh. Bafla are firm wheat dough balls that are boiled or baked until cooked through, then broken open and soaked in generous amounts of ghee. They are served with a warm, spiced dal, and often accompanied by chutney, onions, and a sweet such as ladoo.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Madhya Pradesh</li><li><b>Cuisine :</b> Traditional Malwa Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<p><b>For the Bafla</b></p>
+<ul>
+<li>2 cups Whole Wheat Flour</li>
+<li>2 tbsp Semolina (Sooji)</li>
+<li>½ tsp Ajwain (Carom Seeds)</li>
+<li>4 tbsp Ghee, for the dough</li>
+<li>Salt to Taste</li>
+<li>Water as Required</li>
+<li>Melted Ghee, for dipping</li>
+</ul>
+<p style="margin-top:15px;"><b>For the Dal</b></p>
+<ul>
+<li>1 cup Toor Dal</li>
+<li>1 Tomato, Chopped</li>
+<li>½ tsp Turmeric Powder</li>
+<li>2 tbsp Ghee</li>
+<li>1 tsp Cumin Seeds</li>
+<li>4 Garlic Cloves, Chopped</li>
+<li>2 Dry Red Chilies</li>
+<li>A Pinch of Asafoetida (Hing)</li>
+<li>1 tsp Red Chili Powder</li>
+<li>Salt to Taste</li>
+<li>Fresh Coriander Leaves</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Mix wheat flour, semolina, ajwain, salt, and ghee in a large bowl until crumbly.</li>
+<li>Add water gradually and knead into a stiff dough.</li>
+<li>Rest the dough for 15 minutes.</li>
+<li>Divide the dough into equal portions and shape into firm round balls.</li>
+<li>Preheat the oven to 200°C.</li>
+<li>Bake the baflas for 25–30 minutes, turning them occasionally, until golden brown and cooked through.</li>
+<li>Wash the toor dal and pressure cook it with water, turmeric, and salt until soft.</li>
+<li>Mash the cooked dal lightly.</li>
+<li>Add chopped tomato and simmer for a few minutes.</li>
+<li>Heat ghee in a small pan and add cumin seeds.</li>
+<li>Add garlic, dry red chilies, and asafoetida and sauté until fragrant.</li>
+<li>Add red chili powder and immediately pour the tempering over the dal.</li>
+<li>Simmer for 2–3 minutes and garnish with coriander.</li>
+<li>Lightly crack each hot bafla and dip it into melted ghee.</li>
+<li>Serve the baflas hot with the dal.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>75 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Medium</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Knead the dough stiff so the baflas stay firm. Dipping them in warm ghee while they are still hot lets them soak up flavour and turn soft inside.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Dal Bafla is closely related to Rajasthan's Dal Baati, and is a classic celebration and festival meal in the Malwa region.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="mp-dalbafla">
+<span class="star" onclick="rateRecipe('mp-dalbafla',1,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-dalbafla',2,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-dalbafla',3,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-dalbafla',4,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-dalbafla',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-mp-dalbafla">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-mp-dalbafla" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('mp-dalbafla','Dal Bafla')">Post Review</button>
+<div class="reviews-list" id="reviews-mp-dalbafla"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="mp-dalbafla" onclick="addToFavourite('mp-dalbafla','Dal Bafla','Madhya Pradesh Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="mp-dalbafla" onclick="addToStamp('mp-dalbafla','Dal Bafla','Madhya Pradesh Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Mawa Bati ===== -->
+<section class="recipe-section reverse" data-category="dessert" data-cuisine="mp" data-name="mawa bati" id="mp-mawabati">
+<div class="recipe-image"><img alt="Mawa Bati" src="Mawa Bati.png"></div>
+<div class="recipe-content">
+<h2>🍮 Mawa Bati</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Mawa Bati is a rich traditional sweet of Madhya Pradesh made from khoya (mawa). Soft khoya dough is stuffed with chopped dry fruits, shaped into small round balls, fried gently in ghee until golden, and soaked in warm, cardamom-scented sugar syrup. It is served warm or at room temperature and is a favourite at festivals and special occasions.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Madhya Pradesh</li><li><b>Cuisine :</b> Traditional Madhya Pradesh Sweets</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>200 g Khoya (Mawa), Grated</li>
+<li>3 tbsp All-Purpose Flour</li>
+<li>¼ tsp Baking Soda</li>
+<li>1 tbsp Milk, if needed</li>
+<li>2 tbsp Chopped Almonds and Pistachios</li>
+<li>½ tsp Cardamom Powder</li>
+<li>1 cup Sugar</li>
+<li>1 cup Water</li>
+<li>A Few Strands of Saffron</li>
+<li>Ghee for Frying</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Mix the sugar and water in a pan and boil until the syrup turns slightly sticky.</li>
+<li>Add the saffron and half of the cardamom powder, then keep the syrup warm.</li>
+<li>Mix the chopped dry fruits with the remaining cardamom powder for the stuffing.</li>
+<li>Combine the grated khoya, all-purpose flour, and baking soda in a bowl.</li>
+<li>Gently knead into a smooth, soft dough, adding a little milk only if required.</li>
+<li>Divide the dough into small equal portions.</li>
+<li>Flatten each portion slightly and place a little dry fruit stuffing in the centre.</li>
+<li>Seal and roll into smooth, crack-free balls.</li>
+<li>Heat ghee in a pan on low heat.</li>
+<li>Fry the balls slowly in batches until they turn evenly golden brown.</li>
+<li>Remove the fried balls and drain excess ghee.</li>
+<li>Soak them in the warm sugar syrup for 30 minutes.</li>
+<li>Garnish with a few chopped pistachios.</li>
+<li>Serve warm or at room temperature.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>50 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>6 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Medium</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Fry the balls on low heat so they cook through without breaking. Make sure the syrup is warm, not boiling, so the batis soak it up evenly and stay soft.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Mawa Bati is closely associated with the festive sweet traditions of central India, and is often prepared during weddings and celebrations.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="mp-mawabati">
+<span class="star" onclick="rateRecipe('mp-mawabati',1,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-mawabati',2,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-mawabati',3,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-mawabati',4,this)">★</span>
+<span class="star" onclick="rateRecipe('mp-mawabati',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-mp-mawabati">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-mp-mawabati" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('mp-mawabati','Mawa Bati')">Post Review</button>
+<div class="reviews-list" id="reviews-mp-mawabati"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="mp-mawabati" onclick="addToFavourite('mp-mawabati','Mawa Bati','Madhya Pradesh Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="mp-mawabati" onclick="addToStamp('mp-mawabati','Mawa Bati','Madhya Pradesh Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+
+<!-- ================= FOOD FACTS ================= -->
+<section class="facts-section">
+<h2>🏰 Madhya Pradesh Food Facts</h2>
+<div class="facts-container">
+<div class="fact-card"><h3>🥣 Famous Indori Poha</h3><p>Indori Poha is one of Madhya Pradesh's most iconic breakfasts. Flattened rice is cooked with peanuts and mild spices, then topped with sev and a squeeze of lemon.</p></div>
+<div class="fact-card"><h3>🌽 Creamy Bhutte Ka Kees</h3><p>Bhutte Ka Kees is known for its soft, creamy texture. Grated corn simmered in milk with ghee and green chilies makes this a beloved monsoon snack.</p></div>
+<div class="fact-card"><h3>🍞 Hearty Dal Bafla</h3><p>Dal Bafla combines baked wheat balls, ghee, and spiced dal into a comforting traditional meal that is loved across the Malwa region.</p></div>
+<div class="fact-card"><h3>🌾 Wheat &amp; Corn Heritage</h3><p>The fertile lands of Madhya Pradesh make wheat, corn, and pulses staple ingredients in many traditional dishes of the state.</p></div>
+<div class="fact-card"><h3>❤️ Heart of India</h3><p>Known as the "Heart of India", Madhya Pradesh has a food culture that blends regional traditions into warm, wholesome, and satisfying flavours.</p></div>
+</div>
+</section>
+
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+<h2>🕐 Recently Viewed</h2>
+<div class="recent-container" id="recentContainer">
+<p class="recent-empty">Login to see your recently viewed recipes.</p>
+</div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section class="profile-section">
+<div class="profile-box">
+<h2>👤 My Flavorverse Profile</h2>
+<p class="profile-name" id="profileName">Guest</p>
+<p class="profile-email" id="profileEmail">Login to see your profile</p>
+<div class="profile-stats">
+<div class="profile-card"><span class="count" id="favouriteCount">0</span><span>❤️ Favourites</span></div>
+<div class="profile-card"><span class="count" id="stampCount">0</span><span>🏷️ Stamps</span></div>
+<div class="profile-card"><span class="count" id="ratingCount">0</span><span>⭐ Ratings</span></div>
+<div class="profile-card"><span class="count" id="reviewCount">0</span><span>💬 Reviews</span></div>
+</div>
+</div>
+</section>
+
+<!-- ================= CHEF ================= -->
+<section class="chef-section">
+<h2>👨‍🍳 Chef's Recommendation</h2>
+<p>Explore the warm, wholesome flavours of Madhya Pradesh with the light and tangy <b>Indori Poha</b>, creamy <b>Bhutte Ka Kees</b>, hearty <b>Dal Bafla</b>, and rich, syrupy <b>Mawa Bati</b>. Together, these dishes showcase the state's wheat, corn, ghee, and milk-based cooking and its fascinating culinary heritage.</p>
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+
+<!-- ================= FOOTER ================= -->
+<footer>
+<h2>🍴 The Flavorverse</h2>
+<p>Discover India's rich culinary heritage, one delicious recipe at a time.</p>
+<div class="social"><a href="#">📘</a><a href="#">📸</a><a href="#">▶️</a><a href="#">🐦</a></div>
+<p class="copy">© 2026 The Flavorverse | All Rights Reserved</p>
+</footer>
+
+
+
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ===== FIREBASE CONFIG ===== */
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+  authDomain: "the-flavoverse.firebaseapp.com",
+  projectId: "the-flavoverse",
+  storageBucket: "the-flavoverse.firebasestorage.app",
+  messagingSenderId: "1064022248292",
+  appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+};
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+/* ===== RECIPE DATA ===== */
+const recipes = [
+{id:"mp-poha",name:"Indori Poha",category:"main",cuisine:"mp"},
+{id:"mp-bhutte",name:"Bhutte Ka Kees",category:"main",cuisine:"mp"},
+{id:"mp-dalbafla",name:"Dal Bafla",category:"main",cuisine:"mp"},
+{id:"mp-mawabati",name:"Mawa Bati",category:"dessert",cuisine:"mp"}
+];
+
+function getCurrentUser() { return auth.currentUser; }
+function userDoc(uid) { return db.collection("users").doc(uid); }
+function setText(id, text) { const el = document.getElementById(id); if (el) el.innerText = text; }
+function goLogin(message) { alert(message); window.location.href = "login.html"; }
+
+/* ===== FAVOURITE + STAMP ===== */
+async function toggleSaved(collectionName, id, name, category, button, onLabel, offLabel, addMsg, removeMsg) {
+  const user = getCurrentUser();
+  if (!user) { goLogin(collectionName === "favourites" ? "Please login first to add favourites ❤️" : "Please login first to add stamps 🏷️"); return; }
+  try {
+    const ref = userDoc(user.uid).collection(collectionName).doc(id);
+    const existing = await ref.get();
+    if (existing.exists) {
+      await ref.delete();
+      button.innerHTML = offLabel;
+      alert(name + removeMsg);
+    } else {
+      await ref.set({
+        recipeId: id,
+        recipeName: name,
+        category: category,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      button.innerHTML = onLabel;
+      alert(name + addMsg);
+    }
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Update failed: " + error.message);
+  }
+}
+
+function addToFavourite(id, name, category, button) {
+  toggleSaved("favourites", id, name, category, button, "♥ Added to Favourite", "♡ Add to Favourite", " added to favourites ❤️", " removed from favourites.");
+}
+
+function addToStamp(id, name, category, button) {
+  toggleSaved("stamps", id, name, category, button, "🏷️ Stamped", "🏷️ Add to Stamp", " added to your Flavorverse Passport 🏷️", " removed from passport.");
+}
+
+/* ===== RATING ===== */
+async function rateRecipe(recipeId, rating, element) {
+  const user = getCurrentUser();
+  if (!user) { goLogin("Please login first to rate recipes ⭐"); return; }
+  try {
+    await userDoc(user.uid).collection("ratings").doc(recipeId).set({
+      recipeId: recipeId,
+      rating: rating,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    element.parentElement.querySelectorAll(".star").forEach(function (star, index) {
+      star.classList.toggle("active", index < rating);
+    });
+    setText("rating-" + recipeId, "You rated this recipe " + rating + "/5 ⭐");
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Rating failed: " + error.message);
+  }
+}
+
+async function loadRatings() {
+  const user = getCurrentUser();
+  if (!user) return;
+  for (const recipe of recipes) {
+    try {
+      const doc = await userDoc(user.uid).collection("ratings").doc(recipe.id).get();
+      if (!doc.exists) continue;
+      const rating = doc.data().rating;
+      const container = document.querySelector('.stars[data-recipe="' + recipe.id + '"]');
+      if (container) {
+        container.querySelectorAll(".star").forEach(function (star, index) {
+          star.classList.toggle("active", index < rating);
+        });
+      }
+      setText("rating-" + recipe.id, "You rated this recipe " + rating + "/5 ⭐");
+    } catch (error) { console.error(error); }
+  }
+}
+
+/* ===== REVIEWS ===== */
+async function submitReview(recipeId, recipeName) {
+  const user = getCurrentUser();
+  if (!user) { goLogin("Please login first to post a review 💬"); return; }
+  const textarea = document.getElementById("review-text-" + recipeId);
+  const text = textarea.value.trim();
+  if (!text) { alert("Please write a review first."); return; }
+  try {
+    const profile = await userDoc(user.uid).get();
+    let userName = "Flavorverse User";
+    if (profile.exists && profile.data().name) { userName = profile.data().name; }
+    await db.collection("recipes").doc(recipeId).collection("reviews").doc(user.uid).set({
+      recipeId: recipeId,
+      recipeName: recipeName,
+      userId: user.uid,
+      userName: userName,
+      review: text,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    textarea.value = "";
+    alert("Review posted successfully! 💬");
+    loadReviews(recipeId);
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Review failed: " + error.message);
+  }
+}
+
+async function loadReviews(recipeId) {
+  const container = document.getElementById("reviews-" + recipeId);
+  if (!container) return;
+  try {
+    const snapshot = await db.collection("recipes").doc(recipeId).collection("reviews")
+      .orderBy("createdAt", "desc").limit(10).get();
+    container.innerHTML = "";
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+      return;
+    }
+    snapshot.forEach(function (doc) {
+      const data = doc.data();
+      const review = document.createElement("div");
+      review.className = "single-review";
+      const name = document.createElement("strong");
+      name.textContent = "💜 " + (data.userName || "Flavorverse User");
+      const content = document.createElement("p");
+      content.textContent = data.review || "";
+      const date = document.createElement("small");
+      if (data.createdAt) { date.textContent = data.createdAt.toDate().toLocaleDateString(); }
+      review.appendChild(name);
+      review.appendChild(content);
+      review.appendChild(date);
+      container.appendChild(review);
+    });
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="no-review">Reviews will appear here.</p>';
+  }
+}
+
+/* ===== RECENTLY VIEWED ===== */
+function findRecipe(id) {
+  return recipes.find(function (r) { return r.id === id; });
+}
+
+async function addRecentlyViewed(recipeId) {
+  const user = getCurrentUser();
+  const recipe = findRecipe(recipeId);
+  if (!user || !recipe) return;
+  try {
+    await userDoc(user.uid).collection("recentlyViewed").doc(recipeId).set({
+      recipeId: recipeId,
+      recipeName: recipe.name,
+      name: recipe.name,
+      viewedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    loadRecentlyViewed(true); /* refresh list silently */
+  } catch (error) {
+    console.error("Could not save Recently Viewed recipe:", error);
+  }
+}
+
+async function loadRecentlyViewed(silent) {
+  const container = document.getElementById("recentContainer");
+  if (!container) return;
+  const user = getCurrentUser();
+  if (!user) {
+    container.innerHTML = '<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+    return;
+  }
+  if (!silent) {
+    container.innerHTML = '<p class="recent-empty">Loading recently viewed recipes...</p>';
+  }
+  try {
+    const snapshot = await userDoc(user.uid).collection("recentlyViewed").limit(30).get();
+    const items = [];
+    snapshot.forEach(function (doc) {
+      const data = doc.data() || {};
+      const id = data.recipeId || doc.id;
+      const recipe = findRecipe(id);
+      if (!recipe) return; /* ignores recipes from other state pages */
+      items.push({
+        id: id,
+        name: recipe.name,
+        time: data.viewedAt && data.viewedAt.toMillis ? data.viewedAt.toMillis() : Date.now()
+      });
+    });
+    items.sort(function (a, b) { return b.time - a.time; });
+    container.innerHTML = "";
+    if (items.length === 0) {
+      container.innerHTML = '<p class="recent-empty">No recently viewed Madhya Pradesh recipes yet. Open a recipe to add it here.</p>';
+      return;
+    }
+    items.slice(0, 8).forEach(function (item) {
+      const card = document.createElement("div");
+      card.className = "recent-card";
+      const title = document.createElement("h3");
+      title.textContent = "🕐 " + item.name;
+      const desc = document.createElement("p");
+      desc.textContent = "You recently explored this recipe.";
+      card.appendChild(title);
+      card.appendChild(desc);
+      const section = document.getElementById(item.id);
+      if (section) {
+        card.style.cursor = "pointer";
+        card.addEventListener("click", function () {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="recent-empty">Recently Viewed could not be loaded. Please check your Firestore rules.</p>';
+  }
+}
+
+function setupRecentlyViewed() {
+  const sections = document.querySelectorAll(".recipe-section");
+  const visibleIds = new Set();
+  const lastRecorded = new Map();
+
+  function record(id) {
+    if (!getCurrentUser()) return; /* wait for login */
+    const now = Date.now();
+    if (now - (lastRecorded.get(id) || 0) < 15000) return;
+    lastRecorded.set(id, now);
+    addRecentlyViewed(id);
+  }
+
+  /* Recipe sections are very tall, so a low threshold is needed */
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      const id = entry.target.id;
+      if (entry.isIntersecting) { visibleIds.add(id); record(id); }
+      else { visibleIds.delete(id); }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(function (s) { observer.observe(s); });
+
+  /* called after login finishes, to save recipes already on screen */
+  window.recordVisibleRecipes = function () { visibleIds.forEach(record); };
+}
+
+/* ===== PROFILE ===== */
+async function showProfileInfo(user) {
+  try {
+    const doc = await userDoc(user.uid).get();
+    if (doc.exists) {
+      setText("profileName", doc.data().name || "Flavorverse User");
+      setText("profileEmail", doc.data().email || user.email);
+    } else {
+      setText("profileName", user.email);
+      setText("profileEmail", user.email);
+    }
+  } catch (error) { console.error(error); }
+}
+
+async function updateProfileCounts() {
+  const user = getCurrentUser();
+  if (!user) {
+    ["favouriteCount", "stampCount", "ratingCount", "reviewCount"].forEach(function (id) { setText(id, "0"); });
+    return;
+  }
+  try {
+    await showProfileInfo(user);
+    const favourites = await userDoc(user.uid).collection("favourites").get();
+    const stamps = await userDoc(user.uid).collection("stamps").get();
+    const ratings = await userDoc(user.uid).collection("ratings").get();
+    let reviewTotal = 0;
+    for (const recipe of recipes) {
+      const review = await db.collection("recipes").doc(recipe.id).collection("reviews").doc(user.uid).get();
+      if (review.exists) reviewTotal++;
+    }
+    setText("favouriteCount", favourites.size);
+    setText("stampCount", stamps.size);
+    setText("ratingCount", ratings.size);
+    setText("reviewCount", reviewTotal);
+  } catch (error) { console.error(error); }
+}
+
+/* ===== BUTTON STATUS ===== */
+async function updateButtons() {
+  const user = getCurrentUser();
+  if (!user) return;
+  for (const recipe of recipes) {
+    try {
+      const fav = await userDoc(user.uid).collection("favourites").doc(recipe.id).get();
+      const favButton = document.querySelector('[data-favourite-id="' + recipe.id + '"]');
+      if (fav.exists && favButton) favButton.innerHTML = "♥ Added to Favourite";
+      const stamp = await userDoc(user.uid).collection("stamps").doc(recipe.id).get();
+      const stampButton = document.querySelector('[data-stamp-id="' + recipe.id + '"]');
+      if (stamp.exists && stampButton) stampButton.innerHTML = "🏷️ Stamped";
+    } catch (error) { console.error(error); }
+  }
+}
+
+/* ===== SEARCH + FILTER ===== */
+function filterRecipes() {
+  const search = document.getElementById("recipeSearch").value.toLowerCase().trim();
+  const category = document.getElementById("categoryFilter").value;
+  let count = 0;
+  document.querySelectorAll(".recipe-section").forEach(function (section) {
+    const nameMatch = section.dataset.name.toLowerCase().includes(search);
+    const categoryMatch = category === "all" || section.dataset.category === category;
+    if (nameMatch && categoryMatch) {
+      section.classList.remove("hidden-recipe");
+      count++;
+    } else {
+      section.classList.add("hidden-recipe");
+    }
+  });
+  setText("searchResult", "Showing " + count + " recipe" + (count !== 1 ? "s" : ""));
+}
+
+function resetFilters() {
+  document.getElementById("recipeSearch").value = "";
+  document.getElementById("categoryFilter").value = "all";
+  document.querySelectorAll(".recipe-section").forEach(function (s) { s.classList.remove("hidden-recipe"); });
+  setText("searchResult", "Showing all 4 Madhya Pradesh recipes");
+}
+
+function surpriseMe() {
+  const visible = Array.from(document.querySelectorAll(".recipe-section")).filter(function (r) {
+    return !r.classList.contains("hidden-recipe");
+  });
+  if (visible.length === 0) { alert("No recipes available with the selected filter."); return; }
+  const random = visible[Math.floor(Math.random() * visible.length)];
+  random.scrollIntoView({ behavior: "smooth", block: "center" });
+  random.style.boxShadow = "0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+  setTimeout(function () { random.style.boxShadow = ""; }, 2500);
+  alert("🎲 Surprise Recipe: " + random.dataset.name);
+}
+
+/* ===== DARK MODE ===== */
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("flavorverseDarkMode", document.body.classList.contains("dark-mode") ? "on" : "off");
+}
+
+function loadDarkMode() {
+  if (localStorage.getItem("flavorverseDarkMode") === "on") {
+    document.body.classList.add("dark-mode");
+  }
+}
+
+/* ===== AUTH STATE ===== */
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+    showProfileInfo(user);
+    updateButtons();
+    updateProfileCounts();
+    loadRatings();
+    recipes.forEach(function (recipe) { loadReviews(recipe.id); });
+    if (window.recordVisibleRecipes) window.recordVisibleRecipes();
+  } else {
+    setText("profileName", "Guest");
+    setText("profileEmail", "Login to see your profile");
+    updateProfileCounts();
+    recipes.forEach(function (recipe) { loadReviews(recipe.id); });
+  }
+  loadRecentlyViewed();
+});
+
+/* ===== PAGE LOAD ===== */
+document.addEventListener("DOMContentLoaded", function () {
+  loadDarkMode();
+  setupRecentlyViewed();
+});
+
+/* ===== HAMBURGER DRAWER ===== */
+(function () {
+  const drawer = document.getElementById("exploreDrawer");
+  const backdrop = document.getElementById("menuBackdrop");
+  const openBtn = document.getElementById("openExploreMenu");
+  const closeBtn = document.getElementById("closeExploreMenu");
+  function openMenu() {
+    drawer.classList.add("open"); backdrop.classList.add("show");
+    document.body.classList.add("drawer-open");
+    drawer.setAttribute("aria-hidden", "false"); openBtn.setAttribute("aria-expanded", "true");
+  }
+  function closeMenu() {
+    drawer.classList.remove("open"); backdrop.classList.remove("show");
+    document.body.classList.remove("drawer-open");
+    drawer.setAttribute("aria-hidden", "true"); openBtn.setAttribute("aria-expanded", "false");
+  }
+  openBtn.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+  backdrop.addEventListener("click", closeMenu);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+  drawer.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+})();
+
+
+</script>
+</body>
+</html>

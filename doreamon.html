@@ -1,0 +1,3308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doraemon Recipes | The Flavorverse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
+<style>
+
+/* =====================================================
+   THEME
+===================================================== */
+
+:root{
+
+    --bg:#fff8f4;
+    --section:#f8eee8;
+    --card:#ffffff;
+
+    --purple:#704b72;
+    --purple2:#91698e;
+
+    --text:#51404e;
+    --soft-text:#816d7d;
+
+    --gold:#d8b66c;
+    --border:#eadbd2;
+
+    --input:#ffffff;
+
+    --shadow:rgba(70,45,70,.18);
+
+}
+
+body.dark{
+
+    --bg:#17131a;
+    --section:#241c27;
+    --card:#2a212d;
+
+    --purple:#d3add2;
+    --purple2:#ae82ad;
+
+    --text:#f4eaf4;
+    --soft-text:#c9b7ca;
+
+    --gold:#e1c477;
+    --border:#493b4c;
+
+    --input:#332a36;
+
+    --shadow:rgba(0,0,0,.45);
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:Georgia,serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    transition:.3s;
+
+}
+
+
+/* =====================================================
+   CLEAN NAVIGATION BAR
+===================================================== */
+
+header{
+
+    min-height:85px;
+
+    padding:15px 5%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+    background:var(--card);
+
+    border-bottom:1px solid var(--border);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+}
+
+
+/* LOGO */
+
+.logo{
+
+    font-family:Cinzel,serif;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:var(--purple);
+
+    white-space:nowrap;
+
+}
+
+
+/* MAIN MENU */
+
+.main-menu{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:5px;
+
+    background:var(--section);
+
+    padding:7px;
+
+    border:1px solid var(--border);
+
+    border-radius:40px;
+
+}
+
+
+/* MENU LINKS */
+
+.main-menu a{
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-family:Poppins,sans-serif;
+
+    font-size:12px;
+
+    font-weight:500;
+
+    padding:10px 13px;
+
+    border-radius:25px;
+
+    white-space:nowrap;
+
+    transition:.3s;
+
+}
+
+
+/* HOVER */
+
+.main-menu a:hover{
+
+    background:var(--purple);
+
+    color:white;
+
+}
+
+
+/* CURRENT PAGE */
+
+.main-menu a[href="movies&cartoons.html"]{
+
+    background:var(--purple);
+
+    color:white;
+
+}
+
+
+/* THEME BUTTON */
+
+.theme-btn{
+
+    border:none;
+
+    background:var(--purple);
+
+    color:white;
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    margin-left:4px;
+
+    transition:.3s;
+
+}
+
+.theme-btn:hover{
+
+    transform:rotate(15deg) scale(1.05);
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+    min-height:430px;
+
+    padding:55px 7%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:40px;
+
+    background:linear-gradient(
+        135deg,
+        #704b72,
+        #936b8e
+    );
+
+    color:white;
+
+}
+
+.hero-content{
+
+    max-width:600px;
+
+}
+
+.hero span{
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    color:#f4e5c5;
+
+    font-weight:600;
+
+}
+
+.hero h1{
+
+    font-family:Cinzel,serif;
+
+    font-size:48px;
+
+    line-height:1.15;
+
+    margin:18px 0;
+
+}
+
+.hero p{
+
+    font-family:Poppins,sans-serif;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+    margin-bottom:25px;
+
+}
+
+.hero-btn{
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    background:#f4e5c5;
+
+    color:#704b72;
+
+    padding:13px 25px;
+
+    border-radius:30px;
+
+    font-family:Poppins,sans-serif;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.hero-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+}
+
+.hero img{
+
+    width:370px;
+
+    height:300px;
+
+    object-fit:cover;
+
+    border-radius:30px;
+
+    border:5px solid #f4e5c5;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-section{
+
+    padding:35px 7%;
+
+    background:var(--section);
+
+    text-align:center;
+
+}
+
+.search-title{
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    font-size:25px;
+
+    margin-bottom:18px;
+
+}
+
+.search-box{
+
+    width:100%;
+
+    max-width:650px;
+
+    padding:15px 20px;
+
+    border-radius:30px;
+
+    border:1px solid var(--border);
+
+    outline:none;
+
+    background:var(--input);
+
+    color:var(--text);
+
+    font-family:Poppins,sans-serif;
+
+    font-size:14px;
+
+}
+
+.search-box:focus{
+
+    border-color:var(--purple2);
+
+    box-shadow:0 0 0 3px rgba(145,105,142,.12);
+
+}
+
+
+/* =====================================================
+   RECIPE SECTION
+===================================================== */
+
+.recipe-section{
+
+    padding:70px 7%;
+
+}
+
+.section-heading{
+
+    text-align:center;
+
+    margin-bottom:45px;
+
+}
+
+.section-heading span{
+
+    font-family:Poppins,sans-serif;
+
+    color:var(--purple2);
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    font-weight:600;
+
+}
+
+.section-heading h2{
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    font-size:36px;
+
+    margin:10px 0;
+
+}
+
+.section-heading p{
+
+    font-family:Poppins,sans-serif;
+
+    color:var(--soft-text);
+
+    font-size:14px;
+
+}
+
+
+/* =====================================================
+   RECIPE GRID
+===================================================== */
+
+.recipe-grid{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:35px;
+
+}
+
+.recipe-card{
+
+    background:linear-gradient(
+        145deg,
+        var(--purple),
+        var(--purple2)
+    );
+
+    border:2px solid var(--gold);
+
+    border-radius:30px;
+
+    padding:25px;
+
+    color:white;
+
+    box-shadow:0 15px 35px var(--shadow);
+
+    transition:.3s;
+
+}
+
+.recipe-card:hover{
+
+    transform:translateY(-7px);
+
+}
+
+.recipe-card.hide{
+
+    display:none;
+
+}
+
+.recipe-image{
+
+    width:100%;
+
+    height:260px;
+
+    object-fit:cover;
+
+    border-radius:22px;
+
+    border:3px solid #f4e5c5;
+
+    margin-bottom:22px;
+
+}
+
+.recipe-card h3{
+
+    font-family:Cinzel,serif;
+
+    font-size:25px;
+
+    margin-bottom:12px;
+
+}
+
+.recipe-description{
+
+    font-family:Poppins,sans-serif;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+}
+
+.tag{
+
+    display:inline-block;
+
+    background:#f4e5c5;
+
+    color:#704b72;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    margin-bottom:18px;
+
+}
+
+.info{
+
+    display:flex;
+
+    gap:20px;
+
+    margin-bottom:20px;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+}
+
+.recipe-card h4{
+
+    font-family:Cinzel,serif;
+
+    color:#f4e5c5;
+
+    font-size:17px;
+
+    margin:20px 0 10px;
+
+}
+
+.recipe-card ul,
+
+.recipe-card ol{
+
+    padding-left:20px;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    line-height:1.9;
+
+}
+
+.recipe-card ol{
+
+    margin-bottom:15px;
+
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.actions{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+
+}
+
+.action-btn{
+
+    border:1px solid #f4e5c5;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+
+    padding:10px 14px;
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:12px;
+
+    transition:.3s;
+
+}
+
+.action-btn:hover{
+
+    background:#f4e5c5;
+
+    color:#704b72;
+
+}
+
+.action-btn.active{
+
+    background:#f4e5c5;
+
+    color:#704b72;
+
+    font-weight:600;
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.rating-box{
+
+    margin-top:25px;
+
+    padding-top:20px;
+
+    border-top:1px solid rgba(244,229,197,.35);
+
+}
+
+.rating-title{
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    margin-bottom:8px;
+
+}
+
+.stars{
+
+    display:flex;
+
+    gap:5px;
+
+}
+
+.star{
+
+    border:none;
+
+    background:none;
+
+    color:rgba(255,255,255,.45);
+
+    cursor:pointer;
+
+    font-size:25px;
+
+    padding:0;
+
+    transition:.2s;
+
+}
+
+.star:hover,
+
+.star.active{
+
+    color:#f4e5c5;
+
+    transform:scale(1.1);
+
+}
+
+.rating-message{
+
+    font-family:Poppins,sans-serif;
+
+    font-size:11px;
+
+    margin-top:7px;
+
+}
+
+
+/* =====================================================
+   REVIEW SECTION
+===================================================== */
+
+.review-section{
+
+    max-width:1050px;
+
+    margin:70px auto 0;
+
+    padding:35px;
+
+    background:var(--section);
+
+    border:1px solid var(--border);
+
+    border-radius:30px;
+
+}
+
+.review-section h2{
+
+    text-align:center;
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    margin-bottom:25px;
+
+}
+
+.review-form{
+
+    display:grid;
+
+    gap:15px;
+
+}
+
+.review-form select,
+
+.review-form textarea{
+
+    width:100%;
+
+    border:1px solid var(--border);
+
+    background:var(--input);
+
+    color:var(--text);
+
+    border-radius:15px;
+
+    padding:13px;
+
+    font-family:Poppins,sans-serif;
+
+    outline:none;
+
+}
+
+.review-form textarea{
+
+    min-height:130px;
+
+    resize:vertical;
+
+}
+
+.review-btn{
+
+    border:none;
+
+    background:var(--purple);
+
+    color:white;
+
+    padding:13px 20px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-family:Poppins,sans-serif;
+
+    font-weight:600;
+
+}
+
+.review-btn:hover{
+
+    background:var(--purple2);
+
+}
+
+.reviews-list{
+
+    margin-top:30px;
+
+    display:grid;
+
+    gap:15px;
+
+}
+
+.review-item{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:18px;
+
+}
+
+.review-item strong{
+
+    color:var(--purple);
+
+    font-family:Poppins,sans-serif;
+
+}
+
+.review-item small{
+
+    display:block;
+
+    color:var(--soft-text);
+
+    font-family:Poppins,sans-serif;
+
+    margin:5px 0 10px;
+
+}
+
+.review-item p{
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+.activity-section{
+
+    max-width:1050px;
+
+    margin:45px auto 0;
+
+}
+
+.activity-title{
+
+    text-align:center;
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    font-size:28px;
+
+    margin-bottom:25px;
+
+}
+
+.activity-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+.activity-box{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px var(--shadow);
+
+}
+
+.activity-icon{
+
+    font-size:30px;
+
+    margin-bottom:8px;
+
+}
+
+.activity-number{
+
+    display:block;
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+
+.activity-label{
+
+    font-family:Poppins,sans-serif;
+
+    font-size:12px;
+
+    color:var(--soft-text);
+
+}
+
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quote-section{
+
+    padding:70px 7%;
+
+    text-align:center;
+
+    background:var(--section);
+
+}
+
+.quote{
+
+    max-width:800px;
+
+    margin:auto;
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    font-size:25px;
+
+    line-height:1.7;
+
+}
+
+.quote-author{
+
+    margin-top:15px;
+
+    font-family:Poppins,sans-serif;
+
+    color:var(--soft-text);
+
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-section{
+
+    text-align:center;
+
+    padding:35px;
+
+}
+
+.back-btn{
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    background:var(--purple);
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:25px;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    background:#4d3547;
+
+    color:white;
+
+    text-align:center;
+
+    padding:30px 20px;
+
+}
+
+footer h3{
+
+    font-family:Cinzel,serif;
+
+    margin-bottom:8px;
+
+}
+
+footer p{
+
+    font-family:Poppins,sans-serif;
+
+    font-size:12px;
+
+    opacity:.8;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+
+    position:fixed;
+
+    bottom:25px;
+
+    right:25px;
+
+    background:#4d3547;
+
+    color:white;
+
+    padding:14px 20px;
+
+    border-radius:15px;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(20px);
+
+    transition:.3s;
+
+    z-index:5000;
+
+}
+
+.toast.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateY(0);
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+    header{
+
+        flex-direction:column;
+
+        padding:15px 4%;
+
+    }
+
+    .main-menu{
+
+        width:100%;
+
+        justify-content:center;
+
+        flex-wrap:wrap;
+
+        border-radius:25px;
+
+    }
+
+}
+
+
+@media(max-width:900px){
+
+    .hero{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .hero h1{
+
+        font-size:38px;
+
+    }
+
+    .hero img{
+
+        width:100%;
+
+        max-width:370px;
+
+    }
+
+    .recipe-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .logo{
+
+        font-size:21px;
+
+    }
+
+    .main-menu{
+
+        gap:3px;
+
+        padding:6px;
+
+    }
+
+    .main-menu a{
+
+        font-size:11px;
+
+        padding:8px 10px;
+
+    }
+
+    .theme-btn{
+
+        width:34px;
+
+        height:34px;
+
+        font-size:14px;
+
+    }
+
+    .hero{
+
+        padding:45px 5%;
+
+    }
+
+    .hero h1{
+
+        font-size:31px;
+
+    }
+
+    .recipe-section{
+
+        padding:50px 5%;
+
+    }
+
+    .section-heading h2{
+
+        font-size:28px;
+
+    }
+
+    .activity-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .review-section{
+
+        margin-left:5%;
+
+        margin-right:5%;
+
+        padding:22px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <nav class="main-menu">
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="royal.html">Royal</a>
+
+        <a href="movies&cartoons.html">Movies & Cartoons</a>
+
+        <a href="worldcuisine.html">World Cuisine</a>
+
+        <a href="desertwrold.html">Desserts</a>
+
+        <a href="gallery.html">Gallery</a>
+
+        <a href="favourite.html">Favourite</a>
+
+        <a href="order.html">Order</a>
+
+        <a href="stamp,html">stamp</a>
+
+        <a href="contact.html">Contact</a>
+
+        <button
+            class="theme-btn"
+            id="themeButton"
+            onclick="toggleTheme()">
+            🌙
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span>
+            🔵 CARTOON RECIPE COLLECTION
+        </span>
+
+        <h1>
+            Doraemon's<br>
+            Fun Flavours
+        </h1>
+
+        <p>
+            Step into Doraemon's magical world and enjoy
+            two delicious Japanese-inspired recipes loved
+            by cartoon fans.
+        </p>
+
+        <a
+            href="#recipes"
+            class="hero-btn">
+            Explore Recipes ↓
+        </a>
+
+    </div>
+
+
+    <img
+        src="doreamonhero.png"
+        alt="Doraemon">
+
+</section>
+
+
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
+<section class="search-section">
+
+    <div class="search-title">
+        🔍 Search Doraemon Recipes
+    </div>
+
+    <input
+        type="text"
+        id="searchInput"
+        class="search-box"
+        placeholder="Search Dorayaki or Ramen..."
+        onkeyup="searchRecipes()">
+
+</section>
+
+
+
+<!-- =====================================================
+     RECIPES
+===================================================== -->
+
+<section
+    class="recipe-section"
+    id="recipes">
+
+
+    <div class="section-heading">
+
+        <span>
+            DORAEMON'S KITCHEN
+        </span>
+
+        <h2>
+            Two Delicious Recipes
+        </h2>
+
+        <p>
+            Simple • Fun • Delicious
+        </p>
+
+    </div>
+
+
+    <div class="recipe-grid">
+
+
+        <!-- =================================================
+             DORAYAKI
+        ================================================== -->
+
+        <div
+            class="recipe-card"
+            data-name="Doraemon's Dorayaki Dorayaki sweet">
+
+
+            <img
+                src="doraemon dorayaki.png"
+                class="recipe-image"
+                alt="Doraemon Dorayaki">
+
+
+            <span class="tag">
+                🥞 SWEET
+            </span>
+
+
+            <h3>
+                🥞 Doraemon's Dorayaki
+            </h3>
+
+
+            <p class="recipe-description">
+
+                Soft and fluffy Japanese pancakes filled
+                with sweet red bean paste, inspired by
+                Doraemon's favourite treat.
+
+            </p>
+
+
+            <div class="info">
+
+                <span>
+                    ⏱ 30 mins
+                </span>
+
+                <span>
+                    ⭐ Easy
+                </span>
+
+            </div>
+
+
+            <h4>
+                Ingredients
+            </h4>
+
+
+            <ul>
+
+                <li>
+                    1 cup all-purpose flour
+                </li>
+
+                <li>
+                    2 eggs
+                </li>
+
+                <li>
+                    ¼ cup sugar
+                </li>
+
+                <li>
+                    2 tbsp honey
+                </li>
+
+                <li>
+                    ½ tsp baking powder
+                </li>
+
+                <li>
+                    ½ tsp vanilla essence
+                </li>
+
+                <li>
+                    Red bean paste
+                </li>
+
+            </ul>
+
+
+            <h4>
+                Preparation
+            </h4>
+
+
+            <ol>
+
+                <li>
+                    Beat eggs and sugar until smooth.
+                </li>
+
+                <li>
+                    Add honey and vanilla essence.
+                </li>
+
+                <li>
+                    Mix flour and baking powder into batter.
+                </li>
+
+                <li>
+                    Heat non-stick pan on low-medium.
+                </li>
+
+                <li>
+                    Pour small batter portions and cook
+                    until bubbles appear.
+                </li>
+
+                <li>
+                    Flip and cook the other side.
+                </li>
+
+                <li>
+                    Spread red bean paste between two
+                    pancakes and serve.
+                </li>
+
+            </ol>
+
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    id="fav-dorayaki"
+                    onclick="toggleFavourite(
+                        'doraemon-dorayaki',
+                        'Doraemon Dorayaki',
+                        this
+                    )">
+
+                    ❤️ Add to Favourite
+
+                </button>
+
+
+                <button
+                    class="action-btn"
+                    id="stamp-dorayaki"
+                    onclick="toggleStamp(
+                        'doraemon-dorayaki',
+                        'Doraemon Dorayaki',
+                        this
+                    )">
+
+                    🎟️ Add to Stamp
+
+                </button>
+
+            </div>
+
+
+            <!-- RATING -->
+
+            <div class="rating-box">
+
+                <div class="rating-title">
+                    Rate this recipe
+                </div>
+
+
+                <div
+                    class="stars"
+                    id="stars-dorayaki">
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-dorayaki',
+                            1,
+                            this
+                        )">
+                        ★
+                    </button>
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-dorayaki',
+                            2,
+                            this
+                        )">
+                        ★
+                    </button>
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-dorayaki',
+                            3,
+                            this
+                        )">
+                        ★
+                    </button>
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-dorayaki',
+                            4,
+                            this
+                        )">
+                        ★
+                    </button>
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-dorayaki',
+                            5,
+                            this
+                        )">
+                        ★
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="rating-message"
+                    id="rating-message-dorayaki">
+
+                    Choose your rating
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RAMEN
+        ================================================== -->
+
+        <div
+            class="recipe-card"
+            data-name="Doraemon's Ramen Bowl Ramen noodles savoury">
+
+
+            <img
+                src="doramonnoodlesbowl.png"
+                class="recipe-image"
+                alt="Doraemon Ramen Bowl">
+
+
+            <span class="tag">
+                🍜 SAVOURY
+            </span>
+
+
+            <h3>
+                🍜 Doraemon's Ramen Bowl
+            </h3>
+
+
+            <p class="recipe-description">
+
+                A warm and comforting noodle bowl inspired
+                by the delicious meals enjoyed in
+                Doraemon's world.
+
+            </p>
+
+
+            <div class="info">
+
+                <span>
+                    ⏱ 25 mins
+                </span>
+
+                <span>
+                    ⭐ Easy
+                </span>
+
+            </div>
+
+
+            <h4>
+                Ingredients
+            </h4>
+
+
+            <ul>
+
+                <li>
+                    1 packet ramen noodles
+                </li>
+
+                <li>
+                    2 cups vegetable stock
+                </li>
+
+                <li>
+                    1 cup mixed vegetables
+                </li>
+
+                <li>
+                    1 tbsp soy sauce
+                </li>
+
+                <li>
+                    1 tsp sesame oil
+                </li>
+
+                <li>
+                    1 boiled egg
+                </li>
+
+                <li>
+                    Spring onions
+                </li>
+
+                <li>
+                    Salt to taste
+                </li>
+
+            </ul>
+
+
+            <h4>
+                Preparation
+            </h4>
+
+
+            <ol>
+
+                <li>
+                    Boil vegetable stock.
+                </li>
+
+                <li>
+                    Add soy sauce and sesame oil.
+                </li>
+
+                <li>
+                    Add mixed vegetables and cook until
+                    slightly soft.
+                </li>
+
+                <li>
+                    Add ramen noodles and cook according
+                    to the packet instructions.
+                </li>
+
+                <li>
+                    Season with salt if needed.
+                </li>
+
+                <li>
+                    Transfer to a bowl.
+                </li>
+
+                <li>
+                    Add boiled egg and spring onions
+                    and serve hot.
+                </li>
+
+            </ol>
+
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    id="fav-ramen"
+                    onclick="toggleFavourite(
+                        'doraemon-ramen-bowl',
+                        'Doraemon Ramen Bowl',
+                        this
+                    )">
+
+                    ❤️ Add to Favourite
+
+                </button>
+
+
+                <button
+                    class="action-btn"
+                    id="stamp-ramen"
+                    onclick="toggleStamp(
+                        'doraemon-ramen-bowl',
+                        'Doraemon Ramen Bowl',
+                        this
+                    )">
+
+                    🎟️ Add to Stamp
+
+                </button>
+
+            </div>
+
+
+            <!-- RATING -->
+
+            <div class="rating-box">
+
+                <div class="rating-title">
+                    Rate this recipe
+                </div>
+
+
+                <div
+                    class="stars"
+                    id="stars-ramen">
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-ramen-bowl',
+                            1,
+                            this
+                        )">
+                        ★
+                    </button>
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-ramen-bowl',
+                            2,
+                            this
+                        )">
+                        ★
+                    </button>
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-ramen-bowl',
+                            3,
+                            this
+                        )">
+                        ★
+                    </button>
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-ramen-bowl',
+                            4,
+                            this
+                        )">
+                        ★
+                    </button>
+
+
+                    <button
+                        class="star"
+                        onclick="saveRating(
+                            'doraemon-ramen-bowl',
+                            5,
+                            this
+                        )">
+                        ★
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="rating-message"
+                    id="rating-message-ramen">
+
+                    Choose your rating
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         REVIEW
+    ================================================== -->
+
+    <div class="review-section">
+
+        <h2>
+            💬 Share Your Review
+        </h2>
+
+
+        <div class="review-form">
+
+
+            <select id="reviewRecipe">
+
+                <option value="doraemon-dorayaki">
+                    🥞 Doraemon's Dorayaki
+                </option>
+
+                <option value="doraemon-ramen-bowl">
+                    🍜 Doraemon's Ramen Bowl
+                </option>
+
+            </select>
+
+
+            <textarea
+                id="reviewText"
+                placeholder="Tell us what you think about this recipe...">
+            </textarea>
+
+
+            <button
+                class="review-btn"
+                onclick="submitReview()">
+
+                Submit Review
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="reviews-list"
+            id="reviewsList">
+
+            <p style="
+                text-align:center;
+                color:var(--soft-text);
+                font-family:Poppins,sans-serif;">
+                Loading reviews...
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ACTIVITY
+    ================================================== -->
+
+    <div class="activity-section">
+
+        <h2 class="activity-title">
+            ✨ Your Flavorverse Activity
+        </h2>
+
+
+        <div class="activity-grid">
+
+
+            <div class="activity-box">
+
+                <div class="activity-icon">
+                    ❤️
+                </div>
+
+                <span
+                    class="activity-number"
+                    id="favouriteCount">
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Favourite Recipes
+                </span>
+
+            </div>
+
+
+            <div class="activity-box">
+
+                <div class="activity-icon">
+                    🎟️
+                </div>
+
+                <span
+                    class="activity-number"
+                    id="stampCount">
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Recipe Stamps
+                </span>
+
+            </div>
+
+
+            <div class="activity-box">
+
+                <div class="activity-icon">
+                    ⭐
+                </div>
+
+                <span
+                    class="activity-number"
+                    id="ratingCount">
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Ratings Given
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUOTE
+===================================================== -->
+
+<section class="quote-section">
+
+    <div class="quote">
+
+        "Every bite becomes magical with a little imagination!"
+
+    </div>
+
+    <div class="quote-author">
+
+        — The Flavorverse
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BACK
+===================================================== -->
+
+<div class="back-section">
+
+    <a
+        href="movies&cartoons.html"
+        class="back-btn">
+
+        ← Back to Movies & Cartoons
+
+    </a>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        🍴 The Flavorverse
+    </h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+    authDomain:
+    "the-flavoverse.firebaseapp.com",
+
+    projectId:
+    "the-flavoverse",
+
+    storageBucket:
+    "the-flavoverse.firebasestorage.app",
+
+    messagingSenderId:
+    "1064022248292",
+
+    appId:
+    "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+
+    measurementId:
+    "G-16Z0K1687Z"
+
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+let currentUser = null;
+
+
+
+/* =====================================================
+   RECIPE NAMES
+===================================================== */
+
+const recipeNames = {
+
+    "doraemon-dorayaki":
+    "Doraemon's Dorayaki",
+
+    "doraemon-ramen-bowl":
+    "Doraemon's Ramen Bowl"
+
+};
+
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function applyTheme(){
+
+    const theme =
+        localStorage.getItem(
+            "flavorverseTheme"
+        ) || "light";
+
+
+    if(theme === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById(
+            "themeButton"
+        ).textContent = "☀️";
+
+    }
+
+    else{
+
+        document.body.classList.remove("dark");
+
+        document.getElementById(
+            "themeButton"
+        ).textContent = "🌙";
+
+    }
+
+}
+
+
+function toggleTheme(){
+
+    const isDark =
+        document.body.classList.toggle("dark");
+
+
+    localStorage.setItem(
+        "flavorverseTheme",
+        isDark ? "dark" : "light"
+    );
+
+
+    document.getElementById(
+        "themeButton"
+    ).textContent =
+        isDark ? "☀️" : "🌙";
+
+}
+
+
+applyTheme();
+
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+auth.onAuthStateChanged(async user => {
+
+    currentUser = user;
+
+
+    if(user){
+
+        await loadFavouriteStatus();
+
+        await loadStampStatus();
+
+        await loadMyRatings();
+
+        await loadActivity();
+
+    }
+
+
+    loadReviews();
+
+});
+
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },3000);
+
+}
+
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function checkLogin(){
+
+    if(!currentUser){
+
+        showToast(
+            "Please login to use this feature ❤️"
+        );
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "login.html";
+
+        },1200);
+
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function searchRecipes(){
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const cards =
+        document.querySelectorAll(
+            ".recipe-card"
+        );
+
+
+    cards.forEach(card => {
+
+        const name =
+            card.dataset.name
+            .toLowerCase();
+
+
+        if(name.includes(search)){
+
+            card.classList.remove("hide");
+
+        }
+
+        else{
+
+            card.classList.add("hide");
+
+        }
+
+    });
+
+}
+
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function toggleFavourite(
+    recipeId,
+    recipeName,
+    button
+){
+
+    if(!checkLogin()) return;
+
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("favourites")
+        .doc(recipeId);
+
+
+    try{
+
+        const doc =
+            await ref.get();
+
+
+        if(doc.exists){
+
+            await ref.delete();
+
+
+            button.classList.remove(
+                "active"
+            );
+
+
+            button.innerHTML =
+                "❤️ Add to Favourite";
+
+
+            showToast(
+                recipeName +
+                " removed from favourites"
+            );
+
+        }
+
+        else{
+
+            await ref.set({
+
+                recipeId:recipeId,
+
+                recipeName:recipeName,
+
+                category:"Cartoons",
+
+                addedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            button.innerHTML =
+                "❤️ Added to Favourite";
+
+
+            showToast(
+                recipeName +
+                " added to favourite ❤️"
+            );
+
+        }
+
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to update favourite"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function toggleStamp(
+    recipeId,
+    recipeName,
+    button
+){
+
+    if(!checkLogin()) return;
+
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("stamps")
+        .doc(recipeId);
+
+
+    try{
+
+        const doc =
+            await ref.get();
+
+
+        if(doc.exists){
+
+            await ref.delete();
+
+
+            button.classList.remove(
+                "active"
+            );
+
+
+            button.innerHTML =
+                "🎟️ Add to Stamp";
+
+
+            showToast(
+                recipeName +
+                " removed from stamps"
+            );
+
+        }
+
+        else{
+
+            await ref.set({
+
+                recipeId:recipeId,
+
+                recipeName:recipeName,
+
+                category:"Cartoons",
+
+                stampedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            button.innerHTML =
+                "🎟️ Added to Stamp";
+
+
+            showToast(
+                recipeName +
+                " added to stamp 🎟️"
+            );
+
+        }
+
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to update stamp"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD FAVOURITES
+===================================================== */
+
+async function loadFavouriteStatus(){
+
+    const recipes = [
+
+        {
+            id:"doraemon-dorayaki",
+            button:"fav-dorayaki"
+        },
+
+        {
+            id:"doraemon-ramen-bowl",
+            button:"fav-ramen"
+        }
+
+    ];
+
+
+    for(const recipe of recipes){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("favourites")
+                .doc(recipe.id)
+                .get();
+
+
+            const button =
+                document.getElementById(
+                    recipe.button
+                );
+
+
+            if(doc.exists){
+
+                button.classList.add(
+                    "active"
+                );
+
+                button.innerHTML =
+                    "❤️ Added to Favourite";
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD STAMPS
+===================================================== */
+
+async function loadStampStatus(){
+
+    const recipes = [
+
+        {
+            id:"doraemon-dorayaki",
+            button:"stamp-dorayaki"
+        },
+
+        {
+            id:"doraemon-ramen-bowl",
+            button:"stamp-ramen"
+        }
+
+    ];
+
+
+    for(const recipe of recipes){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("stamps")
+                .doc(recipe.id)
+                .get();
+
+
+            const button =
+                document.getElementById(
+                    recipe.button
+                );
+
+
+            if(doc.exists){
+
+                button.classList.add(
+                    "active"
+                );
+
+                button.innerHTML =
+                    "🎟️ Added to Stamp";
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function saveRating(
+    recipeId,
+    rating,
+    clickedStar
+){
+
+    if(!checkLogin()) return;
+
+
+    try{
+
+        await db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("ratings")
+        .doc(recipeId)
+        .set({
+
+            recipeId:recipeId,
+
+            rating:rating,
+
+            updatedAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+
+        const parent =
+            clickedStar.parentElement;
+
+
+        const stars =
+            parent.querySelectorAll(
+                ".star"
+            );
+
+
+        stars.forEach((star,index) => {
+
+            if(index < rating){
+
+                star.classList.add(
+                    "active"
+                );
+
+            }
+
+            else{
+
+                star.classList.remove(
+                    "active"
+                );
+
+            }
+
+        });
+
+
+        const messageId =
+            recipeId ===
+            "doraemon-dorayaki"
+
+            ? "rating-message-dorayaki"
+
+            : "rating-message-ramen";
+
+
+        document.getElementById(
+            messageId
+        ).textContent =
+            "You rated this recipe " +
+            rating +
+            " / 5 ⭐";
+
+
+        showToast(
+            "Your rating has been saved ⭐"
+        );
+
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to save rating"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD RATINGS
+===================================================== */
+
+async function loadMyRatings(){
+
+    const recipes = [
+
+        "doraemon-dorayaki",
+
+        "doraemon-ramen-bowl"
+
+    ];
+
+
+    for(const recipeId of recipes){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("ratings")
+                .doc(recipeId)
+                .get();
+
+
+            if(!doc.exists) continue;
+
+
+            const rating =
+                doc.data().rating;
+
+
+            const container =
+                document.getElementById(
+
+                    recipeId ===
+                    "doraemon-dorayaki"
+
+                    ? "stars-dorayaki"
+
+                    : "stars-ramen"
+
+                );
+
+
+            const stars =
+                container.querySelectorAll(
+                    ".star"
+                );
+
+
+            stars.forEach((star,index) => {
+
+                if(index < rating){
+
+                    star.classList.add(
+                        "active"
+                    );
+
+                }
+
+                else{
+
+                    star.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            });
+
+
+            const messageId =
+                recipeId ===
+                "doraemon-dorayaki"
+
+                ? "rating-message-dorayaki"
+
+                : "rating-message-ramen";
+
+
+            document.getElementById(
+                messageId
+            ).textContent =
+                "You rated this recipe " +
+                rating +
+                " / 5 ⭐";
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SUBMIT REVIEW
+===================================================== */
+
+async function submitReview(){
+
+    if(!checkLogin()) return;
+
+
+    const recipeId =
+        document.getElementById(
+            "reviewRecipe"
+        ).value;
+
+
+    const review =
+        document.getElementById(
+            "reviewText"
+        ).value.trim();
+
+
+    if(!review){
+
+        showToast(
+            "Please write your review first 💬"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await db
+        .collection("recipes")
+        .doc(recipeId)
+        .collection("reviews")
+        .add({
+
+            userId:
+                currentUser.uid,
+
+            userName:
+                currentUser.displayName ||
+                currentUser.email
+                .split("@")[0],
+
+            review:review,
+
+            createdAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+
+        document.getElementById(
+            "reviewText"
+        ).value = "";
+
+
+        showToast(
+            "Your review has been posted 💬"
+        );
+
+
+        loadReviews();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to post review"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(){
+
+    const reviewList =
+        document.getElementById(
+            "reviewsList"
+        );
+
+
+    reviewList.innerHTML =
+
+        `<p style="
+        text-align:center;
+        color:var(--soft-text);
+        font-family:Poppins,sans-serif;">
+        Loading reviews...
+        </p>`;
+
+
+    const recipeIds = [
+
+        "doraemon-dorayaki",
+
+        "doraemon-ramen-bowl"
+
+    ];
+
+
+    let allReviews = [];
+
+
+    try{
+
+        for(const recipeId of recipeIds){
+
+            const snapshot =
+                await db
+                .collection("recipes")
+                .doc(recipeId)
+                .collection("reviews")
+                .get();
+
+
+            snapshot.forEach(doc => {
+
+                const data =
+                    doc.data();
+
+
+                allReviews.push({
+
+                    id:doc.id,
+
+                    recipeId:recipeId,
+
+                    ...data
+
+                });
+
+            });
+
+        }
+
+
+        allReviews.sort((a,b) => {
+
+            const timeA =
+                a.createdAt
+                ? a.createdAt.toMillis()
+                : 0;
+
+
+            const timeB =
+                b.createdAt
+                ? b.createdAt.toMillis()
+                : 0;
+
+
+            return timeB - timeA;
+
+        });
+
+
+        if(allReviews.length === 0){
+
+            reviewList.innerHTML =
+
+                `<p style="
+                text-align:center;
+                color:var(--soft-text);
+                font-family:Poppins,sans-serif;">
+                No reviews yet. Be the first to share your experience! 💜
+                </p>`;
+
+            return;
+
+        }
+
+
+        reviewList.innerHTML = "";
+
+
+        allReviews.forEach(item => {
+
+            const recipeName =
+                recipeNames[
+                    item.recipeId
+                ];
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "review-item";
+
+
+            const date =
+                item.createdAt
+
+                ? item.createdAt
+                    .toDate()
+                    .toLocaleDateString()
+
+                : "Recently";
+
+
+            div.innerHTML = `
+
+                <strong>
+                    ${escapeHTML(
+                        item.userName ||
+                        "Flavorverse User"
+                    )}
+                </strong>
+
+                <small>
+                    ${escapeHTML(
+                        recipeName
+                    )}
+                    •
+                    ${date}
+                </small>
+
+                <p>
+                    ${escapeHTML(
+                        item.review
+                    )}
+                </p>
+
+            `;
+
+
+            reviewList.appendChild(
+                div
+            );
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        reviewList.innerHTML =
+
+            `<p style="
+            text-align:center;
+            color:var(--soft-text);
+            font-family:Poppins,sans-serif;">
+            Reviews could not be loaded.
+            </p>`;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+async function loadActivity(){
+
+    if(!currentUser) return;
+
+
+    try{
+
+        const userRef =
+            db
+            .collection("users")
+            .doc(currentUser.uid);
+
+
+        const favouriteSnapshot =
+            await userRef
+            .collection("favourites")
+            .get();
+
+
+        const stampSnapshot =
+            await userRef
+            .collection("stamps")
+            .get();
+
+
+        const ratingSnapshot =
+            await userRef
+            .collection("ratings")
+            .get();
+
+
+        document.getElementById(
+            "favouriteCount"
+        ).textContent =
+            favouriteSnapshot.size;
+
+
+        document.getElementById(
+            "stampCount"
+        ).textContent =
+            stampSnapshot.size;
+
+
+        document.getElementById(
+            "ratingCount"
+        ).textContent =
+            ratingSnapshot.size;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

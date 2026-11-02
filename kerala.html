@@ -1,0 +1,3684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kerala | The Flavorverse</title>
+
+<script src="recipe-actions.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#F7E7CE;
+color:#5B4A45;
+transition:.3s;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode{
+background:#241d23;
+color:#eee;
+}
+
+body.dark-mode .hero,
+body.dark-mode .about-text,
+body.dark-mode .recipe-section,
+body.dark-mode .fact-card,
+body.dark-mode .profile-card,
+body.dark-mode .explorer-box,
+body.dark-mode .review-box,
+body.dark-mode .recent-card{
+background:#342a32;
+color:#eee;
+}
+
+body.dark-mode .recipe-content h2,
+body.dark-mode .about-text h2,
+body.dark-mode .facts-section h2{
+color:#e9c9e4;
+}
+
+body.dark-mode .recipe-content h3{
+color:#d6aeca;
+}
+
+body.dark-mode .recipe-info div,
+body.dark-mode .chef-tip,
+body.dark-mode .fun-fact{
+background:#443640;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea{
+background:#443640;
+color:white;
+border-color:#80647b;
+}
+
+body.dark-mode .search-box{
+background:#342a32;
+}
+
+/* ================= HEADER ================= */
+
+header{
+background:#8E6C88;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+font-family:'Cinzel',serif;
+font-size:32px;
+font-weight:bold;
+color:white;
+}
+
+
+/* ================= HAMBURGER DRAWER MENU ================= */
+header{
+    position:relative;
+    z-index:1000;
+    min-height:80px;
+}
+header nav{display:none !important;}
+.menu-open-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:44px;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:12px;
+    background:#4d3547;
+    color:#fff;
+    font-size:27px;
+    cursor:pointer;
+    transition:.25s;
+}
+.menu-open-btn:hover{background:#735267;transform:scale(1.04);}
+.menu-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(28,18,29,.48);
+    backdrop-filter:blur(2px);
+    z-index:2000;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .28s ease,visibility .28s ease;
+}
+.menu-overlay.show{opacity:1;visibility:visible;}
+.explore-drawer{
+    position:fixed;
+    top:0;
+    right:0;
+    width:350px;
+    max-width:90vw;
+    height:100vh;
+    overflow-y:auto;
+    background:#fff8f0;
+    color:#604b62;
+    z-index:2001;
+    transform:translateX(105%);
+    transition:transform .3s ease;
+    box-shadow:-8px 0 30px rgba(0,0,0,.18);
+}
+.explore-drawer.open{transform:translateX(0);}
+.drawer-heading{
+    position:sticky;
+    top:0;
+    z-index:2;
+    min-height:92px;
+    padding:25px 28px;
+    background:#9a7897;
+    color:#fffaf5;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.drawer-heading h2{
+    font-family:'Poppins',sans-serif;
+    font-size:25px;
+    margin:0;
+    color:#fffaf5;
+}
+.drawer-close{
+    border:0;
+    background:transparent;
+    color:white;
+    font-size:29px;
+    line-height:1;
+    cursor:pointer;
+    padding:0 0 4px 10px;
+}
+.drawer-links{padding:14px 22px 24px;}
+.drawer-link{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:12px 12px;
+    margin:2px 0;
+    border-radius:12px;
+    color:#604b62;
+    text-decoration:none;
+    transition:background .2s,transform .2s;
+}
+.drawer-link:hover,.drawer-link.active{
+    background:#f0e1ed;
+    transform:translateX(2px);
+}
+.drawer-icon{
+    width:28px;
+    flex:0 0 28px;
+    text-align:center;
+    font-size:22px;
+}
+.drawer-link strong{
+    display:block;
+    font-size:15px;
+    font-weight:600;
+    line-height:1.35;
+}
+.drawer-link small{
+    display:block;
+    margin-top:2px;
+    font-size:11px;
+    color:#927b91;
+    line-height:1.4;
+}
+.drawer-divider{
+    height:1px;
+    background:#e4d2df;
+    margin:12px 0;
+}
+.drawer-theme{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    border:0;
+    background:transparent;
+    padding:12px;
+    border-radius:12px;
+    color:#604b62;
+    text-align:left;
+    font-family:'Poppins',sans-serif;
+    cursor:pointer;
+}
+.drawer-theme:hover{background:#f0e1ed;}
+body.drawer-open{overflow:hidden;}
+@media(max-width:768px){
+    header{flex-direction:row;gap:12px;padding:16px 5%;}
+    .logo{font-size:24px;}
+    .menu-open-btn{width:44px;height:42px;flex:0 0 44px;}
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+width:90%;
+margin:40px auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+display:flex;
+align-items:center;
+gap:40px;
+padding:40px;
+
+}
+
+.image-box{
+
+width:450px;
+height:350px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#fff8f2;
+border-radius:20px;
+flex:1;
+
+}
+
+.image-box img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+display:block;
+}
+
+.hero-content{
+
+padding:40px;
+flex:1;
+text-align:left;
+
+}
+
+.hero-content h1{
+
+font-family:'Cinzel',serif;
+font-size:58px;
+color:#6F4B72;
+
+}
+
+.hero-content h2{
+
+margin-top:15px;
+color:#B58A4D;
+font-size:30px;
+
+}
+
+.hero-content p{
+
+margin-top:18px;
+font-size:18px;
+line-height:1.8;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:25px;
+padding:14px 35px;
+background:#8E6C88;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#6F4B72;
+
+}
+
+/* ================= ABOUT ================= */
+
+.about-section{
+width:90%;
+margin:50px auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+
+.about-text{
+flex:2;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.about-text h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:20px;
+}
+
+.about-text p{
+line-height:1.9;
+font-size:17px;
+margin-bottom:18px;
+text-align:justify;
+}
+
+.about-box{
+flex:1;
+background:#8E6C88;
+color:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.about-box h3{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+text-align:center;
+}
+
+.about-box ul{
+list-style:none;
+}
+
+.about-box li{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.25);
+font-size:16px;
+}
+
+.about-box li:last-child{
+border-bottom:none;
+}
+
+/* =====================================================
+   RECIPE EXPLORER
+===================================================== */
+
+.explorer-section{
+width:90%;
+margin:60px auto;
+}
+
+.explorer-box{
+background:#FFF9F4;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.explorer-box h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.search-filter-row{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.search-box,
+.filter-box{
+padding:13px 18px;
+border:1px solid #D8C5B0;
+border-radius:25px;
+background:white;
+color:#5B4A45;
+font-family:'Poppins',sans-serif;
+outline:none;
+}
+
+.search-box{
+width:45%;
+min-width:250px;
+}
+
+.filter-box{
+min-width:180px;
+}
+
+.explorer-buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+.explorer-btn{
+border:none;
+padding:12px 22px;
+border-radius:25px;
+background:#8E6C88;
+color:white;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.explorer-btn:hover{
+background:#6F4B72;
+transform:translateY(-2px);
+}
+
+.explorer-btn.random{
+background:#B58A4D;
+}
+
+/* ================= POPULAR ================= */
+
+.popular-section{
+width:90%;
+margin:40px auto;
+}
+
+.popular-title{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:32px;
+margin-bottom:25px;
+}
+
+.popular-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.popular-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+text-align:center;
+transition:.3s;
+}
+
+.popular-card:hover{
+transform:translateY(-6px);
+}
+
+.popular-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.popular-card p{
+font-size:14px;
+line-height:1.6;
+}
+
+/* ================= SEARCH RESULT ================= */
+
+.search-result{
+text-align:center;
+margin-top:18px;
+font-weight:600;
+color:#8E6C88;
+}
+
+/* ================= RECIPE SECTION ================= */
+
+.recipe-section{
+width:90%;
+margin:60px auto;
+
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:40px;
+
+align-items:stretch;
+
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.recipe-image{
+grid-column:1;
+grid-row:1;
+}
+
+.recipe-image img{
+width:100%;
+border-radius:18px;
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+display:block;
+}
+
+.recipe-content{
+grid-column:2;
+grid-row:1;
+}
+
+.recipe-content h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:38px;
+margin-bottom:20px;
+}
+
+.recipe-content h3{
+margin-top:25px;
+margin-bottom:12px;
+color:#8E6C88;
+}
+
+.recipe-content p{
+line-height:1.8;
+text-align:justify;
+}
+
+.recipe-content ul,
+.recipe-content ol{
+margin-left:25px;
+line-height:1.9;
+}
+
+/* ================= RECIPE INFO ================= */
+
+.recipe-info{
+display:flex;
+justify-content:space-between;
+margin-top:25px;
+gap:20px;
+}
+
+.recipe-info div{
+flex:1;
+background:#F7E7CE;
+padding:18px;
+text-align:center;
+border-radius:15px;
+}
+
+/* ================= CHEF TIP + FUN FACT ================= */
+
+.chef-tip,
+.fun-fact{
+margin-top:25px;
+background:#F7E7CE;
+padding:20px;
+border-left:6px solid #8E6C88;
+border-radius:12px;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.recipe-actions{
+grid-column:1;
+grid-row:1;
+
+align-self:end;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-end;
+
+gap:15px;
+
+padding-bottom:5px;
+}
+
+.recipe-actions button{
+
+width:200px;
+padding:14px 18px;
+
+border:none;
+border-radius:30px;
+
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 6px 15px rgba(91,74,69,.18);
+
+}
+
+.favorite-btn{
+background:#8E6C88;
+color:white;
+}
+
+.stamp-btn{
+background:#F4E5C5;
+color:#5B4A45;
+}
+
+.recipe-actions button:hover{
+transform:translateY(-3px);
+box-shadow:0 9px 20px rgba(91,74,69,.22);
+}
+
+/* ================= RATING ================= */
+
+.rating-area{
+margin-top:22px;
+padding:20px;
+background:rgba(244,229,197,.55);
+border-radius:15px;
+}
+
+.rating-area h3{
+margin-top:0;
+}
+
+.stars{
+display:flex;
+gap:5px;
+margin-top:8px;
+}
+
+.star{
+font-size:28px;
+cursor:pointer;
+color:#c8b9aa;
+transition:.2s;
+}
+
+.star.active{
+color:#E5A82F;
+}
+
+.rating-message{
+font-size:13px;
+margin-top:7px;
+}
+
+/* ================= REVIEWS ================= */
+
+.review-box{
+margin-top:18px;
+padding:20px;
+background:#FFF9F4;
+border:1px solid #eadbc9;
+border-radius:15px;
+}
+
+.review-box h3{
+margin-top:0;
+}
+
+.review-input{
+width:100%;
+min-height:80px;
+resize:vertical;
+padding:12px;
+border:1px solid #D8C5B0;
+border-radius:12px;
+outline:none;
+font-family:'Poppins',sans-serif;
+margin-top:8px;
+}
+
+.review-submit{
+margin-top:10px;
+border:none;
+background:#8E6C88;
+color:white;
+padding:10px 20px;
+border-radius:22px;
+cursor:pointer;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+}
+
+.review-submit:hover{
+background:#6F4B72;
+}
+
+.reviews-list{
+margin-top:15px;
+}
+
+.single-review{
+padding:12px;
+margin-top:10px;
+background:#F7E7CE;
+border-radius:12px;
+}
+
+.single-review strong{
+color:#6F4B72;
+}
+
+.single-review small{
+display:block;
+margin-top:4px;
+opacity:.7;
+}
+
+.no-review{
+font-size:13px;
+opacity:.7;
+margin-top:10px;
+}
+
+/* =====================================================
+   REVERSE RECIPE
+===================================================== */
+
+.recipe-section.reverse{
+grid-template-columns:2fr 1fr;
+}
+
+.recipe-section.reverse .recipe-content{
+grid-column:1;
+grid-row:1;
+}
+
+.recipe-section.reverse .recipe-image{
+grid-column:2;
+grid-row:1;
+}
+
+.recipe-section.reverse .recipe-actions{
+grid-column:2;
+grid-row:1;
+}
+
+/* ================= FOOD FACTS ================= */
+
+.facts-section{
+width:90%;
+margin:60px auto;
+}
+
+.facts-section h2{
+text-align:center;
+font-family:'Cinzel',serif;
+font-size:40px;
+color:#6F4B72;
+margin-bottom:35px;
+}
+
+.facts-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.fact-card{
+background:#FFF9F4;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.fact-card:hover{
+transform:translateY(-8px);
+}
+
+.fact-card h3{
+color:#8E6C88;
+margin-bottom:15px;
+}
+
+.fact-card p{
+line-height:1.8;
+}
+
+/* ================= RECENTLY VIEWED ================= */
+
+.recent-section{
+width:90%;
+margin:60px auto;
+}
+
+.recent-section h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.recent-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.recent-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+}
+
+.recent-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.recent-card p{
+font-size:13px;
+}
+
+.recent-empty{
+text-align:center;
+opacity:.7;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-section{
+width:90%;
+margin:60px auto;
+}
+
+.profile-box{
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.profile-box h2{
+font-family:'Cinzel',serif;
+font-size:38px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.profile-name{
+text-align:center;
+font-size:20px;
+margin-bottom:30px;
+}
+
+.profile-email{
+text-align:center;
+opacity:.9;
+margin-bottom:25px;
+}
+
+.profile-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.profile-card{
+background:#FFF9F4;
+color:#5B4A45;
+padding:22px;
+border-radius:16px;
+text-align:center;
+}
+
+.profile-card .count{
+font-size:30px;
+font-weight:bold;
+color:#6F4B72;
+display:block;
+margin-bottom:5px;
+}
+
+.profile-card span:last-child{
+font-size:14px;
+}
+
+/* ================= CHEF ================= */
+
+.chef-section{
+width:90%;
+margin:60px auto;
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.chef-section h2{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+}
+
+.chef-section p{
+font-size:18px;
+line-height:1.8;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+background:#6F4B72;
+color:white;
+text-align:center;
+padding:40px 20px;
+margin-top:60px;
+}
+
+footer h2{
+font-family:'Cinzel',serif;
+margin-bottom:15px;
+}
+
+footer p{
+margin:10px 0;
+line-height:1.8;
+}
+
+.social{
+margin:25px 0;
+}
+
+.social a{
+text-decoration:none;
+font-size:30px;
+margin:0 12px;
+}
+
+.copy{
+margin-top:20px;
+font-size:15px;
+opacity:.9;
+}
+
+/* ================= HIDDEN SEARCH ================= */
+
+.recipe-section.hidden-recipe{
+display:none;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+.logo{
+font-size:25px;
+}
+
+nav{
+justify-content:center;
+}
+
+nav a{
+margin:5px 8px;
+font-size:14px;
+}
+
+.dark-toggle{
+margin:8px 0 0 0;
+}
+
+.hero{
+flex-direction:column;
+padding:20px;
+}
+
+.image-box{
+width:100%;
+height:280px;
+}
+
+.hero-content{
+padding:20px 5px;
+text-align:center;
+}
+
+.hero-content h1{
+font-size:42px;
+}
+
+.hero-content h2{
+font-size:24px;
+}
+
+.hero-content p{
+font-size:15px;
+text-align:justify;
+}
+
+.about-section{
+flex-direction:column;
+}
+
+.about-text,
+.about-box{
+width:100%;
+}
+
+.recipe-section,
+.recipe-section.reverse{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.recipe-image,
+.recipe-content{
+width:100%;
+}
+
+.recipe-info{
+flex-direction:column;
+}
+
+.recipe-actions,
+.recipe-section.reverse .recipe-actions{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:0;
+order:2;
+}
+
+.recipe-actions button{
+width:220px;
+}
+
+.profile-stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.search-box{
+width:100%;
+}
+
+}
+
+@media(max-width:450px){
+
+.profile-stats{
+grid-template-columns:1fr;
+}
+
+.hero-content h1{
+font-size:35px;
+}
+
+.recipe-content h2{
+font-size:30px;
+}
+
+}
+
+
+
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+
+</style>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="logo">
+🍴 The Flavorverse
+</div>
+
+<button class="menu-open-btn" type="button" aria-label="Open menu" onclick="openExploreMenu()">
+☰
+</button>
+
+</header>
+
+<!-- ================= EXPLORE HAMBURGER MENU ================= -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeExploreMenu()"></div>
+
+<aside class="explore-drawer" id="exploreDrawer" aria-label="Explore menu" aria-hidden="true">
+    <div class="drawer-heading">
+        <h2>Explore</h2>
+        <button class="drawer-close" type="button" aria-label="Close menu" onclick="closeExploreMenu()">×</button>
+    </div>
+
+    <div class="drawer-links">
+        <a class="drawer-link" href="index.html">
+            <span class="drawer-icon">🏠</span><span><strong>Home</strong><small>Return to the homepage</small></span>
+        </a>
+        <a class="drawer-link" href="royal.html">
+            <span class="drawer-icon">👑</span><span><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span>
+        </a>
+        <a class="drawer-link" href="movies&cartoons.html">
+            <span class="drawer-icon">🎬</span><span><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span>
+        </a>
+        <a class="drawer-link" href="worldcuisine.html">
+            <span class="drawer-icon">🌎</span><span><strong>World Cuisine</strong><small>Flavours from around the world</small></span>
+        </a>
+        <a class="drawer-link" href="desertwrold.html">
+            <span class="drawer-icon">🍰</span><span><strong>Desserts</strong><small>Sweet treats and desserts</small></span>
+        </a>
+        <a class="drawer-link" href="gallery.html">
+            <span class="drawer-icon">🖼️</span><span><strong>Gallery</strong><small>Explore our food gallery</small></span>
+        </a>
+
+        <div class="drawer-divider"></div>
+
+        <a class="drawer-link" href="favourite.html".html">
+            <span class="drawer-icon">💗</span><span><strong>Favourites</strong><small>Your favourite recipes</small></span>
+        </a>
+        <a class="drawer-link" href="order.html">
+            <span class="drawer-icon">🛒</span><span><strong>Order</strong><small>Order ingredient kits</small></span>
+        </a>
+        <a class="drawer-link" href="stamp.html">
+            <span class="drawer-icon">🏷️</span><span><strong>Stamped</strong><small>Your stamped recipes</small></span>
+        </a>
+        <a class="drawer-link" href="contact.html">
+            <span class="drawer-icon">📩</span><span><strong>Contact</strong><small>Get in touch with us</small></span>
+        </a>
+        <a class="drawer-link" href="about.html">
+            <span class="drawer-icon">✨</span><span><strong>About</strong><small>Discover The Flavorverse</small></span>
+        </a>
+        <div class="drawer-divider"></div>
+        <button class="drawer-theme" type="button" onclick="toggleDarkMode()">
+            <span class="drawer-icon">🌙</span><span><strong>Dark Mode</strong><small>Switch the page appearance</small></span>
+        </button>
+    </div>
+</aside>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="image-box">
+
+<img src="keralahero.png" alt="Kerala">
+
+</div>
+
+<div class="hero-content">
+
+<h1>🌴 Kerala</h1>
+
+<h2>God's Own Country Flavours</h2>
+
+<p>
+
+Experience the authentic taste of Kerala through its coconut-rich curries, aromatic spices, fresh seafood, and traditional festive dishes. Every recipe reflects Kerala's lush landscapes, rich cultural heritage, and centuries-old culinary traditions. From comforting breakfasts to grand festive feasts, Kerala cuisine is a perfect blend of flavor, freshness, and tradition.
+
+</p>
+
+<a href="#recipes" class="btn">
+
+Explore Recipes
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ================= ABOUT KERALA ================= -->
+
+<section id="about" class="about-section">
+
+<div class="about-text">
+
+<h2>🌴 About Kerala Cuisine</h2>
+
+<p>
+
+Kerala, popularly known as <b>"God's Own Country"</b>, is one of India's most beautiful states, famous for its backwaters, coconut groves, spice plantations, and rich cultural heritage. Kerala cuisine is loved for its fresh ingredients, unique cooking methods, and delicious flavors. Coconut, curry leaves, black pepper, cardamom, cloves, cinnamon, and fresh seafood are widely used in everyday cooking.
+
+</p>
+
+<p>
+
+Rice is the staple food of Kerala and is served with a variety of curries, vegetable dishes, seafood, and pickles. Traditional meals are often enjoyed on fresh banana leaves, especially during festivals and celebrations. The world-famous <b>Onam Sadya</b> is a grand vegetarian feast consisting of more than twenty delicious dishes served together, representing Kerala's hospitality and culture.
+
+</p>
+
+<p>
+
+Kerala also offers a wide range of breakfast dishes such as Appam, Puttu, Idiyappam, and Dosa, which are served with coconut-based curries and stews. Sweet dishes like Ada Pradhaman and Payasam are prepared during festivals and family gatherings, making every celebration special and memorable.
+
+</p>
+
+<p>
+
+The food of Kerala is a perfect combination of health, taste, and tradition. Whether it is spicy Malabar Biryani, creamy Fish Molee, comforting Kerala Stew, or delicious desserts, every recipe reflects the state's rich history and culinary excellence. Kerala cuisine continues to attract food lovers from all over the world with its authentic flavors and timeless recipes.
+
+</p>
+
+</div>
+
+<div class="about-box">
+
+<h3>🌿 Kerala Highlights</h3>
+
+<ul>
+
+<li>🌴 Known as "God's Own Country"</li>
+
+<li>🥥 Coconut is used in most dishes</li>
+
+<li>🌶️ Famous for aromatic spices</li>
+
+<li>🍛 Home of the famous Onam Sadya</li>
+
+<li>🐟 Fresh seafood is widely enjoyed</li>
+
+<li>🍃 Traditional meals are served on banana leaves</li>
+
+<li>☕ One of India's leading spice producers</li>
+
+<li>❤️ Famous for healthy and flavorful cuisine</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RECIPE EXPLORER
+===================================================== -->
+
+<section class="explorer-section">
+
+<div class="explorer-box">
+
+<h2>🔍 Explore Kerala Recipes</h2>
+
+<div class="search-filter-row">
+
+<input
+type="text"
+id="recipeSearch"
+class="search-box"
+placeholder="🔍 Search recipe..."
+onkeyup="filterRecipes()"
+>
+
+<select id="categoryFilter" class="filter-box" onchange="filterRecipes()">
+
+<option value="all">🏷️ All Categories</option>
+<option value="main">Main Course</option>
+<option value="seafood">Seafood</option>
+<option value="dessert">Dessert</option>
+<option value="vegetarian">Vegetarian</option>
+
+</select>
+
+<select id="cuisineFilter" class="filter-box" onchange="filterRecipes()">
+
+<option value="all">🌍 All Cuisine</option>
+<option value="kerala">Kerala Cuisine</option>
+
+</select>
+
+</div>
+
+<div class="explorer-buttons">
+
+<button class="explorer-btn random" onclick="surpriseMe()">
+🎲 Surprise Me
+</button>
+
+<button class="explorer-btn" onclick="resetFilters()">
+↻ Show All Recipes
+</button>
+
+</div>
+
+<p id="searchResult" class="search-result">
+Showing all 4 Kerala recipes
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= POPULAR RECIPES ================= -->
+
+<section class="popular-section">
+
+<h2 class="popular-title">
+🔥 Popular Kerala Recipes
+</h2>
+
+<div class="popular-container">
+
+<div class="popular-card">
+
+<h3>🍛 Malabar Biryani</h3>
+
+<p>
+One of Kerala's most celebrated rice dishes.
+</p>
+
+</div>
+
+<div class="popular-card">
+
+<h3>🐟 Fish Molee</h3>
+
+<p>
+Creamy coconut milk seafood speciality.
+</p>
+
+</div>
+
+<div class="popular-card">
+
+<h3>🍮 Ada Pradhaman</h3>
+
+<p>
+Traditional festive Kerala dessert.
+</p>
+
+</div>
+
+<div class="popular-card">
+
+<h3>🥣 Kerala Stew</h3>
+
+<p>
+Mild and creamy coconut-based comfort food.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MALABAR BIRYANI
+===================================================== -->
+
+<section
+id="kerala-malabar-biryani"
+class="recipe-section"
+data-name="Malabar Biryani"
+data-category="main"
+data-cuisine="kerala"
+>
+
+<div class="recipe-image">
+
+<img src="malabarbriyani.png" alt="Malabar Biryani">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🍛 Malabar Biryani</h2>
+
+<p>
+
+Malabar Biryani is one of Kerala's most famous traditional dishes, originating from the Malabar region. It is prepared using fragrant Jeerakasala rice, tender chicken or mutton, aromatic spices, fried onions, raisins, and cashew nuts. Unlike other biryanis, Malabar Biryani has a unique mild flavor and rich aroma, making it a favorite during weddings, festivals, and family celebrations.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>500 g Chicken or Mutton</li>
+
+<li>2 cups Jeerakasala (Kaima) Rice</li>
+
+<li>2 Onions (sliced)</li>
+
+<li>2 Tomatoes (chopped)</li>
+
+<li>1 cup Yogurt</li>
+
+<li>Ginger-Garlic Paste</li>
+
+<li>Green Chilies</li>
+
+<li>Mint Leaves</li>
+
+<li>Coriander Leaves</li>
+
+<li>Turmeric Powder</li>
+
+<li>Red Chilli Powder</li>
+
+<li>Garam Masala</li>
+
+<li>Whole Spices (Cinnamon, Cloves, Cardamom)</li>
+
+<li>Ghee</li>
+
+<li>Salt</li>
+
+<li>Cashew Nuts & Raisins</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Wash the Jeerakasala rice thoroughly and soak it for about 20 minutes before cooking.</li>
+
+<li>Heat ghee in a pan and fry sliced onions until golden brown. Roast the cashew nuts and raisins separately and keep them aside.</li>
+
+<li>In the same pan, sauté ginger-garlic paste, green chilies, onions, and tomatoes until soft.</li>
+
+<li>Add turmeric powder, red chilli powder, garam masala, and salt. Mix everything well.</li>
+
+<li>Add the chicken or mutton along with yogurt and cook until the meat becomes tender and fully cooked.</li>
+
+<li>Cook the rice separately until it is about 90% done. Drain any excess water.</li>
+
+<li>Layer the cooked rice over the prepared meat. Sprinkle fried onions, roasted cashews, raisins, mint leaves, coriander leaves, and a little ghee on top.</li>
+
+<li>Cover the pan with a tight lid and cook on low heat (dum) for 20–25 minutes so the flavors blend perfectly.</li>
+
+<li>Gently mix the layers before serving and enjoy hot with raita, pickle, and boiled egg.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>1 Hour 30 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4–6 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Medium</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Always use Jeerakasala rice instead of Basmati rice for authentic Malabar Biryani. Cooking on low flame (dum) gives the biryani its signature aroma and rich taste.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Malabar Biryani is one of Kerala's most celebrated dishes and is commonly served at weddings, festivals, and special family occasions throughout the Malabar region.
+
+</p>
+
+</div>
+
+
+<!-- ================= RATING ================= -->
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div class="stars" data-recipe="kerala-malabar-biryani">
+
+<span class="star" onclick="rateRecipe('kerala-malabar-biryani',1,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-malabar-biryani',2,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-malabar-biryani',3,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-malabar-biryani',4,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-malabar-biryani',5,this)">★</span>
+
+</div>
+
+<p id="rating-kerala-malabar-biryani" class="rating-message">
+Choose your rating
+</p>
+
+</div>
+
+
+<!-- ================= REVIEW ================= -->
+
+<div class="review-box">
+
+<h3>💬 Reviews & Comments</h3>
+
+<textarea
+id="review-text-kerala-malabar-biryani"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('kerala-malabar-biryani','Malabar Biryani')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-kerala-malabar-biryani"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="kerala-malabar-biryani"
+onclick="addToFavourite(
+'kerala-malabar-biryani',
+'Malabar Biryani',
+'Royal Heritage',
+this
+)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="kerala-malabar-biryani"
+onclick="addToStamp(
+'kerala-malabar-biryani',
+'Malabar Biryani',
+'Royal Heritage',
+this
+)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FISH MOLEE
+===================================================== -->
+
+<section
+id="kerala-fish-molee"
+class="recipe-section reverse"
+data-name="Fish Molee"
+data-category="seafood"
+data-cuisine="kerala"
+>
+
+<div class="recipe-image">
+
+<img src="keralafishmole.png" alt="Fish Molee">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🐟 Fish Molee</h2>
+
+<p>
+
+Fish Molee is one of Kerala's most famous seafood dishes, known for its mild flavor and creamy coconut milk gravy. Fresh fish is gently cooked with onions, tomatoes, ginger, garlic, green chilies, and aromatic spices. Unlike spicy fish curries, Fish Molee has a rich, delicate taste and is traditionally served with appam, bread, idiyappam, or steamed rice. It is a popular choice for family meals and festive occasions.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>500 g Fresh Fish (King Fish, Pomfret or Seer Fish)</li>
+
+<li>2 Onions (thinly sliced)</li>
+
+<li>2 Tomatoes (chopped)</li>
+
+<li>1 cup Thick Coconut Milk</li>
+
+<li>½ cup Thin Coconut Milk</li>
+
+<li>2 Green Chilies (slit)</li>
+
+<li>1 tbsp Ginger (finely chopped)</li>
+
+<li>1 tbsp Garlic (finely chopped)</li>
+
+<li>½ tsp Turmeric Powder</li>
+
+<li>½ tsp Black Pepper Powder</li>
+
+<li>Curry Leaves</li>
+
+<li>2 tbsp Coconut Oil</li>
+
+<li>Salt to Taste</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Clean and wash the fish pieces thoroughly.</li>
+
+<li>Heat coconut oil in a pan and sauté onions until soft.</li>
+
+<li>Add ginger, garlic, green chilies, curry leaves, and tomatoes. Cook until the tomatoes become soft.</li>
+
+<li>Add turmeric powder, pepper powder, and salt. Mix well.</li>
+
+<li>Pour in the thin coconut milk and bring it to a gentle boil.</li>
+
+<li>Carefully add the fish pieces and cook for about 10 minutes until the fish becomes tender.</li>
+
+<li>Add the thick coconut milk and cook on a low flame for another 3–5 minutes without boiling.</li>
+
+<li>Turn off the heat and allow the curry to rest for a few minutes before serving.</li>
+
+<li>Serve hot with appam, idiyappam, bread, or steamed rice.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>35 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Always add the thick coconut milk at the end and cook on a low flame. This keeps the curry smooth, creamy, and prevents the coconut milk from curdling.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Fish Molee was influenced by Kerala's coastal culture and is one of the state's most loved seafood recipes. Its mild coconut flavor makes it popular with people of all ages.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div class="stars" data-recipe="kerala-fish-molee">
+
+<span class="star" onclick="rateRecipe('kerala-fish-molee',1,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-fish-molee',2,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-fish-molee',3,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-fish-molee',4,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-fish-molee',5,this)">★</span>
+
+</div>
+
+<p id="rating-kerala-fish-molee" class="rating-message">
+Choose your rating
+</p>
+
+</div>
+
+<div class="review-box">
+
+<h3>💬 Reviews & Comments</h3>
+
+<textarea
+id="review-text-kerala-fish-molee"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('kerala-fish-molee','Fish Molee')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-kerala-fish-molee"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="kerala-fish-molee"
+onclick="addToFavourite(
+'kerala-fish-molee',
+'Fish Molee',
+'Royal Heritage',
+this
+)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="kerala-fish-molee"
+onclick="addToStamp(
+'kerala-fish-molee',
+'Fish Molee',
+'Royal Heritage',
+this
+)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ADA PRADHAMAN
+===================================================== -->
+
+<section
+id="kerala-ada-pradhaman"
+class="recipe-section"
+data-name="Ada Pradhaman"
+data-category="dessert"
+data-cuisine="kerala"
+>
+
+<div class="recipe-image">
+
+<img src="ada pradhaman.png" alt="Ada Pradhaman">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🍮 Ada Pradhaman</h2>
+
+<p>
+
+Ada Pradhaman is one of Kerala's most famous traditional desserts and is considered the king of all Payasams. It is prepared using rice ada, jaggery, thick coconut milk, and roasted cashew nuts and raisins. This rich and creamy dessert is an important part of the famous Onam Sadya and is enjoyed during festivals, weddings, and family celebrations. Its delicious sweetness and aromatic flavor make it one of Kerala's most loved desserts.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>1 cup Rice Ada</li>
+
+<li>2 cups Thick Coconut Milk</li>
+
+<li>1 cup Thin Coconut Milk</li>
+
+<li>250 g Jaggery</li>
+
+<li>3 tbsp Ghee</li>
+
+<li>10 Cashew Nuts</li>
+
+<li>10 Raisins</li>
+
+<li>½ tsp Cardamom Powder</li>
+
+<li>2 tbsp Coconut Pieces (optional)</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Boil the rice ada in water until it becomes soft. Drain the water and rinse with cold water.</li>
+
+<li>Heat jaggery with a little water until it completely melts. Strain the syrup to remove any impurities.</li>
+
+<li>Add the cooked rice ada to the jaggery syrup and cook for 5–8 minutes until well combined.</li>
+
+<li>Pour in the thin coconut milk and cook on a low flame for about 10 minutes.</li>
+
+<li>Add the thick coconut milk and gently stir without allowing it to boil.</li>
+
+<li>Mix in the cardamom powder for a pleasant aroma.</li>
+
+<li>In a small pan, heat ghee and roast cashew nuts, raisins, and coconut pieces until golden brown.</li>
+
+<li>Add the roasted ingredients to the Payasam and mix gently.</li>
+
+<li>Serve warm or chilled according to your preference.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>45 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>6 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Use freshly prepared coconut milk and good-quality jaggery for the best taste. Always add the thick coconut milk at the end and avoid boiling it to keep the dessert rich and creamy.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Ada Pradhaman is considered one of the most important desserts served during the traditional Onam Sadya. Many families prepare it as a symbol of celebration, happiness, and togetherness.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div class="stars" data-recipe="kerala-ada-pradhaman">
+
+<span class="star" onclick="rateRecipe('kerala-ada-pradhaman',1,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-ada-pradhaman',2,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-ada-pradhaman',3,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-ada-pradhaman',4,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-ada-pradhaman',5,this)">★</span>
+
+</div>
+
+<p id="rating-kerala-ada-pradhaman" class="rating-message">
+Choose your rating
+</p>
+
+</div>
+
+<div class="review-box">
+
+<h3>💬 Reviews & Comments</h3>
+
+<textarea
+id="review-text-kerala-ada-pradhaman"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('kerala-ada-pradhaman','Ada Pradhaman')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-kerala-ada-pradhaman"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="kerala-ada-pradhaman"
+onclick="addToFavourite(
+'kerala-ada-pradhaman',
+'Ada Pradhaman',
+'Royal Heritage',
+this
+)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="kerala-ada-pradhaman"
+onclick="addToStamp(
+'kerala-ada-pradhaman',
+'Ada Pradhaman',
+'Royal Heritage',
+this
+)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     KERALA STEW
+===================================================== -->
+
+<section
+id="kerala-stew"
+class="recipe-section reverse"
+data-name="Kerala Stew"
+data-category="vegetarian"
+data-cuisine="kerala"
+>
+
+<div class="recipe-image">
+
+<img src="keralastew.png" alt="Kerala Stew">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🥣 Kerala Stew</h2>
+
+<p>
+
+Kerala Stew is a light, creamy, and mildly spiced curry that is loved throughout Kerala. It is traditionally prepared with vegetables or chicken cooked in fresh coconut milk, flavored with ginger, green chilies, curry leaves, and whole spices. The stew has a delicate aroma and smooth texture, making it a perfect companion for appam, idiyappam, bread, or chapati. It is a popular breakfast and dinner dish enjoyed by families across the state.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>2 Potatoes (cubed)</li>
+
+<li>1 Carrot (sliced)</li>
+
+<li>1 Onion (sliced)</li>
+
+<li>1 cup Green Peas</li>
+
+<li>2 Green Chilies (slit)</li>
+
+<li>1 tbsp Ginger (chopped)</li>
+
+<li>2 cups Thick Coconut Milk</li>
+
+<li>½ cup Thin Coconut Milk</li>
+
+<li>1 Cinnamon Stick</li>
+
+<li>3 Cloves</li>
+
+<li>2 Cardamom Pods</li>
+
+<li>Curry Leaves</li>
+
+<li>2 tbsp Coconut Oil</li>
+
+<li>Salt to Taste</li>
+
+<li>Fresh Coriander Leaves</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Heat coconut oil in a pan and add cinnamon, cloves, and cardamom until fragrant.</li>
+
+<li>Add sliced onions, ginger, green chilies, and curry leaves. Sauté until the onions become soft.</li>
+
+<li>Add potatoes, carrots, and green peas. Mix well with a little salt.</li>
+
+<li>Pour in the thin coconut milk and cook until the vegetables become soft and tender.</li>
+
+<li>Add the thick coconut milk and stir gently over a low flame.</li>
+
+<li>Do not boil after adding the thick coconut milk, as it may curdle.</li>
+
+<li>Adjust the salt and simmer for 2–3 minutes.</li>
+
+<li>Garnish with fresh coriander leaves and curry leaves.</li>
+
+<li>Serve hot with appam, idiyappam, bread, or chapati.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>35 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Use fresh coconut milk for the richest flavor. Always cook the stew on a low flame after adding the thick coconut milk to maintain its smooth and creamy texture.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Kerala Stew is believed to have influences from Kerala's historic spice trade. Today, it remains one of the state's most comforting dishes and is especially popular with soft appam for breakfast and festive meals.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div class="stars" data-recipe="kerala-stew">
+
+<span class="star" onclick="rateRecipe('kerala-stew',1,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-stew',2,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-stew',3,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-stew',4,this)">★</span>
+<span class="star" onclick="rateRecipe('kerala-stew',5,this)">★</span>
+
+</div>
+
+<p id="rating-kerala-stew" class="rating-message">
+Choose your rating
+</p>
+
+</div>
+
+<div class="review-box">
+
+<h3>💬 Reviews & Comments</h3>
+
+<textarea
+id="review-text-kerala-stew"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('kerala-stew','Kerala Stew')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-kerala-stew"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="kerala-stew"
+onclick="addToFavourite(
+'kerala-stew',
+'Kerala Stew',
+'Royal Heritage',
+this
+)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="kerala-stew"
+onclick="addToStamp(
+'kerala-stew',
+'Kerala Stew',
+'Royal Heritage',
+this
+)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= KERALA FOOD FACTS ================= -->
+
+<section class="facts-section">
+
+<h2>🌴 Kerala Food Facts</h2>
+
+<div class="facts-container">
+
+<div class="fact-card">
+<h3>🥥 Coconut Paradise</h3>
+<p>
+Kerala is known as the Land of Coconuts. Fresh coconut, coconut milk, and coconut oil are used in many traditional dishes, giving them their rich and authentic taste.
+</p>
+</div>
+
+<div class="fact-card">
+<h3>🌶️ Spice Capital</h3>
+<p>
+Kerala is famous for producing black pepper, cardamom, cinnamon, cloves, and nutmeg. These spices make Kerala cuisine aromatic and flavorful.
+</p>
+</div>
+
+<div class="fact-card">
+<h3>🍛 Onam Sadya</h3>
+<p>
+Onam Sadya is Kerala's grand festive meal, consisting of more than twenty delicious vegetarian dishes served together during the Onam festival.
+</p>
+</div>
+
+<div class="fact-card">
+<h3>🐟 Seafood Special</h3>
+<p>
+Kerala's long coastline provides fresh seafood throughout the year. Fish, prawns, crab, and mussels are commonly used in many traditional recipes.
+</p>
+</div>
+
+<div class="fact-card">
+<h3>🍮 Traditional Desserts</h3>
+<p>
+Payasam varieties like Ada Pradhaman and Palada Payasam are an important part of Kerala festivals, weddings, and family celebrations.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= RECENTLY VIEWED ================= -->
+
+<section class="recent-section">
+
+<h2>🕐 Recently Viewed</h2>
+
+<div id="recentContainer" class="recent-container">
+
+<p class="recent-empty">
+Login to see your recently viewed recipes.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= MY FLAVORVERSE PROFILE ================= -->
+
+<section class="profile-section">
+
+<div class="profile-box">
+
+<h2>👤 My Flavorverse Profile</h2>
+
+<p id="profileName" class="profile-name">
+Guest
+</p>
+
+<p id="profileEmail" class="profile-email">
+Login to see your profile
+</p>
+
+<div class="profile-stats">
+
+<div class="profile-card">
+
+<span id="favouriteCount" class="count">
+0
+</span>
+
+<span>❤️ Favourites</span>
+
+</div>
+
+<div class="profile-card">
+
+<span id="stampCount" class="count">
+0
+</span>
+
+<span>🏷️ Stamps</span>
+
+</div>
+
+<div class="profile-card">
+
+<span id="ratingCount" class="count">
+0
+</span>
+
+<span>⭐ Ratings</span>
+
+</div>
+
+<div class="profile-card">
+
+<span id="reviewCount" class="count">
+0
+</span>
+
+<span>💬 Reviews</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CHEF RECOMMENDATION ================= -->
+
+<section class="chef-section">
+
+<h2>👨‍🍳 Chef's Recommendation</h2>
+
+<p>
+
+For a complete Kerala dining experience, begin with delicious <b>Malabar Biryani</b>, enjoy the mild and creamy <b>Fish Molee</b> with soft appam, taste the comforting <b>Kerala Stew</b>, and finish your meal with the rich sweetness of <b>Ada Pradhaman</b>. This combination perfectly represents the authentic flavors and rich culinary heritage of Kerala.
+
+</p>
+
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<h2>🍴 The Flavorverse</h2>
+
+<p>
+
+Discover India's rich culinary heritage, one delicious recipe at a time.
+
+</p>
+
+<div class="social">
+
+<a href="#">📘</a>
+<a href="#">📸</a>
+<a href="#">▶️</a>
+<a href="#">🐦</a>
+
+</div>
+
+<p class="copy">
+
+© 2026 The Flavorverse | All Rights Reserved
+
+</p>
+
+</footer>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+authDomain: "the-flavoverse.firebaseapp.com",
+
+projectId: "the-flavoverse",
+
+storageBucket: "the-flavoverse.firebasestorage.app",
+
+messagingSenderId: "1064022248292",
+
+appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+
+};
+
+if(!firebase.apps.length){
+
+firebase.initializeApp(firebaseConfig);
+
+}
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipes = [
+
+{
+id:"kerala-malabar-biryani",
+name:"Malabar Biryani",
+category:"main",
+cuisine:"kerala"
+},
+
+{
+id:"kerala-fish-molee",
+name:"Fish Molee",
+category:"seafood",
+cuisine:"kerala"
+},
+
+{
+id:"kerala-ada-pradhaman",
+name:"Ada Pradhaman",
+category:"dessert",
+cuisine:"kerala"
+},
+
+{
+id:"kerala-stew",
+name:"Kerala Stew",
+category:"vegetarian",
+cuisine:"kerala"
+}
+
+];
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function getCurrentUser(){
+
+return auth.currentUser;
+
+}
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function addToFavourite(id,name,category,button){
+
+const user = getCurrentUser();
+
+if(!user){
+
+alert("Please login first to add favourites ❤️");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const ref =
+db.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.doc(id);
+
+const existing = await ref.get();
+
+if(existing.exists){
+
+await ref.delete();
+
+button.innerHTML="♡ Add to Favourite";
+
+alert(name+" removed from favourites.");
+
+}
+
+else{
+
+await ref.set({
+
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+button.innerHTML="♥ Added to Favourite";
+
+alert(name+" added to favourites ❤️");
+
+}
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Favourite update failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function addToStamp(id,name,category,button){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to add stamps 🏷️");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const ref =
+db.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.doc(id);
+
+const existing=await ref.get();
+
+if(existing.exists){
+
+await ref.delete();
+
+button.innerHTML="🏷️ Add to Stamp";
+
+alert(name+" removed from passport.");
+
+}
+
+else{
+
+await ref.set({
+
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+button.innerHTML="🏷️ Stamped";
+
+alert(name+" added to your Flavorverse Passport 🏷️");
+
+}
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Stamp update failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function rateRecipe(recipeId,rating,element){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to rate recipes ⭐");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.doc(recipeId)
+.set({
+
+recipeId:recipeId,
+rating:rating,
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+const stars=element.parentElement.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+
+if(index<rating){
+
+star.classList.add("active");
+
+}
+else{
+
+star.classList.remove("active");
+
+}
+
+});
+
+document.getElementById("rating-"+recipeId).innerText =
+"You rated this recipe "+rating+"/5 ⭐";
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Rating failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD USER RATINGS
+===================================================== */
+
+async function loadRatings(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const doc=await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.doc(recipe.id)
+.get();
+
+if(doc.exists){
+
+const rating=doc.data().rating;
+
+const container=
+document.querySelector(
+'.stars[data-recipe="'+recipe.id+'"]'
+);
+
+if(container){
+
+const stars=container.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+
+if(index<rating){
+
+star.classList.add("active");
+
+}
+
+});
+
+}
+
+const text=document.getElementById(
+"rating-"+recipe.id
+);
+
+if(text){
+
+text.innerText=
+"You rated this recipe "+rating+"/5 ⭐";
+
+}
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+async function submitReview(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to post a review 💬");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+const textarea=document.getElementById(
+"review-text-"+recipeId
+);
+
+const text=textarea.value.trim();
+
+if(!text){
+
+alert("Please write a review first.");
+
+return;
+
+}
+
+try{
+
+const userDoc=
+await db.collection("users")
+.doc(user.uid)
+.get();
+
+let userName="Flavorverse User";
+
+if(userDoc.exists && userDoc.data().name){
+
+userName=userDoc.data().name;
+
+}
+
+await db
+.collection("recipes")
+.doc(recipeId)
+.collection("reviews")
+.doc(user.uid)
+.set({
+
+recipeId:recipeId,
+recipeName:recipeName,
+userId:user.uid,
+userName:userName,
+review:text,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+textarea.value="";
+
+alert("Review posted successfully! 💬");
+
+loadReviews(recipeId);
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Review failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(recipeId){
+
+const container=
+document.getElementById("reviews-"+recipeId);
+
+if(!container) return;
+
+try{
+
+const snapshot=
+await db
+.collection("recipes")
+.doc(recipeId)
+.collection("reviews")
+.orderBy("createdAt","desc")
+.limit(10)
+.get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+
+container.innerHTML=
+'<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const review=document.createElement("div");
+
+review.className="single-review";
+
+const name=document.createElement("strong");
+
+name.textContent=
+"💜 "+(data.userName || "Flavorverse User");
+
+const content=document.createElement("p");
+
+content.textContent=data.review || "";
+
+const date=document.createElement("small");
+
+if(data.createdAt){
+
+date.textContent=
+data.createdAt.toDate().toLocaleDateString();
+
+}
+
+review.appendChild(name);
+
+review.appendChild(content);
+
+review.appendChild(date);
+
+container.appendChild(review);
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+container.innerHTML=
+'<p class="no-review">Reviews will appear here.</p>';
+
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED
+===================================================== */
+
+async function addRecentlyViewed(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+try{
+
+await db
+.collection("users")
+.doc(user.uid)
+.collection("recentlyViewed")
+.doc(recipeId)
+.set({
+
+recipeId:recipeId,
+recipeName:recipeName,
+viewedAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED DISPLAY
+===================================================== */
+
+async function loadRecentlyViewed(){
+
+const container=
+document.getElementById("recentContainer");
+
+const user=getCurrentUser();
+
+if(!user){
+
+container.innerHTML=
+'<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+
+return;
+
+}
+
+try{
+
+const snapshot=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("recentlyViewed")
+.orderBy("viewedAt","desc")
+.limit(8)
+.get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+
+container.innerHTML=
+'<p class="recent-empty">No recently viewed recipes yet.</p>';
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const card=document.createElement("div");
+
+card.className="recent-card";
+
+const title=document.createElement("h3");
+
+title.textContent="🕐 "+data.recipeName;
+
+const text=document.createElement("p");
+
+text.textContent=
+"You recently explored this recipe.";
+
+card.appendChild(title);
+
+card.appendChild(text);
+
+container.appendChild(card);
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   TRACK RECIPE VIEW
+===================================================== */
+
+function setupRecentlyViewed(){
+
+const recipeSections=
+document.querySelectorAll(".recipe-section");
+
+const observer=
+new IntersectionObserver(
+
+entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const id=entry.target.id;
+
+const recipe=
+recipes.find(item=>item.id===id);
+
+if(recipe){
+
+addRecentlyViewed(
+recipe.id,
+recipe.name
+);
+
+}
+
+}
+
+});
+
+},
+
+{
+threshold:0.35
+}
+
+);
+
+recipeSections.forEach(section=>{
+
+observer.observe(section);
+
+});
+
+}
+
+
+/* =====================================================
+   PROFILE COUNTS
+===================================================== */
+
+async function updateProfileCounts(){
+
+const user=getCurrentUser();
+
+if(!user){
+
+document.getElementById("favouriteCount").innerText="0";
+
+document.getElementById("stampCount").innerText="0";
+
+document.getElementById("ratingCount").innerText="0";
+
+document.getElementById("reviewCount").innerText="0";
+
+return;
+
+}
+
+try{
+
+const userDoc=
+await db.collection("users")
+.doc(user.uid)
+.get();
+
+if(userDoc.exists){
+
+const data=userDoc.data();
+
+document.getElementById("profileName").innerText=
+data.name || "Flavorverse User";
+
+document.getElementById("profileEmail").innerText=
+data.email || user.email;
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+user.email;
+
+document.getElementById("profileEmail").innerText=
+user.email;
+
+}
+
+
+const favourites=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.get();
+
+const stamps=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.get();
+
+const ratings=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.get();
+
+
+/*
+   Reviews are stored inside
+   recipes/{recipeId}/reviews/{uid}
+*/
+
+let reviewTotal=0;
+
+for(const recipe of recipes){
+
+const review=
+await db
+.collection("recipes")
+.doc(recipe.id)
+.collection("reviews")
+.doc(user.uid)
+.get();
+
+if(review.exists){
+
+reviewTotal++;
+
+}
+
+}
+
+
+document.getElementById("favouriteCount").innerText=
+favourites.size;
+
+document.getElementById("stampCount").innerText=
+stamps.size;
+
+document.getElementById("ratingCount").innerText=
+ratings.size;
+
+document.getElementById("reviewCount").innerText=
+reviewTotal;
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   UPDATE BUTTON STATUS
+===================================================== */
+
+async function updateButtons(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const fav=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.doc(recipe.id)
+.get();
+
+const favButton=
+document.querySelector(
+'[data-favourite-id="'+recipe.id+'"]'
+);
+
+if(fav.exists && favButton){
+
+favButton.innerHTML=
+"♥ Added to Favourite";
+
+}
+
+
+const stamp=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.doc(recipe.id)
+.get();
+
+const stampButton=
+document.querySelector(
+'[data-stamp-id="'+recipe.id+'"]'
+);
+
+if(stamp.exists && stampButton){
+
+stampButton.innerHTML=
+"🏷️ Stamped";
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   SEARCH + FILTER
+===================================================== */
+
+function filterRecipes(){
+
+const search=
+document.getElementById("recipeSearch")
+.value
+.toLowerCase()
+.trim();
+
+const category=
+document.getElementById("categoryFilter")
+.value;
+
+const cuisine=
+document.getElementById("cuisineFilter")
+.value;
+
+let count=0;
+
+document.querySelectorAll(".recipe-section")
+.forEach(section=>{
+
+const name=
+section.dataset.name.toLowerCase();
+
+const sectionCategory=
+section.dataset.category;
+
+const sectionCuisine=
+section.dataset.cuisine;
+
+const searchMatch=
+name.includes(search);
+
+const categoryMatch=
+category==="all" ||
+sectionCategory===category;
+
+const cuisineMatch=
+cuisine==="all" ||
+sectionCuisine===cuisine;
+
+if(
+searchMatch &&
+categoryMatch &&
+cuisineMatch
+){
+
+section.classList.remove("hidden-recipe");
+
+count++;
+
+}
+else{
+
+section.classList.add("hidden-recipe");
+
+}
+
+});
+
+document.getElementById("searchResult").innerText=
+"Showing "+count+" recipe"+(count!==1?"s":"");
+
+}
+
+
+/* =====================================================
+   RESET FILTER
+===================================================== */
+
+function resetFilters(){
+
+document.getElementById("recipeSearch").value="";
+
+document.getElementById("categoryFilter").value="all";
+
+document.getElementById("cuisineFilter").value="all";
+
+document.querySelectorAll(".recipe-section")
+.forEach(section=>{
+
+section.classList.remove("hidden-recipe");
+
+});
+
+document.getElementById("searchResult").innerText=
+"Showing all 4 Kerala recipes";
+
+}
+
+
+/* =====================================================
+   SURPRISE ME
+===================================================== */
+
+function surpriseMe(){
+
+const visibleRecipes=
+Array.from(
+document.querySelectorAll(".recipe-section")
+)
+.filter(recipe=>
+!recipe.classList.contains("hidden-recipe")
+);
+
+if(visibleRecipes.length===0){
+
+alert("No recipes available with the selected filter.");
+
+return;
+
+}
+
+const random=
+visibleRecipes[
+Math.floor(Math.random()*visibleRecipes.length)
+];
+
+random.scrollIntoView({
+
+behavior:"smooth",
+block:"center"
+
+});
+
+random.style.boxShadow=
+"0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+
+setTimeout(()=>{
+
+random.style.boxShadow=
+"0 8px 20px rgba(0,0,0,.12)";
+
+},2500);
+
+alert(
+"🎲 Surprise Recipe: "+
+random.dataset.name
+);
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+if(
+document.body.classList.contains("dark-mode")
+){
+
+localStorage.setItem(
+"flavorverseDarkMode",
+"on"
+);
+
+}
+else{
+
+localStorage.setItem(
+"flavorverseDarkMode",
+"off"
+);
+
+}
+
+}
+
+
+function loadDarkMode(){
+
+if(
+localStorage.getItem("flavorverseDarkMode")==="on"
+){
+
+document.body.classList.add("dark-mode");
+
+}
+
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(async function(user){
+
+if(user){
+
+try{
+
+const userDoc=
+await db
+.collection("users")
+.doc(user.uid)
+.get();
+
+if(userDoc.exists){
+
+const data=userDoc.data();
+
+document.getElementById("profileName").innerText=
+data.name || "Flavorverse User";
+
+document.getElementById("profileEmail").innerText=
+data.email || user.email;
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+user.email;
+
+document.getElementById("profileEmail").innerText=
+user.email;
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+updateButtons();
+
+updateProfileCounts();
+
+loadRatings();
+
+loadRecentlyViewed();
+
+recipes.forEach(recipe=>{
+
+loadReviews(recipe.id);
+
+});
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+"Guest";
+
+document.getElementById("profileEmail").innerText=
+"Login to see your profile";
+
+loadRecentlyViewed();
+
+}
+
+});
+
+
+/* ================= HAMBURGER MENU ================= */
+function openExploreMenu(){
+    const drawer=document.getElementById("exploreDrawer");
+    const overlay=document.getElementById("menuOverlay");
+    if(!drawer || !overlay) return;
+    drawer.classList.add("open");
+    overlay.classList.add("show");
+    drawer.setAttribute("aria-hidden","false");
+    document.body.classList.add("drawer-open");
+}
+function closeExploreMenu(){
+    const drawer=document.getElementById("exploreDrawer");
+    const overlay=document.getElementById("menuOverlay");
+    if(!drawer || !overlay) return;
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+    drawer.setAttribute("aria-hidden","true");
+    document.body.classList.remove("drawer-open");
+}
+document.addEventListener("keydown",function(event){
+    if(event.key==="Escape") closeExploreMenu();
+});
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+loadDarkMode();
+
+setupRecentlyViewed();
+
+});
+
+</script>
+
+</body>
+
+</html>

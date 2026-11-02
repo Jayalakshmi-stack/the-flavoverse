@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flavorverse | 132 Ingredient Kits</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --mauve:#735267;
+  --deep:#4d3547;
+  --champagne:#f4e5c5;
+  --cream:#fdf6ec;
+  --paper:#fffaf3;
+  --text:#5b4a45;
+  --gold:#b68b54;
+  --line:#ead9c7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#f7e7ce,#fffaf3 48%,#f4e5c5);
+  color:var(--text);
+}
+nav{
+  height:76px;background:var(--deep);color:white;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6%;position:sticky;top:0;z-index:100;
+  box-shadow:0 8px 25px #4d354733;
+}
+.logo{font-family:Cinzel,serif;font-size:22px;letter-spacing:2px}
+.logo span{color:#f4d9a7}
+nav a{color:white;text-decoration:none;font-size:13px;margin-left:22px}
+nav a:hover{color:#f4d9a7}
+.hero{text-align:center;padding:55px 20px 35px}
+.eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);font-weight:600}
+.hero h1{font-family:Cinzel,serif;color:var(--deep);font-size:40px;margin:10px 0}
+.hero p{font-size:14px;color:#806f68}
+.toolbar{
+  width:min(1200px,92%);margin:0 auto 30px;
+  display:flex;gap:12px;flex-wrap:wrap;
+}
+.toolbar input,.toolbar select{
+  flex:1;min-width:230px;border:1px solid var(--line);
+  background:var(--paper);border-radius:13px;padding:13px;
+  font-family:Poppins;color:var(--text);outline:none;
+}
+.count{
+  width:min(1200px,92%);margin:0 auto 20px;
+  font-size:13px;color:#806f68;
+}
+.recipe-grid{
+  width:min(1200px,92%);margin:auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+  padding-bottom:55px;
+}
+.card{
+  background:#fffaf4e8;border:1px solid var(--line);
+  border-radius:22px;overflow:hidden;
+  box-shadow:0 12px 35px #4d354715;
+  transition:.25s;
+}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 45px #4d354725}
+.card-img{height:190px;background:linear-gradient(135deg,var(--mauve),var(--deep))}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-body{padding:20px}
+.id{font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px}
+.card h2{font-family:Cinzel,serif;color:var(--deep);font-size:20px;margin:7px 0}
+.category{font-size:11px;color:#8d7770;margin-bottom:12px}
+.price{font-size:19px;font-weight:700;color:var(--mauve)}
+.kit-label{
+  display:inline-block;background:var(--champagne);
+  color:var(--deep);padding:5px 10px;border-radius:20px;
+  font-size:10px;font-weight:700;margin-bottom:10px;
+}
+.ingredients{
+  display:flex;flex-wrap:wrap;gap:6px;margin:13px 0 16px;
+}
+.ingredient{
+  background:#f7e7ce;padding:5px 8px;border-radius:15px;
+  font-size:10px;
+}
+.add{
+  width:100%;border:0;background:var(--mauve);color:white;
+  padding:12px;border-radius:12px;font-family:Poppins;
+  font-weight:600;cursor:pointer;
+}
+.add:hover{background:var(--deep)}
+.cart{
+  position:fixed;right:22px;bottom:22px;z-index:200;
+  border:0;background:var(--deep);color:white;
+  padding:14px 20px;border-radius:30px;cursor:pointer;
+  box-shadow:0 10px 30px #4d354755;font-weight:600;
+}
+.cart-panel{
+  position:fixed;right:-430px;top:0;width:400px;height:100vh;
+  background:var(--cream);z-index:500;transition:.35s;
+  box-shadow:-12px 0 35px #0003;display:flex;flex-direction:column;
+}
+.cart-panel.open{right:0}
+.cart-head{
+  background:var(--deep);color:white;padding:20px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.cart-head button{background:none;border:0;color:white;font-size:25px;cursor:pointer}
+.cart-list{flex:1;overflow:auto;padding:18px}
+.cart-item{
+  background:white;border:1px solid var(--line);
+  border-radius:14px;padding:14px;margin-bottom:12px;
+}
+.cart-item h4{color:var(--deep);margin-bottom:4px}
+.cart-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.qty{display:flex;align-items:center;gap:9px}
+.qty button{
+  width:27px;height:27px;border:0;border-radius:50%;
+  background:var(--champagne);cursor:pointer;
+}
+.remove{border:0;background:none;color:#a45f5f;font-size:11px;cursor:pointer}
+.cart-foot{padding:18px;border-top:1px solid var(--line)}
+.total{display:flex;justify-content:space-between;margin:8px 0}
+.checkout{
+  width:100%;border:0;background:var(--mauve);color:white;
+  padding:13px;border-radius:12px;margin-top:10px;cursor:pointer;font-weight:600;
+}
+.modal-bg{
+  display:none;position:fixed;inset:0;background:#0008;
+  z-index:800;align-items:center;justify-content:center;padding:20px;
+}
+.modal-bg.show{display:flex}
+.modal{
+  width:min(520px,100%);background:var(--cream);
+  border-radius:22px;padding:28px;max-height:90vh;overflow:auto;
+}
+.modal h2{font-family:Cinzel,serif;color:var(--deep);margin-bottom:18px}
+.modal input,.modal textarea{
+  width:100%;padding:12px;border:1px solid var(--line);
+  border-radius:10px;margin-bottom:12px;font-family:Poppins;
+}
+.modal textarea{height:85px;resize:none}
+.place{
+  width:100%;border:0;background:var(--deep);color:white;
+  padding:13px;border-radius:12px;font-weight:600;cursor:pointer;
+}
+.close-modal{
+  width:100%;border:0;background:none;padding:10px;cursor:pointer;color:#806f68;
+}
+.empty{text-align:center;padding:50px 10px;color:#8d7770}
+.toast{
+  position:fixed;left:50%;bottom:25px;transform:translate(-50%,100px);
+  background:var(--deep);color:white;padding:12px 20px;border-radius:25px;
+  z-index:1000;opacity:0;transition:.3s
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{background:var(--deep);color:#eadbc6;text-align:center;padding:25px;font-size:11px}
+@media(max-width:950px){.recipe-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){
+  .recipe-grid{grid-template-columns:1fr}
+  .cart-panel{width:100%;right:-100%}
+  nav a{display:none}
+  .hero h1{font-size:30px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">THE <span>FLAVORVERSE</span></div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="royal.html">royal</a>
+     <a href="movies&cartoons.html">movies&cartoon</a>
+    <a href="worldcuisine.html">worldcuisine</a>
+    <a href="desertwrold.html">dessert</a>
+    <a href="favourite.html">Favourites</a>
+    <a href="order.html">order</a>
+    <a href="stamp.html">stamp</a>
+    <a href="contact.html">contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">✦ 132 RECIPES · INGREDIENT KITS ✦</div>
+  <h1>Cook Your Favorite Flavours</h1>
+  <p>Choose any recipe and buy the ingredient kit. We sell ingredients only — you cook the recipe fresh at home.</p>
+</section>
+
+<div class="toolbar">
+  <input id="search" placeholder="Search all 132 recipes..." oninput="renderRecipes()">
+  <select id="filter" onchange="renderRecipes()">
+    <option value="All">All Collections</option>
+    <option value="Heritage">Heritage</option>
+    <option value="Cartoon">Cartoon</option>
+    <option value="Movie">Movie</option>
+    <option value="World Cuisine">World Cuisine</option>
+    <option value="Dessert">Dessert</option>
+  </select>
+</div>
+
+<div class="count" id="count"></div>
+<div class="recipe-grid" id="recipeGrid"></div>
+
+<button class="cart" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <h2>Your Ingredient Cart</h2>
+    <button onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-list" id="cartList"></div>
+  <div class="cart-foot">
+    <div class="total"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+    <div class="total"><span>Delivery</span><strong id="delivery">₹0</strong></div>
+    <div class="total" style="font-size:19px;color:var(--deep)"><span>Total</span><strong id="grand">₹0</strong></div>
+    <button class="checkout" onclick="openCheckout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="checkoutModal">
+  <div class="modal">
+    <h2>Ingredient Kit Checkout</h2>
+    <input id="name" placeholder="Full Name">
+    <input id="phone" placeholder="10-digit Phone Number" maxlength="10">
+    <textarea id="address" placeholder="Complete Delivery Address"></textarea>
+    <select id="payment">
+      <option>Cash on Delivery</option>
+      <option>UPI</option>
+    </select>
+    <div class="total" style="margin:15px 0;font-size:18px">
+      <span>Order Total</span><strong id="checkoutTotal">₹0</strong>
+    </div>
+    <button class="place" onclick="placeOrder()">Place Ingredient Order</button>
+    <button class="close-modal" onclick="closeCheckout()">Cancel</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  ✦ The Flavorverse · Where Every Recipe Tells a Story ✦<br>
+  © 2026 The Flavorverse | All Rights Reserved
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+  authDomain: "the-flavoverse.firebaseapp.com",
+  projectId: "the-flavoverse",
+  storageBucket: "the-flavoverse.firebasestorage.app",
+  messagingSenderId: "1064022248292",
+  appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+  measurementId: "G-16Z0K1687Z"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+
+window.firebaseAuth = auth;
+window.firebaseDB = db;
+window.firebaseDoc = doc;
+window.firebaseSetDoc = setDoc;
+window.firebaseServerTimestamp = serverTimestamp;
+window.currentUser = null;
+
+onAuthStateChanged(auth, (user) => {
+  window.currentUser = user || null;
+  console.log(user
+    ? "Flavorverse Firebase login: " + user.email + " | UID: " + user.uid
+    : "No Firebase user is logged in.");
+});
+</script>
+
+<script>
+
+/* ============================================================
+   EXACT 132-RECIPE COLLECTION FROM YOUR FLAVORVERSE SOURCE
+   ============================================================ */
+
+const recipes = [
+{id:'FV001',name:'Kumbakonam Kadappa',category:'Tamil Nadu',type:'Heritage',image:'kadapa.png',page:'tamilnadu.html',price:100},
+{id:'FV002',name:'Chettinad Chicken Curry',category:'Tamil Nadu',type:'Heritage',image:'chettinaduchicken.png',page:'tamilnadu.html',price:120},
+{id:'FV003',name:'Sakkarai Pongal',category:'Tamil Nadu',type:'Heritage',image:'sakaraipongal.jpeg',page:'tamilnadu.html',price:140},
+{id:'FV004',name:'Akkaravadisal',category:'Tamil Nadu',type:'Heritage',image:'akkaravadisal.png',page:'tamilnadu.html',price:160},
+
+{id:'FV005',name:'Malabar Biryani',category:'Kerala',type:'Heritage',image:'malabarbriyani.png',page:'kerala.html',price:180},
+{id:'FV006',name:'Fish Molee',category:'Kerala',type:'Heritage',image:'keralafishmole.png',page:'kerala.html',price:200},
+{id:'FV007',name:'Ada Pradhaman',category:'Kerala',type:'Heritage',image:'ada pradhaman.png',page:'kerala.html',price:220},
+{id:'FV008',name:'Kerala Stew',category:'Kerala',type:'Heritage',image:'keralastew.png',page:'kerala.html',price:240},
+
+{id:'FV009',name:'Mysore Pak',category:'Karnataka',type:'Heritage',image:'mysorepak.png',page:'karnataka.html',price:80},
+{id:'FV010',name:'Bisi Bele Bath',category:'Karnataka',type:'Heritage',image:'Bisi-Bele-Bath.jpg',page:'karnataka.html',price:100},
+{id:'FV011',name:'Neer Dosa',category:'Karnataka',type:'Heritage',image:'Neer-Dosas.jpg',page:'karnataka.html',price:120},
+{id:'FV012',name:'Ragi Mudde',category:'Karnataka',type:'Heritage',image:'karragimudee.png',page:'karnataka.html',price:140},
+
+{id:'FV013',name:'Pulihora',category:'Andhra Pradesh',type:'Heritage',image:'pulihoraandhara.png',page:'Andrapradesh.html',price:160},
+{id:'FV014',name:'Andhra Chicken Curry',category:'Andhra Pradesh',type:'Heritage',image:'andhrachickencurry.png',page:'Andrapradesh.html',price:180},
+{id:'FV015',name:'Royyala Iguru',category:'Andhra Pradesh',type:'Heritage',image:'Royyala Iguru.png',page:'Andrapradesh.html',price:200},
+{id:'FV016',name:'Pootharekulu',category:'Andhra Pradesh',type:'Heritage',image:'Pootharekulu.png',page:'Andrapradesh.html',price:220},
+
+{id:'FV017',name:'Dal Baati Churma',category:'Rajasthan',type:'Heritage',image:'Dal Baati Churma.png',page:'rajasthan.html',price:240},
+{id:'FV018',name:'Laal Maas',category:'Rajasthan',type:'Heritage',image:'laal maas.png',page:'rajasthan.html',price:80},
+{id:'FV019',name:'Gatte Ki Sabzi',category:'Rajasthan',type:'Heritage',image:'gaati ki saabze.png',page:'rajasthan.html',price:100},
+{id:'FV020',name:'Ghevar',category:'Rajasthan',type:'Heritage',image:'ghewar.png',page:'rajasthan.html',price:120},
+
+{id:'FV021',name:'Sarson Ka Saag',category:'Punjab',type:'Heritage',image:'Sarson Ka Saag.png',page:'punjab.html',price:140},
+{id:'FV022',name:'Makki Ki Roti',category:'Punjab',type:'Heritage',image:'Makki Ki Roti.png',page:'punjab.html',price:160},
+{id:'FV023',name:'Amritsari Chole',category:'Punjab',type:'Heritage',image:'Amritsari Choli.png',page:'punjab.html',price:180},
+{id:'FV024',name:'Phirni',category:'Punjab',type:'Heritage',image:'phirni.png',page:'punjab.html',price:200},
+
+{id:'FV025',name:'Galouti Kebab',category:'Uttar Pradesh',type:'Heritage',image:'gaulotikebab.png',page:'uttarpradesh.html',price:220},
+{id:'FV026',name:'Lucknowi Biryani',category:'Uttar Pradesh',type:'Heritage',image:'lucknowbriyani.png',page:'uttarpradesh.html',price:240},
+{id:'FV027',name:'Shahi Tukda',category:'Uttar Pradesh',type:'Heritage',image:'shahi tukda.png',page:'uttarpradesh.html',price:80},
+{id:'FV028',name:'Kakori Kebab',category:'Uttar Pradesh',type:'Heritage',image:'kakori kebab.png',page:'uttarpradesh.html',price:100},
+
+{id:'FV029',name:'Rogan Josh',category:'Kashmir',type:'Heritage',image:'rohanjose.jpg',page:'kashmir.html',price:120},
+{id:'FV030',name:'Yakhni',category:'Kashmir',type:'Heritage',image:'yakhni.jpg',page:'kashmir.html',price:140},
+{id:'FV031',name:'Kashmiri Pulao',category:'Kashmir',type:'Heritage',image:'kashmiripulav.jpg',page:'kashmir.html',price:160},
+{id:'FV032',name:'Modur Pulao',category:'Kashmir',type:'Heritage',image:'Modur Pulao.png',page:'kashmir.html',price:180},
+
+{id:'FV033',name:'Mishti Doi',category:'West Bengal',type:'Heritage',image:'matka kulfi.jpg',page:'westbengal.html',price:200},
+{id:'FV034',name:'Macher Jhol',category:'West Bengal',type:'Heritage',image:'macherchol.jpg',page:'westbengal.html',price:220},
+{id:'FV035',name:'Kosha Mangsho',category:'West Bengal',type:'Heritage',image:'koshamangsho.jpg',page:'westbengal.html',price:240},
+{id:'FV036',name:'Rasgulla',category:'West Bengal',type:'Heritage',image:'rasagulla.jpg',page:'westbengal.html',price:80},
+
+{id:'FV037',name:'Chhena Poda',category:'Odisha',type:'Heritage',image:'chhenapoda.jpg',page:'odisha.html',price:100},
+{id:'FV038',name:'Dalma',category:'Odisha',type:'Heritage',image:'dalma.jpg',page:'odisha.html',price:120},
+{id:'FV039',name:'Kanika',category:'Odisha',type:'Heritage',image:'kanika.png',page:'odisha.html',price:140},
+{id:'FV040',name:'Rasabali',category:'Odisha',type:'Heritage',image:'rasabali.png',page:'odisha.html',price:160},
+
+{id:'FV041',name:'Khar',category:'Assam',type:'Heritage',image:'Khar.png',page:'assam.html',price:180},
+{id:'FV042',name:'Masor Tenga',category:'Assam',type:'Heritage',image:'Masor Tenga.png',page:'assam.html',price:200},
+{id:'FV043',name:'Duck Meat Curry',category:'Assam',type:'Heritage',image:'Duck Meat Curry.png',page:'assam.html',price:220},
+{id:'FV044',name:'Pitha',category:'Assam',type:'Heritage',image:'Pitha.png',page:'assam.html',price:240},
+
+{id:'FV045',name:'Litti Chokha',category:'Bihar',type:'Heritage',image:'Litti Chokha.png',page:'bihar.html',price:80},
+{id:'FV046',name:'Khaja',category:'Bihar',type:'Heritage',image:'chiti khaja.png',page:'bihar.html',price:100},
+{id:'FV047',name:'Thekua',category:'Bihar',type:'Heritage',image:'Thekua.png',page:'bihar.html',price:120},
+{id:'FV048',name:'Malpua',category:'Bihar',type:'Heritage',image:'Malpua.png',page:'bihar.html',price:140},
+
+{id:'FV049',name:'Undhiyu',category:'Gujarat',type:'Heritage',image:'Undhiyu.png',page:'gujarat.html',price:160},
+{id:'FV050',name:'Khandvi',category:'Gujarat',type:'Heritage',image:'Khandvi.png',page:'gujarat.html',price:180},
+{id:'FV051',name:'Gujarati Kadhi',category:'Gujarat',type:'Heritage',image:'Gujarati Kadhi.png',page:'gujarat.html',price:200},
+{id:'FV052',name:'Basundi',category:'Gujarat',type:'Heritage',image:'Basundi.png',page:'gujarat.html',price:220},
+
+{id:'FV053',name:'Puran Poli',category:'Maharashtra',type:'Heritage',image:'Puran Poli.png',page:'maharastra.html',price:240},
+{id:'FV054',name:'Misal Pav',category:'Maharashtra',type:'Heritage',image:'Misal Pav.png',page:'maharastra.html',price:80},
+{id:'FV055',name:'Pav Bhaji',category:'Maharashtra',type:'Heritage',image:'Pav Bhaji.png ',page:'maharastra.html',price:100},
+{id:'FV056',name:'Modak',category:'Maharashtra',type:'Heritage',image:'Modak.png',page:'maharastra.html',price:120},
+
+{id:'FV057',name:'Goan Fish Curry',category:'Goa',type:'Heritage',image:'Goan Fish Curry.png',page:'goa.html',price:140},
+{id:'FV058',name:'Chicken Xacuti',category:'Goa',type:'Heritage',image:'Chicken Xacuti.png',page:'goa.html',price:160},
+{id:'FV059',name:'Prawn Balchão',category:'Goa',type:'Heritage',image:'Prawn Balchão.png',page:'goa.html',price:180},
+{id:'FV060',name:'Bebinca',category:'Goa',type:'Heritage',image:'Bebinca.png',page:'goa.html',price:200},
+
+{id:'FV061',name:'Poha Jalebi',category:'Madhya Pradesh',type:'Heritage',image:'Poha Jalebi.png',page:'madhyapradesh.html',price:220},
+{id:'FV062',name:'Bhutte Ka Kees',category:'Madhya Pradesh',type:'Heritage',image:'Bhutte Ka Kees.png',page:'madhyapradesh.html',price:240},
+{id:'FV063',name:'Dal Bafla',category:'Madhya Pradesh',type:'Heritage',image:'Dal Bafla.png',page:'madhyapradesh.html',price:80},
+{id:'FV064',name:'Mawa Bati',category:'Madhya Pradesh',type:'Heritage',image:'Mawa Bati.png',page:'madhyapradesh.html',price:100},
+
+{id:'FV065',name:'Chocobi Cookies',category:'Shinchan',type:'Cartoon',image:'shinchancookies.png',page:'shinchanrecipe.html',price:120},
+{id:'FV066',name:'Noodle Bowl',category:'Shinchan',type:'Cartoon',image:'shinchannoodlesbowl.png',page:'shinchanrecipe.html',price:140},
+{id:'FV067',name:'Dorayaki',category:'Doraemon',type:'Cartoon',image:'doraemon dorayaki.png',page:'doreamon.html',price:160},
+{id:'FV068',name:'Ramen',category:'Doraemon',type:'Cartoon',image:'doramonnoodlesbowl.png',page:'doreamon.html',price:180},
+{id:'FV069',name:'Cheese Platter',category:'Tom & Jerry',type:'Cartoon',image:'recipetom and jerry cheese.png',page:'tom&jerry.html',price:200},
+{id:'FV070',name:'Milk & Cookies',category:'Tom & Jerry',type:'Cartoon',image:'recipe tom and jerry white cookie.png',page:'tom&jerry.html',price:220},
+{id:'FV071',name:'Berry Pie',category:'Masha & the Bear',type:'Cartoon',image:'mashaandbear berry pie.png',page:'masha&bear.html',price:240},
+{id:'FV072',name:'Honey Pancakes',category:'Masha & the Bear',type:'Cartoon',image:'mashanadbear honeypie.png',page:'masha&bear.html',price:80},
+{id:'FV073',name:'Laddoo',category:'Chhota Bheem',type:'Cartoon',image:'chottabhemeladdu.png',page:'chottabheem.html',price:100},
+{id:'FV074',name:'Badam Milk',category:'Chhota Bheem',type:'Cartoon',image:'chottabheme badammilk.png',page:'chottabheem.html',price:120},
+{id:'FV075',name:'Krabby Patty',category:'SpongeBob',type:'Cartoon',image:'spongebobkrabbypatty.png',page:'spongebob.html',price:140},
+{id:'FV076',name:'SpongeBob Cookies',category:'SpongeBob',type:'Cartoon',image:'spongebobcookie.png',page:'spongebob.html',price:160},
+
+{id:'FV077',name:'Butterbeer',category:'Harry Potter',type:'Movie',image:'harrybutterbeer.png',page:'harrypotter.html',price:180},
+{id:'FV078',name:'Pumpkin Pasties',category:'Harry Potter',type:'Movie',image:'harrypumpkinpasties.png',page:'harrypotter.html',price:200},
+{id:'FV079',name:'Ratatouille',category:'Ratatouille',type:'Movie',image:'ratatouillefood.png',page:'ratotoulie.html',price:220},
+{id:'FV080',name:'Crème Brûlée',category:'Ratatouille',type:'Movie',image:'ratatouillecremebrulli.png',page:'ratotoulie.html',price:240},
+{id:'FV081',name:'Chocolate Fudge',category:'Charlie & the Chocolate Factory',type:'Movie',image:'charliefudge.png',page:'charlie&thechocolate.html',price:80},
+{id:'FV082',name:'Chocolate Cupcakes',category:'Charlie & the Chocolate Factory',type:'Movie',image:'charliechocolate cake.png',page:'charlie&thechocolate.html',price:100},
+{id:'FV083',name:'Tropical Fruit Bowl',category:'The Lion King',type:'Movie',image:'lionking fruit bowl.png',page:'thelionking.html',price:120},
+{id:'FV084',name:'Banana Pancakes',category:'The Lion King',type:'Movie',image:'lionkingpancake.png',page:'thelionking.html',price:140},
+{id:'FV085',name:'Dumplings',category:'Kung Fu Panda',type:'Movie',image:'kungfupandadumplings.png',page:'Kung Fu Panda.html',price:160},
+{id:'FV086',name:'Noodles',category:'Kung Fu Panda',type:'Movie',image:'kungfupandanoodles.png',page:'Kung Fu Panda.html',price:180},
+{id:'FV087',name:'Snowflake Cupcakes',category:'Frozen',type:'Movie',image:'frozencupcake.png',page:'forzen.html',price:200},
+{id:'FV088',name:'Sugar Cookies',category:'Frozen',type:'Movie',image:'frozencookie.png',page:'forzen.html',price:220},
+
+{id:'FV089',name:'Feijoada',category:'Brazil',type:'World Cuisine',image:'feijoada2.jpg',page:'brazil.html',price:240},
+{id:'FV090',name:'Pão de Queijo',category:'Brazil',type:'World Cuisine',image:'paode.jpg',page:'brazil.html',price:80},
+{id:'FV091',name:'Brigadeiro',category:'Brazil',type:'World Cuisine',image:'brazil3food.jpg',page:'brazil.html',price:100},
+{id:'FV092',name:'Burger',category:'USA',type:'World Cuisine',image:'burger.jpg',page:'USA.html',price:120},
+{id:'FV093',name:'Pancakes',category:'USA',type:'World Cuisine',image:'pancake.jpg',page:'USA.html',price:140},
+{id:'FV094',name:'Apple Pie',category:'USA',type:'World Cuisine',image:'aapplepie.jpg',page:'USA.html',price:160},
+{id:'FV095',name:'Poutine',category:'Canada',type:'World Cuisine',image:'poutine.jpg',page:'canada.html',price:180},
+{id:'FV096',name:'Butter Tart',category:'Canada',type:'World Cuisine',image:'buttertart.jpg',page:'canada.html',price:200},
+{id:'FV097',name:'Maple Pancakes',category:'Canada',type:'World Cuisine',image:'maplepancakes.jpg',page:'canada.html',price:220},
+{id:'FV098',name:'Fish & Chips',category:'United Kingdom',type:'World Cuisine',image:'fishandchips.jpg',page:'uk.html',price:240},
+{id:'FV099',name:"Shepherd's Pie",category:'United Kingdom',type:'World Cuisine',image:'shepherds-pie.jpg',page:'uk.html',price:80},
+{id:'FV100',name:'Sticky Toffee Pudding',category:'United Kingdom',type:'World Cuisine',image:'sticky-toffee-pudding.jpg',page:'uk.html',price:100},
+{id:'FV101',name:'Biryani',category:'India',type:'World Cuisine',image:'briyani.jpg',page:'india.html',price:120},
+{id:'FV102',name:'Butter Chicken',category:'India',type:'World Cuisine',image:'butterchicken.jpg',page:'india.html',price:140},
+{id:'FV103',name:'Gulab Jamun',category:'India',type:'World Cuisine',image:'gulabjamun.jpg',page:'india.html',price:160},
+{id:'FV104',name:'Pad Thai',category:'Thailand',type:'World Cuisine',image:'padthai.jpg',page:'thailand .html',price:180},
+{id:'FV105',name:'Green Curry',category:'Thailand',type:'World Cuisine',image:'greencurry2.jpg',page:'thailand .html',price:200},
+{id:'FV106',name:'Mango Sticky Rice',category:'Thailand',type:'World Cuisine',image:'mangostickyrice.jpg',page:'thailand .html',price:220},
+{id:'FV107',name:'Döner Kebab',category:'Turkey',type:'World Cuisine',image:'donarkebab.jpg',page:'turkey.html',price:240},
+{id:'FV108',name:'Baklava',category:'Turkey',type:'World Cuisine',image:'baklava.jpg',page:'turkey.html',price:80},
+{id:'FV109',name:'Lahmacun',category:'Turkey',type:'World Cuisine',image:'lahmacun.jpg',page:'turkey.html',price:100},
+{id:'FV110',name:'Pho',category:'Vietnam',type:'World Cuisine',image:'pho.jpg',page:'vitenam.html',price:120},
+{id:'FV111',name:'Banh Mi',category:'Vietnam',type:'World Cuisine',image:'banhmi.jpg',page:'vitenam.html',price:140},
+{id:'FV112',name:'Goi Cuon',category:'Vietnam',type:'World Cuisine',image:'goicon.jpg',page:'vitenam.html',price:160},
+
+{id:'FV113',name:'Chocolate Cake',category:'Dessert Collection',type:'Dessert',image:'chococake.jpg',page:'',price:180},
+{id:'FV114',name:'Cheesecake',category:'Dessert Collection',type:'Dessert',image:'cheesecake.jpg',page:'',price:200},
+{id:'FV115',name:'Tiramisu',category:'Dessert Collection',type:'Dessert',image:'tiramisu2.jpg',page:'',price:220},
+{id:'FV116',name:'Brownie',category:'Dessert Collection',type:'Dessert',image:'brownie2.jpg',page:'',price:240},
+{id:'FV117',name:'Ice Cream',category:'Dessert Collection',type:'Dessert',image:'icecream2.jpg',page:'',price:80},
+{id:'FV118',name:'Gulab Jamun',category:'Dessert Collection',type:'Dessert',image:'gulabjamun.jpg',page:'',price:100},
+{id:'FV119',name:'Rasmalai',category:'Dessert Collection',type:'Dessert',image:'rasamalai.jpg',page:'',price:120},
+{id:'FV120',name:'Jalebi',category:'Dessert Collection',type:'Dessert',image:'jelabi.jpg',page:'',price:140},
+{id:'FV121',name:'Macarons',category:'Dessert Collection',type:'Dessert',image:'macroons.jpg',page:'',price:160},
+{id:'FV122',name:'Donut',category:'Dessert Collection',type:'Dessert',image:'donut.jpg',page:'',price:180},
+{id:'FV123',name:'Apple Pie',category:'Dessert Collection',type:'Dessert',image:'apple pie.jpg',page:'',price:200},
+{id:'FV124',name:'Cupcake',category:'Dessert Collection',type:'Dessert',image:'cupcake.jpg',page:'',price:220},
+{id:'FV125',name:'Panna Cotta',category:'Dessert Collection',type:'Dessert',image:'pannacotta.jpg',page:'',price:240},
+{id:'FV126',name:'Crème Brûlée',category:'Dessert Collection',type:'Dessert',image:'creamebrulee.jpg',page:'',price:80},
+{id:'FV127',name:'Mochi',category:'Dessert Collection',type:'Dessert',image:'mochi.jpg',page:'',price:100},
+{id:'FV128',name:'Churros',category:'Dessert Collection',type:'Dessert',image:'churros.jpg',page:'',price:120},
+{id:'FV129',name:'Baklava',category:'Dessert Collection',type:'Dessert',image:'baklava.jpg',page:'',price:140},
+{id:'FV130',name:'Carrot Cake',category:'Dessert Collection',type:'Dessert',image:'carrotcake.jpg',page:'',price:160},
+{id:'FV131',name:'Mango Pudding',category:'Dessert Collection',type:'Dessert',image:'mangopudding.jpg',page:'',price:180},
+{id:'FV132',name:'Red Velvet',category:'Dessert Collection',type:'Dessert',image:'redvelvet.jpg',page:'',price:200}
+];
+
+/* Ingredient kits: the site sells ingredients only, not cooked food. */
+const ingredientSets = {
+  rice:["Rice","Cumin","Coriander","Turmeric","Whole Spices","Cooking Oil"],
+  biryani:["Basmati Rice","Biryani Masala","Cinnamon","Cardamom","Cloves","Fried Onion","Mint","Coriander","Saffron"],
+  chicken:["Chicken Spice Mix","Red Chilli","Coriander","Cumin","Ginger","Garlic","Turmeric","Curry Leaves"],
+  mutton:["Mutton Spice Mix","Kashmiri Chilli","Coriander","Cumin","Ginger","Garlic","Cinnamon","Cardamom"],
+  fish:["Fish Spice Mix","Turmeric","Red Chilli","Coconut","Ginger","Garlic","Curry Leaves"],
+  prawn:["Prawn Spice Mix","Red Chilli","Coriander","Cumin","Ginger","Garlic","Coconut"],
+  sweet:["Sugar","Cardamom","Ghee","Cashews","Raisins","Milk"],
+  cake:["Maida","Sugar","Cocoa Powder","Baking Powder","Vanilla","Butter","Milk"],
+  cookie:["Maida","Sugar","Butter","Vanilla","Baking Powder"],
+  noodles:["Noodles","Soy Sauce","Garlic","Ginger","Spring Onion","Chilli"],
+  pancake:["Maida","Milk","Sugar","Baking Powder","Butter","Vanilla"],
+  curry:["Curry Spice Mix","Onion","Tomato","Ginger","Garlic","Turmeric","Coriander","Cumin"],
+  default:["Main Ingredient","Traditional Spice Mix","Turmeric","Cumin","Coriander","Ginger","Garlic","Cooking Oil"]
+};
+
+function getIngredients(name){
+  const n=name.toLowerCase();
+
+  if(n.includes("biryani")) return ingredientSets.biryani;
+  if(n.includes("chicken")||n.includes("xacuti")||n.includes("butter chicken")) return ingredientSets.chicken;
+  if(n.includes("mutton")||n.includes("rogan")||n.includes("kakori")||n.includes("galouti")||n.includes("shepherd")) return ingredientSets.mutton;
+  if(n.includes("fish")||n.includes("molee")||n.includes("macher")||n.includes("tenga")) return ingredientSets.fish;
+  if(n.includes("prawn")||n.includes("balchão")||n.includes("royyala")) return ingredientSets.prawn;
+  if(n.includes("cake")||n.includes("cheesecake")||n.includes("brownie")||n.includes("red velvet")) return ingredientSets.cake;
+  if(n.includes("cookie")||n.includes("macaron")) return ingredientSets.cookie;
+  if(n.includes("noodle")||n.includes("ramen")||n.includes("pho")||n.includes("pad thai")) return ingredientSets.noodles;
+  if(n.includes("pancake")) return ingredientSets.pancake;
+  if(n.includes("curry")||n.includes("stew")||n.includes("kadhi")||n.includes("undhiyu")||n.includes("misal")) return ingredientSets.curry;
+  if(n.includes("pulao")||n.includes("pulihora")||n.includes("kanika")||n.includes("poha")) return ingredientSets.rice;
+  if(n.includes("pak")||n.includes("pongal")||n.includes("pradhaman")||n.includes("rasgulla")||n.includes("gulab")||n.includes("rasmalai")||n.includes("jalebi")||n.includes("modak")||n.includes("basundi")||n.includes("phirni")||n.includes("malpua")||n.includes("baklava")||n.includes("pudding")||n.includes("tiramisu")||n.includes("brûlée")||n.includes("ice cream")||n.includes("donut")||n.includes("churros")||n.includes("mochi")||n.includes("tart")||n.includes("fudge")||n.includes("brigadeiro")||n.includes("bebinca")) return ingredientSets.sweet;
+  return ingredientSets.default;
+}
+
+let cart=JSON.parse(localStorage.getItem("flavorverseIngredientCart")||"[]");
+
+function renderRecipes(){
+  const q=document.getElementById("search").value.toLowerCase().trim();
+  const type=document.getElementById("filter").value;
+
+  const filtered=recipes.filter(r=>{
+    const text=(r.name+" "+r.category+" "+r.type+" "+r.id).toLowerCase();
+    return text.includes(q) && (type==="All" || r.type===type);
+  });
+
+  document.getElementById("count").textContent=
+    `Showing ${filtered.length} of 132 recipes`;
+
+  const grid=document.getElementById("recipeGrid");
+  grid.innerHTML="";
+
+  if(!filtered.length){
+    grid.innerHTML=`<div class="empty" style="grid-column:1/-1">No recipe found.</div>`;
+    return;
+  }
+
+  filtered.forEach(r=>{
+    const ingredients=getIngredients(r.name);
+
+    const card=document.createElement("article");
+    card.className="card";
+
+    card.innerHTML=`
+      <div class="card-img">
+        <img src="${r.image}" alt="${r.name}"
+          onerror="this.style.display='none'">
+      </div>
+
+      <div class="card-body">
+        <div class="id">${r.id}</div>
+        <span class="kit-label">INGREDIENT KIT</span>
+        <h2>${r.name}</h2>
+        <div class="category">${r.category} · ${r.type}</div>
+
+        <div class="price">₹${r.price}</div>
+
+        <div class="ingredients">
+          ${ingredients.map(x=>`<span class="ingredient">🌿 ${x}</span>`).join("")}
+        </div>
+
+        <button class="add" onclick="addToCart('${r.id}')">
+          🛒 Add Ingredient Kit
+        </button>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+function addToCart(id){
+  const recipe=recipes.find(r=>r.id===id);
+  if(!recipe)return;
+
+  const existing=cart.find(x=>x.id===id);
+
+  if(existing) existing.qty++;
+  else cart.push({
+    id:recipe.id,
+    name:recipe.name,
+    category:recipe.category,
+    price:recipe.price,
+    qty:1
+  });
+
+  saveCart();
+  updateCart();
+  showToast(recipe.name+" ingredient kit added!");
+}
+
+function saveCart(){
+  localStorage.setItem("flavorverseIngredientCart",JSON.stringify(cart));
+}
+
+function updateCart(){
+  const list=document.getElementById("cartList");
+  let subtotal=0;
+  let count=0;
+
+  if(!cart.length){
+    list.innerHTML=`<div class="empty">🛒<br><br>Your ingredient cart is empty.</div>`;
+  }else{
+    list.innerHTML="";
+    cart.forEach((item,i)=>{
+      subtotal+=item.price*item.qty;
+      count+=item.qty;
+
+      const div=document.createElement("div");
+      div.className="cart-item";
+      div.innerHTML=`
+        <h4>${item.name}</h4>
+        <small>${item.category} · Ingredient Kit</small>
+
+        <div class="cart-row">
+          <div class="qty">
+            <button onclick="changeQty(${i},-1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${i},1)">+</button>
+          </div>
+          <strong>₹${item.price*item.qty}</strong>
+        </div>
+
+        <button class="remove" onclick="removeItem(${i})">Remove</button>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  const delivery=subtotal===0?0:(subtotal>=500?0:40);
+  const grand=subtotal+delivery;
+
+  document.getElementById("cartCount").textContent=count;
+  document.getElementById("subtotal").textContent="₹"+subtotal;
+  document.getElementById("delivery").textContent=delivery===0&&subtotal>0?"FREE":"₹"+delivery;
+  document.getElementById("grand").textContent="₹"+grand;
+  document.getElementById("checkoutTotal").textContent="₹"+grand;
+}
+
+function changeQty(index,value){
+  cart[index].qty+=value;
+  if(cart[index].qty<=0)cart.splice(index,1);
+  saveCart();
+  updateCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  saveCart();
+  updateCart();
+}
+
+function openCart(){
+  updateCart();
+  document.getElementById("cartPanel").classList.add("open");
+}
+
+function closeCart(){
+  document.getElementById("cartPanel").classList.remove("open");
+}
+
+function openCheckout(){
+  if(!cart.length){
+    showToast("Add an ingredient kit first.");
+    return;
+  }
+  updateCart();
+  document.getElementById("checkoutModal").classList.add("show");
+}
+
+function closeCheckout(){
+  document.getElementById("checkoutModal").classList.remove("show");
+}
+
+async function placeOrder(){
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  const address=document.getElementById("address").value.trim();
+  const payment=document.getElementById("payment").value;
+  const placeButton=document.querySelector(".place");
+
+  if(!name||!phone||!address){
+    alert("Please fill all delivery details.");
+    return;
+  }
+
+  if(!/^[0-9]{10}$/.test(phone)){
+    alert("Please enter a valid 10-digit phone number.");
+    return;
+  }
+
+  if(!cart.length){
+    alert("Your ingredient cart is empty.");
+    return;
+  }
+
+  /* User must be logged in before placing an order */
+  if(!window.currentUser){
+    alert("Please log in to Flavorverse before placing your order.");
+    return;
+  }
+
+  let subtotal=cart.reduce((sum,x)=>sum+x.price*x.qty,0);
+  let delivery=subtotal>=500?0:40;
+
+  const orderId="FVORDER"+Date.now().toString().slice(-8);
+
+  const order={
+    orderId:orderId,
+    userId:window.currentUser.uid,
+    items:cart.map(item=>({
+      id:item.id,
+      name:item.name,
+      category:item.category,
+      price:item.price,
+      qty:item.qty
+    })),
+    customer:{
+      name:name,
+      phone:phone,
+      address:address
+    },
+    payment:payment,
+    subtotal:subtotal,
+    delivery:delivery,
+    total:subtotal+delivery,
+    status:"Placed",
+    createdAt:new Date().toISOString()
+  };
+
+  try{
+    if(placeButton){
+      placeButton.disabled=true;
+      placeButton.textContent="Saving Order...";
+    }
+
+    /* Save order in:
+       users / USER_UID / orders / ORDER_ID
+    */
+    const orderRef=window.firebaseDoc(
+      window.firebaseDB,
+      "users",
+      window.currentUser.uid,
+      "orders",
+      orderId
+    );
+
+    await window.firebaseSetDoc(orderRef,{
+      ...order,
+      firebaseCreatedAt:window.firebaseServerTimestamp()
+    });
+
+    /* Backup in browser storage */
+    localStorage.setItem("lastFlavorverseOrder",JSON.stringify(order));
+
+    cart=[];
+    saveCart();
+    updateCart();
+    closeCheckout();
+
+    document.getElementById("name").value="";
+    document.getElementById("phone").value="";
+    document.getElementById("address").value="";
+
+    showToast("Order "+orderId+" saved successfully! ✓");
+
+    console.log("Order saved to Firestore:",order);
+  }
+  catch(error){
+    console.error("Firestore order error:",error);
+
+    alert(
+      "Order could not be saved to Firebase.\n\n"+
+      "Error: "+error.message
+    );
+  }
+  finally{
+    if(placeButton){
+      placeButton.disabled=false;
+      placeButton.textContent="Place Ingredient Order";
+    }
+  }
+}
+function showToast(message){
+  const t=document.getElementById("toast");
+  t.textContent=message;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2500);
+}
+
+renderRecipes();
+updateCart();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Masha & Bear Recipes | The Flavorverse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+
+/* =====================================================
+   LIGHT MODE
+===================================================== */
+
+:root {
+    --bg: #fff8f4;
+    --section: #f8eee8;
+    --card: #ffffff;
+
+    --purple: #704b72;
+    --purple2: #91698e;
+
+    --text: #51404e;
+    --soft-text: #816d7d;
+
+    --gold: #d8b66c;
+    --border: #eadbd2;
+    --input: #ffffff;
+    --shadow: rgba(70,45,70,.18);
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+body.dark {
+    --bg: #17131a;
+    --section: #241c27;
+    --card: #2a212d;
+
+    --purple: #d3add2;
+    --purple2: #ae82ad;
+
+    --text: #f4eaf4;
+    --soft-text: #c9b7ca;
+
+    --gold: #e1c477;
+    --border: #493b4c;
+    --input: #332a36;
+    --shadow: rgba(0,0,0,.45);
+}
+
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: .3s;
+}
+
+
+/* =====================================================
+   NAVBAR (Doraemon style)
+===================================================== */
+
+header {
+    min-height: 85px;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: Cinzel, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--purple);
+    white-space: nowrap;
+}
+
+.main-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    background: var(--section);
+    padding: 7px;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+}
+
+.main-menu a {
+    text-decoration: none;
+    color: var(--text);
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px 13px;
+    border-radius: 25px;
+    white-space: nowrap;
+    transition: .3s;
+}
+
+.main-menu a:hover {
+    background: var(--purple);
+    color: white;
+}
+
+/* current page */
+.main-menu a[href="movies&cartoons.html"] {
+    background: var(--purple);
+    color: white;
+}
+
+.theme-btn {
+    border: none;
+    background: var(--purple);
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 4px;
+    transition: .3s;
+}
+
+.theme-btn:hover {
+    transform: rotate(15deg) scale(1.05);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    min-height: 430px;
+    padding: 55px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    background: linear-gradient(120deg, #704b72, #936b8e);
+}
+
+.hero-text {
+    max-width: 580px;
+    color: white;
+}
+
+.hero-text span {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #f7e7ce;
+}
+
+.hero-text h1 {
+    margin: 15px 0;
+    font-size: 52px;
+    line-height: 1.1;
+}
+
+.hero-text p {
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+.hero-btn {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    background: #f7e7ce;
+    color: #704b72;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.hero-image {
+    width: 370px;
+    height: 300px;
+    padding: 7px;
+    background: #f7e7ce;
+    border-radius: 35px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 28px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-area {
+    padding: 35px 7% 10px;
+    background: var(--bg);
+}
+
+.search-box {
+    max-width: 650px;
+    margin: auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px 22px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    outline: none;
+    background: var(--input);
+    color: var(--text);
+    font-family: Georgia, serif;
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   RECIPES
+===================================================== */
+
+.recipes {
+    padding: 55px 7% 70px;
+    background: var(--section);
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heading span {
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-size: 12px;
+}
+
+.heading h2 {
+    margin: 10px 0;
+    color: var(--purple);
+    font-size: 38px;
+}
+
+.heading p {
+    color: var(--soft-text);
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.recipe-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 35px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.recipe-card {
+    overflow: hidden;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #704b72, #936b8e);
+    border: 2px solid var(--gold);
+    box-shadow: 0 20px 40px var(--shadow);
+}
+
+.recipe-card.hide {
+    display: none;
+}
+
+.recipe-image {
+    height: 260px;
+    position: relative;
+}
+
+.recipe-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tag {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: #fff3df;
+    color: #704b72;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.recipe-content {
+    padding: 28px;
+    color: white;
+}
+
+.recipe-content small {
+    color: #f8e8c9;
+    letter-spacing: 2px;
+}
+
+.recipe-content h3 {
+    margin: 9px 0;
+    font-size: 25px;
+    color: #fffaf3;
+}
+
+.recipe-content > p {
+    color: #fff5ef;
+    line-height: 1.7;
+    font-size: 13px;
+}
+
+.info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0;
+}
+
+.info span {
+    padding: 7px 13px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.12);
+    font-size: 11px;
+}
+
+.recipe-content h4 {
+    margin-top: 22px;
+    margin-bottom: 10px;
+    color: #f8e8c9;
+}
+
+.recipe-content ul,
+.recipe-content ol {
+    padding-left: 20px;
+}
+
+.recipe-content li {
+    margin-bottom: 7px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #fff8f1;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.action-btn {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid #e7c987;
+    background: rgba(255,255,255,.10);
+    color: white;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 11px;
+}
+
+.action-btn:hover,
+.action-btn.active {
+    background: #f7e7ce;
+    color: #704b72;
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.rating-box {
+    margin-top: 25px;
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.10);
+}
+
+.rating-title {
+    color: #f8e8c9;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.rating-message {
+    color: white;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.stars {
+    display: flex;
+    gap: 5px;
+}
+
+.star {
+    font-size: 28px;
+    color: #c7b3c5;
+    cursor: pointer;
+}
+
+.star.selected,
+.star:hover {
+    color: #f7d36b;
+}
+
+
+/* =====================================================
+   REVIEW SECTION
+===================================================== */
+
+.review-section {
+    max-width: 1050px;
+    margin: 55px auto 0;
+    padding: 35px;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #704b72, #936b8e);
+    box-shadow: 0 15px 35px var(--shadow);
+}
+
+.review-section h2 {
+    color: #f7e7ce;
+    margin-bottom: 8px;
+}
+
+.review-section > p {
+    color: white;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.review-select {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.review-text {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    resize: vertical;
+    outline: none;
+    font-family: Georgia, serif;
+}
+
+.review-submit {
+    margin-top: 12px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #f7e7ce;
+    color: #704b72;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   REVIEWS DISPLAY
+===================================================== */
+
+.reviews-list {
+    margin-top: 30px;
+}
+
+.review-item {
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.10);
+}
+
+.review-user {
+    color: #f7e7ce;
+    font-weight: bold;
+}
+
+.review-recipe {
+    margin-top: 4px;
+    color: #e3c5dc;
+    font-size: 11px;
+}
+
+.review-message {
+    margin-top: 8px;
+    color: white;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+.activity {
+    max-width: 1050px;
+    margin: 50px auto 0;
+    padding: 30px;
+    border-radius: 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+
+.activity h2 {
+    color: var(--purple);
+    margin-bottom: 20px;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
+}
+
+.activity-box {
+    padding: 20px;
+    text-align: center;
+    border-radius: 18px;
+    background: var(--section);
+}
+
+.activity-box strong {
+    display: block;
+    color: var(--purple);
+    font-size: 23px;
+}
+
+.activity-box span {
+    color: var(--soft-text);
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quote {
+    padding: 75px 20px;
+    text-align: center;
+    background: var(--bg);
+}
+
+.quote span {
+    color: var(--gold);
+    font-size: 22px;
+}
+
+.quote h2 {
+    margin: 18px 0;
+    color: var(--purple);
+    font-size: 30px;
+    font-style: italic;
+}
+
+.quote p {
+    color: var(--soft-text);
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+.back {
+    padding: 25px 6%;
+    display: flex;
+    justify-content: flex-end;
+    background: var(--bg);
+}
+
+.back a {
+    padding: 12px 22px;
+    border: 1px solid #d6b979;
+    border-radius: 25px;
+    background: #704b72;
+    color: #f5dda2;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    padding: 40px 20px;
+    text-align: center;
+    background: #704b72;
+    color: white;
+}
+
+footer h3 {
+    color: #f7e7ce;
+    margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+#toast {
+    position: fixed;
+    left: 50%;
+    bottom: 25px;
+    transform: translate(-50%,80px);
+    opacity: 0;
+    padding: 13px 22px;
+    border-radius: 25px;
+    background: #704b72;
+    color: white;
+    z-index: 5000;
+    transition: .3s;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translate(-50%,0);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px) {
+
+    header {
+        flex-direction: column;
+        padding: 15px 4%;
+    }
+
+    .main-menu {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-radius: 25px;
+    }
+
+}
+
+@media(max-width:900px) {
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-image {
+        width: 90%;
+        max-width: 370px;
+    }
+
+    .recipe-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .main-menu {
+        gap: 3px;
+        padding: 6px;
+    }
+
+    .main-menu a {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+
+    .theme-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <nav class="main-menu">
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="royal.html">Royal</a>
+
+        <a href="movies&cartoons.html">Movies & Cartoons</a>
+
+        <a href="worldcuisine.html">World Cuisine</a>
+
+        <a href="desertwrold.html">Desserts</a>
+
+        <a href="gallery.html">Gallery</a>
+
+        <a href="favourite.html">Favourite</a>
+
+        <a href="order.html">Order</a>
+
+        <a href="stamp.html">stamp</a>
+
+        <a href="contact.html">Contact</a>
+
+        <button
+            class="theme-btn"
+            id="themeButton"
+            onclick="toggleTheme()">
+            🌙
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <span>
+            🌸 CARTOON RECIPE COLLECTION
+        </span>
+
+        <h1>
+            Masha & Bear's<br>
+            Fun Flavours
+        </h1>
+
+        <p>
+            Step into the cheerful world of Masha and Bear
+            and enjoy delicious recipes inspired by their
+            fun-filled adventures.
+        </p>
+
+        <a href="#recipes" class="hero-btn">
+            Explore Recipes ↓
+        </a>
+
+    </div>
+
+    <div class="hero-image">
+
+        <img
+            src="masha&bear.png"
+            alt="Masha and Bear">
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
+<section class="search-area">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔎 Search Masha & Bear recipes..."
+            onkeyup="searchRecipes()">
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RECIPES
+===================================================== -->
+
+<section class="recipes" id="recipes">
+
+    <div class="heading">
+
+        <span>
+            MASHA & BEAR'S KITCHEN
+        </span>
+
+        <h2>
+            Two Delicious Recipes
+        </h2>
+
+        <p>
+            Simple • Sweet • Delicious
+        </p>
+
+    </div>
+
+
+    <div class="recipe-grid">
+
+
+        <!-- =================================================
+             BERRY PIE
+        ================================================= -->
+
+        <article
+            class="recipe-card"
+            data-name="masha berry pie berry pie sweet">
+
+            <div class="recipe-image">
+
+                <img
+                    src="mashaandbear berry pie.png"
+                    alt="Masha's Berry Pie">
+
+                <span class="tag">
+                    🥧 SWEET
+                </span>
+
+            </div>
+
+            <div class="recipe-content">
+
+                <small>
+                    RECIPE • 01
+                </small>
+
+                <h3>
+                    🥧 Masha's Berry Pie
+                </h3>
+
+                <p>
+                    A colourful and delicious berry pie
+                    inspired by Masha's cheerful adventures
+                    with Bear.
+                </p>
+
+                <div class="info">
+                    <span>⏱ 50 mins</span>
+                    <span>🥧 Medium</span>
+                </div>
+
+                <h4>
+                    Ingredients
+                </h4>
+
+                <ul>
+                    <li>1½ cups all-purpose flour</li>
+                    <li>½ cup cold butter</li>
+                    <li>3 tbsp sugar</li>
+                    <li>2 tbsp cold water</li>
+                    <li>1 cup mixed berries</li>
+                    <li>2 tbsp sugar for filling</li>
+                    <li>1 tbsp cornflour</li>
+                    <li>½ tsp vanilla essence</li>
+                </ul>
+
+                <h4>
+                    Preparation
+                </h4>
+
+                <ol>
+                    <li>Mix flour, sugar and cold butter until crumbly.</li>
+                    <li>Add cold water little by little and form soft dough.</li>
+                    <li>Chill the dough for 15 minutes.</li>
+                    <li>Mix berries with sugar, cornflour and vanilla.</li>
+                    <li>Roll dough and place in pie dish.</li>
+                    <li>Add filling and cover with another dough layer.</li>
+                    <li>Bake at 180°C for 30–35 minutes until golden.</li>
+                    <li>Cool slightly before serving.</li>
+                </ol>
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="actions">
+
+                    <button
+                        class="action-btn"
+                        id="fav-berry"
+                        onclick="toggleFavourite('masha-berry-pie', 'Masha\'s Berry Pie', this)">
+                        ❤️ Add to Favourite
+                    </button>
+
+                    <button
+                        class="action-btn"
+                        id="stamp-berry"
+                        onclick="toggleStamp('masha-berry-pie', 'Masha\'s Berry Pie', this)">
+                        🏷️ Add to Stamp
+                    </button>
+
+                </div>
+
+                <!-- RATING -->
+
+                <div class="rating-box">
+
+                    <div class="rating-title">
+                        ⭐ Rate this recipe
+                    </div>
+
+                    <div
+                        class="rating-message"
+                        id="rating-message-berry">
+                        You haven't rated this recipe yet.
+                    </div>
+
+                    <div class="stars" id="stars-berry">
+                        <span class="star" onclick="saveRating('masha-berry-pie', 1, this)">★</span>
+                        <span class="star" onclick="saveRating('masha-berry-pie', 2, this)">★</span>
+                        <span class="star" onclick="saveRating('masha-berry-pie', 3, this)">★</span>
+                        <span class="star" onclick="saveRating('masha-berry-pie', 4, this)">★</span>
+                        <span class="star" onclick="saveRating('masha-berry-pie', 5, this)">★</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             HONEY PANCAKES
+        ================================================= -->
+
+        <article
+            class="recipe-card"
+            data-name="bear honey pancakes pancakes sweet">
+
+            <div class="recipe-image">
+
+                <img
+                    src="mashanadbear honeypie.png"
+                    alt="Bear's Honey Pancakes">
+
+                <span class="tag">
+                    🍯 SWEET
+                </span>
+
+            </div>
+
+            <div class="recipe-content">
+
+                <small>
+                    RECIPE • 02
+                </small>
+
+                <h3>
+                    🍯 Bear's Honey Pancakes
+                </h3>
+
+                <p>
+                    Soft and fluffy pancakes topped with
+                    golden honey and fresh fruits,
+                    perfect for a cosy breakfast.
+                </p>
+
+                <div class="info">
+                    <span>⏱ 20 mins</span>
+                    <span>🥞 Easy</span>
+                </div>
+
+                <h4>
+                    Ingredients
+                </h4>
+
+                <ul>
+                    <li>1 cup all-purpose flour</li>
+                    <li>1 tbsp sugar</li>
+                    <li>1 tsp baking powder</li>
+                    <li>1 egg</li>
+                    <li>¾ cup milk</li>
+                    <li>1 tbsp melted butter</li>
+                    <li>½ tsp vanilla essence</li>
+                    <li>Honey</li>
+                    <li>Fresh banana or berries</li>
+                </ul>
+
+                <h4>
+                    Preparation
+                </h4>
+
+                <ol>
+                    <li>Mix flour, sugar and baking powder.</li>
+                    <li>Add egg, milk, melted butter and vanilla.</li>
+                    <li>Whisk gently to smooth batter.</li>
+                    <li>Heat a lightly greased pan.</li>
+                    <li>Pour a small amount of batter and cook until bubbles appear.</li>
+                    <li>Flip and cook the other side.</li>
+                    <li>Stack the pancakes.</li>
+                    <li>Drizzle honey and add fresh fruits.</li>
+                </ol>
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="actions">
+
+                    <button
+                        class="action-btn"
+                        id="fav-pancakes"
+                        onclick="toggleFavourite('bear-honey-pancakes', 'Bear\'s Honey Pancakes', this)">
+                        ❤️ Add to Favourite
+                    </button>
+
+                    <button
+                        class="action-btn"
+                        id="stamp-pancakes"
+                        onclick="toggleStamp('bear-honey-pancakes', 'Bear\'s Honey Pancakes', this)">
+                        🏷️ Add to Stamp
+                    </button>
+
+                </div>
+
+                <!-- RATING -->
+
+                <div class="rating-box">
+
+                    <div class="rating-title">
+                        ⭐ Rate this recipe
+                    </div>
+
+                    <div
+                        class="rating-message"
+                        id="rating-message-pancakes">
+                        You haven't rated this recipe yet.
+                    </div>
+
+                    <div class="stars" id="stars-pancakes">
+                        <span class="star" onclick="saveRating('bear-honey-pancakes', 1, this)">★</span>
+                        <span class="star" onclick="saveRating('bear-honey-pancakes', 2, this)">★</span>
+                        <span class="star" onclick="saveRating('bear-honey-pancakes', 3, this)">★</span>
+                        <span class="star" onclick="saveRating('bear-honey-pancakes', 4, this)">★</span>
+                        <span class="star" onclick="saveRating('bear-honey-pancakes', 5, this)">★</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         REVIEW
+    ===================================================== -->
+
+    <section class="review-section" id="reviews">
+
+        <h2>
+            💬 Share Your Review
+        </h2>
+
+        <p>
+            Tell us what you think about these Masha & Bear recipes.
+        </p>
+
+        <select id="reviewRecipe" class="review-select">
+
+            <option value="masha-berry-pie">
+                🥧 Masha's Berry Pie
+            </option>
+
+            <option value="bear-honey-pancakes">
+                🍯 Bear's Honey Pancakes
+            </option>
+
+        </select>
+
+        <textarea
+            id="reviewText"
+            class="review-text"
+            placeholder="Write your review here..."></textarea>
+
+        <button
+            class="review-submit"
+            onclick="submitReview()">
+            Submit Review
+        </button>
+
+        <div class="reviews-list" id="reviewsList">
+            Loading reviews...
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         USER ACTIVITY
+    ===================================================== -->
+
+    <section class="activity">
+
+        <h2>
+            👤 Your Flavorverse Activity
+        </h2>
+
+        <div class="activity-grid">
+
+            <div class="activity-box">
+                <strong id="my-favourites">0</strong>
+                <span>❤️ Favourites</span>
+            </div>
+
+            <div class="activity-box">
+                <strong id="my-stamps">0</strong>
+                <span>🏷️ Stamps</span>
+            </div>
+
+            <div class="activity-box">
+                <strong id="my-ratings">0</strong>
+                <span>⭐ Ratings</span>
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUOTE
+===================================================== -->
+
+<section class="quote">
+
+    <span>✦</span>
+
+    <h2>
+        "Sweet moments are even better when shared!"
+    </h2>
+
+    <p>
+        — The Flavorverse
+    </p>
+
+    <span>✦</span>
+
+</section>
+
+
+
+<!-- =====================================================
+     BACK
+===================================================== -->
+
+<div class="back">
+
+    <a href="movies&cartoons.html">
+        ← BACK TO MOVIES & CARTOONS
+    </a>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        🍴 The Flavorverse
+    </h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+
+
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+  authDomain: "the-flavoverse.firebaseapp.com",
+
+  projectId: "the-flavoverse",
+
+  storageBucket: "the-flavoverse.firebasestorage.app",
+
+  messagingSenderId: "1064022248292",
+
+  appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+
+  measurementId: "G-16Z0K1687Z"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+let currentUser = null;
+
+
+/* =====================================================
+   RECIPE NAMES
+===================================================== */
+
+const recipeNames = {
+
+    "masha-berry-pie": "Masha's Berry Pie",
+
+    "bear-honey-pancakes": "Bear's Honey Pancakes"
+
+};
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function applyTheme() {
+
+    const theme = localStorage.getItem("flavorverseTheme");
+
+    if (theme === "dark") {
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeButton").innerHTML = "☀️";
+
+    }
+
+}
+
+function toggleTheme() {
+
+    document.body.classList.toggle("dark");
+
+    const isDark = document.body.classList.contains("dark");
+
+    if (isDark) {
+
+        localStorage.setItem("flavorverseTheme", "dark");
+
+        document.getElementById("themeButton").innerHTML = "☀️";
+
+    } else {
+
+        localStorage.setItem("flavorverseTheme", "light");
+
+        document.getElementById("themeButton").innerHTML = "🌙";
+
+    }
+
+}
+
+applyTheme();
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+auth.onAuthStateChanged(function(user) {
+
+    currentUser = user;
+
+    if (user) {
+
+        loadFavouriteStatus();
+
+        loadStampStatus();
+
+        loadMyRatings();
+
+        loadActivity();
+
+    }
+
+    loadReviews();
+
+});
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    toast.innerText = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function() {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function checkLogin() {
+
+    if (!currentUser) {
+
+        showToast("🔐 Please log in first");
+
+        setTimeout(function() {
+
+            window.location.href = "login.html";
+
+        }, 1000);
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function searchRecipes() {
+
+    const search = document.getElementById("searchInput").value.toLowerCase();
+
+    const cards = document.querySelectorAll(".recipe-card");
+
+    cards.forEach(function(card) {
+
+        const name = card.dataset.name.toLowerCase();
+
+        if (name.includes(search)) {
+
+            card.classList.remove("hide");
+
+        } else {
+
+            card.classList.add("hide");
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   ❤️ FAVOURITE
+===================================================== */
+
+async function toggleFavourite(recipeId, recipeName, button) {
+
+    if (!checkLogin()) return;
+
+    const ref = db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("favourites")
+        .doc(recipeId);
+
+    try {
+
+        const doc = await ref.get();
+
+        if (doc.exists) {
+
+            await ref.delete();
+
+            button.innerHTML = "❤️ Add to Favourite";
+
+            button.classList.remove("active");
+
+            showToast("Removed from Favourite");
+
+        } else {
+
+            await ref.set({
+
+                recipeId: recipeId,
+
+                recipeName: recipeName,
+
+                category: "Cartoons",
+
+                addedAt: firebase.firestore.FieldValue.serverTimestamp()
+
+            });
+
+            button.innerHTML = "❤️ Added to Favourite";
+
+            button.classList.add("active");
+
+            showToast(recipeName + " added to Favourite ❤️");
+
+        }
+
+        loadActivity();
+
+    } catch (error) {
+
+        console.error("Favourite error:", error);
+
+        showToast("❌ Favourite error");
+
+    }
+
+}
+
+
+/* =====================================================
+   🏷️ STAMP
+===================================================== */
+
+async function toggleStamp(recipeId, recipeName, button) {
+
+    if (!checkLogin()) return;
+
+    const ref = db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("stamps")
+        .doc(recipeId);
+
+    try {
+
+        const doc = await ref.get();
+
+        if (doc.exists) {
+
+            await ref.delete();
+
+            button.innerHTML = "🏷️ Add to Stamp";
+
+            button.classList.remove("active");
+
+            showToast("Stamp removed");
+
+        } else {
+
+            await ref.set({
+
+                recipeId: recipeId,
+
+                recipeName: recipeName,
+
+                category: "Cartoons",
+
+                stampedAt: firebase.firestore.FieldValue.serverTimestamp()
+
+            });
+
+            button.innerHTML = "🏷️ Recipe Stamped ✓";
+
+            button.classList.add("active");
+
+            showToast(recipeName + " stamped 🏷️");
+
+        }
+
+        loadActivity();
+
+    } catch (error) {
+
+        console.error("Stamp error:", error);
+
+        showToast("❌ Stamp error");
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD FAVOURITE STATUS
+===================================================== */
+
+async function loadFavouriteStatus() {
+
+    if (!currentUser) return;
+
+    try {
+
+        const snapshot = await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("favourites")
+            .get();
+
+        snapshot.forEach(function(doc) {
+
+            if (doc.id === "masha-berry-pie") {
+
+                const button = document.getElementById("fav-berry");
+
+                button.innerHTML = "❤️ Added to Favourite";
+
+                button.classList.add("active");
+
+            }
+
+            if (doc.id === "bear-honey-pancakes") {
+
+                const button = document.getElementById("fav-pancakes");
+
+                button.innerHTML = "❤️ Added to Favourite";
+
+                button.classList.add("active");
+
+            }
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD STAMP STATUS
+===================================================== */
+
+async function loadStampStatus() {
+
+    if (!currentUser) return;
+
+    try {
+
+        const snapshot = await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("stamps")
+            .get();
+
+        snapshot.forEach(function(doc) {
+
+            if (doc.id === "masha-berry-pie") {
+
+                const button = document.getElementById("stamp-berry");
+
+                button.innerHTML = "🏷️ Recipe Stamped ✓";
+
+                button.classList.add("active");
+
+            }
+
+            if (doc.id === "bear-honey-pancakes") {
+
+                const button = document.getElementById("stamp-pancakes");
+
+                button.innerHTML = "🏷️ Recipe Stamped ✓";
+
+                button.classList.add("active");
+
+            }
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   ⭐ RATING
+===================================================== */
+
+async function saveRating(recipeId, rating, clickedStar) {
+
+    if (!checkLogin()) return;
+
+    try {
+
+        await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("ratings")
+            .doc(recipeId)
+            .set({
+
+                recipeId: recipeId,
+
+                rating: rating,
+
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+
+            });
+
+        const stars = clickedStar.parentElement.querySelectorAll(".star");
+
+        stars.forEach(function(star, index) {
+
+            if (index < rating) {
+
+                star.classList.add("selected");
+
+            } else {
+
+                star.classList.remove("selected");
+
+            }
+
+        });
+
+        const shortName = recipeId === "masha-berry-pie" ? "berry" : "pancakes";
+
+        document.getElementById("rating-message-" + shortName).innerText =
+            "⭐ You rated this recipe " + rating + "/5";
+
+        showToast("⭐ Rating saved successfully!");
+
+        loadActivity();
+
+    } catch (error) {
+
+        console.error("Rating error:", error);
+
+        showToast("❌ Rating error");
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD USER RATING
+===================================================== */
+
+async function loadMyRatings() {
+
+    if (!currentUser) return;
+
+    const recipeIds = [
+
+        "masha-berry-pie",
+
+        "bear-honey-pancakes"
+
+    ];
+
+    for (const recipeId of recipeIds) {
+
+        try {
+
+            const doc = await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("ratings")
+                .doc(recipeId)
+                .get();
+
+            if (!doc.exists) continue;
+
+            const rating = doc.data().rating;
+
+            const shortName = recipeId === "masha-berry-pie" ? "berry" : "pancakes";
+
+            const stars = document
+                .getElementById("stars-" + shortName)
+                .querySelectorAll(".star");
+
+            stars.forEach(function(star, index) {
+
+                if (index < rating) {
+
+                    star.classList.add("selected");
+
+                }
+
+            });
+
+            document.getElementById("rating-message-" + shortName).innerText =
+                "⭐ You rated this recipe " + rating + "/5";
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   💬 SUBMIT REVIEW
+===================================================== */
+
+async function submitReview() {
+
+    if (!checkLogin()) return;
+
+    const recipeId = document.getElementById("reviewRecipe").value;
+
+    const review = document.getElementById("reviewText").value.trim();
+
+    if (review === "") {
+
+        showToast("✍️ Please write a review");
+
+        return;
+
+    }
+
+    try {
+
+        let userName = currentUser.displayName;
+
+        if (!userName) {
+
+            userName = currentUser.email.split("@")[0];
+
+        }
+
+        await db
+            .collection("recipes")
+            .doc(recipeId)
+            .collection("reviews")
+            .add({
+
+                userId: currentUser.uid,
+
+                userName: userName,
+
+                review: review,
+
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+
+            });
+
+        document.getElementById("reviewText").value = "";
+
+        showToast("💬 Review added successfully!");
+
+        loadReviews();
+
+    } catch (error) {
+
+        console.error("Review error:", error);
+
+        showToast("❌ Review error: " + error.message);
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews() {
+
+    const list = document.getElementById("reviewsList");
+
+    list.innerHTML = "Loading reviews...";
+
+    const recipeIds = [
+
+        "masha-berry-pie",
+
+        "bear-honey-pancakes"
+
+    ];
+
+    let allReviews = [];
+
+    try {
+
+        for (const recipeId of recipeIds) {
+
+            const snapshot = await db
+                .collection("recipes")
+                .doc(recipeId)
+                .collection("reviews")
+                .get();
+
+            snapshot.forEach(function(doc) {
+
+                const data = doc.data();
+
+                allReviews.push({
+
+                    id: doc.id,
+
+                    recipeId: recipeId,
+
+                    userName: data.userName || "User",
+
+                    review: data.review || "",
+
+                    createdAt: data.createdAt ? data.createdAt.toMillis() : 0
+
+                });
+
+            });
+
+        }
+
+        allReviews.sort(function(a, b) {
+
+            return b.createdAt - a.createdAt;
+
+        });
+
+        if (allReviews.length === 0) {
+
+            list.innerHTML = "No reviews yet. Be the first to review! 💜";
+
+            return;
+
+        }
+
+        list.innerHTML = "";
+
+        allReviews.forEach(function(item) {
+
+            const div = document.createElement("div");
+
+            div.className = "review-item";
+
+            div.innerHTML =
+
+                "<div class='review-user'>" +
+                escapeHTML(item.userName) +
+                "</div>" +
+
+                "<div class='review-recipe'>" +
+                "🍴 " +
+                escapeHTML(recipeNames[item.recipeId]) +
+                "</div>" +
+
+                "<div class='review-message'>" +
+                escapeHTML(item.review) +
+                "</div>";
+
+            list.appendChild(div);
+
+        });
+
+    } catch (error) {
+
+        console.error("Review loading error:", error);
+
+        list.innerHTML = "❌ Unable to load reviews.";
+
+    }
+
+}
+
+
+/* =====================================================
+   USER ACTIVITY
+===================================================== */
+
+async function loadActivity() {
+
+    if (!currentUser) return;
+
+    try {
+
+        const userRef = db.collection("users").doc(currentUser.uid);
+
+        const favourites = await userRef.collection("favourites").get();
+
+        const stamps = await userRef.collection("stamps").get();
+
+        const ratings = await userRef.collection("ratings").get();
+
+        document.getElementById("my-favourites").innerText = favourites.size;
+
+        document.getElementById("my-stamps").innerText = stamps.size;
+
+        document.getElementById("my-ratings").innerText = ratings.size;
+
+    } catch (error) {
+
+        console.error("Activity error:", error);
+
+    }
+
+}
+
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+function escapeHTML(text) {
+
+    return String(text)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+</script>
+
+</body>
+
+</html>

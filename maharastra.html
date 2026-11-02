@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flavorverse | Maharashtra</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:20px;}
+body{font-family:'Poppins',sans-serif;background:#F7E7CE;color:#5B4A45;transition:.3s;}
+
+/* ===== DARK MODE ===== */
+body.dark-mode{background:#241d23;color:#eee;}
+body.dark-mode .hero,body.dark-mode .about-text,body.dark-mode .recipe-section,body.dark-mode .fact-card,body.dark-mode .profile-card,body.dark-mode .explorer-box,body.dark-mode .review-box,body.dark-mode .recent-card,body.dark-mode .popular-card{background:#342a32;color:#eee;}
+body.dark-mode .recipe-content h2,body.dark-mode .about-text h2,body.dark-mode .facts-section h2,body.dark-mode .explorer-box h2,body.dark-mode .popular-title,body.dark-mode .recent-section h2{color:#e9c9e4;}
+body.dark-mode .recipe-content h3{color:#d6aeca;}
+body.dark-mode .recipe-info div,body.dark-mode .chef-tip,body.dark-mode .fun-fact,body.dark-mode .single-review{background:#443640;}
+body.dark-mode .rating-area{background:rgba(68,54,64,.7);}
+body.dark-mode .image-box{background:#443640;}
+body.dark-mode .profile-card{color:#eee;}
+body.dark-mode .profile-card .count{color:#e9c9e4;}
+body.dark-mode input,body.dark-mode select,body.dark-mode textarea,body.dark-mode .search-box{background:#443640;color:white;border-color:#80647b;}
+
+/* ===== HEADER ===== */
+header{background:#8E6C88;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 5px 15px rgba(0,0,0,.15);}
+.logo{font-family:'Cinzel',serif;font-size:32px;font-weight:bold;color:white;}
+nav{display:flex;align-items:center;justify-content:flex-end;}
+.dark-toggle{margin-right:12px;border:none;background:#F4E5C5;color:#5B4A45;padding:9px 14px;border-radius:20px;cursor:pointer;font-weight:bold;}
+
+/* ===== HAMBURGER DRAWER ===== */
+.menu-open-btn{border:0;background:transparent;color:#fff;font-size:32px;line-height:1;cursor:pointer;padding:5px 8px;}
+.menu-backdrop{position:fixed;inset:0;background:rgba(25,16,28,.55);z-index:9998;opacity:0;visibility:hidden;transition:.25s;}
+.menu-backdrop.show{opacity:1;visibility:visible;}
+.explore-drawer{position:fixed;top:0;right:0;width:418px;max-width:88vw;height:100vh;background:#fff8ef;z-index:9999;transform:translateX(102%);transition:transform .3s ease;box-shadow:-8px 0 25px rgba(0,0,0,.2);overflow-y:auto;color:#5b4a45;}
+.explore-drawer.open{transform:translateX(0);}
+.drawer-heading{height:115px;background:#a083a2;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 35px;position:sticky;top:0;z-index:2;}
+.drawer-heading h2{font-family:'Cinzel',serif;font-size:32px;font-weight:700;}
+.drawer-close{border:0;background:transparent;color:#fff;font-size:34px;font-weight:300;cursor:pointer;line-height:1;}
+.drawer-links{padding:18px 27px 30px;}
+.drawer-link{display:flex;align-items:center;gap:22px;text-decoration:none;color:#654b70;padding:16px 12px;border-radius:8px;transition:background .2s;}
+.drawer-link:hover{background:#f0e3ed;}
+.drawer-icon{width:36px;flex:0 0 36px;text-align:center;font-size:25px;}
+.drawer-copy strong{display:block;font-family:'Cinzel',serif;font-size:18px;line-height:1.35;color:#654b70;}
+.drawer-copy small{display:block;font-size:13px;color:#806d91;line-height:1.5;}
+.drawer-divider{height:1px;background:#e4cedd;margin:10px 0 12px;}
+body.drawer-open{overflow:hidden;}
+
+/* ===== HERO ===== */
+.hero{width:90%;margin:40px auto;background:white;border-radius:25px;overflow:hidden;box-shadow:0 12px 25px rgba(0,0,0,.15);display:flex;align-items:center;gap:40px;padding:40px;}
+.image-box{width:450px;height:350px;display:flex;justify-content:center;align-items:center;background:#fff8f2;border-radius:20px;flex:1;}
+.image-box img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.hero-content{padding:40px;flex:1;text-align:left;}
+.hero-content h1{font-family:'Cinzel',serif;font-size:58px;color:#6F4B72;}
+.hero-content h2{margin-top:15px;color:#B58A4D;font-size:30px;}
+.hero-content p{margin-top:18px;font-size:18px;line-height:1.8;}
+.btn{display:inline-block;margin-top:25px;padding:14px 35px;background:#8E6C88;color:white;text-decoration:none;border-radius:30px;font-weight:bold;transition:.3s;}
+.btn:hover{background:#6F4B72;}
+
+/* ===== ABOUT ===== */
+.about-section{width:90%;margin:50px auto;display:flex;justify-content:space-between;align-items:center;gap:40px;}
+.about-text{flex:2;background:#FFF9F4;padding:35px;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.12);}
+.about-text h2{font-family:'Cinzel',serif;color:#6F4B72;font-size:36px;margin-bottom:20px;}
+.about-text p{line-height:1.9;font-size:17px;margin-bottom:18px;text-align:justify;}
+.about-box{flex:1;background:#8E6C88;color:white;padding:30px;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.15);}
+.about-box h3{font-family:'Cinzel',serif;margin-bottom:20px;text-align:center;}
+.about-box ul{list-style:none;}
+.about-box li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.25);font-size:16px;}
+.about-box li:last-child{border-bottom:none;}
+
+/* ===== EXPLORER ===== */
+.explorer-section{width:90%;margin:60px auto;}
+.explorer-box{background:#FFF9F4;padding:30px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.explorer-box h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:36px;margin-bottom:25px;}
+.search-filter-row{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+.search-box,.filter-box{padding:13px 18px;border:1px solid #D8C5B0;border-radius:25px;background:white;color:#5B4A45;font-family:'Poppins',sans-serif;outline:none;}
+.search-box{width:45%;min-width:250px;}
+.filter-box{min-width:180px;}
+.explorer-buttons{display:flex;justify-content:center;gap:15px;margin-top:20px;flex-wrap:wrap;}
+.explorer-btn{border:none;padding:12px 22px;border-radius:25px;background:#8E6C88;color:white;font-family:'Poppins',sans-serif;font-weight:600;cursor:pointer;transition:.3s;}
+.explorer-btn:hover{background:#6F4B72;transform:translateY(-2px);}
+.explorer-btn.random{background:#B58A4D;}
+.search-result{text-align:center;margin-top:18px;font-weight:600;color:#8E6C88;}
+
+/* ===== POPULAR ===== */
+.popular-section{width:90%;margin:40px auto;}
+.popular-title{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:32px;margin-bottom:25px;}
+.popular-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.popular-card{display:block;text-decoration:none;color:inherit;background:#FFF9F4;padding:22px;border-radius:18px;box-shadow:0 7px 17px rgba(0,0,0,.12);text-align:center;transition:.3s;}
+.popular-card:hover{transform:translateY(-6px);}
+.popular-card h3{color:#8E6C88;margin-bottom:8px;}
+.popular-card p{font-size:14px;line-height:1.6;}
+
+/* ===== RECIPE ===== */
+.recipe-section{width:90%;margin:60px auto;display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:stretch;background:#FFF9F4;padding:35px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.12);transition:box-shadow .3s;}
+.recipe-image{grid-column:1;grid-row:1;}
+.recipe-image img{width:100%;border-radius:18px;box-shadow:0 6px 15px rgba(0,0,0,.15);display:block;}
+.recipe-content{grid-column:2;grid-row:1;}
+.recipe-content h2{font-family:'Cinzel',serif;color:#6F4B72;font-size:38px;margin-bottom:20px;}
+.recipe-content h3{margin-top:25px;margin-bottom:12px;color:#8E6C88;}
+.recipe-content p{line-height:1.8;text-align:justify;}
+.recipe-content ul,.recipe-content ol{margin-left:25px;line-height:1.9;}
+.recipe-info{display:flex;justify-content:space-between;margin-top:25px;gap:20px;}
+.recipe-info div{flex:1;background:#F7E7CE;padding:18px;text-align:center;border-radius:15px;}
+.chef-tip,.fun-fact{margin-top:25px;background:#F7E7CE;padding:20px;border-left:6px solid #8E6C88;border-radius:12px;}
+.recipe-section.reverse{grid-template-columns:2fr 1fr;}
+.recipe-section.reverse .recipe-content{grid-column:1;grid-row:1;}
+.recipe-section.reverse .recipe-image{grid-column:2;grid-row:1;}
+.recipe-section.reverse .recipe-actions{grid-column:2;grid-row:1;}
+.recipe-section.hidden-recipe{display:none;}
+
+/* ===== BUTTONS ===== */
+.recipe-actions{grid-column:1;grid-row:1;align-self:end;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:15px;padding-bottom:5px;}
+.recipe-actions button{width:200px;padding:14px 18px;border:none;border-radius:30px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;box-shadow:0 6px 15px rgba(91,74,69,.18);}
+.favorite-btn{background:#8E6C88;color:white;}
+.stamp-btn{background:#F4E5C5;color:#5B4A45;}
+.recipe-actions button:hover{transform:translateY(-3px);box-shadow:0 9px 20px rgba(91,74,69,.22);}
+
+/* ===== RATING ===== */
+.rating-area{margin-top:22px;padding:20px;background:rgba(244,229,197,.55);border-radius:15px;}
+.rating-area h3{margin-top:0;}
+.stars{display:flex;gap:5px;margin-top:8px;}
+.star{font-size:28px;cursor:pointer;color:#c8b9aa;transition:.2s;}
+.star.active{color:#E5A82F;}
+.rating-message{font-size:13px;margin-top:7px;}
+
+/* ===== REVIEWS ===== */
+.review-box{margin-top:18px;padding:20px;background:#FFF9F4;border:1px solid #eadbc9;border-radius:15px;}
+.review-box h3{margin-top:0;}
+.review-input{width:100%;min-height:80px;resize:vertical;padding:12px;border:1px solid #D8C5B0;border-radius:12px;outline:none;font-family:'Poppins',sans-serif;margin-top:8px;}
+.review-submit{margin-top:10px;border:none;background:#8E6C88;color:white;padding:10px 20px;border-radius:22px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;}
+.review-submit:hover{background:#6F4B72;}
+.reviews-list{margin-top:15px;}
+.single-review{padding:12px;margin-top:10px;background:#F7E7CE;border-radius:12px;}
+.single-review strong{color:#6F4B72;}
+body.dark-mode .single-review strong{color:#e9c9e4;}
+.single-review small{display:block;margin-top:4px;opacity:.7;}
+.no-review{font-size:13px;opacity:.7;margin-top:10px;}
+
+/* ===== FACTS ===== */
+.facts-section{width:90%;margin:60px auto;}
+.facts-section h2{text-align:center;font-family:'Cinzel',serif;font-size:40px;color:#6F4B72;margin-bottom:35px;}
+.facts-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.fact-card{background:#FFF9F4;padding:25px;border-radius:20px;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,.12);transition:.3s;}
+.fact-card:hover{transform:translateY(-8px);}
+.fact-card h3{color:#8E6C88;margin-bottom:15px;}
+.fact-card p{line-height:1.8;}
+
+/* ===== RECENTLY VIEWED ===== */
+.recent-section{width:90%;margin:60px auto;}
+.recent-section h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:36px;margin-bottom:25px;}
+.recent-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.recent-card{background:#FFF9F4;padding:22px;border-radius:18px;box-shadow:0 7px 17px rgba(0,0,0,.12);}
+.recent-card h3{color:#8E6C88;margin-bottom:8px;}
+.recent-card p{font-size:13px;}
+.recent-empty{text-align:center;opacity:.7;grid-column:1/-1;}
+
+/* ===== PROFILE ===== */
+.profile-section{width:90%;margin:60px auto;}
+.profile-box{background:#8E6C88;color:white;padding:40px;border-radius:22px;box-shadow:0 10px 25px rgba(0,0,0,.15);}
+.profile-box h2{font-family:'Cinzel',serif;font-size:38px;text-align:center;margin-bottom:10px;}
+.profile-name{text-align:center;font-size:20px;margin-bottom:10px;}
+.profile-email{text-align:center;opacity:.9;margin-bottom:25px;}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.profile-card{background:#FFF9F4;color:#5B4A45;padding:22px;border-radius:16px;text-align:center;}
+.profile-card .count{font-size:30px;font-weight:bold;color:#6F4B72;display:block;margin-bottom:5px;}
+.profile-card span:last-child{font-size:14px;}
+
+/* ===== CHEF + FOOTER ===== */
+.chef-section{width:90%;margin:60px auto;background:#8E6C88;color:white;padding:40px;border-radius:20px;text-align:center;}
+.chef-section h2{font-family:'Cinzel',serif;margin-bottom:20px;}
+.chef-section p{font-size:18px;line-height:1.8;}
+footer{background:#6F4B72;color:white;text-align:center;padding:40px 20px;margin-top:60px;}
+footer h2{font-family:'Cinzel',serif;margin-bottom:15px;}
+footer p{margin:10px 0;line-height:1.8;}
+.social{margin:25px 0;}
+.social a{text-decoration:none;font-size:30px;margin:0 12px;}
+.copy{margin-top:20px;font-size:15px;opacity:.9;}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+header{padding:14px 5%;}
+.logo{font-size:22px;}
+.hero{flex-direction:column;padding:20px;gap:20px;}
+.image-box{width:100%;height:280px;flex:none;}
+.hero-content{padding:20px 5px;text-align:center;}
+.hero-content h1{font-size:42px;}
+.hero-content h2{font-size:24px;}
+.hero-content p{font-size:15px;text-align:justify;}
+.about-section{flex-direction:column;}
+.about-text,.about-box{width:100%;}
+.recipe-section,.recipe-section.reverse{display:flex;flex-direction:column;gap:25px;}
+.recipe-image,.recipe-content{width:100%;}
+.recipe-info{flex-direction:column;}
+.recipe-actions,.recipe-section.reverse .recipe-actions{width:100%;padding:0;order:2;}
+.recipe-actions button{width:220px;}
+.profile-stats{grid-template-columns:repeat(2,1fr);}
+.search-box{width:100%;}
+}
+@media(max-width:450px){
+.profile-stats{grid-template-columns:1fr;}
+.hero-content h1{font-size:35px;}
+.recipe-content h2{font-size:30px;}
+}
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+</style>
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header>
+<div class="logo">🍴 The Flavorverse</div>
+<nav>
+<button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
+<button class="menu-open-btn" id="openExploreMenu" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav>
+</header>
+
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<aside class="explore-drawer" id="exploreDrawer" aria-label="Explore menu" aria-hidden="true">
+<div class="drawer-heading"><h2>Explore</h2><button class="drawer-close" id="closeExploreMenu" aria-label="Close menu">×</button></div>
+<div class="drawer-links">
+<a class="drawer-link" href="index.html"><span class="drawer-icon">🏠</span><span class="drawer-copy"><strong>Home</strong><small>Return to the homepage</small></span></a>
+<a class="drawer-link" href="royal.html"><span class="drawer-icon">👑</span><span class="drawer-copy"><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+<a class="drawer-link" href="movies.html"><span class="drawer-icon">🎬</span><span class="drawer-copy"><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+<a class="drawer-link" href="world.html"><span class="drawer-icon">🌎</span><span class="drawer-copy"><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+<a class="drawer-link" href="desserts.html"><span class="drawer-icon">🍰</span><span class="drawer-copy"><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+<a class="drawer-link" href="gallery.html"><span class="drawer-icon">🖼️</span><span class="drawer-copy"><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+<div class="drawer-divider"></div>
+<a class="drawer-link" href="favourites.html"><span class="drawer-icon">💗</span><span class="drawer-copy"><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+<a class="drawer-link" href="order.html"><span class="drawer-icon">🛒</span><span class="drawer-copy"><strong>Order</strong><small>Order ingredient kits</small></span></a>
+<a class="drawer-link" href="stamped.html"><span class="drawer-icon">🎟️</span><span class="drawer-copy"><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+<a class="drawer-link" href="contact.html"><span class="drawer-icon">💌</span><span class="drawer-copy"><strong>Contact</strong><small>Get in touch with us</small></span></a>
+</div>
+</aside>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+<div class="image-box"><img src="maharastra.png" alt="Maharashtra"></div>
+<div class="hero-content">
+<h1>🏰 Maharashtra</h1>
+<h2>Royal Heritage &amp; Authentic Flavours</h2>
+<p>Welcome to Maharashtra, a land of historic forts, vibrant festivals, diverse traditions, and delicious regional cuisine. Maharashtrian food is known for its bold flavours, aromatic spices, wholesome ingredients, and wonderful variety. From the sweet and comforting Puran Poli to the spicy Misal Pav, famous Pav Bhaji, and festive Modak, every dish reflects the rich cultural heritage of Maharashtra.</p>
+<a href="#mh-puranpoli" class="btn">Explore Recipes</a>
+</div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="about-section">
+<div class="about-text">
+<h2>🏰 About Maharashtra Cuisine</h2>
+<p>Maharashtrian cuisine is a diverse food tradition influenced by the state's geography, agriculture, festivals, and cultural heritage. The cuisine includes a wide variety of vegetarian and non-vegetarian dishes, with ingredients such as lentils, vegetables, grains, coconut, peanuts, jaggery, and aromatic spices commonly used.</p>
+<p>Puran Poli is one of Maharashtra's most famous traditional sweets. It is a soft flatbread filled with a sweet mixture of cooked lentils, jaggery, cardamom, and nutmeg. It is especially popular during festivals and celebrations.</p>
+<p>Misal Pav is a popular Maharashtrian street food made with a spicy sprouted-legume curry topped with farsan, onions, coriander, and other garnishes. It is traditionally served with soft pav and is known for its bold and spicy flavours.</p>
+<p>Pav Bhaji is another much-loved dish that became particularly popular in Mumbai. It consists of a spicy mashed vegetable preparation served with buttered pav. Modak, a sweet dumpling traditionally filled with coconut and jaggery, holds a special place in Maharashtrian festive cuisine, especially during Ganesh Chaturthi.</p>
+</div>
+<div class="about-box">
+<h3>🏰 Maharashtra Highlights</h3>
+<ul>
+<li>🫓 Puran Poli is a famous traditional sweet flatbread</li>
+<li>🌶️ Misal Pav is a popular spicy Maharashtrian dish</li>
+<li>🍞 Pav Bhaji is strongly associated with Mumbai street food</li>
+<li>🍬 Modak is a traditional festive sweet</li>
+<li>🥥 Coconut and peanuts are commonly used ingredients</li>
+<li>🌿 Aromatic spices add distinctive flavours to Maharashtrian dishes</li>
+<li>🎉 Food is closely connected with festivals and celebrations</li>
+<li>❤️ Cuisine reflects Maharashtra's rich cultural heritage</li>
+</ul>
+</div>
+</section>
+
+<!-- ================= RECIPE EXPLORER ================= -->
+<section class="explorer-section">
+<div class="explorer-box">
+<h2>🔍 Explore Maharashtra Recipes</h2>
+<div class="search-filter-row">
+<input class="search-box" id="recipeSearch" onkeyup="filterRecipes()" placeholder="🔍 Search recipe..." type="text">
+<select class="filter-box" id="categoryFilter" onchange="filterRecipes()">
+<option value="all">All Categories</option>
+<option value="main">Main Course</option>
+<option value="snack">Snacks</option>
+<option value="dessert">Sweets</option>
+</select>
+</div>
+<div class="explorer-buttons">
+<button class="explorer-btn random" onclick="surpriseMe()">🎲 Surprise Me</button>
+<button class="explorer-btn" onclick="resetFilters()">↻ Show All Recipes</button>
+</div>
+<p class="search-result" id="searchResult">Showing all 4 Maharashtra recipes</p>
+</div>
+</section>
+
+<!-- ================= POPULAR ================= -->
+<section class="popular-section">
+<h2 class="popular-title">🔥 Popular Maharashtra Recipes</h2>
+<div class="popular-container"><a class="popular-card" href="#mh-puranpoli"><h3>🫓 Puran Poli</h3><p>Soft festive flatbread stuffed with sweet chana dal and jaggery.</p></a><a class="popular-card" href="#mh-misalpav"><h3>🌶️ Misal Pav</h3><p>Spicy sprouted-legume curry topped with farsan and served with pav.</p></a><a class="popular-card" href="#mh-pavbhaji"><h3>🍞 Pav Bhaji</h3><p>Mumbai's favourite spiced mashed vegetables with buttered pav.</p></a><a class="popular-card" href="#mh-modak"><h3>🍬 Modak</h3><p>Steamed festive dumplings filled with coconut and jaggery.</p></a></div>
+</section>
+
+<!-- ================= RECIPES ================= -->
+
+<!-- ===== Puran Poli ===== -->
+<section class="recipe-section" data-category="dessert" data-cuisine="maharashtra" data-name="puran poli" id="mh-puranpoli">
+<div class="recipe-image"><img alt="Maharashtra Puran Poli" src="Puran Poli.png"></div>
+<div class="recipe-content">
+<h2>🫓 Puran Poli</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Puran Poli is one of Maharashtra's most beloved traditional sweet dishes. It is a soft flatbread filled with a sweet mixture called puran, prepared from cooked chana dal, jaggery, cardamom, and nutmeg. It is especially popular during festivals and celebrations and is traditionally served with ghee or warm milk.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Maharashtra</li><li><b>Cuisine :</b> Traditional Maharashtrian Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>1 cup Chana Dal</li>
+<li>1 cup Jaggery</li>
+<li>2 cups Wheat Flour</li>
+<li>½ tsp Cardamom Powder</li>
+<li>¼ tsp Nutmeg Powder</li>
+<li>2 tbsp Ghee</li>
+<li>½ tsp Turmeric Powder</li>
+<li>Water as Required</li>
+<li>Salt – a Small Pinch</li>
+<li>Ghee for Cooking</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Wash the chana dal thoroughly and soak it for about 30 minutes.</li>
+<li>Cook the dal with enough water until it becomes soft.</li>
+<li>Drain the excess water completely and keep the cooked dal aside.</li>
+<li>Add the cooked dal and jaggery to a heavy-bottomed pan.</li>
+<li>Cook the mixture on medium heat until the jaggery melts and the mixture becomes thick.</li>
+<li>Add cardamom powder and nutmeg powder.</li>
+<li>Mix well and cook until the mixture becomes firm enough to shape.</li>
+<li>Allow the puran mixture to cool.</li>
+<li>Grind the mixture until it becomes smooth and lump-free.</li>
+<li>In another bowl, combine wheat flour, turmeric, salt, and a little ghee.</li>
+<li>Add water gradually and knead into a soft dough.</li>
+<li>Cover the dough and allow it to rest for about 20–30 minutes.</li>
+<li>Divide the dough and puran into equal portions.</li>
+<li>Take one portion of dough and flatten it gently.</li>
+<li>Place a portion of puran in the centre and seal the edges.</li>
+<li>Roll it gently into a round flatbread.</li>
+<li>Heat a tawa over medium heat.</li>
+<li>Place the Puran Poli on the hot tawa.</li>
+<li>Cook both sides until golden spots appear.</li>
+<li>Apply a little ghee and serve warm.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>60 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>6 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Medium</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Cook the puran until it becomes thick but not dry. Kneading the dough well makes the Puran Poli soft and easier to roll without breaking.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Puran Poli is closely associated with Maharashtrian festivals and celebrations. It is traditionally enjoyed with ghee and is especially popular during festive meals.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="mh-puranpoli">
+<span class="star" onclick="rateRecipe('mh-puranpoli',1,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-puranpoli',2,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-puranpoli',3,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-puranpoli',4,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-puranpoli',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-mh-puranpoli">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-mh-puranpoli" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('mh-puranpoli','Puran Poli')">Post Review</button>
+<div class="reviews-list" id="reviews-mh-puranpoli"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="mh-puranpoli" onclick="addToFavourite('mh-puranpoli','Puran Poli','Maharashtra Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="mh-puranpoli" onclick="addToStamp('mh-puranpoli','Puran Poli','Maharashtra Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Misal Pav ===== -->
+<section class="recipe-section reverse" data-category="main" data-cuisine="maharashtra" data-name="misal pav" id="mh-misalpav">
+<div class="recipe-image"><img alt="Maharashtra Misal Pav" src="Misal Pav.png"></div>
+<div class="recipe-content">
+<h2>🌶️ Misal Pav</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Misal Pav is one of Maharashtra's most popular and flavourful street foods. It is made with a spicy sprouted-legume curry called misal, which is topped with crunchy farsan, chopped onions, coriander, and lemon juice. It is traditionally served with soft pav and is loved for its combination of spicy, tangy, and crunchy textures.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Maharashtra</li><li><b>Cuisine :</b> Traditional Maharashtrian Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>2 cups Mixed Sprouts</li>
+<li>1 Onion, Chopped</li>
+<li>2 Tomatoes, Chopped</li>
+<li>1 Potato, Cubed</li>
+<li>1 tbsp Ginger-Garlic Paste</li>
+<li>2 tbsp Oil</li>
+<li>1 tsp Mustard Seeds</li>
+<li>½ tsp Cumin Seeds</li>
+<li>1 tsp Turmeric Powder</li>
+<li>1 tsp Red Chili Powder</li>
+<li>1 tbsp Misal Masala</li>
+<li>½ tsp Garam Masala</li>
+<li>Salt to Taste</li>
+<li>3 cups Water</li>
+<li>1 cup Farsan or Mixture</li>
+<li>1 Onion, Finely Chopped for Garnishing</li>
+<li>Fresh Coriander Leaves</li>
+<li>Lemon Wedges</li>
+<li>Pav – As Required</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Wash the mixed sprouts thoroughly and keep them ready.</li>
+<li>Heat oil in a deep pan.</li>
+<li>Add mustard seeds and allow them to splutter.</li>
+<li>Add cumin seeds and sauté for a few seconds.</li>
+<li>Add chopped onions and cook until they become soft.</li>
+<li>Add ginger-garlic paste and sauté until the raw aroma disappears.</li>
+<li>Add chopped tomatoes and cook until they become soft.</li>
+<li>Add turmeric powder, red chili powder, misal masala, garam masala, and salt.</li>
+<li>Mix the spices well with the onion and tomato mixture.</li>
+<li>Add the mixed sprouts and cubed potato.</li>
+<li>Pour in the required amount of water and mix gently.</li>
+<li>Cover and cook until the sprouts and potatoes become tender.</li>
+<li>Adjust the consistency by adding a little more water if required.</li>
+<li>Simmer the misal for a few minutes so that the flavours combine well.</li>
+<li>Transfer the hot misal into serving bowls.</li>
+<li>Top each serving with crunchy farsan.</li>
+<li>Add finely chopped onions and fresh coriander leaves.</li>
+<li>Serve with lemon wedges and warm pav.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>40 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Medium</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Adjust the amount of chili and misal masala according to your taste. Add the farsan just before serving so that it remains crunchy.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Misal Pav is a beloved Maharashtrian street food and is enjoyed for breakfast, snacks, or a filling meal. Different regions of Maharashtra have their own versions of Misal with varying levels of spice.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="mh-misalpav">
+<span class="star" onclick="rateRecipe('mh-misalpav',1,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-misalpav',2,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-misalpav',3,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-misalpav',4,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-misalpav',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-mh-misalpav">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-mh-misalpav" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('mh-misalpav','Misal Pav')">Post Review</button>
+<div class="reviews-list" id="reviews-mh-misalpav"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="mh-misalpav" onclick="addToFavourite('mh-misalpav','Misal Pav','Maharashtra Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="mh-misalpav" onclick="addToStamp('mh-misalpav','Misal Pav','Maharashtra Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Pav Bhaji ===== -->
+<section class="recipe-section" data-category="snack" data-cuisine="maharashtra" data-name="pav bhaji" id="mh-pavbhaji">
+<div class="recipe-image"><img alt="Maharashtra Pav Bhaji" src="Pav Bhaji.png"></div>
+<div class="recipe-content">
+<h2>🍞 Pav Bhaji</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Pav Bhaji is one of Maharashtra's most popular street foods, especially associated with Mumbai. It is a delicious combination of mashed vegetables cooked with aromatic spices and served with soft, buttered pav. The dish is colourful, flavourful, and commonly enjoyed as a quick meal or evening snack.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Maharashtra</li><li><b>Cuisine :</b> Traditional Maharashtrian Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>3 Potatoes, Boiled</li>
+<li>1 cup Cauliflower, Chopped</li>
+<li>1 cup Green Peas</li>
+<li>1 Carrot, Chopped</li>
+<li>1 Capsicum, Chopped</li>
+<li>2 Tomatoes, Chopped</li>
+<li>1 Onion, Chopped</li>
+<li>1 tbsp Ginger-Garlic Paste</li>
+<li>2 tbsp Pav Bhaji Masala</li>
+<li>1 tsp Red Chili Powder</li>
+<li>½ tsp Turmeric Powder</li>
+<li>2 tbsp Butter</li>
+<li>1 tbsp Oil</li>
+<li>Salt to Taste</li>
+<li>½ cup Water</li>
+<li>Fresh Coriander Leaves</li>
+<li>Lemon Wedges</li>
+<li>Pav – As Required</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Boil the potatoes, cauliflower, green peas, and carrot until they become soft.</li>
+<li>Mash the cooked vegetables and keep them aside.</li>
+<li>Heat butter and oil in a large pan or tawa.</li>
+<li>Add chopped onions and sauté until they become soft.</li>
+<li>Add ginger-garlic paste and cook until the raw aroma disappears.</li>
+<li>Add chopped tomatoes and cook until they become soft and mushy.</li>
+<li>Add capsicum and sauté for a few minutes.</li>
+<li>Add turmeric powder, red chili powder, pav bhaji masala, and salt.</li>
+<li>Mix the spices thoroughly with the cooked vegetables.</li>
+<li>Add the mashed potatoes, cauliflower, peas, and carrot.</li>
+<li>Add a little water and mix everything well.</li>
+<li>Mash the vegetables gently using a masher while cooking.</li>
+<li>Cook the bhaji until it becomes thick, smooth, and flavourful.</li>
+<li>Add another spoonful of butter for extra richness if desired.</li>
+<li>Garnish the bhaji with fresh coriander leaves.</li>
+<li>Heat a tawa and add a little butter.</li>
+<li>Cut the pav horizontally and toast both sides on the buttered tawa.</li>
+<li>Serve the hot bhaji with buttered pav.</li>
+<li>Garnish with chopped onions and serve with lemon wedges.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>40 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Easy</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Mash the vegetables thoroughly while cooking to get a smooth bhaji. Toast the pav with butter just before serving for the best flavour and texture.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Pav Bhaji is strongly associated with Mumbai's street-food culture. It became popular as a quick and filling meal and is now enjoyed throughout India.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="mh-pavbhaji">
+<span class="star" onclick="rateRecipe('mh-pavbhaji',1,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-pavbhaji',2,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-pavbhaji',3,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-pavbhaji',4,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-pavbhaji',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-mh-pavbhaji">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-mh-pavbhaji" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('mh-pavbhaji','Pav Bhaji')">Post Review</button>
+<div class="reviews-list" id="reviews-mh-pavbhaji"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="mh-pavbhaji" onclick="addToFavourite('mh-pavbhaji','Pav Bhaji','Maharashtra Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="mh-pavbhaji" onclick="addToStamp('mh-pavbhaji','Pav Bhaji','Maharashtra Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Modak ===== -->
+<section class="recipe-section reverse" data-category="dessert" data-cuisine="maharashtra" data-name="modak" id="mh-modak">
+<div class="recipe-image"><img alt="Maharashtra Modak" src="Modak.png"></div>
+<div class="recipe-content">
+<h2>🍬 Modak</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Modak is a traditional Maharashtrian sweet dumpling made with a soft rice-flour outer covering and a delicious filling of coconut and jaggery. It is especially associated with Ganesh Chaturthi and is traditionally prepared as an offering to Lord Ganesha. The combination of coconut, jaggery, cardamom, and rice flour gives Modak its distinctive taste and aroma.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Maharashtra</li><li><b>Cuisine :</b> Traditional Maharashtrian Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>1 cup Rice Flour</li>
+<li>1 cup Water</li>
+<li>1 cup Grated Coconut</li>
+<li>¾ cup Jaggery</li>
+<li>1 tsp Ghee</li>
+<li>½ tsp Cardamom Powder</li>
+<li>2 tbsp Chopped Cashews</li>
+<li>2 tbsp Chopped Almonds</li>
+<li>1 tbsp Poppy Seeds</li>
+<li>1 Small Pinch of Salt</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Heat a pan and add grated coconut and jaggery.</li>
+<li>Cook the mixture over low heat until the jaggery melts and combines with the coconut.</li>
+<li>Add cardamom powder, poppy seeds, cashews, and almonds.</li>
+<li>Mix well and cook until the filling becomes slightly thick.</li>
+<li>Allow the filling to cool and keep it aside.</li>
+<li>For the outer covering, bring one cup of water to a boil.</li>
+<li>Add a small pinch of salt and one teaspoon of ghee.</li>
+<li>Reduce the heat and gradually add the rice flour.</li>
+<li>Mix quickly until the flour absorbs the water.</li>
+<li>Cover and allow the mixture to rest for a few minutes.</li>
+<li>While the mixture is still warm, knead it gently into a smooth dough.</li>
+<li>Divide the dough into small equal portions.</li>
+<li>Take one portion and flatten it into a thin circular shape.</li>
+<li>Place a spoonful of coconut-jaggery filling in the centre.</li>
+<li>Bring the edges together and create small pleats around the filling.</li>
+<li>Pinch the pleats together at the top to form the traditional Modak shape.</li>
+<li>Prepare the remaining Modaks in the same way.</li>
+<li>Place the Modaks in a greased steamer.</li>
+<li>Steam them for about 10–15 minutes until the outer covering becomes soft and slightly translucent.</li>
+<li>Serve warm with a little ghee.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>45 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>6 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Medium</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Keep the rice-flour dough soft and smooth so that it does not crack while shaping the Modaks. Steam them gently and avoid overcooking to maintain their soft texture.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Modak is especially important during Ganesh Chaturthi in Maharashtra. Steamed Ukadiche Modak is one of the most traditional varieties and is commonly prepared as a festive offering.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="mh-modak">
+<span class="star" onclick="rateRecipe('mh-modak',1,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-modak',2,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-modak',3,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-modak',4,this)">★</span>
+<span class="star" onclick="rateRecipe('mh-modak',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-mh-modak">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-mh-modak" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('mh-modak','Modak')">Post Review</button>
+<div class="reviews-list" id="reviews-mh-modak"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="mh-modak" onclick="addToFavourite('mh-modak','Modak','Maharashtra Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="mh-modak" onclick="addToStamp('mh-modak','Modak','Maharashtra Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+
+<!-- ================= FOOD FACTS ================= -->
+<section class="facts-section">
+<h2>🏰 Maharashtra Food Facts</h2>
+<div class="facts-container">
+<div class="fact-card"><h3>🫓 Famous Puran Poli</h3><p>Puran Poli is one of Maharashtra's most beloved festive foods. It is a soft flatbread filled with sweetened chana dal, jaggery, cardamom, and aromatic spices.</p></div>
+<div class="fact-card"><h3>🌶️ Spicy Misal Pav</h3><p>Misal Pav is a popular Maharashtrian street food made with a spicy sprouted-legume curry, crunchy farsan, onions, coriander, and pav.</p></div>
+<div class="fact-card"><h3>🍞 Mumbai Pav Bhaji</h3><p>Pav Bhaji is strongly associated with Mumbai street-food culture. Mashed vegetables are cooked with spices and served with buttered pav.</p></div>
+<div class="fact-card"><h3>🍬 Traditional Modak</h3><p>Modak is a traditional festive sweet made with rice flour, coconut, and jaggery. It has a special connection with Ganesh Chaturthi celebrations.</p></div>
+<div class="fact-card"><h3>❤️ Rich Culinary Heritage</h3><p>Maharashtra's cuisine reflects its diverse regions, agricultural traditions, historic communities, festivals, and generations of cooking knowledge.</p></div>
+</div>
+</section>
+
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+<h2>🕐 Recently Viewed</h2>
+<div class="recent-container" id="recentContainer">
+<p class="recent-empty">Login to see your recently viewed recipes.</p>
+</div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section class="profile-section">
+<div class="profile-box">
+<h2>👤 My Flavorverse Profile</h2>
+<p class="profile-name" id="profileName">Guest</p>
+<p class="profile-email" id="profileEmail">Login to see your profile</p>
+<div class="profile-stats">
+<div class="profile-card"><span class="count" id="favouriteCount">0</span><span>❤️ Favourites</span></div>
+<div class="profile-card"><span class="count" id="stampCount">0</span><span>🏷️ Stamps</span></div>
+<div class="profile-card"><span class="count" id="ratingCount">0</span><span>⭐ Ratings</span></div>
+<div class="profile-card"><span class="count" id="reviewCount">0</span><span>💬 Reviews</span></div>
+</div>
+</div>
+</section>
+
+<!-- ================= CHEF ================= -->
+<section class="chef-section">
+<h2>👨‍🍳 Chef's Recommendation</h2>
+<p>Explore the rich flavours of Maharashtra with the sweet and comforting <b>Puran Poli</b>, spicy <b>Misal Pav</b>, famous street-style <b>Pav Bhaji</b>, and festive <b>Modak</b>. Together, these dishes showcase Maharashtra's vibrant street-food culture, traditional celebrations, bold flavours, and rich culinary heritage.</p>
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+<h2>🍴 The Flavorverse</h2>
+<p>Discover India's rich culinary heritage, one delicious recipe at a time.</p>
+<div class="social"><a href="#">📘</a><a href="#">📸</a><a href="#">▶️</a><a href="#">🐦</a></div>
+<p class="copy">© 2026 The Flavorverse | All Rights Reserved</p>
+</footer>
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ===== FIREBASE CONFIG ===== */
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+  authDomain: "the-flavoverse.firebaseapp.com",
+  projectId: "the-flavoverse",
+  storageBucket: "the-flavoverse.firebasestorage.app",
+  messagingSenderId: "1064022248292",
+  appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+};
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+/* ===== RECIPE DATA ===== */
+const recipes = [
+{id:"mh-puranpoli",name:"Puran Poli",category:"dessert",cuisine:"maharashtra"},
+{id:"mh-misalpav",name:"Misal Pav",category:"main",cuisine:"maharashtra"},
+{id:"mh-pavbhaji",name:"Pav Bhaji",category:"snack",cuisine:"maharashtra"},
+{id:"mh-modak",name:"Modak",category:"dessert",cuisine:"maharashtra"}
+];
+
+function getCurrentUser() { return auth.currentUser; }
+function userDoc(uid) { return db.collection("users").doc(uid); }
+function setText(id, text) { const el = document.getElementById(id); if (el) el.innerText = text; }
+function goLogin(message) { alert(message); window.location.href = "login.html"; }
+
+/* ===== FAVOURITE + STAMP ===== */
+async function toggleSaved(collectionName, id, name, category, button, onLabel, offLabel, addMsg, removeMsg) {
+  const user = getCurrentUser();
+  if (!user) { goLogin(collectionName === "favourites" ? "Please login first to add favourites ❤️" : "Please login first to add stamps 🏷️"); return; }
+  try {
+    const ref = userDoc(user.uid).collection(collectionName).doc(id);
+    const existing = await ref.get();
+    if (existing.exists) {
+      await ref.delete();
+      button.innerHTML = offLabel;
+      alert(name + removeMsg);
+    } else {
+      await ref.set({
+        recipeId: id,
+        recipeName: name,
+        category: category,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      button.innerHTML = onLabel;
+      alert(name + addMsg);
+    }
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Update failed: " + error.message);
+  }
+}
+
+function addToFavourite(id, name, category, button) {
+  toggleSaved("favourites", id, name, category, button, "♥ Added to Favourite", "♡ Add to Favourite", " added to favourites ❤️", " removed from favourites.");
+}
+
+function addToStamp(id, name, category, button) {
+  toggleSaved("stamps", id, name, category, button, "🏷️ Stamped", "🏷️ Add to Stamp", " added to your Flavorverse Passport 🏷️", " removed from passport.");
+}
+
+/* ===== RATING ===== */
+async function rateRecipe(recipeId, rating, element) {
+  const user = getCurrentUser();
+  if (!user) { goLogin("Please login first to rate recipes ⭐"); return; }
+  try {
+    await userDoc(user.uid).collection("ratings").doc(recipeId).set({
+      recipeId: recipeId,
+      rating: rating,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    element.parentElement.querySelectorAll(".star").forEach(function (star, index) {
+      star.classList.toggle("active", index < rating);
+    });
+    setText("rating-" + recipeId, "You rated this recipe " + rating + "/5 ⭐");
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Rating failed: " + error.message);
+  }
+}
+
+async function loadRatings() {
+  const user = getCurrentUser();
+  if (!user) return;
+  for (const recipe of recipes) {
+    try {
+      const doc = await userDoc(user.uid).collection("ratings").doc(recipe.id).get();
+      if (!doc.exists) continue;
+      const rating = doc.data().rating;
+      const container = document.querySelector('.stars[data-recipe="' + recipe.id + '"]');
+      if (container) {
+        container.querySelectorAll(".star").forEach(function (star, index) {
+          star.classList.toggle("active", index < rating);
+        });
+      }
+      setText("rating-" + recipe.id, "You rated this recipe " + rating + "/5 ⭐");
+    } catch (error) { console.error(error); }
+  }
+}
+
+/* ===== REVIEWS ===== */
+async function submitReview(recipeId, recipeName) {
+  const user = getCurrentUser();
+  if (!user) { goLogin("Please login first to post a review 💬"); return; }
+  const textarea = document.getElementById("review-text-" + recipeId);
+  const text = textarea.value.trim();
+  if (!text) { alert("Please write a review first."); return; }
+  try {
+    const profile = await userDoc(user.uid).get();
+    let userName = "Flavorverse User";
+    if (profile.exists && profile.data().name) { userName = profile.data().name; }
+    await db.collection("recipes").doc(recipeId).collection("reviews").doc(user.uid).set({
+      recipeId: recipeId,
+      recipeName: recipeName,
+      userId: user.uid,
+      userName: userName,
+      review: text,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    textarea.value = "";
+    alert("Review posted successfully! 💬");
+    loadReviews(recipeId);
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Review failed: " + error.message);
+  }
+}
+
+async function loadReviews(recipeId) {
+  const container = document.getElementById("reviews-" + recipeId);
+  if (!container) return;
+  try {
+    const snapshot = await db.collection("recipes").doc(recipeId).collection("reviews")
+      .orderBy("createdAt", "desc").limit(10).get();
+    container.innerHTML = "";
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+      return;
+    }
+    snapshot.forEach(function (doc) {
+      const data = doc.data();
+      const review = document.createElement("div");
+      review.className = "single-review";
+      const name = document.createElement("strong");
+      name.textContent = "💜 " + (data.userName || "Flavorverse User");
+      const content = document.createElement("p");
+      content.textContent = data.review || "";
+      const date = document.createElement("small");
+      if (data.createdAt) { date.textContent = data.createdAt.toDate().toLocaleDateString(); }
+      review.appendChild(name);
+      review.appendChild(content);
+      review.appendChild(date);
+      container.appendChild(review);
+    });
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="no-review">Reviews will appear here.</p>';
+  }
+}
+
+/* ===== RECENTLY VIEWED ===== */
+function findRecipe(id) {
+  return recipes.find(function (r) { return r.id === id; });
+}
+
+async function addRecentlyViewed(recipeId) {
+  const user = getCurrentUser();
+  const recipe = findRecipe(recipeId);
+  if (!user || !recipe) return;
+  try {
+    await userDoc(user.uid).collection("recentlyViewed").doc(recipeId).set({
+      recipeId: recipeId,
+      recipeName: recipe.name,
+      name: recipe.name,
+      viewedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    loadRecentlyViewed(true); /* refresh list silently */
+  } catch (error) {
+    console.error("Could not save Recently Viewed recipe:", error);
+  }
+}
+
+async function loadRecentlyViewed(silent) {
+  const container = document.getElementById("recentContainer");
+  if (!container) return;
+  const user = getCurrentUser();
+  if (!user) {
+    container.innerHTML = '<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+    return;
+  }
+  if (!silent) {
+    container.innerHTML = '<p class="recent-empty">Loading recently viewed recipes...</p>';
+  }
+  try {
+    const snapshot = await userDoc(user.uid).collection("recentlyViewed").limit(30).get();
+    const items = [];
+    snapshot.forEach(function (doc) {
+      const data = doc.data() || {};
+      const id = data.recipeId || doc.id;
+      const recipe = findRecipe(id);
+      if (!recipe) return; /* ignores recipes from other state pages */
+      items.push({
+        id: id,
+        name: recipe.name,
+        time: data.viewedAt && data.viewedAt.toMillis ? data.viewedAt.toMillis() : Date.now()
+      });
+    });
+    items.sort(function (a, b) { return b.time - a.time; });
+    container.innerHTML = "";
+    if (items.length === 0) {
+      container.innerHTML = '<p class="recent-empty">No recently viewed Maharashtra recipes yet. Open a recipe to add it here.</p>';
+      return;
+    }
+    items.slice(0, 8).forEach(function (item) {
+      const card = document.createElement("div");
+      card.className = "recent-card";
+      const title = document.createElement("h3");
+      title.textContent = "🕐 " + item.name;
+      const desc = document.createElement("p");
+      desc.textContent = "You recently explored this recipe.";
+      card.appendChild(title);
+      card.appendChild(desc);
+      const section = document.getElementById(item.id);
+      if (section) {
+        card.style.cursor = "pointer";
+        card.addEventListener("click", function () {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="recent-empty">Recently Viewed could not be loaded. Please check your Firestore rules.</p>';
+  }
+}
+
+function setupRecentlyViewed() {
+  const sections = document.querySelectorAll(".recipe-section");
+  const visibleIds = new Set();
+  const lastRecorded = new Map();
+
+  function record(id) {
+    if (!getCurrentUser()) return; /* wait for login */
+    const now = Date.now();
+    if (now - (lastRecorded.get(id) || 0) < 15000) return;
+    lastRecorded.set(id, now);
+    addRecentlyViewed(id);
+  }
+
+  /* Recipe sections are very tall, so a low threshold is needed */
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      const id = entry.target.id;
+      if (entry.isIntersecting) { visibleIds.add(id); record(id); }
+      else { visibleIds.delete(id); }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(function (s) { observer.observe(s); });
+
+  /* called after login finishes, to save recipes already on screen */
+  window.recordVisibleRecipes = function () { visibleIds.forEach(record); };
+}
+
+/* ===== PROFILE ===== */
+async function showProfileInfo(user) {
+  try {
+    const doc = await userDoc(user.uid).get();
+    if (doc.exists) {
+      setText("profileName", doc.data().name || "Flavorverse User");
+      setText("profileEmail", doc.data().email || user.email);
+    } else {
+      setText("profileName", user.email);
+      setText("profileEmail", user.email);
+    }
+  } catch (error) { console.error(error); }
+}
+
+async function updateProfileCounts() {
+  const user = getCurrentUser();
+  if (!user) {
+    ["favouriteCount", "stampCount", "ratingCount", "reviewCount"].forEach(function (id) { setText(id, "0"); });
+    return;
+  }
+  try {
+    await showProfileInfo(user);
+    const favourites = await userDoc(user.uid).collection("favourites").get();
+    const stamps = await userDoc(user.uid).collection("stamps").get();
+    const ratings = await userDoc(user.uid).collection("ratings").get();
+    let reviewTotal = 0;
+    for (const recipe of recipes) {
+      const review = await db.collection("recipes").doc(recipe.id).collection("reviews").doc(user.uid).get();
+      if (review.exists) reviewTotal++;
+    }
+    setText("favouriteCount", favourites.size);
+    setText("stampCount", stamps.size);
+    setText("ratingCount", ratings.size);
+    setText("reviewCount", reviewTotal);
+  } catch (error) { console.error(error); }
+}
+
+/* ===== BUTTON STATUS ===== */
+async function updateButtons() {
+  const user = getCurrentUser();
+  if (!user) return;
+  for (const recipe of recipes) {
+    try {
+      const fav = await userDoc(user.uid).collection("favourites").doc(recipe.id).get();
+      const favButton = document.querySelector('[data-favourite-id="' + recipe.id + '"]');
+      if (fav.exists && favButton) favButton.innerHTML = "♥ Added to Favourite";
+      const stamp = await userDoc(user.uid).collection("stamps").doc(recipe.id).get();
+      const stampButton = document.querySelector('[data-stamp-id="' + recipe.id + '"]');
+      if (stamp.exists && stampButton) stampButton.innerHTML = "🏷️ Stamped";
+    } catch (error) { console.error(error); }
+  }
+}
+
+/* ===== SEARCH + FILTER ===== */
+function filterRecipes() {
+  const search = document.getElementById("recipeSearch").value.toLowerCase().trim();
+  const category = document.getElementById("categoryFilter").value;
+  let count = 0;
+  document.querySelectorAll(".recipe-section").forEach(function (section) {
+    const nameMatch = section.dataset.name.toLowerCase().includes(search);
+    const categoryMatch = category === "all" || section.dataset.category === category;
+    if (nameMatch && categoryMatch) {
+      section.classList.remove("hidden-recipe");
+      count++;
+    } else {
+      section.classList.add("hidden-recipe");
+    }
+  });
+  setText("searchResult", "Showing " + count + " recipe" + (count !== 1 ? "s" : ""));
+}
+
+function resetFilters() {
+  document.getElementById("recipeSearch").value = "";
+  document.getElementById("categoryFilter").value = "all";
+  document.querySelectorAll(".recipe-section").forEach(function (s) { s.classList.remove("hidden-recipe"); });
+  setText("searchResult", "Showing all 4 Maharashtra recipes");
+}
+
+function surpriseMe() {
+  const visible = Array.from(document.querySelectorAll(".recipe-section")).filter(function (r) {
+    return !r.classList.contains("hidden-recipe");
+  });
+  if (visible.length === 0) { alert("No recipes available with the selected filter."); return; }
+  const random = visible[Math.floor(Math.random() * visible.length)];
+  random.scrollIntoView({ behavior: "smooth", block: "center" });
+  random.style.boxShadow = "0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+  setTimeout(function () { random.style.boxShadow = ""; }, 2500);
+  alert("🎲 Surprise Recipe: " + random.dataset.name);
+}
+
+/* ===== DARK MODE ===== */
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("flavorverseDarkMode", document.body.classList.contains("dark-mode") ? "on" : "off");
+}
+
+function loadDarkMode() {
+  if (localStorage.getItem("flavorverseDarkMode") === "on") {
+    document.body.classList.add("dark-mode");
+  }
+}
+
+/* ===== AUTH STATE ===== */
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+    showProfileInfo(user);
+    updateButtons();
+    updateProfileCounts();
+    loadRatings();
+    recipes.forEach(function (recipe) { loadReviews(recipe.id); });
+    if (window.recordVisibleRecipes) window.recordVisibleRecipes();
+  } else {
+    setText("profileName", "Guest");
+    setText("profileEmail", "Login to see your profile");
+    updateProfileCounts();
+    recipes.forEach(function (recipe) { loadReviews(recipe.id); });
+  }
+  loadRecentlyViewed();
+});
+
+/* ===== PAGE LOAD ===== */
+document.addEventListener("DOMContentLoaded", function () {
+  loadDarkMode();
+  setupRecentlyViewed();
+});
+
+/* ===== HAMBURGER DRAWER ===== */
+(function () {
+  const drawer = document.getElementById("exploreDrawer");
+  const backdrop = document.getElementById("menuBackdrop");
+  const openBtn = document.getElementById("openExploreMenu");
+  const closeBtn = document.getElementById("closeExploreMenu");
+  function openMenu() {
+    drawer.classList.add("open"); backdrop.classList.add("show");
+    document.body.classList.add("drawer-open");
+    drawer.setAttribute("aria-hidden", "false"); openBtn.setAttribute("aria-expanded", "true");
+  }
+  function closeMenu() {
+    drawer.classList.remove("open"); backdrop.classList.remove("show");
+    document.body.classList.remove("drawer-open");
+    drawer.setAttribute("aria-hidden", "true"); openBtn.setAttribute("aria-expanded", "false");
+  }
+  openBtn.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+  backdrop.addEventListener("click", closeMenu);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+  drawer.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>World Cuisine | The Flavorverse</title>
+
+<style>
+
+/* =====================================
+   RESET & ROOT
+===================================== */
+
+:root {
+    --bg: #ead9e1;
+    --cream: #f8ecd8;
+    --paper: #fff8ef;
+    --mauve: #735267;
+    --deep: #4d3547;
+    --champagne: #f4e5c5;
+    --gold: #b8955d;
+    --text: #503c49;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255,255,255,.6),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(255,255,255,.5),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #ead9e1,
+            #f7ead7,
+            #dec8d5
+        );
+
+    color: var(--text);
+    min-height: 100vh;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+header {
+    min-height: 78px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 7%;
+
+    background: var(--deep);
+    color: var(--champagne);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow: 0 5px 20px rgba(70,40,55,.25);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding-right: 55px;
+}
+
+nav a {
+    color: var(--champagne);
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+
+/* =====================================
+   EXPLORE MENU BUTTON
+===================================== */
+
+.menu-toggle {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid rgba(244,229,197,.4);
+    border-radius: 50%;
+
+    background: var(--mauve);
+    color: white;
+
+    font-size: 25px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2000;
+
+    box-shadow: 0 4px 15px rgba(77,53,71,.25);
+
+    transition: .3s;
+}
+
+.menu-toggle:hover {
+    background: #a083a0;
+    transform: scale(1.05);
+}
+
+
+/* =====================================
+   MENU OVERLAY
+===================================== */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(35,25,35,.55);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .35s;
+
+    z-index: 2001;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =====================================
+   SLIDING SIDE MENU
+===================================== */
+
+.side-menu {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width: 420px;
+    max-width: 90%;
+    height: 100vh;
+
+    background: var(--paper);
+
+    transform: translateX(100%);
+    transition: transform .4s ease;
+
+    overflow-y: auto;
+
+    z-index: 2002;
+
+    box-shadow: -8px 0 30px rgba(40,25,40,.2);
+}
+
+.side-menu.active {
+    transform: translateX(0);
+}
+
+
+/* MENU HEADER */
+
+.menu-header {
+    min-height: 115px;
+
+    padding: 25px 35px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #a083a0;
+    color: #fffaf5;
+}
+
+.menu-header h2 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.menu-close {
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    background: transparent;
+
+    color: white;
+    font-size: 35px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+/* MENU LINKS */
+
+.menu-items {
+    padding: 22px 28px 30px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 15px 10px;
+    margin-bottom: 5px;
+
+    color: var(--mauve);
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    transition: background .25s, transform .25s;
+}
+
+.menu-item:hover {
+    background: #f0e2e8;
+    transform: translateX(4px);
+}
+
+.menu-icon {
+    width: 30px;
+    flex-shrink: 0;
+
+    text-align: center;
+    font-size: 25px;
+}
+
+.menu-text strong {
+    display: block;
+
+    color: var(--mauve);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu-text small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #896d86;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.menu-divider {
+    height: 1px;
+    background: #e2cfd9;
+    margin: 15px 0;
+}
+
+
+/* =====================================
+   HERO
+===================================== */
+
+.hero {
+    min-height: 500px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "✈";
+
+    position: absolute;
+    left: 10%;
+    top: 90px;
+
+    font-size: 70px;
+    opacity: .12;
+
+    transform: rotate(-15deg);
+}
+
+.hero::after {
+    content: "🌎";
+
+    position: absolute;
+    right: 5%;
+    bottom: -25px;
+
+    font-size: 190px;
+    opacity: .07;
+}
+
+.hero-content {
+    max-width: 850px;
+    position: relative;
+    z-index: 2;
+}
+
+.badge {
+    display: inline-block;
+
+    padding: 9px 22px;
+
+    border: 1px solid #a87991;
+    border-radius: 30px;
+
+    letter-spacing: 3px;
+    font-size: 11px;
+
+    margin-bottom: 22px;
+
+    background: rgba(255,255,255,.35);
+}
+
+.hero h1 {
+    font-size: clamp(45px,7vw,80px);
+    color: #5b3e50;
+
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #a56d87;
+}
+
+.hero p {
+    max-width: 680px;
+    margin: auto;
+
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 55px;
+
+    margin-top: 35px;
+}
+
+.stats strong {
+    display: block;
+
+    font-size: 28px;
+    color: #7b5268;
+}
+
+.stats span {
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+
+/* =====================================
+   TRAVEL ROUTE
+===================================== */
+
+.route {
+    width: 82%;
+
+    margin: 0 auto 70px;
+
+    border-top: 2px dashed rgba(80,55,70,.35);
+
+    position: relative;
+}
+
+.route::before {
+    content: "✈";
+
+    position: absolute;
+    top: -18px;
+    left: 0;
+
+    font-size: 27px;
+}
+
+.route::after {
+    content: "🌎";
+
+    position: absolute;
+    top: -21px;
+    right: 0;
+
+    font-size: 32px;
+}
+
+
+/* =====================================
+   SECTION TITLE
+===================================== */
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+
+    padding: 0 15px;
+}
+
+.section-title small {
+    color: #9b6880;
+    letter-spacing: 4px;
+    font-size: 11px;
+}
+
+.section-title h2 {
+    color: #593d50;
+    font-size: 42px;
+    margin: 10px 0;
+}
+
+.section-title p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =====================================
+   PASSPORT CARDS CONTAINER
+===================================== */
+
+.cards {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+
+    padding-bottom: 90px;
+}
+
+
+/* =====================================
+   PASSPORT CARD
+===================================== */
+
+.passport-card {
+    --accent: #8f6178;
+
+    width: 100%;
+    min-height: 330px;
+
+    display: flex;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(150,100,125,.08),
+            transparent 25%
+        ),
+        #f8ecd8;
+
+    border: 1px solid rgba(100,65,82,.45);
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 35px rgba(75,45,62,.18),
+        inset 0 0 30px rgba(160,110,130,.08);
+
+    transition: .4s;
+}
+
+
+/* =====================================
+   COLOUR STRIP
+===================================== */
+
+.color-strip {
+    width: 2cm;
+    min-width: 2cm;
+
+    background: var(--accent);
+
+    position: relative;
+    z-index: 3;
+}
+
+.hole {
+    position: absolute;
+
+    top: 24px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 18px;
+    height: 18px;
+
+    background: #ead9e1;
+
+    border: 2px solid rgba(255,255,255,.75);
+    border-radius: 50%;
+
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.15);
+}
+
+
+/* =====================================
+   CARD MAIN
+===================================== */
+
+.card-main {
+    flex: 1;
+
+    display: flex;
+
+    padding: 28px 35px;
+
+    position: relative;
+    min-width: 0;
+}
+
+
+/* =====================================
+   FOOD IMAGE
+===================================== */
+
+.food-image {
+    width: 42%;
+    min-height: 250px;
+
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    border: 3px solid #fff4df;
+
+    box-shadow: 0 8px 20px rgba(70,40,55,.18);
+}
+
+.food-image img {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    inset: 0;
+
+    object-fit: cover;
+
+    transition: .6s;
+}
+
+.passport-card:hover .food-image img {
+    transform: scale(1.07);
+}
+
+.food-image::before {
+    content: "✦";
+
+    position: absolute;
+    top: 8px;
+    left: 10px;
+
+    color: white;
+    font-size: 20px;
+
+    z-index: 2;
+
+    text-shadow: 0 1px 4px #333;
+    pointer-events: none;
+}
+
+
+/* =====================================
+   CARD CONTENT
+===================================== */
+
+.card-content {
+    flex: 1;
+
+    padding: 10px 35px 80px;
+
+    position: relative;
+    min-width: 0;
+}
+
+.country-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+
+    color: var(--accent);
+
+    margin-bottom: 8px;
+}
+
+.country-name {
+    font-size: 38px;
+    color: #593d50;
+
+    margin-bottom: 5px;
+}
+
+.region {
+    font-size: 12px;
+    letter-spacing: 2px;
+
+    color: #987086;
+
+    margin-bottom: 25px;
+}
+
+
+/* =====================================
+   RECIPE LIST
+===================================== */
+
+.recipe-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-bottom: 22px;
+}
+
+.recipe {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 15px;
+
+    padding-bottom: 8px;
+
+    border-bottom: 1px dashed rgba(100,70,85,.25);
+
+    transition: .3s;
+}
+
+.recipe:hover {
+    transform: translateX(7px);
+    color: var(--accent);
+}
+
+.recipe-icon {
+    font-size: 21px;
+}
+
+
+/* =====================================
+   BOTTOM AREA
+===================================== */
+
+.bottom-area {
+    position: absolute;
+
+    left: 35px;
+    right: 35px;
+    bottom: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+    height: 48px;
+}
+
+
+/* =====================================
+   BARCODE
+===================================== */
+
+.barcode-area {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.barcode {
+    width: 145px;
+    height: 32px;
+
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+
+    overflow: hidden;
+}
+
+.barcode span {
+    display: block;
+    background: var(--accent);
+    height: 100%;
+}
+
+.barcode span:nth-child(1)  { width: 3px; }
+.barcode span:nth-child(2)  { width: 6px; }
+.barcode span:nth-child(3)  { width: 2px; }
+.barcode span:nth-child(4)  { width: 8px; }
+.barcode span:nth-child(5)  { width: 3px; }
+.barcode span:nth-child(6)  { width: 5px; }
+.barcode span:nth-child(7)  { width: 2px; }
+.barcode span:nth-child(8)  { width: 7px; }
+.barcode span:nth-child(9)  { width: 3px; }
+.barcode span:nth-child(10) { width: 5px; }
+.barcode span:nth-child(11) { width: 2px; }
+.barcode span:nth-child(12) { width: 8px; }
+.barcode span:nth-child(13) { width: 3px; }
+.barcode span:nth-child(14) { width: 6px; }
+.barcode span:nth-child(15) { width: 2px; }
+
+.barcode-number {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+
+/* =====================================
+   VIEW RECIPE BUTTON
+===================================== */
+
+.view-recipe {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 17px;
+    min-width: 105px;
+
+    background: var(--accent);
+    color: #fff8eb;
+
+    text-decoration: none;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+
+    box-shadow: 0 5px 12px rgba(70,40,55,.18);
+
+    transition: .3s;
+    white-space: nowrap;
+}
+
+.view-recipe:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 18px rgba(70,40,55,.28);
+
+    background: #593d50;
+}
+
+
+/* =====================================
+   PASSPORT STAMP
+===================================== */
+
+.stamp {
+    position: absolute;
+
+    right: 20px;
+    top: 0;
+
+    width: 75px;
+    height: 75px;
+
+    border: 2px dashed var(--accent);
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 9px;
+    line-height: 1.3;
+
+    color: var(--accent);
+
+    transform: rotate(12deg);
+    opacity: .8;
+}
+
+.stamp::after {
+    content: "";
+
+    position: absolute;
+    inset: 7px;
+
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+}
+
+
+/* =====================================
+   DESTINATION NUMBER
+===================================== */
+
+.card-number {
+    position: absolute;
+
+    right: 35px;
+    bottom: 13px;
+
+    transform: translateY(38px);
+
+    font-size: 9px;
+    color: #967084;
+
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+
+/* =====================================
+   COUNTRY COLOURS
+===================================== */
+
+.brazil   { --accent: #8d6b48; }
+.usa      { --accent: #8c5c68; }
+.canada   { --accent: #a85d68; }
+.uk       { --accent: #68557d; }
+.india    { --accent: #b56d49; }
+.thailand { --accent: #8b6785; }
+.turkey   { --accent: #9b5c5c; }
+.vietnam  { --accent: #7b7960; }
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+    background: #513547;
+    color: #f4dfc2;
+
+    text-align: center;
+
+    padding: 30px 20px;
+}
+
+footer h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+footer p {
+    font-size: 13px;
+    opacity: .85;
+}
+
+
+/* =====================================
+   TABLET RESPONSIVE
+===================================== */
+
+@media(max-width: 850px) {
+
+    header {
+        padding: 15px 25px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .menu-toggle {
+        top: 15px;
+        right: 18px;
+    }
+
+    .card-main {
+        flex-direction: column;
+        gap: 25px;
+        padding: 25px;
+    }
+
+    .food-image {
+        width: 100%;
+        height: 260px;
+        min-height: 260px;
+    }
+
+    .card-content {
+        padding: 5px 10px 120px;
+    }
+
+    .stamp {
+        right: 5px;
+    }
+
+    .bottom-area {
+        left: 10px;
+        right: 10px;
+        bottom: 38px;
+
+        flex-wrap: wrap;
+        height: auto;
+        gap: 10px;
+    }
+
+    .card-number {
+        right: 20px;
+        bottom: 10px;
+        transform: none;
+    }
+}
+
+
+/* =====================================
+   MOBILE RESPONSIVE
+===================================== */
+
+@media(max-width: 500px) {
+
+    .logo {
+        font-size: 19px;
+        padding-right: 45px;
+    }
+
+    .hero {
+        min-height: 440px;
+        padding: 55px 18px;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .stats {
+        gap: 20px;
+    }
+
+    .stats strong {
+        font-size: 24px;
+    }
+
+    .stats span {
+        font-size: 9px;
+    }
+
+    .section-title h2 {
+        font-size: 31px;
+    }
+
+    .cards {
+        width: 94%;
+        gap: 30px;
+    }
+
+    .card-main {
+        padding: 20px;
+    }
+
+    .country-name {
+        font-size: 30px;
+    }
+
+    .stamp {
+        display: none;
+    }
+
+    .bottom-area {
+        position: relative;
+
+        left: auto;
+        right: auto;
+        bottom: auto;
+
+        margin-top: 25px;
+        padding-bottom: 5px;
+
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .barcode-area {
+        justify-content: center;
+    }
+
+    .view-recipe {
+        min-width: 130px;
+    }
+
+    .card-number {
+        position: relative;
+
+        right: auto;
+        bottom: auto;
+
+        transform: none;
+
+        text-align: center;
+        margin-top: 5px;
+
+        display: block;
+    }
+
+    .side-menu {
+        width: 360px;
+        max-width: 88%;
+    }
+
+    .menu-header {
+        min-height: 95px;
+        padding: 20px 24px;
+    }
+
+    .menu-header h2 {
+        font-size: 30px;
+    }
+
+    .menu-items {
+        padding: 18px 17px 25px;
+    }
+
+    .menu-item {
+        gap: 15px;
+        padding: 13px 7px;
+    }
+
+    .menu-text strong {
+        font-size: 18px;
+    }
+
+    .menu-text small {
+        font-size: 12px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+
+        <a href="movies.html">
+            Movies &amp; Cartoons
+        </a>
+
+        <a href="world.html">
+            World Cuisine
+        </a>
+
+        <a href="#footer">
+            Contact
+        </a>
+    </nav>
+
+</header>
+
+
+<!-- =====================================
+     EXPLORE MENU BUTTON
+===================================== -->
+
+<button
+    class="menu-toggle"
+    id="menuToggle"
+    onclick="openMenu()"
+    aria-label="Open Explore menu"
+    aria-controls="sideMenu"
+    aria-expanded="false">
+
+    ☰
+
+</button>
+
+
+<!-- =====================================
+     DARK OVERLAY
+===================================== -->
+
+<div
+    class="menu-overlay"
+    id="menuOverlay"
+    onclick="closeMenu()">
+</div>
+
+
+<!-- =====================================
+     SLIDING EXPLORE MENU
+===================================== -->
+
+<aside
+    class="side-menu"
+    id="sideMenu"
+    aria-label="Explore navigation">
+
+    <div class="menu-header">
+
+        <h2>Explore</h2>
+
+        <button
+            class="menu-close"
+            onclick="closeMenu()"
+            aria-label="Close menu">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div class="menu-items">
+
+        <a href="index.html" class="menu-item">
+            <span class="menu-icon">🏠</span>
+
+            <span class="menu-text">
+                <strong>Home</strong>
+                <small>Return to the homepage</small>
+            </span>
+        </a>
+
+
+        <a href="royal.html" class="menu-item">
+            <span class="menu-icon">👑</span>
+
+            <span class="menu-text">
+                <strong>Royal Heritage</strong>
+                <small>Traditional royal recipes</small>
+            </span>
+        </a>
+
+
+        <a href="movies&cartoons.html" class="menu-item">
+            <span class="menu-icon">🎬</span>
+
+            <span class="menu-text">
+                <strong>Movies &amp; Cartoons</strong>
+                <small>Recipes inspired by magical worlds</small>
+            </span>
+        </a>
+
+
+        <a href="worldcuisine.html" class="menu-item">
+            <span class="menu-icon">🌎</span>
+
+            <span class="menu-text">
+                <strong>World Cuisine</strong>
+                <small>Flavours from around the world</small>
+            </span>
+        </a>
+
+
+        <a href="desertwrold.html" class="menu-item">
+            <span class="menu-icon">🍰</span>
+
+            <span class="menu-text">
+                <strong>Desserts</strong>
+                <small>Sweet treats and desserts</small>
+            </span>
+        </a>
+
+
+        <a href="gallery.html" class="menu-item">
+            <span class="menu-icon">🖼️</span>
+
+            <span class="menu-text">
+                <strong>Gallery</strong>
+                <small>Explore our food gallery</small>
+            </span>
+        </a>
+
+
+        <div class="menu-divider"></div>
+
+
+        <a href="favourite.html" class="menu-item">
+            <span class="menu-icon">💗</span>
+
+            <span class="menu-text">
+                <strong>Favourites</strong>
+                <small>Your favourite recipes</small>
+            </span>
+        </a>
+
+
+        <a href="order.html" class="menu-item">
+            <span class="menu-icon">🛒</span>
+
+            <span class="menu-text">
+                <strong>Order</strong>
+                <small>Order ingredient kits</small>
+            </span>
+        </a>
+
+
+        <a href="stamp.html" class="menu-item">
+            <span class="menu-icon">🎟️</span>
+
+            <span class="menu-text">
+                <strong>Stamped</strong>
+                <small>Your stamped recipes</small>
+            </span>
+        </a>
+
+
+        <a href="contact.html" class="menu-item">
+            <span class="menu-icon">💌</span>
+
+            <span class="menu-text">
+                <strong>Contact</strong>
+                <small>Get in touch with us</small>
+            </span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================
+     HERO
+===================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ✦ FLAVORVERSE WORLD PASSPORT ✦
+        </div>
+
+        <h1>
+            A Journey Through
+            <span>Flavours</span>
+        </h1>
+
+        <p>
+            Travel across the world through iconic dishes,
+            traditional recipes and unforgettable flavours.
+        </p>
+
+        <div class="stats">
+
+            <div>
+                <strong>08</strong>
+                <span>COUNTRIES</span>
+            </div>
+
+            <div>
+                <strong>24</strong>
+                <span>DISHES</span>
+            </div>
+
+            <div>
+                <strong>∞</strong>
+                <span>FLAVOURS</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     TRAVEL ROUTE
+===================================== -->
+
+<div class="route"></div>
+
+
+<!-- =====================================
+     SECTION TITLE
+===================================== -->
+
+<section class="section-title">
+
+    <small>
+        YOUR CULINARY PASSPORT
+    </small>
+
+    <h2>
+        Explore the World
+    </h2>
+
+    <p>
+        Every card is a little passport to another flavour.
+    </p>
+
+</section>
+
+
+<!-- =====================================
+     PASSPORT CARDS
+===================================== -->
+
+<section class="cards" id="countryCards"></section>
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer id="footer">
+
+    <h3>
+        🍴 The Flavorverse
+    </h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+/* =====================================
+   EXPLORE MENU FUNCTIONS
+===================================== */
+
+const sideMenu = document.getElementById("sideMenu");
+const menuOverlay = document.getElementById("menuOverlay");
+const menuToggle = document.getElementById("menuToggle");
+
+function openMenu() {
+
+    sideMenu.classList.add("active");
+    menuOverlay.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+    menuToggle.setAttribute("aria-expanded", "true");
+}
+
+function closeMenu() {
+
+    sideMenu.classList.remove("active");
+    menuOverlay.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+    menuToggle.setAttribute("aria-expanded", "false");
+}
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+        closeMenu();
+    }
+
+});
+
+
+/* =====================================
+   COUNTRY DATA
+===================================== */
+
+const countries = [
+
+    {
+        className: "brazil",
+        flag: "🇧🇷",
+        name: "Brazil",
+        region: "SOUTH AMERICA",
+        code: "BRA",
+        barcode: "FV001",
+        destination: "01",
+        image: "mainbrazil.png",
+        alt: "Brazilian cuisine",
+        link: "brazil.html",
+        dishes: [
+            ["🍲", "Feijoada"],
+            ["🧀", "Pão de Queijo"],
+            ["🍫", "Brigadeiro"]
+        ]
+    },
+
+    {
+        className: "usa",
+        flag: "🇺🇸",
+        name: "USA",
+        region: "NORTH AMERICA",
+        code: "USA",
+        barcode: "FV002",
+        destination: "02",
+        image: "mainusa.png",
+        alt: "American cuisine",
+        link: "usa.html",
+        dishes: [
+            ["🍔", "Burger"],
+            ["🥞", "Pancakes"],
+            ["🥧", "Apple Pie"]
+        ]
+    },
+
+    {
+        className: "canada",
+        flag: "🇨🇦",
+        name: "Canada",
+        region: "NORTH AMERICA",
+        code: "CAN",
+        barcode: "FV003",
+        destination: "03",
+        image: "miancanada.png",
+        alt: "Canadian cuisine",
+        link: "canada.html",
+        dishes: [
+            ["🍟", "Poutine"],
+            ["🧈", "Butter Tart"],
+            ["🥞", "Maple Pancakes"]
+        ]
+    },
+
+    {
+        className: "uk",
+        flag: "🇬🇧",
+        name: "United Kingdom",
+        region: "EUROPE",
+        code: "UK",
+        barcode: "FV004",
+        destination: "04",
+        image: "mainuk2.png",
+        alt: "British cuisine",
+        link: "uk.html",
+        dishes: [
+            ["🐟", "Fish & Chips"],
+            ["🥧", "Shepherd's Pie"],
+            ["🍮", "Sticky Toffee Pudding"]
+        ]
+    },
+
+    {
+        className: "india",
+        flag: "🇮🇳",
+        name: "India",
+        region: "SOUTH ASIA",
+        code: "IND",
+        barcode: "FV005",
+        destination: "05",
+        image: "mainindia.png",
+        alt: "Indian cuisine",
+        link: "india.html",
+        dishes: [
+            ["🍛", "Biryani"],
+            ["🍗", "Butter Chicken"],
+            ["🍬", "Gulab Jamun"]
+        ]
+    },
+
+    {
+        className: "thailand",
+        flag: "🇹🇭",
+        name: "Thailand",
+        region: "SOUTHEAST ASIA",
+        code: "THA",
+        barcode: "FV006",
+        destination: "06",
+        image: "mainthailand.png",
+        alt: "Thai cuisine",
+        link: "thailand .html",
+        dishes: [
+            ["🍜", "Pad Thai"],
+            ["🍛", "Green Curry"],
+            ["🥭", "Mango Sticky Rice"]
+        ]
+    },
+
+    {
+        className: "turkey",
+        flag: "🇹🇷",
+        name: "Turkey",
+        region: "EURASIA",
+        code: "TUR",
+        barcode: "FV007",
+        destination: "07",
+        image: "mianturkey.png",
+        alt: "Turkish cuisine",
+        link: "turkey.html",
+        dishes: [
+            ["🥙", "Döner Kebab"],
+            ["🍯", "Baklava"],
+            ["🫓", "Lahmacun"]
+        ]
+    },
+
+    {
+        className: "vietnam",
+        flag: "🇻🇳",
+        name: "Vietnam",
+        region: "SOUTHEAST ASIA",
+        code: "VNM",
+        barcode: "FV008",
+        destination: "08",
+        image: "mainvietnam.png",
+        alt: "Vietnamese cuisine",
+        link: "vietnam.html",
+        dishes: [
+            ["🍜", "Pho"],
+            ["🥖", "Banh Mi"],
+            ["🥬", "Goi Cuon"]
+        ]
+    }
+
+];
+
+
+/* =====================================
+   GENERATE BARCODE
+===================================== */
+
+function createBarcode() {
+
+    return Array.from(
+        { length: 15 },
+        () => "<span></span>"
+    ).join("");
+
+}
+
+
+/* =====================================
+   DISPLAY COUNTRY CARDS
+===================================== */
+
+function renderCountries() {
+
+    const container = document.getElementById("countryCards");
+
+    container.innerHTML = countries.map(country => {
+
+        const dishesHTML = country.dishes.map(dish => `
+            <div class="recipe">
+                <span class="recipe-icon">${dish[0]}</span>
+                <span>${dish[1]}</span>
+            </div>
+        `).join("");
+
+        return `
+
+        <article class="passport-card ${country.className}">
+
+            <div class="color-strip">
+                <div class="hole"></div>
+            </div>
+
+            <div class="card-main">
+
+                <div class="food-image">
+
+                    <img
+                        src="${country.image}"
+                        alt="${country.alt}"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="card-content">
+
+                    <div class="country-label">
+                        FLAVORVERSE PASSPORT
+                    </div>
+
+                    <h2 class="country-name">
+                        ${country.flag} ${country.name}
+                    </h2>
+
+                    <div class="region">
+                        ${country.region}
+                    </div>
+
+                    <div class="stamp">
+                        ${country.code}<br>
+                        PASSPORT<br>
+                        STAMP
+                    </div>
+
+                    <div class="recipe-list">
+                        ${dishesHTML}
+                    </div>
+
+                    <div class="bottom-area">
+
+                        <div class="barcode-area">
+
+                            <div class="barcode">
+                                ${createBarcode()}
+                            </div>
+
+                            <div class="barcode-number">
+                                ${country.barcode}
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="${country.link}"
+                            class="view-recipe"
+                        >
+                            VIEW RECIPE →
+                        </a>
+
+                    </div>
+
+                    <div class="card-number">
+                        DESTINATION ${country.destination}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        `;
+
+    }).join("");
+
+}
+
+
+/* =====================================
+   INITIALIZE PAGE
+===================================== */
+
+renderCountries();
+
+</script>
+
+</body>
+</html>

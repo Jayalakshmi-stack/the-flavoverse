@@ -1,0 +1,2501 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Uttar Pradesh | The Flavorverse</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#F7E7CE;
+color:#5B4A45;
+transition:.3s;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode{
+background:#241d23;
+color:#eee;
+}
+
+body.dark-mode .hero,
+body.dark-mode .about-text,
+body.dark-mode .recipe-section,
+body.dark-mode .fact-card,
+body.dark-mode .profile-card,
+body.dark-mode .explorer-section,
+body.dark-mode .popular-card,
+body.dark-mode .review-box,
+body.dark-mode .recent-card{
+background:#342a32;
+color:#eee;
+}
+
+body.dark-mode .recipe-content h2,
+body.dark-mode .about-text h2,
+body.dark-mode .facts-section h2,
+body.dark-mode .explorer-section h2,
+body.dark-mode .popular-title,
+body.dark-mode .recent-section h2,
+body.dark-mode .popular-card h3,
+body.dark-mode .recent-card h3{
+color:#e9c9e4;
+}
+
+body.dark-mode .recipe-content h3{
+color:#d6aeca;
+}
+
+body.dark-mode .recipe-info div,
+body.dark-mode .chef-tip,
+body.dark-mode .fun-fact{
+background:#443640;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea{
+background:#443640;
+color:white;
+border-color:#80647b;
+}
+
+/* Header */
+
+header{
+background:#8E6C88;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+font-family:'Cinzel',serif;
+font-size:32px;
+font-weight:bold;
+color:white;
+}
+
+nav{
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.dark-toggle{
+margin-left:20px;
+border:none;
+background:#F4E5C5;
+color:#5B4A45;
+padding:9px 14px;
+border-radius:20px;
+cursor:pointer;
+font-weight:bold;
+}
+
+/* ================= EXPLORE SLIDE MENU ================= */
+
+.menu-btn{
+margin-left:15px;
+border:none;
+background:#F4E5C5;
+color:#5B4A45;
+width:44px;
+height:40px;
+border-radius:12px;
+font-size:22px;
+cursor:pointer;
+transition:.3s;
+line-height:1;
+}
+
+.menu-btn:hover{
+background:#FFD166;
+transform:translateY(-2px);
+}
+
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(36,29,35,.55);
+backdrop-filter:blur(2px);
+opacity:0;
+visibility:hidden;
+transition:.35s;
+z-index:9998;
+}
+
+.menu-overlay.open{
+opacity:1;
+visibility:visible;
+}
+
+.side-menu{
+position:fixed;
+top:0;
+right:0;
+height:100%;
+width:350px;
+max-width:88%;
+background:#FFF9F4;
+box-shadow:-10px 0 30px rgba(0,0,0,.3);
+transform:translateX(100%);
+transition:transform .4s ease;
+z-index:9999;
+display:flex;
+flex-direction:column;
+}
+
+.side-menu.open{
+transform:translateX(0);
+}
+
+.side-menu-head{
+background:#9B7A98;
+color:white;
+padding:32px 28px;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+
+.side-menu-head h2{
+font-size:28px;
+font-weight:600;
+}
+
+.menu-close{
+background:none;
+border:none;
+color:white;
+font-size:26px;
+cursor:pointer;
+transition:.3s;
+}
+
+.menu-close:hover{
+transform:rotate(90deg);
+}
+
+.side-menu-list{
+flex:1;
+overflow-y:auto;
+padding:14px 22px 24px;
+}
+
+.menu-item{
+display:flex;
+align-items:center;
+gap:18px;
+padding:12px 14px;
+border-radius:14px;
+text-decoration:none;
+color:#5B3F5C;
+transition:.25s;
+margin-bottom:2px;
+}
+
+.menu-item:hover,
+.menu-item.active{
+background:#EFE0EE;
+transform:translateX(4px);
+}
+
+.menu-icon{
+font-size:26px;
+width:32px;
+text-align:center;
+}
+
+.menu-item strong{
+display:block;
+font-size:15px;
+font-weight:600;
+color:#5B3F5C;
+}
+
+.menu-item small{
+display:block;
+font-size:12px;
+color:#7a6a74;
+margin-top:2px;
+}
+
+.menu-divider{
+height:1px;
+background:#E3CFE0;
+margin:12px 0;
+}
+
+body.menu-lock{
+overflow:hidden;
+}
+
+body.dark-mode .side-menu{
+background:#342a32;
+}
+
+body.dark-mode .menu-item strong{
+color:#e9c9e4;
+}
+
+body.dark-mode .menu-item small{
+color:#bfa9bb;
+}
+
+body.dark-mode .menu-item:hover,
+body.dark-mode .menu-item.active{
+background:#443640;
+}
+
+body.dark-mode .menu-divider{
+background:#5a4757;
+}
+
+/* Hero */
+
+.hero{
+
+width:90%;
+margin:40px auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+display:flex;
+align-items:center;
+gap:40px;
+padding:40px;
+
+}
+
+.image-box{
+
+    width:450px;
+    height:350px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff8f2;
+    border-radius:20px;
+    flex:1;
+
+}
+
+.image-box img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+.hero-content{
+
+padding:40px;
+flex:1;
+text-align:left;
+
+}
+
+.hero-content h1{
+
+font-family:'Cinzel',serif;
+font-size:58px;
+color:#6F4B72;
+
+}
+
+.hero-content h2{
+
+margin-top:15px;
+color:#B58A4D;
+font-size:30px;
+
+}
+
+.hero-content p{
+
+margin-top:18px;
+font-size:18px;
+line-height:1.8;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:25px;
+padding:14px 35px;
+background:#8E6C88;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#6F4B72;
+
+}
+/* ================= ABOUT SECTION ================= */
+
+.about-section{
+width:90%;
+margin:50px auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+
+.about-text{
+flex:2;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.about-text h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:20px;
+}
+
+.about-text p{
+line-height:1.9;
+font-size:17px;
+margin-bottom:18px;
+text-align:justify;
+}
+
+.about-box{
+flex:1;
+background:#8E6C88;
+color:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.about-box h3{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+text-align:center;
+}
+
+.about-box ul{
+list-style:none;
+}
+
+.about-box li{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.25);
+font-size:16px;
+}
+
+.about-box li:last-child{
+border-bottom:none;
+}
+
+@media(max-width:768px){
+
+.about-section{
+flex-direction:column;
+}
+
+.about-text,
+.about-box{
+width:100%;
+}
+
+}
+/* ================= RECIPE SECTION ================= */
+
+.recipe-section{
+
+width:90%;
+
+margin:60px auto;
+
+display:flex;
+
+gap:40px;
+
+align-items:flex-start;
+
+background:#FFF9F4;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.recipe-image{
+
+flex:1;
+
+}
+
+.recipe-image img{
+
+width:100%;
+
+border-radius:18px;
+
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+
+}
+
+.recipe-content{
+
+flex:2;
+
+}
+
+.recipe-content h2{
+
+font-family:'Cinzel',serif;
+
+color:#6F4B72;
+
+font-size:38px;
+
+margin-bottom:20px;
+
+}
+
+.recipe-content h3{
+
+margin-top:25px;
+
+margin-bottom:12px;
+
+color:#8E6C88;
+
+}
+
+.recipe-content p{
+
+line-height:1.8;
+
+text-align:justify;
+
+}
+
+.recipe-content ul,
+
+.recipe-content ol{
+
+margin-left:25px;
+
+line-height:1.9;
+
+}
+
+.recipe-info{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:25px;
+
+gap:20px;
+
+}
+
+.recipe-info div{
+
+flex:1;
+
+background:#F7E7CE;
+
+padding:18px;
+
+text-align:center;
+
+border-radius:15px;
+
+}
+
+.chef-tip,
+
+.fun-fact{
+
+margin-top:25px;
+
+background:#F7E7CE;
+
+padding:20px;
+
+border-left:6px solid #8E6C88;
+
+border-radius:12px;
+
+}
+
+@media(max-width:768px){
+
+.recipe-section{
+
+flex-direction:column;
+
+}
+
+.recipe-info{
+
+flex-direction:column;
+
+}
+
+}
+/* Reverse Layout for Alternate Recipe */
+
+.reverse{
+display:flex;
+flex-direction:row-reverse;
+}
+
+@media(max-width:768px){
+
+.reverse{
+flex-direction:column;
+}
+
+}
+/* ================= FOOD FACTS ================= */
+
+.facts-section{
+
+width:90%;
+margin:60px auto;
+
+}
+
+.facts-section h2{
+
+text-align:center;
+font-family:'Cinzel',serif;
+font-size:40px;
+color:#6F4B72;
+margin-bottom:35px;
+
+}
+
+.facts-container{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+
+}
+
+.fact-card{
+
+background:#FFF9F4;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+transition:.3s;
+
+}
+
+.fact-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.fact-card h3{
+
+color:#8E6C88;
+margin-bottom:15px;
+
+}
+
+.fact-card p{
+
+line-height:1.8;
+
+}
+
+/* ================= CHEF ================= */
+
+.chef-section{
+
+width:90%;
+margin:60px auto;
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+
+}
+
+.chef-section h2{
+
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+
+}
+
+.chef-section p{
+
+font-size:18px;
+line-height:1.8;
+
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+background:#6F4B72;
+color:white;
+text-align:center;
+padding:40px 20px;
+margin-top:60px;
+
+}
+
+footer h2{
+
+font-family:'Cinzel',serif;
+margin-bottom:15px;
+
+}
+
+footer p{
+
+margin:10px 0;
+line-height:1.8;
+
+}
+
+.social{
+
+margin:25px 0;
+
+}
+
+.social a{
+
+text-decoration:none;
+font-size:30px;
+margin:0 12px;
+
+}
+
+.copy{
+
+margin-top:20px;
+font-size:15px;
+opacity:.9;
+
+}
+
+
+/* ================= EXTRA FLAVORVERSE FEATURES ================= */
+
+.explorer-section{
+width:90%;
+margin:35px auto;
+background:#FFF9F4;
+padding:30px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.10);
+text-align:center;
+}
+.explorer-section h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+margin-bottom:20px;
+}
+.explorer-controls{
+display:flex;
+gap:14px;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+}
+.search-box,.filter-box{
+padding:13px 16px;
+border:1px solid #D8C5B0;
+border-radius:25px;
+font-family:'Poppins',sans-serif;
+background:white;
+color:#5B4A45;
+outline:none;
+}
+.search-box{width:280px}
+.filter-box{min-width:170px}
+.explorer-buttons{
+display:flex;
+gap:12px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:15px;
+}
+.explorer-btn{
+border:none;
+padding:12px 22px;
+border-radius:25px;
+background:#8E6C88;
+color:white;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+cursor:pointer;
+box-shadow:0 5px 12px rgba(0,0,0,.12);
+}
+.explorer-btn.random{background:#F4E5C5;color:#5B4A45}
+.search-result{margin-top:15px;font-size:14px;opacity:.8}
+
+.popular-section{
+width:90%;
+margin:35px auto;
+}
+.popular-title{
+text-align:center;
+font-family:'Cinzel',serif;
+color:#6F4B72;
+margin-bottom:22px;
+}
+.popular-container{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+.popular-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 8px 18px rgba(0,0,0,.09);
+text-align:center;
+}
+.popular-card h3{color:#6F4B72;margin-bottom:8px}
+.popular-card p{font-size:14px;line-height:1.6}
+
+.recipe-actions{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:22px;
+align-items:center;
+}
+.recipe-actions button{
+border:none;
+padding:11px 17px;
+border-radius:25px;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+cursor:pointer;
+box-shadow:0 5px 12px rgba(0,0,0,.10);
+}
+.favorite-btn{background:#8E6C88;color:white}
+.stamp-btn{background:#F4E5C5;color:#5B4A45}
+
+.rating-area{
+margin-top:20px;
+padding:18px;
+background:rgba(244,229,197,.55);
+border-radius:15px;
+}
+.rating-area h3{margin:0 0 8px}
+.stars{display:flex;gap:5px}
+.star{
+font-size:28px;
+cursor:pointer;
+color:#C8B9AA;
+user-select:none;
+}
+.star.active{color:#E5A82F}
+.rating-message{font-size:13px;margin-top:6px}
+
+.review-box{
+margin-top:16px;
+padding:18px;
+background:#FFF9F4;
+border:1px solid #EADBC9;
+border-radius:15px;
+}
+.review-box h3{margin:0}
+.review-input{
+width:100%;
+min-height:85px;
+resize:vertical;
+padding:12px;
+border:1px solid #D8C5B0;
+border-radius:12px;
+font-family:'Poppins',sans-serif;
+margin-top:8px;
+}
+.review-submit{
+margin-top:10px;
+border:none;
+background:#8E6C88;
+color:white;
+padding:10px 20px;
+border-radius:22px;
+cursor:pointer;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+}
+.reviews-list{margin-top:15px}
+.single-review{
+padding:12px;
+margin-top:10px;
+background:#F7E7CE;
+border-radius:12px;
+}
+.single-review strong{color:#6F4B72}
+.single-review small{display:block;margin-top:4px;opacity:.7}
+.no-review{font-size:13px;opacity:.7;margin-top:10px}
+
+.recent-section,.profile-section{
+width:90%;
+margin:40px auto;
+}
+.recent-section h2{
+text-align:center;
+font-family:'Cinzel',serif;
+color:#6F4B72;
+margin-bottom:20px;
+}
+.recent-container{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+.recent-card{
+background:#FFF9F4;
+padding:20px;
+border-radius:18px;
+box-shadow:0 8px 18px rgba(0,0,0,.09);
+text-align:center;
+}
+.recent-card h3{color:#6F4B72}
+.recent-empty{text-align:center;opacity:.7}
+
+.profile-box{
+background:#8E6C88;
+color:white;
+padding:35px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.profile-box h2{
+font-family:'Cinzel',serif;
+font-size:34px;
+text-align:center;
+margin-bottom:10px;
+}
+.profile-name,.profile-email{text-align:center;margin-bottom:18px}
+.profile-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+.profile-card{
+background:#FFF9F4;
+color:#5B4A45;
+padding:20px;
+border-radius:16px;
+text-align:center;
+}
+.profile-card .count{
+font-size:30px;
+font-weight:bold;
+color:#6F4B72;
+display:block;
+}
+
+.recipe-hidden,
+.recipe-section.hidden-recipe{display:none !important}
+
+@media(max-width:900px){
+.popular-container,.recent-container{grid-template-columns:repeat(2,1fr)}
+.profile-stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+.explorer-controls{flex-direction:column}
+.search-box,.filter-box{width:100%}
+.popular-container,.recent-container,.profile-stats{grid-template-columns:1fr}
+.recipe-actions button{width:100%}
+}
+
+
+/* ================= RAJASTHAN-STYLE RECIPE LAYOUT ================= */
+.recipe-section{
+width:90%;
+margin:60px auto;
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:40px;
+align-items:stretch;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+.recipe-image{grid-column:1;grid-row:1}
+.recipe-image img{width:100%;border-radius:18px;box-shadow:0 6px 15px rgba(0,0,0,.15);display:block}
+.recipe-content{grid-column:2;grid-row:1}
+.recipe-actions{
+grid-column:1;
+grid-row:1;
+align-self:end;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-end;
+gap:15px;
+padding-bottom:5px;
+margin-top:0;
+}
+.recipe-actions button{width:200px;padding:14px 18px;border:none;border-radius:30px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;box-shadow:0 6px 15px rgba(91,74,69,.18)}
+.recipe-section.reverse{grid-template-columns:2fr 1fr}
+.recipe-section.reverse .recipe-content{grid-column:1;grid-row:1}
+.recipe-section.reverse .recipe-image{grid-column:2;grid-row:1}
+.recipe-section.reverse .recipe-actions{grid-column:2;grid-row:1}
+@media(max-width:768px){.recipe-section,.recipe-section.reverse{display:flex;flex-direction:column;gap:25px}.recipe-image,.recipe-content{width:100%}.recipe-actions,.recipe-section.reverse .recipe-actions{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;order:2;margin-top:0}.recipe-actions button{width:220px}}
+
+/* ================= MOBILE HEADER ================= */
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+.logo{
+font-size:25px;
+}
+
+nav{
+justify-content:center;
+}
+
+.dark-toggle{
+margin:8px 0 0 0;
+}
+
+.menu-btn{
+margin:8px 0 0 10px;
+}
+
+.hero{
+flex-direction:column;
+padding:20px;
+}
+
+.image-box{
+width:100%;
+height:280px;
+}
+
+.hero-content{
+padding:20px 5px;
+text-align:center;
+}
+
+.hero-content h1{
+font-size:42px;
+}
+
+.hero-content h2{
+font-size:24px;
+}
+
+.hero-content p{
+font-size:15px;
+}
+
+}
+
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+</style>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header>
+<div class="logo">
+🍴 The Flavorverse
+</div>
+<nav>
+<button class="dark-toggle" onclick="toggleDarkMode()">
+🌙
+</button>
+<button class="menu-btn" onclick="openMenu()" aria-label="Open menu">☰</button>
+</nav>
+</header>
+
+<!-- ================= EXPLORE SLIDE MENU ================= -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+<aside class="side-menu" id="sideMenu">
+<div class="side-menu-head">
+<h2>Explore</h2>
+<button class="menu-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+</div>
+<div class="side-menu-list">
+<a class="menu-item" href="index.html"><span class="menu-icon">🏠</span><span><strong>Home</strong><small>Return to the homepage</small></span></a>
+<a class="menu-item active" href="royal.html"><span class="menu-icon">👑</span><span><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+<a class="menu-item" href="movies.html"><span class="menu-icon">🎬</span><span><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+<a class="menu-item" href="world.html"><span class="menu-icon">🌏</span><span><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+<a class="menu-item" href="desserts.html"><span class="menu-icon">🍰</span><span><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+<a class="menu-item" href="gallery.html"><span class="menu-icon">🖼️</span><span><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+<div class="menu-divider"></div>
+<a class="menu-item" href="favourites.html"><span class="menu-icon">❤️</span><span><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+<a class="menu-item" href="order.html"><span class="menu-icon">🛒</span><span><strong>Order</strong><small>Order ingredient kits</small></span></a>
+<a class="menu-item" href="stamped.html"><span class="menu-icon">🏷️</span><span><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+<a class="menu-item" href="contact.html"><span class="menu-icon">📩</span><span><strong>Contact</strong><small>Get in touch with us</small></span></a>
+<a class="menu-item" href="about.html"><span class="menu-icon">✨</span><span><strong>About</strong><small>Discover The Flavorverse</small></span></a>
+<a class="menu-item" href="profile.html"><span class="menu-icon">👤</span><span><strong>My Flavorverse</strong><small>Your personal food profile</small></span></a>
+</div>
+</aside>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+<div class="image-box">
+<img alt="Uttar Pradesh" src="uttarpradeshhero.png"/>
+</div>
+<div class="hero-content">
+<h1>🕌 Uttar Pradesh</h1>
+<h2>Royal Flavours of Awadh</h2>
+<p>
+
+Welcome to Uttar Pradesh, the home of the world-famous Awadhi cuisine. From the royal kitchens of Lucknow to traditional Mughlai delicacies, the state's cuisine is celebrated for its aromatic spices, slow-cooked recipes, delicate kebabs, fragrant biryanis, and irresistible desserts. Every dish reflects centuries of royal heritage, culture, and culinary excellence.
+
+</p>
+<a class="btn" href="kashmir.html">
+
+Explore Recipes
+
+</a>
+</div>
+</section>
+<!-- ================= ABOUT UTTAR PRADESH ================= -->
+<section class="about-section" id="about">
+<div class="about-text">
+<h2>🕌 About Uttar Pradesh Cuisine</h2>
+<p>
+
+Uttar Pradesh is one of India's richest culinary destinations, renowned for its royal Awadhi cuisine, Mughlai influences, and centuries-old food traditions. The state is especially famous for the city of Lucknow, where skilled royal chefs perfected the art of slow cooking, creating dishes with delicate flavors, aromatic spices, and elegant presentation.
+
+</p>
+<p>
+
+The cuisine of Uttar Pradesh offers a delightful variety of kebabs, biryanis, rich curries, breads, and traditional desserts. Popular dishes such as Galouti Kebab, Lucknowi Biryani, Kakori Kebab, and Shahi Tukda beautifully represent the state's royal heritage. These recipes continue to be enjoyed during festivals, family celebrations, weddings, and special occasions.
+
+</p>
+<p>
+
+Traditional cooking methods such as "Dum Pukht" (slow cooking in sealed pots) are widely used to enhance aroma and flavor. Fresh herbs, saffron, yogurt, dry fruits, and fragrant spices play an important role in creating the rich taste that makes Awadhi cuisine famous around the world.
+
+</p>
+<p>
+
+Whether you enjoy the melt-in-the-mouth Galouti Kebab, the aromatic Lucknowi Biryani, the delicious Kakori Kebab, or the sweet richness of Shahi Tukda, every dish reflects the royal hospitality, culture, and timeless culinary excellence of Uttar Pradesh.
+
+</p>
+</div>
+<div class="about-box">
+<h3>👑 Uttar Pradesh Highlights</h3>
+<ul>
+<li>🕌 Home of the famous Awadhi cuisine</li>
+<li>🍛 Lucknow is known as the City of Nawabs</li>
+<li>🥩 Galouti &amp; Kakori Kebabs are world famous</li>
+<li>🍚 Lucknowi Biryani is rich in aroma and flavor</li>
+<li>🍞 Shahi Tukda is a classic royal dessert</li>
+<li>🔥 Dum Pukht is the traditional slow-cooking method</li>
+<li>🌿 Saffron, cardamom, and dry fruits are widely used</li>
+<li>❤️ Rich royal heritage and authentic Mughlai recipes</li>
+</ul>
+</div>
+</section>
+<!-- ================= RECIPE EXPLORER ================= -->
+<section class="explorer-section">
+<h2>🔎 Explore Uttar Pradesh Recipes</h2>
+<div class="explorer-controls">
+<input class="search-box" id="recipeSearch" oninput="filterRecipes()" placeholder="🔎 Search recipes..." type="text"/>
+<select class="filter-box" id="categoryFilter" onchange="filterRecipes()"><option value="all">🏷️ All Categories</option><option value="main">Main Course</option><option value="nonveg">Non-Vegetarian</option><option value="dessert">Dessert</option><option value="vegetarian">Vegetarian</option></select>
+<select class="filter-box" id="cuisineFilter" onchange="filterRecipes()"><option value="all">🌍 All Cuisine</option><option value="uttarpradesh">Uttar Pradesh Cuisine</option></select>
+</div>
+<div class="explorer-buttons">
+<button class="explorer-btn random" onclick="surpriseMe()">🎲 Surprise Me</button>
+<button class="explorer-btn" onclick="resetFilters()">↻ Show All Recipes</button>
+</div>
+<p class="search-result" id="searchResult">
+Showing all 4 Uttar Pradesh recipes
+</p>
+</section>
+<!-- ================= POPULAR RECIPES ================= -->
+<section class="popular-section">
+<h2 class="popular-title">🔥 Popular Uttar Pradesh Recipes</h2>
+<div class="popular-container">
+<div class="popular-card">
+<h3>🥩 Galouti Kebab</h3>
+<p>Soft and aromatic Awadhi kebab famous from Lucknow.</p>
+</div>
+<div class="popular-card">
+<h3>🍛 Lucknowi Biryani</h3>
+<p>Fragrant rice dish representing the royal Awadhi tradition.</p>
+</div>
+<div class="popular-card">
+<h3>🍞 Shahi Tukda</h3>
+<p>A rich royal dessert made with bread, rabri and sweetness.</p>
+</div>
+<div class="popular-card">
+<h3>🍢 Kakori Kebab</h3>
+<p>A delicate and flavorful kebab associated with Kakori.</p>
+</div>
+</div>
+</section>
+
+<!-- ================= GALOUTI KEBAB ================= -->
+<section class="recipe-section" data-category="nonveg" data-cuisine="uttarpradesh" data-name="Galouti Kebab" id="galouti-kebab">
+<div class="recipe-image">
+<img alt="Galouti Kebab" src="gaulotikebab.png"/>
+</div>
+<div class="recipe-content">
+<h2>🥩 Galouti Kebab</h2>
+<p>
+
+Galouti Kebab is one of the most famous royal delicacies of Lucknow, Uttar Pradesh. Created during the Nawabi era, these kebabs are known for their incredibly soft texture that almost melts in the mouth. They are prepared using finely minced meat, aromatic spices, herbs, and cooked on a hot griddle with ghee. Galouti Kebab is traditionally served with Roomali Roti, Paratha, mint chutney, and sliced onions.
+
+</p>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>500 g Minced Mutton</li>
+<li>2 tbsp Ginger-Garlic Paste</li>
+<li>1 Onion (Finely Chopped)</li>
+<li>2 Green Chilies (Finely Chopped)</li>
+<li>1 tsp Red Chilli Powder</li>
+<li>½ tsp Turmeric Powder</li>
+<li>1 tsp Garam Masala</li>
+<li>½ tsp Cardamom Powder</li>
+<li>1 tbsp Roasted Gram Flour</li>
+<li>Fresh Coriander Leaves</li>
+<li>2 tbsp Ghee</li>
+<li>Salt to Taste</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Mix minced mutton with ginger-garlic paste and all the spices.</li>
+<li>Add chopped onions, green chilies, coriander leaves, and roasted gram flour.</li>
+<li>Mix everything thoroughly until smooth.</li>
+<li>Cover and marinate the mixture for at least 1 hour.</li>
+<li>Shape the mixture into small round patties.</li>
+<li>Heat ghee on a flat pan or tawa.</li>
+<li>Cook the kebabs on medium heat until golden brown on both sides.</li>
+<li>Serve hot with Roomali Roti, mint chutney, and onion rings.</li>
+</ol>
+<div class="recipe-info">
+<div>
+<h4>⏱ Cooking Time</h4>
+<p>45 Minutes</p>
+</div>
+<div>
+<h4>🍽 Serves</h4>
+<p>4 People</p>
+</div>
+<div>
+<h4>⭐ Difficulty</h4>
+<p>Medium</p>
+</div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Tip</h3>
+<p>
+
+Marinate the meat well and cook the kebabs on low to medium heat with ghee. This helps them remain soft, juicy, and full of authentic Awadhi flavor.
+
+</p>
+</div>
+<div class="fun-fact">
+<h3>🌟 Fun Fact</h3>
+<p>
+
+Galouti Kebab was created for an elderly Nawab of Lucknow who had lost his teeth but still wanted to enjoy delicious kebabs. Its soft, melt-in-the-mouth texture made it a royal favorite.
+
+</p>
+</div>
+
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="galouti-kebab">
+<span class="star" onclick="rateRecipe('galouti-kebab',1,this)">★</span>
+<span class="star" onclick="rateRecipe('galouti-kebab',2,this)">★</span>
+<span class="star" onclick="rateRecipe('galouti-kebab',3,this)">★</span>
+<span class="star" onclick="rateRecipe('galouti-kebab',4,this)">★</span>
+<span class="star" onclick="rateRecipe('galouti-kebab',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-galouti-kebab">Not rated yet</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews</h3>
+<textarea class="review-input" id="review-text-galouti-kebab" placeholder="Write your review about Galouti Kebab..."></textarea>
+<button class="review-submit" onclick="submitReview('galouti-kebab','Galouti Kebab')">
+Submit Review
+</button>
+<div class="reviews-list" id="reviews-galouti-kebab">
+<p class="no-review">Loading reviews...</p>
+</div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="galouti-kebab" onclick="addToFavourite('galouti-kebab','Galouti Kebab','Uttar Pradesh',this)">
+♡ Add to Favourite
+</button>
+<button class="stamp-btn" data-stamp-id="galouti-kebab" onclick="addToStamp('galouti-kebab','Galouti Kebab','Uttar Pradesh',this)">
+🏷️ Add to Stamp
+</button>
+</div></section>
+<!-- ================= LUCKNOWI BIRYANI ================= -->
+<section class="recipe-section reverse" data-category="main" data-cuisine="uttarpradesh" data-name="Lucknowi Biryani" id="lucknowi-biryani">
+<div class="recipe-image">
+<img alt="Lucknowi Biryani" src="lucknowbriyani.png"/>
+</div>
+<div class="recipe-content">
+<h2>🍛 Lucknowi Biryani</h2>
+<p>
+
+Lucknowi Biryani, also known as Awadhi Biryani, is one of the most famous royal dishes of Uttar Pradesh. Prepared using fragrant basmati rice, tender marinated meat, aromatic spices, saffron, and herbs, this biryani is slow-cooked using the traditional Dum Pukht method. Unlike spicy biryanis, Lucknowi Biryani is known for its mild yet rich flavors and irresistible aroma. It is a favorite dish served during festivals, weddings, and royal feasts.
+
+</p>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>500 g Chicken or Mutton</li>
+<li>2 cups Basmati Rice</li>
+<li>2 Onions (Thinly Sliced)</li>
+<li>1 cup Yogurt</li>
+<li>2 tbsp Ginger-Garlic Paste</li>
+<li>2 Green Chilies</li>
+<li>Whole Spices (Bay Leaf, Cinnamon, Cardamom, Cloves)</li>
+<li>1 tsp Garam Masala</li>
+<li>½ tsp Turmeric Powder</li>
+<li>Saffron soaked in Warm Milk</li>
+<li>Fresh Mint Leaves</li>
+<li>Fresh Coriander Leaves</li>
+<li>3 tbsp Ghee</li>
+<li>Salt to Taste</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Marinate the chicken or mutton with yogurt, ginger-garlic paste, spices, and salt for at least one hour.</li>
+<li>Cook the basmati rice until it is about 70% done.</li>
+<li>Heat ghee and fry the sliced onions until golden brown.</li>
+<li>Cook the marinated meat until it becomes tender.</li>
+<li>Layer the partially cooked rice over the cooked meat.</li>
+<li>Top with fried onions, mint leaves, coriander leaves, and saffron milk.</li>
+<li>Cover the pot tightly and cook on low flame (Dum) for 20–25 minutes.</li>
+<li>Gently mix before serving.</li>
+<li>Serve hot with raita and salad.</li>
+</ol>
+<div class="recipe-info">
+<div>
+<h4>⏱ Cooking Time</h4>
+<p>90 Minutes</p>
+</div>
+<div>
+<h4>🍽 Serves</h4>
+<p>4–5 People</p>
+</div>
+<div>
+<h4>⭐ Difficulty</h4>
+<p>Medium</p>
+</div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Tip</h3>
+<p>
+
+For authentic Awadhi flavor, always use long-grain basmati rice, pure ghee, saffron, and cook the biryani on low heat using the Dum method. This locks in the aroma and makes every grain flavorful.
+
+</p>
+</div>
+<div class="fun-fact">
+<h3>🌟 Fun Fact</h3>
+<p>
+
+Lucknowi Biryani originated in the royal kitchens of the Nawabs of Awadh. It is famous for its delicate flavors and elegant cooking style, making it one of India's most celebrated biryanis.
+
+</p>
+</div>
+
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="lucknowi-biryani">
+<span class="star" onclick="rateRecipe('lucknowi-biryani',1,this)">★</span>
+<span class="star" onclick="rateRecipe('lucknowi-biryani',2,this)">★</span>
+<span class="star" onclick="rateRecipe('lucknowi-biryani',3,this)">★</span>
+<span class="star" onclick="rateRecipe('lucknowi-biryani',4,this)">★</span>
+<span class="star" onclick="rateRecipe('lucknowi-biryani',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-lucknowi-biryani">Not rated yet</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews</h3>
+<textarea class="review-input" id="review-text-lucknowi-biryani" placeholder="Write your review about Lucknowi Biryani..."></textarea>
+<button class="review-submit" onclick="submitReview('lucknowi-biryani','Lucknowi Biryani')">
+Submit Review
+</button>
+<div class="reviews-list" id="reviews-lucknowi-biryani">
+<p class="no-review">Loading reviews...</p>
+</div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="lucknowi-biryani" onclick="addToFavourite('lucknowi-biryani','Lucknowi Biryani','Uttar Pradesh',this)">
+♡ Add to Favourite
+</button>
+<button class="stamp-btn" data-stamp-id="lucknowi-biryani" onclick="addToStamp('lucknowi-biryani','Lucknowi Biryani','Uttar Pradesh',this)">
+🏷️ Add to Stamp
+</button>
+</div></section>
+<!-- ================= SHAHI TUKDA ================= -->
+<section class="recipe-section" data-category="dessert" data-cuisine="uttarpradesh" data-name="Shahi Tukda" id="shahi-tukda">
+<div class="recipe-image">
+<img alt="Shahi Tukda" src="shahi tukda.png"/>
+</div>
+<div class="recipe-content">
+<h2>🍞 Shahi Tukda</h2>
+<p>
+
+Shahi Tukda is one of the most famous royal desserts of Uttar Pradesh, especially associated with the royal kitchens of Lucknow. This rich delicacy is prepared by frying slices of bread in ghee until golden brown and soaking them in fragrant sugar syrup. It is then topped with creamy rabri, saffron, cardamom, almonds, pistachios, and silver leaf for a luxurious finish. Shahi Tukda is a popular dessert served during festivals, weddings, and special celebrations.
+
+</p>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>6 Bread Slices</li>
+<li>3 tbsp Ghee</li>
+<li>1 cup Sugar</li>
+<li>½ cup Water</li>
+<li>1 cup Rabri</li>
+<li>½ tsp Cardamom Powder</li>
+<li>A few Saffron Strands</li>
+<li>2 tbsp Chopped Almonds</li>
+<li>2 tbsp Chopped Pistachios</li>
+<li>Silver Leaf (Optional)</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Trim the edges of the bread and cut each slice into triangles.</li>
+<li>Heat ghee and fry the bread slices until golden brown and crispy.</li>
+<li>Prepare a sugar syrup by boiling sugar and water together.</li>
+<li>Dip each fried bread slice briefly into the warm sugar syrup.</li>
+<li>Arrange the bread pieces on a serving plate.</li>
+<li>Pour chilled rabri generously over the bread.</li>
+<li>Garnish with saffron, cardamom powder, almonds, pistachios, and silver leaf.</li>
+<li>Serve chilled or slightly warm.</li>
+</ol>
+<div class="recipe-info">
+<div>
+<h4>⏱ Cooking Time</h4>
+<p>35 Minutes</p>
+</div>
+<div>
+<h4>🍽 Serves</h4>
+<p>4 People</p>
+</div>
+<div>
+<h4>⭐ Difficulty</h4>
+<p>Easy</p>
+</div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Tip</h3>
+<p>
+
+Use fresh homemade rabri and serve the dessert chilled. Garnishing with saffron and dry fruits gives Shahi Tukda its authentic royal taste and elegant appearance.
+
+</p>
+</div>
+<div class="fun-fact">
+<h3>🌟 Fun Fact</h3>
+<p>
+
+The name "Shahi Tukda" means "Royal Piece." This dessert was a favorite of the Nawabs of Awadh and continues to be one of the most popular Mughlai sweets in North India.
+
+</p>
+</div>
+
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="shahi-tukda">
+<span class="star" onclick="rateRecipe('shahi-tukda',1,this)">★</span>
+<span class="star" onclick="rateRecipe('shahi-tukda',2,this)">★</span>
+<span class="star" onclick="rateRecipe('shahi-tukda',3,this)">★</span>
+<span class="star" onclick="rateRecipe('shahi-tukda',4,this)">★</span>
+<span class="star" onclick="rateRecipe('shahi-tukda',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-shahi-tukda">Not rated yet</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews</h3>
+<textarea class="review-input" id="review-text-shahi-tukda" placeholder="Write your review about Shahi Tukda..."></textarea>
+<button class="review-submit" onclick="submitReview('shahi-tukda','Shahi Tukda')">
+Submit Review
+</button>
+<div class="reviews-list" id="reviews-shahi-tukda">
+<p class="no-review">Loading reviews...</p>
+</div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="shahi-tukda" onclick="addToFavourite('shahi-tukda','Shahi Tukda','Uttar Pradesh',this)">
+♡ Add to Favourite
+</button>
+<button class="stamp-btn" data-stamp-id="shahi-tukda" onclick="addToStamp('shahi-tukda','Shahi Tukda','Uttar Pradesh',this)">
+🏷️ Add to Stamp
+</button>
+</div></section>
+<!-- ================= KAKORI KEBAB ================= -->
+<section class="recipe-section reverse" data-category="nonveg" data-cuisine="uttarpradesh" data-name="Kakori Kebab" id="kakori-kebab">
+<div class="recipe-image">
+<img alt="Kakori Kebab" src="kakori kebab.png"/>
+</div>
+<div class="recipe-content">
+<h2>🍢 Kakori Kebab</h2>
+<p>
+
+Kakori Kebab is one of the most famous royal delicacies of Lucknow in Uttar Pradesh. Originating from the town of Kakori, these soft and juicy kebabs are prepared using finely minced mutton blended with aromatic spices and herbs. Traditionally cooked over charcoal, Kakori Kebabs are known for their silky texture and rich flavor. They are commonly served with Roomali Roti, mint chutney, onion rings, and lemon wedges during festivals, family gatherings, and royal feasts.
+
+</p>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>500 g Minced Mutton</li>
+<li>2 tbsp Ginger-Garlic Paste</li>
+<li>1 Onion (Finely Chopped)</li>
+<li>2 Green Chilies (Finely Chopped)</li>
+<li>1 tsp Red Chilli Powder</li>
+<li>1 tsp Garam Masala</li>
+<li>½ tsp Cardamom Powder</li>
+<li>1 tbsp Roasted Gram Flour</li>
+<li>Fresh Coriander Leaves</li>
+<li>2 tbsp Ghee</li>
+<li>Salt to Taste</li>
+<li>Wooden Skewers</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Combine minced mutton with ginger-garlic paste, spices, herbs, and roasted gram flour.</li>
+<li>Mix thoroughly until the mixture becomes smooth and well combined.</li>
+<li>Cover and marinate for 2 hours to enhance the flavor.</li>
+<li>Shape the mixture evenly around soaked wooden skewers.</li>
+<li>Heat a grill pan or charcoal grill and brush it with ghee.</li>
+<li>Cook the kebabs on medium heat, turning gently until evenly browned.</li>
+<li>Brush with a little extra ghee while cooking for added richness.</li>
+<li>Serve hot with Roomali Roti, mint chutney, onion rings, and lemon wedges.</li>
+</ol>
+<div class="recipe-info">
+<div>
+<h4>⏱ Cooking Time</h4>
+<p>50 Minutes</p>
+</div>
+<div>
+<h4>🍽 Serves</h4>
+<p>4 People</p>
+</div>
+<div>
+<h4>⭐ Difficulty</h4>
+<p>Medium</p>
+</div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Tip</h3>
+<p>
+
+Marinate the meat for at least two hours and cook on medium heat to keep the kebabs soft, juicy, and full of authentic Awadhi flavor.
+
+</p>
+</div>
+<div class="fun-fact">
+<h3>🌟 Fun Fact</h3>
+<p>
+
+Kakori Kebab originated in the town of Kakori near Lucknow and became famous during the Nawabi era. Its tender texture and delicate spice blend have made it one of India's most celebrated kebab varieties.
+
+</p>
+</div>
+
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="kakori-kebab">
+<span class="star" onclick="rateRecipe('kakori-kebab',1,this)">★</span>
+<span class="star" onclick="rateRecipe('kakori-kebab',2,this)">★</span>
+<span class="star" onclick="rateRecipe('kakori-kebab',3,this)">★</span>
+<span class="star" onclick="rateRecipe('kakori-kebab',4,this)">★</span>
+<span class="star" onclick="rateRecipe('kakori-kebab',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-kakori-kebab">Not rated yet</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews</h3>
+<textarea class="review-input" id="review-text-kakori-kebab" placeholder="Write your review about Kakori Kebab..."></textarea>
+<button class="review-submit" onclick="submitReview('kakori-kebab','Kakori Kebab')">
+Submit Review
+</button>
+<div class="reviews-list" id="reviews-kakori-kebab">
+<p class="no-review">Loading reviews...</p>
+</div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="kakori-kebab" onclick="addToFavourite('kakori-kebab','Kakori Kebab','Uttar Pradesh',this)">
+♡ Add to Favourite
+</button>
+<button class="stamp-btn" data-stamp-id="kakori-kebab" onclick="addToStamp('kakori-kebab','Kakori Kebab','Uttar Pradesh',this)">
+🏷️ Add to Stamp
+</button>
+</div></section>
+<!-- ================= UTTAR PRADESH FOOD FACTS ================= -->
+<section class="facts-section">
+<h2>🕌 Uttar Pradesh Food Facts</h2>
+<div class="facts-container">
+<div class="fact-card">
+<h3>👑 Royal Awadhi Cuisine</h3>
+<p>
+
+Uttar Pradesh is famous for its royal Awadhi cuisine, developed in the kitchens of the Nawabs of Lucknow. The recipes are known for their rich aroma, delicate spices, and elegant presentation.
+
+</p>
+</div>
+<div class="fact-card">
+<h3>🥩 Famous Kebabs</h3>
+<p>
+
+Galouti Kebab and Kakori Kebab are among the world's most famous kebabs. Their soft texture and unique spice blend make them a signature of Lucknow's royal cuisine.
+
+</p>
+</div>
+<div class="fact-card">
+<h3>🍚 Aromatic Biryani</h3>
+<p>
+
+Lucknowi Biryani is prepared with fragrant basmati rice, saffron, herbs, and tender meat. It is known for its mild yet rich flavor and royal cooking style.
+
+</p>
+</div>
+<div class="fact-card">
+<h3>🍞 Traditional Royal Dessert</h3>
+<p>
+
+Shahi Tukda is one of Uttar Pradesh's most celebrated desserts. Prepared with fried bread, sugar syrup, and creamy rabri, it is served during festivals and weddings.
+
+</p>
+</div>
+<div class="fact-card">
+<h3>❤️ Hospitality &amp; Heritage</h3>
+<p>
+
+The cuisine of Uttar Pradesh reflects centuries of Mughal and Awadhi traditions. Every meal is prepared with care, generosity, and warm hospitality, making it a memorable culinary experience.
+
+</p>
+</div>
+</div>
+</section>
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+<h2>🕐 Recently Viewed</h2>
+<div class="recent-container" id="recentContainer">
+<p class="recent-empty">
+Login to see your recently viewed recipes.
+</p>
+</div>
+</section>
+<!-- ================= MY FLAVORVERSE PROFILE ================= -->
+<section class="profile-section">
+<div class="profile-box">
+<h2>👤 My Flavorverse Profile</h2>
+<p class="profile-name" id="profileName">Guest</p>
+<p class="profile-email" id="profileEmail">
+Login to see your profile
+</p>
+<div class="profile-stats">
+<div class="profile-card">
+<span class="count" id="favouriteCount">0</span>
+<span>❤️ Favourites</span>
+</div>
+<div class="profile-card">
+<span class="count" id="stampCount">0</span>
+<span>🏷️ Stamps</span>
+</div>
+<div class="profile-card">
+<span class="count" id="ratingCount">0</span>
+<span>⭐ Ratings</span>
+</div>
+<div class="profile-card">
+<span class="count" id="reviewCount">0</span>
+<span>💬 Reviews</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= CHEF RECOMMENDATION ================= -->
+<section class="chef-section">
+<h2>👨‍🍳 Chef's Recommendation</h2>
+<p>
+
+Experience the royal taste of Uttar Pradesh by beginning your meal with the melt-in-the-mouth <b>Galouti Kebab</b>, followed by the aromatic <b>Lucknowi Biryani</b>, enjoy the crispy and flavorful <b>Kakori Kebab</b>, and complete your feast with the rich sweetness of <b>Shahi Tukda</b>. This menu beautifully represents the timeless culinary heritage of Awadhi cuisine.
+
+</p>
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+<!-- ================= FOOTER ================= -->
+<footer>
+<h2>🍴 The Flavorverse</h2>
+<p>
+
+Discover India's rich culinary heritage, one delicious recipe at a time.
+
+</p>
+<div class="social">
+<a href="#">📘</a>
+<a href="#">📸</a>
+<a href="#">▶️</a>
+<a href="#">🐦</a>
+</div>
+<p class="copy">
+
+© 2026 The Flavorverse | All Rights Reserved
+
+</p>
+</footer>
+<!-- ================= FIREBASE + EXTRA FEATURES ================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="recipe-actions.js"></script>
+<script>
+
+/* =====================================================
+   EXPLORE SLIDE MENU
+===================================================== */
+
+function openMenu(){
+document.getElementById("menuOverlay").classList.add("open");
+document.getElementById("sideMenu").classList.add("open");
+document.body.classList.add("menu-lock");
+}
+
+function closeMenu(){
+document.getElementById("menuOverlay").classList.remove("open");
+document.getElementById("sideMenu").classList.remove("open");
+document.body.classList.remove("menu-lock");
+}
+
+document.addEventListener("keydown",function(e){
+if(e.key==="Escape") closeMenu();
+});
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+  authDomain: "the-flavoverse.firebaseapp.com",
+  projectId: "the-flavoverse",
+  storageBucket: "the-flavoverse.firebasestorage.app",
+  messagingSenderId: "1064022248292",
+  appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+  measurementId: "G-16Z0K1687Z"
+};
+
+if(!firebase.apps.length){
+firebase.initializeApp(firebaseConfig);
+}
+
+const auth = firebase.auth();
+
+// Keep the same Firebase login session used by the other Flavorverse pages.
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function(error){
+    console.error("Firebase persistence error:", error);
+});
+
+const db = firebase.firestore();
+
+// Firebase Auth session shared with the Login page.
+// Wait for Firebase to restore the existing signed-in user.
+let flavorverseUser = null;
+let flavorverseAuthResolved = false;
+let flavorverseAuthResolve;
+
+const flavorverseAuthReady = new Promise(function(resolve){
+    flavorverseAuthResolve = resolve;
+});
+
+auth.onAuthStateChanged(function(user){
+    flavorverseUser = user;
+    flavorverseAuthResolved = true;
+    flavorverseAuthResolve(user);
+});
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipes = [
+{id:"galouti-kebab",name:"Galouti Kebab",category:"kebab",cuisine:"awadhi"},
+{id:"lucknowi-biryani",name:"Lucknowi Biryani",category:"biryani",cuisine:"awadhi"},
+{id:"shahi-tukda",name:"Shahi Tukda",category:"dessert",cuisine:"awadhi"},
+{id:"kakori-kebab",name:"Kakori Kebab",category:"kebab",cuisine:"awadhi"}
+];
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+async function getCurrentUser(){
+    if(flavorverseAuthResolved){
+        return flavorverseUser;
+    }
+
+    const user = await flavorverseAuthReady;
+    return user || auth.currentUser || null;
+}
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function addToFavourite(id,name,category,button){
+
+const user = await getCurrentUser();
+
+if(!user){
+alert("Please login first to add favourites ❤️");
+window.location.href="login.html";
+return;
+}
+
+try{
+
+const ref = db.collection("users").doc(user.uid).collection("favourites").doc(id);
+const existing = await ref.get();
+
+if(existing.exists){
+await ref.delete();
+button.innerHTML="♡ Add to Favourite";
+alert(name+" removed from favourites.");
+}
+else{
+await ref.set({
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+button.innerHTML="♥ Added to Favourite";
+alert(name+" added to favourites ❤️");
+}
+
+updateProfileCounts();
+
+}
+catch(error){
+console.error(error);
+alert("Favourite update failed: "+error.message);
+}
+
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function addToStamp(id,name,category,button){
+
+const user=await getCurrentUser();
+
+if(!user){
+alert("Please login first to add stamps 🏷️");
+window.location.href="login.html";
+return;
+}
+
+try{
+
+const ref = db.collection("users").doc(user.uid).collection("stamps").doc(id);
+const existing=await ref.get();
+
+if(existing.exists){
+await ref.delete();
+button.innerHTML="🏷️ Add to Stamp";
+alert(name+" removed from passport.");
+}
+else{
+await ref.set({
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+button.innerHTML="🏷️ Stamped";
+alert(name+" added to your Flavorverse Passport 🏷️");
+}
+
+updateProfileCounts();
+
+}
+catch(error){
+console.error(error);
+alert("Stamp update failed: "+error.message);
+}
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function rateRecipe(recipeId,rating,element){
+
+const user=await getCurrentUser();
+
+if(!user){
+alert("Please login first to rate recipes ⭐");
+window.location.href="login.html";
+return;
+}
+
+try{
+
+await db.collection("users").doc(user.uid).collection("ratings").doc(recipeId).set({
+recipeId:recipeId,
+rating:rating,
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+
+const stars=element.parentElement.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+if(index<rating){
+star.classList.add("active");
+}
+else{
+star.classList.remove("active");
+}
+});
+
+document.getElementById("rating-"+recipeId).innerText =
+"You rated this recipe "+rating+"/5 ⭐";
+
+updateProfileCounts();
+
+}
+catch(error){
+console.error(error);
+alert("Rating failed: "+error.message);
+}
+
+}
+
+
+/* =====================================================
+   LOAD USER RATINGS
+===================================================== */
+
+async function loadRatings(){
+
+const user=await getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const doc=await db.collection("users").doc(user.uid).collection("ratings").doc(recipe.id).get();
+
+if(doc.exists){
+
+const rating=doc.data().rating;
+
+const container=document.querySelector('.stars[data-recipe="'+recipe.id+'"]');
+
+if(container){
+const stars=container.querySelectorAll(".star");
+stars.forEach((star,index)=>{
+if(index<rating){
+star.classList.add("active");
+}
+});
+}
+
+const text=document.getElementById("rating-"+recipe.id);
+
+if(text){
+text.innerText="You rated this recipe "+rating+"/5 ⭐";
+}
+
+}
+
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+async function submitReview(recipeId,recipeName){
+
+const user=await getCurrentUser();
+
+if(!user){
+alert("Please login first to post a review 💬");
+window.location.href="login.html";
+return;
+}
+
+const textarea=document.getElementById("review-text-"+recipeId);
+const text=textarea.value.trim();
+
+if(!text){
+alert("Please write a review first.");
+return;
+}
+
+try{
+
+const userDoc=await db.collection("users").doc(user.uid).get();
+
+let userName="Flavorverse User";
+
+if(userDoc.exists && userDoc.data().name){
+userName=userDoc.data().name;
+}
+
+await db.collection("recipes").doc(recipeId).collection("reviews").doc(user.uid).set({
+recipeId:recipeId,
+recipeName:recipeName,
+userId:user.uid,
+userName:userName,
+review:text,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+
+textarea.value="";
+
+alert("Review posted successfully! 💬");
+
+loadReviews(recipeId);
+
+updateProfileCounts();
+
+}
+catch(error){
+console.error(error);
+alert("Review failed: "+error.message);
+}
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(recipeId){
+
+const container=document.getElementById("reviews-"+recipeId);
+
+if(!container) return;
+
+try{
+
+const snapshot=await db.collection("recipes").doc(recipeId).collection("reviews")
+.orderBy("createdAt","desc").limit(10).get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+container.innerHTML='<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+return;
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const review=document.createElement("div");
+review.className="single-review";
+
+const name=document.createElement("strong");
+name.textContent="💜 "+(data.userName || "Flavorverse User");
+
+const content=document.createElement("p");
+content.textContent=data.review || "";
+
+const date=document.createElement("small");
+if(data.createdAt){
+date.textContent=data.createdAt.toDate().toLocaleDateString();
+}
+
+review.appendChild(name);
+review.appendChild(content);
+review.appendChild(date);
+container.appendChild(review);
+
+});
+
+}
+catch(error){
+console.error(error);
+container.innerHTML='<p class="no-review">Reviews will appear here.</p>';
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED
+===================================================== */
+
+async function addRecentlyViewed(recipeId,recipeName){
+
+const user=await getCurrentUser();
+
+if(!user) return;
+
+try{
+await db.collection("users").doc(user.uid).collection("recentlyViewed").doc(recipeId).set({
+recipeId:recipeId,
+recipeName:recipeName,
+viewedAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED DISPLAY
+===================================================== */
+
+async function loadRecentlyViewed(){
+
+const container=document.getElementById("recentContainer");
+
+const user=await getCurrentUser();
+
+if(!user){
+container.innerHTML='<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+return;
+}
+
+try{
+
+const snapshot=await db.collection("users").doc(user.uid).collection("recentlyViewed")
+.orderBy("viewedAt","desc").limit(8).get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+container.innerHTML='<p class="recent-empty">No recently viewed recipes yet.</p>';
+return;
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const card=document.createElement("div");
+card.className="recent-card";
+
+const title=document.createElement("h3");
+title.textContent="🕐 "+data.recipeName;
+
+const text=document.createElement("p");
+text.textContent="You recently explored this recipe.";
+
+card.appendChild(title);
+card.appendChild(text);
+container.appendChild(card);
+
+});
+
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+
+/* =====================================================
+   TRACK RECIPE VIEW
+===================================================== */
+
+function setupRecentlyViewed(){
+
+const recipeSections=document.querySelectorAll(".recipe-section");
+
+const observer=new IntersectionObserver(
+
+entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const id=entry.target.id;
+const recipe=recipes.find(item=>item.id===id);
+
+if(recipe){
+addRecentlyViewed(recipe.id,recipe.name);
+}
+
+}
+
+});
+
+},
+
+{threshold:0.35}
+
+);
+
+recipeSections.forEach(section=>{
+observer.observe(section);
+});
+
+}
+
+
+/* =====================================================
+   PROFILE COUNTS
+===================================================== */
+
+async function updateProfileCounts(){
+
+const user=await getCurrentUser();
+
+if(!user){
+document.getElementById("favouriteCount").innerText="0";
+document.getElementById("stampCount").innerText="0";
+document.getElementById("ratingCount").innerText="0";
+document.getElementById("reviewCount").innerText="0";
+return;
+}
+
+try{
+
+const userDoc=await db.collection("users").doc(user.uid).get();
+
+if(userDoc.exists){
+const data=userDoc.data();
+document.getElementById("profileName").innerText=data.name || "Flavorverse User";
+document.getElementById("profileEmail").innerText=data.email || user.email;
+}
+else{
+document.getElementById("profileName").innerText=user.email;
+document.getElementById("profileEmail").innerText=user.email;
+}
+
+const favourites=await db.collection("users").doc(user.uid).collection("favourites").get();
+const stamps=await db.collection("users").doc(user.uid).collection("stamps").get();
+const ratings=await db.collection("users").doc(user.uid).collection("ratings").get();
+
+/* Reviews are stored inside recipes/{recipeId}/reviews/{uid} */
+
+let reviewTotal=0;
+
+for(const recipe of recipes){
+
+const review=await db.collection("recipes").doc(recipe.id).collection("reviews").doc(user.uid).get();
+
+if(review.exists){
+reviewTotal++;
+}
+
+}
+
+document.getElementById("favouriteCount").innerText=favourites.size;
+document.getElementById("stampCount").innerText=stamps.size;
+document.getElementById("ratingCount").innerText=ratings.size;
+document.getElementById("reviewCount").innerText=reviewTotal;
+
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+
+/* =====================================================
+   UPDATE BUTTON STATUS
+===================================================== */
+
+async function updateButtons(){
+
+const user=await getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const fav=await db.collection("users").doc(user.uid).collection("favourites").doc(recipe.id).get();
+const favButton=document.querySelector('[data-favourite-id="'+recipe.id+'"]');
+
+if(fav.exists && favButton){
+favButton.innerHTML="♥ Added to Favourite";
+}
+
+const stamp=await db.collection("users").doc(user.uid).collection("stamps").doc(recipe.id).get();
+const stampButton=document.querySelector('[data-stamp-id="'+recipe.id+'"]');
+
+if(stamp.exists && stampButton){
+stampButton.innerHTML="🏷️ Stamped";
+}
+
+}
+catch(error){
+console.error(error);
+}
+
+}
+
+}
+
+
+/* =====================================================
+   SEARCH + FILTER
+===================================================== */
+
+function filterRecipes(){
+
+const search=document.getElementById("recipeSearch").value.toLowerCase().trim();
+const category=document.getElementById("categoryFilter").value;
+const cuisine=document.getElementById("cuisineFilter").value;
+
+let count=0;
+
+document.querySelectorAll(".recipe-section").forEach(section=>{
+
+const name=section.dataset.name.toLowerCase();
+const sectionCategory=section.dataset.category;
+const sectionCuisine=section.dataset.cuisine;
+
+const searchMatch=name.includes(search);
+const categoryMatch=category==="all" || sectionCategory===category;
+const cuisineMatch=cuisine==="all" || sectionCuisine===cuisine;
+
+if(searchMatch && categoryMatch && cuisineMatch){
+section.classList.remove("hidden-recipe");
+count++;
+}
+else{
+section.classList.add("hidden-recipe");
+}
+
+});
+
+document.getElementById("searchResult").innerText=
+"Showing "+count+" recipe"+(count!==1?"s":"");
+
+}
+
+
+/* =====================================================
+   RESET FILTER
+===================================================== */
+
+function resetFilters(){
+
+document.getElementById("recipeSearch").value="";
+document.getElementById("categoryFilter").value="all";
+document.getElementById("cuisineFilter").value="all";
+
+document.querySelectorAll(".recipe-section").forEach(section=>{
+section.classList.remove("hidden-recipe");
+});
+
+document.getElementById("searchResult").innerText="Showing all 4 Uttar Pradesh recipes";
+
+}
+
+
+/* =====================================================
+   SURPRISE ME
+===================================================== */
+
+function surpriseMe(){
+
+const visibleRecipes=Array.from(document.querySelectorAll(".recipe-section"))
+.filter(recipe=>!recipe.classList.contains("hidden-recipe"));
+
+if(visibleRecipes.length===0){
+alert("No recipes available with the selected filter.");
+return;
+}
+
+const random=visibleRecipes[Math.floor(Math.random()*visibleRecipes.length)];
+
+random.scrollIntoView({behavior:"smooth",block:"center"});
+
+random.style.boxShadow="0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+
+setTimeout(()=>{
+random.style.boxShadow="0 8px 20px rgba(0,0,0,.12)";
+},2500);
+
+alert("🎲 Surprise Recipe: "+random.dataset.name);
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+if(document.body.classList.contains("dark-mode")){
+localStorage.setItem("flavorverseDarkMode","on");
+}
+else{
+localStorage.setItem("flavorverseDarkMode","off");
+}
+
+}
+
+function loadDarkMode(){
+if(localStorage.getItem("flavorverseDarkMode")==="on"){
+document.body.classList.add("dark-mode");
+}
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+flavorverseAuthReady.then(async function(user){
+
+if(user){
+
+try{
+
+const userDoc=await db.collection("users").doc(user.uid).get();
+
+if(userDoc.exists){
+const data=userDoc.data();
+document.getElementById("profileName").innerText=data.name || "Flavorverse User";
+document.getElementById("profileEmail").innerText=data.email || user.email;
+}
+else{
+document.getElementById("profileName").innerText=user.email;
+document.getElementById("profileEmail").innerText=user.email;
+}
+
+}
+catch(error){
+console.error(error);
+}
+
+updateButtons();
+updateProfileCounts();
+loadRatings();
+loadRecentlyViewed();
+
+recipes.forEach(recipe=>{
+loadReviews(recipe.id);
+});
+
+}
+else{
+
+document.getElementById("profileName").innerText="Guest";
+document.getElementById("profileEmail").innerText="Login to see your profile";
+
+loadRecentlyViewed();
+
+}
+
+});
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+loadDarkMode();
+
+setupRecentlyViewed();
+
+});
+
+</script>
+</body>
+</html>

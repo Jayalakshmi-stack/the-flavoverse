@@ -1,0 +1,2669 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gallery | The Flavorverse</title>
+
+<style>
+
+/* =====================================================
+   ROOT
+===================================================== */
+
+:root{
+    --mauve:#735267;
+    --deep:#4d3547;
+    --champagne:#d8bd91;
+    --cream:#fff8f0;
+    --light:#f4ebe2;
+    --white:#ffffff;
+    --text:#493b40;
+    --shadow:0 12px 30px rgba(77,53,71,.16);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:var(--cream);
+    color:var(--text);
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+header{
+    background:var(--deep);
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.logo{
+    color:var(--champagne);
+    font-size:26px;
+    font-weight:bold;
+}
+
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--champagne);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    text-align:center;
+    padding:70px 20px 50px;
+
+    background:
+    radial-gradient(
+        circle at top left,
+        rgba(216,189,145,.30),
+        transparent 35%
+    ),
+    var(--cream);
+}
+
+.hero-small{
+    color:var(--mauve);
+    font-size:13px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.hero h1{
+    font-size:52px;
+    color:var(--deep);
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:var(--champagne);
+}
+
+.hero p{
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+    font-size:16px;
+}
+
+
+/* =====================================================
+   INSTRUCTIONS
+===================================================== */
+
+.instructions{
+    width:90%;
+    max-width:1000px;
+    margin:0 auto 55px;
+
+    padding:20px;
+
+    background:white;
+
+    border-left:5px solid var(--champagne);
+
+    border-radius:12px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+}
+
+.instructions span{
+    display:inline-block;
+    margin:5px 12px;
+}
+
+.instructions strong{
+    color:var(--deep);
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.gallery-section{
+    width:90%;
+    max-width:1250px;
+    margin:auto;
+    padding-bottom:80px;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    margin:55px 0 30px;
+}
+
+.section-title h2{
+    color:var(--deep);
+    font-size:29px;
+}
+
+.section-title small{
+    color:var(--mauve);
+    letter-spacing:2px;
+}
+
+.line{
+    flex:1;
+    height:1px;
+    background:var(--champagne);
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.puzzle-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.puzzle-card{
+    background:white;
+    border-radius:18px;
+
+    padding:15px;
+
+    border:1px solid rgba(216,189,145,.45);
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+}
+
+.puzzle-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 38px rgba(77,53,71,.22);
+}
+
+
+/* =====================================================
+   CARD HEADER
+===================================================== */
+
+.card-header{
+    padding:5px 5px 14px;
+}
+
+.category{
+    color:var(--champagne);
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.card-header h3{
+    color:var(--deep);
+    font-size:20px;
+    margin-top:5px;
+}
+
+.card-header p{
+    color:#806f76;
+    font-size:13px;
+    margin-top:5px;
+}
+
+
+/* =====================================================
+   PUZZLE BOARD
+===================================================== */
+
+.puzzle-board{
+
+    width:100%;
+
+    aspect-ratio:3 / 2;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    grid-template-rows:repeat(2,1fr);
+
+    gap:3px;
+
+    background:#ddd;
+
+    padding:3px;
+
+    border-radius:12px;
+
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   PUZZLE PIECE
+===================================================== */
+
+.piece{
+
+    width:100%;
+    height:100%;
+
+    background-repeat:no-repeat;
+
+    background-size:300% 200%;
+
+    border-radius:3px;
+
+    cursor:pointer;
+
+    transition:
+        transform .2s ease,
+        filter .2s ease,
+        outline .2s ease;
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    -webkit-tap-highlight-color:transparent;
+}
+
+
+/* Hover */
+
+.piece:hover{
+    filter:brightness(1.08);
+}
+
+
+/* Selected piece */
+
+.piece.selected{
+
+    transform:scale(.94);
+
+    outline:4px solid var(--champagne);
+
+    outline-offset:-4px;
+
+    filter:brightness(1.08);
+
+    z-index:10;
+}
+
+
+/* Correct piece */
+
+.piece.correct{
+
+    outline:3px solid #a98b62;
+
+    outline-offset:-3px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.card-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 4px 3px;
+}
+
+.status{
+
+    font-size:12px;
+
+    color:#806f76;
+}
+
+.status.solved{
+
+    color:var(--mauve);
+
+    font-weight:bold;
+}
+
+.shuffle-btn{
+
+    border:none;
+
+    background:var(--deep);
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:12px;
+
+    transition:.3s;
+}
+
+.shuffle-btn:hover{
+
+    background:var(--mauve);
+
+    transform:scale(1.04);
+}
+
+
+/* =====================================================
+   SOLVED MESSAGE
+===================================================== */
+
+.solved-message{
+
+    display:none;
+
+    margin-top:10px;
+
+    padding:9px;
+
+    background:var(--light);
+
+    color:var(--deep);
+
+    text-align:center;
+
+    border-radius:8px;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+.puzzle-card.solved-card{
+
+    border:2px solid var(--champagne);
+}
+
+.puzzle-card.solved-card .solved-message{
+
+    display:block;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    background:var(--deep);
+
+    color:white;
+
+    text-align:center;
+
+    padding:35px 20px;
+}
+
+footer h3{
+
+    color:var(--champagne);
+
+    margin-bottom:8px;
+}
+
+footer p{
+
+    font-size:13px;
+
+    opacity:.8;
+
+    margin:5px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .puzzle-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    nav{
+        gap:15px;
+    }
+}
+
+@media(max-width:600px){
+
+    header{
+        flex-direction:column;
+        gap:12px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:12px;
+    }
+
+    .hero{
+        padding:50px 15px 40px;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+    .puzzle-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-title{
+        flex-wrap:wrap;
+    }
+
+    .line{
+        flex-basis:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="royal.html">Royal</a>
+
+        <a href="movies&cartoons.html">movies&cartoons</a>
+
+        <a href="worldcuisine.html">worldcuisine</a>
+
+        <a href="desertwrold.html">desserts</a>
+
+        <a href="gallery.html">gallery</a>
+
+        <a href="order.html">order</a>
+
+         <a href="stamp.html">stamp</a>
+
+          <a href="contact.html">contact</a>
+
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-small">
+        A Taste of Memories
+    </div>
+
+    <h1>
+        Flavor <span>Puzzle</span> Gallery
+    </h1>
+
+    <p>
+        Click two puzzle pieces to swap them and reveal
+        the delicious dish hidden inside.
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     INSTRUCTIONS
+===================================================== -->
+
+<div class="instructions">
+
+    <span>🧩 <strong>6 Pieces</strong></span>
+
+    <span>👆 <strong>Click a Piece</strong></span>
+
+    <span>🔄 <strong>Click Another Piece</strong></span>
+
+    <span>✨ <strong>Solve the Puzzle</strong></span>
+
+</div>
+
+
+<!-- =====================================================
+     GALLERY
+===================================================== -->
+
+<main class="gallery-section">
+
+
+<!-- =====================================================
+     ROYAL HERITAGE
+===================================================== -->
+
+<div class="section-title">
+
+    <small>01</small>
+
+    <h2>Royal Heritage</h2>
+
+    <div class="line"></div>
+
+</div>
+
+
+<div class="puzzle-grid">
+
+
+<!-- 1 -->
+
+<div class="puzzle-card"
+data-image="chettinaduchicken.png">
+
+    <div class="card-header">
+
+        <div class="category">Tamil Nadu</div>
+
+        <h3>Chettinad Chicken Curry</h3>
+
+        <p>Rich • Spicy • Traditional</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 2 -->
+
+<div class="puzzle-card"
+data-image="malabarbriyani.png">
+
+    <div class="card-header">
+
+        <div class="category">Kerala</div>
+
+        <h3>Malabar Biryani</h3>
+
+        <p>Fragrant • Royal • Delicious</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 3 -->
+
+<div class="puzzle-card"
+data-image="mysorepak.png">
+
+    <div class="card-header">
+
+        <div class="category">Karnataka</div>
+
+        <h3>Mysore Pak</h3>
+
+        <p>Golden • Soft • Classic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 4 -->
+
+<div class="puzzle-card"
+data-image="Royyala Iguru.png">
+
+    <div class="card-header">
+
+        <div class="category">Andhra Pradesh</div>
+
+        <h3>Royyala Iguru</h3>
+
+        <p>Spicy • Seafood • Authentic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 5 -->
+
+<div class="puzzle-card"
+data-image="Dal Baati Churma.png">
+
+    <div class="card-header">
+
+        <div class="category">Rajasthan</div>
+
+        <h3>Dal Baati Churma</h3>
+
+        <p>Rustic • Royal • Hearty</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 6 -->
+
+<div class="puzzle-card"
+data-image="Sarson Ka Saag.png">
+
+
+
+    <div class="card-header">
+
+        <div class="category">Punjab</div>
+
+        <h3>Sarson Ka Saag</h3>
+
+        <p>Homestyle • Warm • Traditional</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 7 -->
+
+<div class="puzzle-card"
+data-image="lucknowbriyani.png">
+
+    <div class="card-header">
+
+        <div class="category">Uttar Pradesh</div>
+
+        <h3>Lucknowi Biryani</h3>
+
+        <p>Elegant • Aromatic • Royal</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 8 -->
+
+<div class="puzzle-card"
+data-image="rohanjose.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Kashmir</div>
+
+        <h3>Rogan Josh</h3>
+
+        <p>Rich • Aromatic • Kashmiri</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 9 -->
+
+<div class="puzzle-card"
+data-image="macherchol.jpg">
+
+    <div class="card-header">
+
+        <div class="category">West Bengal</div>
+
+        <h3>Macher Jhol</h3>
+
+        <p>Comforting • Traditional • Homely</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 10 -->
+
+<div class="puzzle-card"
+data-image="chhenapoda.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Odisha</div>
+
+        <h3>Chhena Poda</h3>
+
+        <p>Caramelized • Sweet • Classic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 11 -->
+
+<div class="puzzle-card"
+data-image="Masor Tenga.png">
+
+    <div class="card-header">
+
+        <div class="category">Assam</div>
+
+        <h3>Masor Tenga</h3>
+
+        <p>Tangy • Light • Traditional</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 12 -->
+
+<div class="puzzle-card"
+data-image="Litti Chokha.png">
+
+    <div class="card-header">
+
+        <div class="category">Bihar</div>
+
+        <h3>Litti Chokha</h3>
+
+        <p>Rustic • Smoky • Comforting</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 13 -->
+
+<div class="puzzle-card"
+data-image="Undhiyu.png">
+
+    <div class="card-header">
+
+        <div class="category">Gujarat</div>
+
+        <h3>Undhiyu</h3>
+
+        <p>Festive • Colourful • Gujarati</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 14 -->
+
+<div class="puzzle-card"
+data-image="Puran Poli.png">
+
+    <div class="card-header">
+
+        <div class="category">Maharashtra</div>
+
+        <h3>Puran Poli</h3>
+
+        <p>Sweet • Festive • Traditional</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 15 -->
+
+<div class="puzzle-card"
+data-image="Goan Fish Curry.png">
+
+    <div class="card-header">
+
+        <div class="category">Goa</div>
+
+        <h3>Goan Fish Curry</h3>
+
+        <p>Coconut • Tangy • Coastal</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- 16 -->
+
+<div class="puzzle-card"
+data-image="Poha Jalebi.png">
+
+    <div class="card-header">
+
+        <div class="category">Madhya Pradesh</div>
+
+        <h3>Poha Jalebi</h3>
+
+        <p>Sweet • Savoury • Iconic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">
+            Shuffle
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     WORLD CUISINE
+===================================================== -->
+
+<div class="section-title">
+
+    <small>02</small>
+
+    <h2>World Cuisine</h2>
+
+    <div class="line"></div>
+
+</div>
+
+
+<div class="puzzle-grid">
+
+
+<!-- 17 -->
+
+<div class="puzzle-card"
+data-image="feijoada2.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Brazil</div>
+
+        <h3>Feijoada</h3>
+
+        <p>Brazilian • Hearty • Classic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 18 -->
+
+<div class="puzzle-card"
+data-image="aapplepie.jpg">
+
+    <div class="card-header">
+
+        <div class="category">USA</div>
+
+        <h3>Apple Pie</h3>
+
+        <p>Sweet • Warm • Classic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 19 -->
+
+<div class="puzzle-card"
+data-image="poutine.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Canada</div>
+
+        <h3>Poutine</h3>
+
+        <p>Comfort Food • Crispy • Classic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 20 -->
+
+<div class="puzzle-card"
+data-image="fishandchips.jpg">
+
+    <div class="card-header">
+
+        <div class="category">United Kingdom</div>
+
+        <h3>Fish & Chips</h3>
+
+        <p>Crispy • Classic • British</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 21 -->
+
+<div class="puzzle-card"
+data-image="briyani.jpg">
+
+    <div class="card-header">
+
+        <div class="category">India</div>
+
+        <h3>Biryani</h3>
+
+        <p>Aromatic • Royal • Iconic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 22 -->
+
+<div class="puzzle-card"
+data-image="padthai.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Thailand</div>
+
+        <h3>Pad Thai</h3>
+
+        <p>Sweet • Sour • Savoury</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 23 -->
+
+<div class="puzzle-card"
+data-image="baklava.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Turkey</div>
+
+        <h3>Baklava</h3>
+
+        <p>Flaky • Nutty • Sweet</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 24 -->
+
+<div class="puzzle-card"
+data-image="pho.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Vietnam</div>
+
+        <h3>Pho</h3>
+
+        <p>Fragrant • Warm • Traditional</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">
+            Click two pieces 🔄
+        </div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     MOVIES & CARTOONS
+===================================================== -->
+
+<div class="section-title">
+
+    <small>03</small>
+
+    <h2>Movies & Cartoon Inspiration</h2>
+
+    <div class="line"></div>
+
+</div>
+
+
+<div class="puzzle-grid">
+
+
+<!-- 25 -->
+
+<div class="puzzle-card"
+data-image="shinchancookies.png">
+
+    <div class="card-header">
+
+        <div class="category">Shinchan</div>
+
+        <h3>Chocobi Cookies</h3>
+
+        <p>Fun • Crunchy • Cartoon Inspired</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 26 -->
+
+<div class="puzzle-card"
+data-image="doraemon dorayaki.png">
+
+    <div class="card-header">
+
+        <div class="category">Doraemon</div>
+
+        <h3>Dorayaki</h3>
+
+        <p>Soft • Sweet • Japanese</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 27 -->
+
+<div class="puzzle-card"
+data-image="recipetom and jerry cheese.png">
+
+    <div class="card-header">
+
+        <div class="category">Tom & Jerry</div>
+
+        <h3>Cheese Platter</h3>
+
+        <p>Cheesy • Fun • Playful</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 28 -->
+
+<div class="puzzle-card"
+data-image="mashaandbear berry pie.png">
+
+    <div class="card-header">
+
+        <div class="category">Masha & the Bear</div>
+
+        <h3>Berry Pie</h3>
+
+        <p>Sweet • Fruity • Homemade</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 29 -->
+
+<div class="puzzle-card"
+data-image="chottabhemeladdu.png">
+
+    <div class="card-header">
+
+        <div class="category">Chhota Bheem</div>
+
+        <h3>Laddoo</h3>
+
+        <p>Sweet • Indian • Fun</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 30 -->
+
+<div class="puzzle-card"
+data-image="spongebobkrabbypatty.png">
+
+    <div class="card-header">
+
+        <div class="category">SpongeBob</div>
+
+        <h3>Krabby Patty</h3>
+
+        <p>Fun • Burger • Cartoon Inspired</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 31 -->
+
+<div class="puzzle-card"
+data-image="harrybutterbeer.png">
+
+    <div class="card-header">
+
+        <div class="category">Harry Potter</div>
+
+        <h3>Butterbeer</h3>
+
+        <p>Magical • Creamy • Fantasy Inspired</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 32 -->
+
+<div class="puzzle-card"
+data-image="ratatouillefood.png">
+
+    <div class="card-header">
+
+        <div class="category">Ratatouille</div>
+
+        <h3>Ratatouille</h3>
+
+        <p>French • Colourful • Elegant</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 33 -->
+
+<div class="puzzle-card"
+data-image="charliefudge.png">
+
+    <div class="card-header">
+
+        <div class="category">Charlie & the Chocolate Factory</div>
+
+        <h3>Chocolate Fudge</h3>
+
+        <p>Chocolate • Rich • Magical</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 34 -->
+
+<div class="puzzle-card"
+data-image="lionking fruit bowl.png">
+
+    <div class="card-header">
+
+        <div class="category">The Lion King</div>
+
+        <h3>Tropical Fruit Bowl</h3>
+
+        <p>Fresh • Colourful • Tropical</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 35 -->
+
+<div class="puzzle-card"
+data-image="kungfupandadumplings.png">
+
+    <div class="card-header">
+
+        <div class="category">Kung Fu Panda</div>
+
+        <h3>Dumplings</h3>
+
+        <p>Steamed • Warm • Asian Inspired</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 36 -->
+
+<div class="puzzle-card"
+data-image="frozencupcake.png">
+
+    <div class="card-header">
+
+        <div class="category">Frozen</div>
+
+        <h3>Snowflake Cupcakes</h3>
+
+        <p>Sweet • Icy • Whimsical</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     DESSERTS
+===================================================== -->
+
+<div class="section-title">
+
+    <small>04</small>
+
+    <h2>Dessert Collection</h2>
+
+    <div class="line"></div>
+
+</div>
+
+
+<div class="puzzle-grid">
+
+
+<!-- 37 -->
+
+<div class="puzzle-card"
+data-image="chocolate cake.png">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Chocolate Cake</h3>
+
+        <p>Rich • Moist • Chocolatey</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 38 -->
+
+<div class="puzzle-card"
+data-image="cheesecake.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Cheesecake</h3>
+
+        <p>Creamy • Smooth • Elegant</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 39 -->
+
+<div class="puzzle-card"
+data-image="tiramisu2.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Tiramisu</h3>
+
+        <p>Coffee • Creamy • Italian</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 40 -->
+
+<div class="puzzle-card"
+data-image="ggulabjammun.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Gulab Jamun</h3>
+
+        <p>Soft • Syrupy • Indian</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 41 -->
+
+<div class="puzzle-card"
+data-image="macroons.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Macarons</h3>
+
+        <p>Colourful • Delicate • French</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 42 -->
+
+<div class="puzzle-card"
+data-image="aapplepie.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Apple Pie</h3>
+
+        <p>Warm • Fruity • Classic</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 43 -->
+
+<div class="puzzle-card"
+data-image="pannacotta.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Panna Cotta</h3>
+
+        <p>Creamy • Silky • Italian</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 44 -->
+
+<div class="puzzle-card"
+data-image="churros.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Churros</h3>
+
+        <p>Crispy • Cinnamon • Spanish</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+<!-- 45 -->
+
+<div class="puzzle-card"
+data-image="reciperedvelvetcake.jpg">
+
+    <div class="card-header">
+
+        <div class="category">Dessert</div>
+
+        <h3>Red Velvet Cake</h3>
+
+        <p>Velvety • Creamy • Elegant</p>
+
+    </div>
+
+    <div class="puzzle-board"></div>
+
+    <div class="solved-message">
+        🎉 Puzzle Solved!
+    </div>
+
+    <div class="card-footer">
+
+        <div class="status">Click two pieces 🔄</div>
+
+        <button class="shuffle-btn">Shuffle</button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>🍴 The Flavorverse</h3>
+
+    <p>Cook • Create • Celebrate</p>
+
+    <p>© 2026 The Flavorverse | All Rights Reserved</p>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   ALL PUZZLE CARDS
+===================================================== */
+
+const cards =
+document.querySelectorAll(".puzzle-card");
+
+
+/* =====================================================
+   CREATE PUZZLE
+===================================================== */
+
+function createPuzzle(card){
+
+    const board =
+    card.querySelector(".puzzle-board");
+
+    const image =
+    card.dataset.image;
+
+
+    /* Clear old pieces */
+
+    board.innerHTML = "";
+
+
+    let pieces = [];
+
+
+    /* =================================================
+       CREATE 6 PIECES
+       3 COLUMNS × 2 ROWS
+    ================================================= */
+
+    for(let row = 0; row < 2; row++){
+
+        for(let col = 0; col < 3; col++){
+
+            const piece =
+            document.createElement("div");
+
+
+            piece.className = "piece";
+
+
+            /*
+               Correct position
+            */
+
+            const correct =
+            row * 3 + col;
+
+
+            piece.dataset.correct =
+            correct;
+
+
+            /*
+               Original image
+            */
+
+            piece.style.backgroundImage =
+            `url("${image}")`;
+
+
+            /*
+               Split image
+            */
+
+            piece.style.backgroundPosition =
+            `${col * 50}% ${row * 100}%`;
+
+
+            pieces.push(piece);
+
+        }
+
+    }
+
+
+    /* =================================================
+       SHUFFLE
+    ================================================= */
+
+    shuffleArray(pieces);
+
+
+    /* =================================================
+       ADD TO BOARD
+    ================================================= */
+
+    pieces.forEach(piece => {
+
+        board.appendChild(piece);
+
+    });
+
+
+    /* Reset */
+
+    card.classList.remove("solved-card");
+
+    card.querySelector(".status").textContent =
+    "Click two pieces 🔄";
+
+
+    /*
+       Remove selected state
+    */
+
+    selectedPiece = null;
+
+}
+
+
+/* =====================================================
+   SHUFFLE FUNCTION
+===================================================== */
+
+function shuffleArray(array){
+
+    for(let i = array.length - 1; i > 0; i--){
+
+        const random =
+        Math.floor(Math.random() * (i + 1));
+
+
+        [
+            array[i],
+            array[random]
+        ] =
+        [
+            array[random],
+            array[i]
+        ];
+
+    }
+
+}
+
+
+/* =====================================================
+   SELECTED PIECE
+===================================================== */
+
+let selectedPiece = null;
+
+
+/* =====================================================
+   CLICK EVENT
+===================================================== */
+
+document.addEventListener("click", function(e){
+
+
+    /*
+       Check whether clicked element
+       is a puzzle piece
+    */
+
+    const piece =
+    e.target.closest(".piece");
+
+
+    /*
+       If not a piece → ignore
+    */
+
+    if(!piece){
+        return;
+    }
+
+
+    /*
+       Find its card
+    */
+
+    const card =
+    piece.closest(".puzzle-card");
+
+
+    /* =================================================
+       FIRST CLICK
+    ================================================= */
+
+    if(selectedPiece === null){
+
+        selectedPiece = piece;
+
+        piece.classList.add("selected");
+
+        card.querySelector(".status").textContent =
+        "Now click another piece 👆";
+
+        return;
+
+    }
+
+
+    /* =================================================
+       SAME PIECE CLICKED
+    ================================================= */
+
+    if(selectedPiece === piece){
+
+        piece.classList.remove("selected");
+
+        selectedPiece = null;
+
+        card.querySelector(".status").textContent =
+        "Click two pieces 🔄";
+
+        return;
+
+    }
+
+
+    /*
+       Make sure both pieces
+       belong to same card
+    */
+
+    const selectedCard =
+    selectedPiece.closest(".puzzle-card");
+
+
+    if(selectedCard !== card){
+
+        selectedPiece.classList.remove("selected");
+
+        selectedPiece = piece;
+
+        piece.classList.add("selected");
+
+        card.querySelector(".status").textContent =
+        "Now click another piece 👆";
+
+        return;
+
+    }
+
+
+    /* =================================================
+       SWAP PIECES
+    ================================================= */
+
+    swapPieces(
+        selectedPiece,
+        piece
+    );
+
+
+    /* Remove selection */
+
+    selectedPiece.classList.remove("selected");
+
+    piece.classList.remove("selected");
+
+
+    selectedPiece = null;
+
+
+    /* Check puzzle */
+
+    checkPuzzle(card);
+
+});
+
+
+/* =====================================================
+   SWAP TWO PIECES
+===================================================== */
+
+function swapPieces(first, second){
+
+    const board =
+    first.parentElement;
+
+
+    /*
+       Save positions
+    */
+
+    const firstIndex =
+    [...board.children].indexOf(first);
+
+    const secondIndex =
+    [...board.children].indexOf(second);
+
+
+    /*
+       If first comes before second
+    */
+
+    if(firstIndex < secondIndex){
+
+        board.insertBefore(
+            second,
+            first
+        );
+
+        board.insertBefore(
+            first,
+            board.children[secondIndex]
+        );
+
+    }else{
+
+        board.insertBefore(
+            first,
+            second
+        );
+
+        board.insertBefore(
+            second,
+            board.children[firstIndex]
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CHECK PUZZLE
+===================================================== */
+
+function checkPuzzle(card){
+
+    const board =
+    card.querySelector(".puzzle-board");
+
+
+    const pieces =
+    [...board.querySelectorAll(".piece")];
+
+
+    let solved = true;
+
+
+    pieces.forEach((piece,index)=>{
+
+
+        const correct =
+        Number(piece.dataset.correct);
+
+
+        /*
+           Correct position
+        */
+
+        if(correct === index){
+
+            piece.classList.add("correct");
+
+        }else{
+
+            piece.classList.remove("correct");
+
+            solved = false;
+
+        }
+
+    });
+
+
+    /* =================================================
+       PUZZLE SOLVED
+    ================================================= */
+
+    if(solved){
+
+        card.classList.add("solved-card");
+
+        card.querySelector(".status").textContent =
+        "🎉 Completed!";
+
+    }
+
+}
+
+
+/* =====================================================
+   SHUFFLE BUTTONS
+===================================================== */
+
+cards.forEach(card => {
+
+
+    const button =
+    card.querySelector(".shuffle-btn");
+
+
+    button.addEventListener("click", function(e){
+
+        /*
+           Stop document click
+        */
+
+        e.stopPropagation();
+
+
+        createPuzzle(card);
+
+    });
+
+});
+
+
+/* =====================================================
+   INITIALIZE ALL 45 PUZZLES
+===================================================== */
+
+cards.forEach(card => {
+
+    createPuzzle(card);
+
+});
+
+</script>
+
+
+</body>
+
+</html>
+

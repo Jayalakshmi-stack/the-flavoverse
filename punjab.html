@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Punjab | The Flavorverse</title>
+<script src="recipe-actions.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:#F7E7CE;color:#5B4A45;transition:.3s;}
+
+/* ================= DARK MODE ================= */
+body.dark-mode{background:#241d23;color:#eee;}
+body.dark-mode .hero,body.dark-mode .about-text,body.dark-mode .recipe-section,body.dark-mode .fact-card,body.dark-mode .profile-card,body.dark-mode .explorer-box,body.dark-mode .review-box,body.dark-mode .recent-card{background:#342a32;color:#eee;}
+body.dark-mode .recipe-content h2,body.dark-mode .about-text h2,body.dark-mode .facts-section h2{color:#e9c9e4;}
+body.dark-mode .recipe-content h3{color:#d6aeca;}
+body.dark-mode .recipe-info div,body.dark-mode .chef-tip,body.dark-mode .fun-fact{background:#443640;}
+body.dark-mode input,body.dark-mode select,body.dark-mode textarea{background:#443640;color:white;border-color:#80647b;}
+body.dark-mode .search-box{background:#342a32;}
+
+/* ================= HEADER ================= */
+header{background:#8E6C88;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 5px 15px rgba(0,0,0,.15);}
+.logo{font-family:'Cinzel',serif;font-size:32px;font-weight:bold;color:white;}
+nav{display:flex;align-items:center;justify-content:flex-end;}
+
+/* ================= EXPLORE DRAWER (HAMBURGER MENU) ================= */
+.menu-open-btn{border:0;background:transparent;color:#fff;font-size:32px;line-height:1;cursor:pointer;padding:5px 8px;}
+.menu-backdrop{position:fixed;inset:0;background:rgba(25,16,28,.55);z-index:9998;opacity:0;visibility:hidden;transition:.25s;}
+.menu-backdrop.show{opacity:1;visibility:visible;}
+.explore-drawer{position:fixed;top:0;right:0;width:418px;max-width:88vw;height:100vh;background:#fff8ef;z-index:9999;transform:translateX(102%);transition:transform .3s ease;box-shadow:-8px 0 25px rgba(0,0,0,.2);overflow-y:auto;color:#5b4a45;}
+.explore-drawer.open{transform:translateX(0);}
+.drawer-heading{height:115px;background:#a083a2;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 35px;position:sticky;top:0;z-index:2;}
+.drawer-heading h2{font-family:'Cinzel',serif;font-size:32px;font-weight:700;}
+.drawer-close{border:0;background:transparent;color:#fff;font-size:34px;font-weight:300;cursor:pointer;line-height:1;}
+.drawer-links{padding:18px 27px 30px;}
+.drawer-link{display:flex;align-items:center;gap:22px;text-decoration:none;color:#654b70;padding:16px 12px;border-radius:8px;transition:background .2s;}
+.drawer-link:hover{background:#f0e3ed;}
+.drawer-icon{width:36px;flex:0 0 36px;text-align:center;font-size:25px;}
+.drawer-copy strong{display:block;font-family:'Cinzel',serif;font-size:18px;line-height:1.35;color:#654b70;}
+.drawer-copy small{display:block;font-family:'Poppins',sans-serif;font-size:13px;color:#806d91;line-height:1.5;}
+.drawer-divider{height:1px;background:#e4cedd;margin:10px 0 12px;}
+body.drawer-open{overflow:hidden;}
+
+.dark-toggle{margin-left:20px;border:none;background:#F4E5C5;color:#5B4A45;padding:9px 14px;border-radius:20px;cursor:pointer;font-weight:bold;}
+
+/* ================= HERO ================= */
+.hero{width:90%;margin:40px auto;background:white;border-radius:25px;overflow:hidden;box-shadow:0 12px 25px rgba(0,0,0,.15);display:flex;align-items:center;gap:40px;padding:40px;}
+.image-box{width:450px;height:350px;display:flex;justify-content:center;align-items:center;background:#fff8f2;border-radius:20px;flex:1;}
+.image-box img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.hero-content{padding:40px;flex:1;text-align:left;}
+.hero-content h1{font-family:'Cinzel',serif;font-size:58px;color:#6F4B72;}
+.hero-content h2{margin-top:15px;color:#B58A4D;font-size:30px;}
+.hero-content p{margin-top:18px;font-size:18px;line-height:1.8;}
+.btn{display:inline-block;margin-top:25px;padding:14px 35px;background:#8E6C88;color:white;text-decoration:none;border-radius:30px;font-weight:bold;transition:.3s;}
+.btn:hover{background:#6F4B72;}
+
+/* ================= ABOUT ================= */
+.about-section{width:90%;margin:50px auto;display:flex;justify-content:space-between;align-items:center;gap:40px;}
+.about-text{flex:2;background:#FFF9F4;padding:35px;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.12);}
+.about-text h2{font-family:'Cinzel',serif;color:#6F4B72;font-size:36px;margin-bottom:20px;}
+.about-text p{line-height:1.9;font-size:17px;margin-bottom:18px;text-align:justify;}
+.about-box{flex:1;background:#8E6C88;color:white;padding:30px;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.15);}
+.about-box h3{font-family:'Cinzel',serif;margin-bottom:20px;text-align:center;}
+.about-box ul{list-style:none;}
+.about-box li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.25);font-size:16px;}
+.about-box li:last-child{border-bottom:none;}
+
+/* ================= RECIPE EXPLORER ================= */
+.explorer-section{width:90%;margin:60px auto;}
+.explorer-box{background:#FFF9F4;padding:30px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.explorer-box h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:36px;margin-bottom:25px;}
+.search-filter-row{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+.search-box,.filter-box{padding:13px 18px;border:1px solid #D8C5B0;border-radius:25px;background:white;color:#5B4A45;font-family:'Poppins',sans-serif;outline:none;}
+.search-box{width:45%;min-width:250px;}
+.filter-box{min-width:180px;}
+.explorer-buttons{display:flex;justify-content:center;gap:15px;margin-top:20px;flex-wrap:wrap;}
+.explorer-btn{border:none;padding:12px 22px;border-radius:25px;background:#8E6C88;color:white;font-family:'Poppins',sans-serif;font-weight:600;cursor:pointer;transition:.3s;}
+.explorer-btn:hover{background:#6F4B72;transform:translateY(-2px);}
+.explorer-btn.random{background:#B58A4D;}
+
+/* ================= POPULAR ================= */
+.popular-section{width:90%;margin:40px auto;}
+.popular-title{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:32px;margin-bottom:25px;}
+.popular-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.popular-card{background:#FFF9F4;padding:22px;border-radius:18px;box-shadow:0 7px 17px rgba(0,0,0,.12);text-align:center;transition:.3s;}
+.popular-card:hover{transform:translateY(-6px);}
+.popular-card h3{color:#8E6C88;margin-bottom:8px;}
+.popular-card p{font-size:14px;line-height:1.6;}
+
+/* ================= SEARCH RESULT ================= */
+.search-result{text-align:center;margin-top:18px;font-weight:600;color:#8E6C88;}
+
+/* ================= RECIPE SECTION ================= */
+.recipe-section{width:90%;margin:60px auto;display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:stretch;background:#FFF9F4;padding:35px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.recipe-image{grid-column:1;grid-row:1;}
+.recipe-image img{width:100%;border-radius:18px;box-shadow:0 6px 15px rgba(0,0,0,.15);display:block;}
+.recipe-content{grid-column:2;grid-row:1;}
+.recipe-content h2{font-family:'Cinzel',serif;color:#6F4B72;font-size:38px;margin-bottom:20px;}
+.recipe-content h3{margin-top:25px;margin-bottom:12px;color:#8E6C88;}
+.recipe-content p{line-height:1.8;text-align:justify;}
+.recipe-content ul,.recipe-content ol{margin-left:25px;line-height:1.9;}
+
+/* ================= RECIPE INFO ================= */
+.recipe-info{display:flex;justify-content:space-between;margin-top:25px;gap:20px;}
+.recipe-info div{flex:1;background:#F7E7CE;padding:18px;text-align:center;border-radius:15px;}
+
+/* ================= CHEF TIP + FUN FACT ================= */
+.chef-tip,.fun-fact{margin-top:25px;background:#F7E7CE;padding:20px;border-left:6px solid #8E6C88;border-radius:12px;}
+
+/* ================= BUTTONS ================= */
+.recipe-actions{grid-column:1;grid-row:1;align-self:end;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:15px;padding-bottom:5px;}
+.recipe-actions button{width:200px;padding:14px 18px;border:none;border-radius:30px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;box-shadow:0 6px 15px rgba(91,74,69,.18);}
+.favorite-btn{background:#8E6C88;color:white;}
+.stamp-btn{background:#F4E5C5;color:#5B4A45;}
+.recipe-actions button:hover{transform:translateY(-3px);box-shadow:0 9px 20px rgba(91,74,69,.22);}
+
+/* ================= RATING ================= */
+.rating-area{margin-top:22px;padding:20px;background:rgba(244,229,197,.55);border-radius:15px;}
+.rating-area h3{margin-top:0;}
+.stars{display:flex;gap:5px;margin-top:8px;}
+.star{font-size:28px;cursor:pointer;color:#c8b9aa;transition:.2s;}
+.star.active{color:#E5A82F;}
+.rating-message{font-size:13px;margin-top:7px;}
+
+/* ================= REVIEWS ================= */
+.review-box{margin-top:18px;padding:20px;background:#FFF9F4;border:1px solid #eadbc9;border-radius:15px;}
+.review-box h3{margin-top:0;}
+.review-input{width:100%;min-height:80px;resize:vertical;padding:12px;border:1px solid #D8C5B0;border-radius:12px;outline:none;font-family:'Poppins',sans-serif;margin-top:8px;}
+.review-submit{margin-top:10px;border:none;background:#8E6C88;color:white;padding:10px 20px;border-radius:22px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;}
+.review-submit:hover{background:#6F4B72;}
+.reviews-list{margin-top:15px;}
+.single-review{padding:12px;margin-top:10px;background:#F7E7CE;border-radius:12px;}
+.single-review strong{color:#6F4B72;}
+.single-review small{display:block;margin-top:4px;opacity:.7;}
+.no-review{font-size:13px;opacity:.7;margin-top:10px;}
+
+/* ================= REVERSE RECIPE ================= */
+.recipe-section.reverse{grid-template-columns:2fr 1fr;}
+.recipe-section.reverse .recipe-content{grid-column:1;grid-row:1;}
+.recipe-section.reverse .recipe-image{grid-column:2;grid-row:1;}
+.recipe-section.reverse .recipe-actions{grid-column:2;grid-row:1;}
+
+/* ================= FOOD FACTS ================= */
+.facts-section{width:90%;margin:60px auto;}
+.facts-section h2{text-align:center;font-family:'Cinzel',serif;font-size:40px;color:#6F4B72;margin-bottom:35px;}
+.facts-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.fact-card{background:#FFF9F4;padding:25px;border-radius:20px;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,.12);transition:.3s;}
+.fact-card:hover{transform:translateY(-8px);}
+.fact-card h3{color:#8E6C88;margin-bottom:15px;}
+.fact-card p{line-height:1.8;}
+
+/* ================= RECENTLY VIEWED ================= */
+.recent-section{width:90%;margin:60px auto;}
+.recent-section h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:36px;margin-bottom:25px;}
+.recent-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.recent-card{background:#FFF9F4;padding:22px;border-radius:18px;box-shadow:0 7px 17px rgba(0,0,0,.12);}
+.recent-card h3{color:#8E6C88;margin-bottom:8px;}
+.recent-card p{font-size:13px;}
+.recent-empty{text-align:center;opacity:.7;}
+
+/* ================= PROFILE ================= */
+.profile-section{width:90%;margin:60px auto;}
+.profile-box{background:#8E6C88;color:white;padding:40px;border-radius:22px;box-shadow:0 10px 25px rgba(0,0,0,.15);}
+.profile-box h2{font-family:'Cinzel',serif;font-size:38px;text-align:center;margin-bottom:10px;}
+.profile-name{text-align:center;font-size:20px;margin-bottom:30px;}
+.profile-email{text-align:center;opacity:.9;margin-bottom:25px;}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.profile-card{background:#FFF9F4;color:#5B4A45;padding:22px;border-radius:16px;text-align:center;}
+.profile-card .count{font-size:30px;font-weight:bold;color:#6F4B72;display:block;margin-bottom:5px;}
+.profile-card span:last-child{font-size:14px;}
+
+/* ================= CHEF ================= */
+.chef-section{width:90%;margin:60px auto;background:#8E6C88;color:white;padding:40px;border-radius:20px;text-align:center;}
+.chef-section h2{font-family:'Cinzel',serif;margin-bottom:20px;}
+.chef-section p{font-size:18px;line-height:1.8;}
+
+/* ================= FOOTER ================= */
+footer{background:#6F4B72;color:white;text-align:center;padding:40px 20px;margin-top:60px;}
+footer h2{font-family:'Cinzel',serif;margin-bottom:15px;}
+footer p{margin:10px 0;line-height:1.8;}
+.social{margin:25px 0;}
+.social a{text-decoration:none;font-size:30px;margin:0 12px;}
+.copy{margin-top:20px;font-size:15px;opacity:.9;}
+
+/* ================= HIDDEN SEARCH ================= */
+.recipe-section.hidden-recipe{display:none;}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+header{flex-direction:column;gap:15px;}
+.logo{font-size:25px;}
+nav{justify-content:center;}
+.dark-toggle{margin:0 12px 0 0;}
+.hero{flex-direction:column;padding:20px;}
+.image-box{width:100%;height:280px;}
+.hero-content{padding:20px 5px;text-align:center;}
+.hero-content h1{font-size:42px;}
+.hero-content h2{font-size:24px;}
+.hero-content p{font-size:15px;text-align:justify;}
+.about-section{flex-direction:column;}
+.about-text,.about-box{width:100%;}
+.recipe-section,.recipe-section.reverse{display:flex;flex-direction:column;gap:25px;}
+.recipe-image,.recipe-content{width:100%;}
+.recipe-info{flex-direction:column;}
+.recipe-actions,.recipe-section.reverse .recipe-actions{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;order:2;}
+.recipe-actions button{width:220px;}
+.profile-stats{grid-template-columns:repeat(2,1fr);}
+.search-box{width:100%;}
+}
+@media(max-width:450px){
+.profile-stats{grid-template-columns:1fr;}
+.hero-content h1{font-size:35px;}
+.recipe-content h2{font-size:30px;}
+}
+
+.back-heritage{display:table;margin:25px auto;padding:12px 25px;background:#735267;color:#F7E7CE;text-decoration:none;border-radius:8px;font-family:'Poppins',sans-serif;font-size:14px;transition:0.3s;text-align:center;}
+.back-heritage:hover{background:#4d3547;color:#ffffff;transform:translateY(-2px);}
+</style>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+<div class="logo">🍴 The Flavorverse</div>
+<nav>
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+<button class="menu-open-btn" id="openExploreMenu" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav>
+</header>
+
+<!-- ================= EXPLORE DRAWER MENU ================= -->
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<aside class="explore-drawer" id="exploreDrawer" aria-label="Explore menu" aria-hidden="true">
+  <div class="drawer-heading"><h2>Explore</h2><button class="drawer-close" id="closeExploreMenu" aria-label="Close menu">×</button></div>
+  <div class="drawer-links">
+    <a class="drawer-link" href="index.html"><span class="drawer-icon">🏠</span><span class="drawer-copy"><strong>Home</strong><small>Return to the homepage</small></span></a>
+    <a class="drawer-link" href="royal.html"><span class="drawer-icon">👑</span><span class="drawer-copy"><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+    <a class="drawer-link" href="movies&cartoons.html"><span class="drawer-icon">🎬</span><span class="drawer-copy"><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+    <a class="drawer-link" href="worldcuisine.html"><span class="drawer-icon">🌎</span><span class="drawer-copy"><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+    <a class="drawer-link" href="desertwrold.html"><span class="drawer-icon">🍰</span><span class="drawer-copy"><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+    <a class="drawer-link" href="gallery.html"><span class="drawer-icon">🖼️</span><span class="drawer-copy"><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+    <div class="drawer-divider"></div>
+    <a class="drawer-link" href="favourite.html"><span class="drawer-icon">💗</span><span class="drawer-copy"><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+    <a class="drawer-link" href="order.html"><span class="drawer-icon">🛒</span><span class="drawer-copy"><strong>Order</strong><small>Order ingredient kits</small></span></a>
+    <a class="drawer-link" href="stamp.html"><span class="drawer-icon">🎟️</span><span class="drawer-copy"><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+    <a class="drawer-link" href="contact.html"><span class="drawer-icon">💌</span><span class="drawer-copy"><strong>Contact</strong><small>Get in touch with us</small></span></a>
+  </div>
+</aside>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+<div class="image-box"><img alt="Punjab" src="punjabhero.png"/></div>
+<div class="hero-content">
+<h1>🌾 Punjab</h1>
+<h2>The Land of Rich Flavours</h2>
+<p>Welcome to Punjab, the heart of India's vibrant food culture. Famous for its hearty meals, creamy curries, fresh farm ingredients, and warm hospitality, Punjabi cuisine is loved around the world. Every dish reflects the state's agricultural richness, traditional cooking methods, and joyful celebrations, offering an unforgettable dining experience.</p>
+<a class="btn" href="uttarpradesh.html">Explore Recipes</a>
+</div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about-section" id="about">
+<div class="about-text">
+<h2>🌾 About Punjab Cuisine</h2>
+<p>Punjab is known as the "Land of Five Rivers" and is one of India's most celebrated food destinations. Punjabi cuisine is famous for its rich flavors, generous use of butter and ghee, fresh dairy products, and wholesome meals. The fertile farmlands of Punjab provide fresh wheat, vegetables, milk, and spices, making every dish nutritious and full of flavor.</p>
+<p>Traditional Punjabi meals are hearty and satisfying. Popular dishes such as Sarson Ka Saag, Makki Ki Roti, Amritsari Chole, and Phirni are enjoyed by families throughout the year. The cuisine also includes delicious parathas, paneer dishes, lassi, and a variety of festive sweets that reflect the warmth and hospitality of Punjabi culture.</p>
+<p>Food plays an important role in Punjabi festivals, weddings, and family gatherings. Recipes are passed down through generations, preserving authentic cooking techniques and traditional flavors. Every meal is prepared with love and shared with family and guests, making hospitality an important part of Punjabi life.</p>
+<p>Whether you enjoy the comforting taste of Sarson Ka Saag, the crispy Makki Ki Roti, the spicy Amritsari Chole, or the creamy sweetness of Phirni, every dish represents the vibrant culture and rich culinary heritage of Punjab.</p>
+</div>
+<div class="about-box">
+<h3>🌟 Punjab Highlights</h3>
+<ul>
+<li>🌾 Known as the Land of Five Rivers</li>
+<li>🥬 Famous for Sarson Ka Saag &amp; Makki Ki Roti</li>
+<li>🥘 Amritsari Chole is a popular street food</li>
+<li>🥛 Dairy products like butter, ghee, and lassi are widely used</li>
+<li>🍚 Wheat is the staple crop of Punjab</li>
+<li>🍮 Phirni is a traditional festive dessert</li>
+<li>👨‍🌾 Fresh farm ingredients make every dish flavorful</li>
+<li>❤️ Rich culture, hospitality, and delicious traditional recipes</li>
+</ul>
+</div>
+</section>
+
+<!-- ================= RECIPE EXPLORER ================= -->
+<section class="explorer-section">
+<div class="explorer-box">
+<h2>🔍 Explore Punjab Recipes</h2>
+<div class="search-filter-row">
+<input class="search-box" id="recipeSearch" onkeyup="filterRecipes()" placeholder="🔍 Search recipe..." type="text"/>
+<select class="filter-box" id="categoryFilter" onchange="filterRecipes()">
+<option value="all">🏷️ All Categories</option>
+<option value="main">Main Course</option>
+<option value="bread">Bread</option>
+<option value="street">Street Food</option>
+<option value="dessert">Dessert</option>
+</select>
+<select class="filter-box" id="cuisineFilter" onchange="filterRecipes()">
+<option value="all">🌍 All Cuisine</option>
+<option value="punjabi">Punjab Cuisine</option>
+</select>
+</div>
+<div class="explorer-buttons">
+<button class="explorer-btn random" onclick="surpriseMe()">🎲 Surprise Me</button>
+<button class="explorer-btn" onclick="resetFilters()">↻ Show All Recipes</button>
+</div>
+<p class="search-result" id="searchResult">Showing all 4 Punjab recipes</p>
+</div>
+</section>
+
+<!-- ================= POPULAR RECIPES ================= -->
+<section class="popular-section">
+<h2 class="popular-title">🔥 Popular Punjab Recipes</h2>
+<div class="popular-container">
+<div class="popular-card"><h3>🥬 Sarson Ka Saag</h3><p>Traditional mustard greens served with Makki Ki Roti.</p></div>
+<div class="popular-card"><h3>🫓 Makki Ki Roti</h3><p>A classic Punjabi maize bread traditionally served with Sarson Ka Saag.</p></div>
+<div class="popular-card"><h3>🥘 Amritsari Chole</h3><p>A rich and flavorful chickpea dish famous across Punjab.</p></div>
+<div class="popular-card"><h3>🍚 Phirni</h3><p>A creamy traditional rice dessert served chilled during celebrations.</p></div>
+</div>
+</section>
+
+<!-- ================= SARSON KA SAAG ================= -->
+<section class="recipe-section" data-category="main" data-cuisine="punjabi" data-name="Sarson Ka Saag" id="punjab-sarson-ka-saag">
+<div class="recipe-image"><img alt="Sarson Ka Saag" src="Sarson Ka Saag.png"/></div>
+<div class="recipe-content">
+<h2>🥬 Sarson Ka Saag</h2>
+<p>Sarson Ka Saag is the signature dish of Punjab and one of the most loved traditional recipes in North India. It is prepared using fresh mustard leaves, spinach, bathua leaves, and aromatic spices. Slow-cooked to perfection and topped with homemade butter or ghee, this nutritious dish is especially popular during the winter season. It is traditionally served with Makki Ki Roti, making it one of Punjab's most iconic meals.</p>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>2 bunches Mustard Leaves (Sarson)</li>
+<li>1 bunch Spinach</li>
+<li>1 bunch Bathua Leaves (Optional)</li>
+<li>2 Green Chilies</li>
+<li>1 Onion (Finely Chopped)</li>
+<li>2 Tomatoes (Chopped)</li>
+<li>1 tbsp Ginger-Garlic Paste</li>
+<li>1 tsp Red Chilli Powder</li>
+<li>½ tsp Turmeric Powder</li>
+<li>2 tbsp Ghee</li>
+<li>Salt to Taste</li>
+<li>Butter for Garnishing</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Wash all the leafy vegetables thoroughly.</li>
+<li>Boil the mustard leaves, spinach, and bathua until soft.</li>
+<li>Blend them into a coarse paste.</li>
+<li>Heat ghee in a pan and sauté onions until golden.</li>
+<li>Add ginger-garlic paste and cook for a minute.</li>
+<li>Add tomatoes, turmeric, red chilli powder, and salt.</li>
+<li>Cook until the tomatoes become soft.</li>
+<li>Add the blended greens and simmer on low flame for 20–25 minutes.</li>
+<li>Top with fresh butter and serve hot with Makki Ki Roti.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>50 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Easy</p></div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Tip</h3>
+<p>Slow cooking enhances the natural flavor of the greens. Always serve Sarson Ka Saag with a dollop of fresh white butter for an authentic Punjabi taste.</p>
+</div>
+<div class="fun-fact">
+<h3>🌟 Fun Fact</h3>
+<p>Sarson Ka Saag is considered Punjab's most iconic winter dish. It is traditionally enjoyed with Makki Ki Roti during the harvest season and is a symbol of Punjabi hospitality and culture.</p>
+</div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="punjab-sarson-ka-saag">
+<span class="star" onclick="rateRecipe('punjab-sarson-ka-saag',1,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-sarson-ka-saag',2,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-sarson-ka-saag',3,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-sarson-ka-saag',4,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-sarson-ka-saag',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-punjab-sarson-ka-saag">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-punjab-sarson-ka-saag" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('punjab-sarson-ka-saag','Sarson Ka Saag')">Post Review</button>
+<div class="reviews-list" id="reviews-punjab-sarson-ka-saag"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="punjab-sarson-ka-saag" onclick="addToFavourite('punjab-sarson-ka-saag','Sarson Ka Saag','Punjab',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="punjab-sarson-ka-saag" onclick="addToStamp('punjab-sarson-ka-saag','Sarson Ka Saag','Punjab',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ================= MAKKI KI ROTI ================= -->
+<section class="recipe-section reverse" data-category="bread" data-cuisine="punjabi" data-name="Makki Ki Roti" id="punjab-makki-ki-roti">
+<div class="recipe-image"><img alt="Makki Ki Roti" src="Makki Ki Roti.png"/></div>
+<div class="recipe-content">
+<h2>🫓 Makki Ki Roti</h2>
+<p>Makki Ki Roti is one of the most famous traditional breads of Punjab. It is prepared using maize (corn) flour and cooked on a hot griddle until golden brown. Soft on the inside and slightly crisp on the outside, this wholesome bread is traditionally served with Sarson Ka Saag, fresh white butter, jaggery, and buttermilk. It is especially popular during the winter season and is an essential part of Punjabi cuisine.</p>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>2 cups Maize Flour (Makki Atta)</li>
+<li>½ cup Warm Water</li>
+<li>½ tsp Salt</li>
+<li>1 tsp Ghee</li>
+<li>Butter for Serving</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Mix maize flour and salt in a bowl.</li>
+<li>Add warm water gradually and knead into a soft dough.</li>
+<li>Divide the dough into equal portions.</li>
+<li>Flatten each portion gently into a round roti using your palms or a rolling pin.</li>
+<li>Heat a tawa and carefully place the roti on it.</li>
+<li>Cook both sides until golden brown.</li>
+<li>Apply a little ghee while cooking for extra flavor.</li>
+<li>Serve hot with Sarson Ka Saag, butter, and jaggery.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>30 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Easy</p></div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Tip</h3>
+<p>Use warm water while kneading the dough to make the roti soft and easy to shape. Serve immediately with homemade butter for the authentic Punjabi experience.</p>
+</div>
+<div class="fun-fact">
+<h3>🌟 Fun Fact</h3>
+<p>Makki Ki Roti and Sarson Ka Saag are considered Punjab's most iconic food combination. This traditional meal has been enjoyed for generations, especially during the winter harvest season.</p>
+</div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="punjab-makki-ki-roti">
+<span class="star" onclick="rateRecipe('punjab-makki-ki-roti',1,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-makki-ki-roti',2,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-makki-ki-roti',3,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-makki-ki-roti',4,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-makki-ki-roti',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-punjab-makki-ki-roti">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-punjab-makki-ki-roti" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('punjab-makki-ki-roti','Makki Ki Roti')">Post Review</button>
+<div class="reviews-list" id="reviews-punjab-makki-ki-roti"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="punjab-makki-ki-roti" onclick="addToFavourite('punjab-makki-ki-roti','Makki Ki Roti','Punjab',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="punjab-makki-ki-roti" onclick="addToStamp('punjab-makki-ki-roti','Makki Ki Roti','Punjab',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ================= AMRITSARI CHOLE ================= -->
+<section class="recipe-section" data-category="street" data-cuisine="punjabi" data-name="Amritsari Chole" id="punjab-amritsari-chole">
+<div class="recipe-image"><img alt="Amritsari Chole" src="Amritsari Choli.png"/></div>
+<div class="recipe-content">
+<h2>🥘 Amritsari Chole</h2>
+<p>Amritsari Chole is one of Punjab's most famous and flavorful dishes. It is prepared using chickpeas cooked in a rich gravy made with onions, tomatoes, ginger, garlic, and aromatic Punjabi spices. The dish is known for its deep flavor, slightly tangy taste, and spicy aroma. It is commonly served with Bhature, Kulcha, Naan, or Rice and is a favorite for breakfast, lunch, and festive occasions.</p>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>2 cups Chickpeas (Kabuli Chana)</li>
+<li>2 Onions (Finely Chopped)</li>
+<li>2 Tomatoes (Pureed)</li>
+<li>1 tbsp Ginger-Garlic Paste</li>
+<li>2 Green Chilies</li>
+<li>1 tsp Red Chilli Powder</li>
+<li>1 tsp Coriander Powder</li>
+<li>½ tsp Turmeric Powder</li>
+<li>1 tsp Chole Masala</li>
+<li>1 tsp Cumin Seeds</li>
+<li>2 tbsp Oil</li>
+<li>Fresh Coriander Leaves</li>
+<li>Salt to Taste</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Soak the chickpeas overnight and pressure cook until soft.</li>
+<li>Heat oil in a pan and add cumin seeds.</li>
+<li>Add chopped onions and sauté until golden brown.</li>
+<li>Add ginger-garlic paste and cook until the raw smell disappears.</li>
+<li>Add tomato puree and cook until the oil separates.</li>
+<li>Mix in turmeric, red chilli powder, coriander powder, Chole Masala, and salt.</li>
+<li>Add the cooked chickpeas along with a little cooking water.</li>
+<li>Simmer for 15–20 minutes until the gravy becomes thick and flavorful.</li>
+<li>Garnish with fresh coriander leaves and serve hot with Bhature, Kulcha, or Rice.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>45 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Easy</p></div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Tip</h3>
+<p>For authentic Punjabi flavor, let the chole simmer on low heat for a few extra minutes. Adding a little butter before serving makes the gravy richer and more delicious.</p>
+</div>
+<div class="fun-fact">
+<h3>🌟 Fun Fact</h3>
+<p>Amritsari Chole is one of the most famous street foods in Punjab and is traditionally served with fluffy Bhature or crispy Kulcha, making it a favorite across India.</p>
+</div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="punjab-amritsari-chole">
+<span class="star" onclick="rateRecipe('punjab-amritsari-chole',1,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-amritsari-chole',2,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-amritsari-chole',3,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-amritsari-chole',4,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-amritsari-chole',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-punjab-amritsari-chole">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-punjab-amritsari-chole" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('punjab-amritsari-chole','Amritsari Chole')">Post Review</button>
+<div class="reviews-list" id="reviews-punjab-amritsari-chole"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="punjab-amritsari-chole" onclick="addToFavourite('punjab-amritsari-chole','Amritsari Chole','Punjab',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="punjab-amritsari-chole" onclick="addToStamp('punjab-amritsari-chole','Amritsari Chole','Punjab',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ================= PHIRNI ================= -->
+<section class="recipe-section reverse" data-category="dessert" data-cuisine="punjabi" data-name="Phirni" id="punjab-phirni">
+<div class="recipe-image"><img alt="Phirni" src="phirni.png"/></div>
+<div class="recipe-content">
+<h2>🍚 Phirni</h2>
+<p>Phirni is one of Punjab's most loved traditional desserts, prepared with ground basmati rice, fresh milk, sugar, and flavored with cardamom and saffron. This creamy pudding is slow-cooked until smooth and rich, then chilled and garnished with almonds and pistachios. Phirni is commonly served during festivals, weddings, family celebrations, and special occasions. Its delicate texture and refreshing taste make it a favorite dessert throughout Punjab.</p>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>1 litre Full Cream Milk</li>
+<li>¼ cup Basmati Rice (Soaked &amp; Ground)</li>
+<li>½ cup Sugar</li>
+<li>½ tsp Cardamom Powder</li>
+<li>A few Saffron Strands</li>
+<li>2 tbsp Chopped Almonds</li>
+<li>2 tbsp Chopped Pistachios</li>
+<li>1 tsp Rose Water (Optional)</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Wash and soak the basmati rice for about 30 minutes.</li>
+<li>Grind the soaked rice into a slightly coarse paste.</li>
+<li>Boil the milk in a heavy-bottomed pan.</li>
+<li>Add the rice paste gradually while stirring continuously.</li>
+<li>Cook on low flame until the mixture thickens.</li>
+<li>Add sugar, cardamom powder, and saffron strands.</li>
+<li>Cook for another 5–10 minutes until creamy.</li>
+<li>Remove from heat and add rose water if desired.</li>
+<li>Pour into traditional clay bowls or serving cups.</li>
+<li>Garnish with chopped almonds and pistachios.</li>
+<li>Refrigerate for at least 2 hours before serving chilled.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>40 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>6 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Easy</p></div>
+</div>
+<div class="chef-tip">
+<h3>👨‍🍳 Chef's Tip</h3>
+<p>Serve Phirni chilled in traditional clay pots (matkas). The clay naturally keeps the dessert cool and gives it an authentic Punjabi flavor and aroma.</p>
+</div>
+<div class="fun-fact">
+<h3>🌟 Fun Fact</h3>
+<p>Phirni has been enjoyed in North India for centuries and is especially popular in Punjab during Eid, weddings, and festive celebrations. It is traditionally served in small earthen bowls to enhance its taste.</p>
+</div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="punjab-phirni">
+<span class="star" onclick="rateRecipe('punjab-phirni',1,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-phirni',2,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-phirni',3,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-phirni',4,this)">★</span>
+<span class="star" onclick="rateRecipe('punjab-phirni',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-punjab-phirni">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-punjab-phirni" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('punjab-phirni','Phirni')">Post Review</button>
+<div class="reviews-list" id="reviews-punjab-phirni"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="punjab-phirni" onclick="addToFavourite('punjab-phirni','Phirni','Punjab',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="punjab-phirni" onclick="addToStamp('punjab-phirni','Phirni','Punjab',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ================= FOOD FACTS ================= -->
+<section class="facts-section">
+<h2>🌾 Punjab Food Facts</h2>
+<div class="facts-container">
+<div class="fact-card"><h3>🌾 Land of Agriculture</h3><p>Punjab is known as the "Granary of India" because of its fertile land and abundant wheat production. Fresh farm ingredients make Punjabi cuisine rich and flavorful.</p></div>
+<div class="fact-card"><h3>🥬 Famous Winter Dish</h3><p>Sarson Ka Saag and Makki Ki Roti are Punjab's most iconic winter foods. This traditional combination is enjoyed in almost every Punjabi household.</p></div>
+<div class="fact-card"><h3>🥘 Rich Punjabi Flavours</h3><p>Amritsari Chole is loved for its spicy and aromatic taste. It is commonly served with Bhature, Kulcha, or Rice and is popular across India.</p></div>
+<div class="fact-card"><h3>🧈 Butter &amp; Ghee</h3><p>Punjabi cuisine is famous for its generous use of butter, ghee, fresh cream, and dairy products, giving every dish a rich and satisfying taste.</p></div>
+<div class="fact-card"><h3>🍚 Traditional Desserts</h3><p>Phirni is one of Punjab's most famous festive desserts. It is traditionally served chilled in earthen clay pots and garnished with dry fruits.</p></div>
+</div>
+</section>
+
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+<h2>🕐 Recently Viewed</h2>
+<div class="recent-container" id="recentContainer">
+<p class="recent-empty">Login to see your recently viewed recipes.</p>
+</div>
+</section>
+
+<!-- ================= MY FLAVORVERSE PROFILE ================= -->
+<section class="profile-section">
+<div class="profile-box">
+<h2>👤 My Flavorverse Profile</h2>
+<p class="profile-name" id="profileName">Guest</p>
+<p class="profile-email" id="profileEmail">Login to see your profile</p>
+<div class="profile-stats">
+<div class="profile-card"><span class="count" id="favouriteCount">0</span><span>❤️ Favourites</span></div>
+<div class="profile-card"><span class="count" id="stampCount">0</span><span>🏷️ Stamps</span></div>
+<div class="profile-card"><span class="count" id="ratingCount">0</span><span>⭐ Ratings</span></div>
+<div class="profile-card"><span class="count" id="reviewCount">0</span><span>💬 Reviews</span></div>
+</div>
+</div>
+</section>
+
+<!-- ================= CHEF RECOMMENDATION ================= -->
+<section class="chef-section">
+<h2>👨‍🍳 Chef's Recommendation</h2>
+<p>Enjoy the authentic taste of Punjab by beginning your meal with nutritious <b>Sarson Ka Saag</b>, pairing it with crispy <b>Makki Ki Roti</b>, savoring the rich and flavorful <b>Amritsari Chole</b>, and ending with the creamy sweetness of <b>Phirni</b>. This traditional menu perfectly captures the rich culinary heritage and warm hospitality of Punjab.</p>
+</section>
+
+<a href="royal.html" class="back-heritage">← Back to Royal Heritage</a>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+<h2>🍴 The Flavorverse</h2>
+<p>Discover India's rich culinary heritage, one delicious recipe at a time.</p>
+<div class="social">
+<a href="#">📘</a>
+<a href="#">📸</a>
+<a href="#">▶️</a>
+<a href="#">🐦</a>
+</div>
+<p class="copy">© 2026 The Flavorverse | All Rights Reserved</p>
+</footer>
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ================= FIREBASE CONFIG ================= */
+const firebaseConfig = {
+apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+authDomain: "the-flavoverse.firebaseapp.com",
+projectId: "the-flavoverse",
+storageBucket: "the-flavoverse.firebasestorage.app",
+messagingSenderId: "1064022248292",
+appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+};
+
+if(!firebase.apps.length){
+firebase.initializeApp(firebaseConfig);
+}
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// Punjab page uses the same Firebase project as the rest of Flavorverse.
+// All Punjab actions are stored using the Punjab recipe IDs below.
+
+/* ================= RECIPE DATA ================= */
+const recipes = [
+{id:"punjab-sarson-ka-saag",name:"Sarson Ka Saag",category:"main",cuisine:"punjabi"},
+{id:"punjab-makki-ki-roti",name:"Makki Ki Roti",category:"bread",cuisine:"punjabi"},
+{id:"punjab-amritsari-chole",name:"Amritsari Chole",category:"street",cuisine:"punjabi"},
+{id:"punjab-phirni",name:"Phirni",category:"dessert",cuisine:"punjabi"}
+];
+
+/* ================= LOGIN CHECK ================= */
+function getCurrentUser(){
+return auth.currentUser;
+}
+
+/* ================= FAVOURITE ================= */
+async function addToFavourite(id,name,category,button){
+const user = getCurrentUser();
+if(!user){
+alert("Please login first to add favourites ❤️");
+window.location.href="login.html";
+return;
+}
+try{
+const ref = db.collection("users").doc(user.uid).collection("favourites").doc(id);
+const existing = await ref.get();
+if(existing.exists){
+await ref.delete();
+button.innerHTML="♡ Add to Favourite";
+alert(name+" removed from favourites.");
+}
+else{
+await ref.set({
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+button.innerHTML="♥ Added to Favourite";
+alert(name+" added to favourites ❤️");
+}
+updateProfileCounts();
+}
+catch(error){
+console.error(error);
+alert("Favourite update failed: "+error.message);
+}
+}
+
+/* ================= STAMP ================= */
+async function addToStamp(id,name,category,button){
+const user=getCurrentUser();
+if(!user){
+alert("Please login first to add stamps 🏷️");
+window.location.href="login.html";
+return;
+}
+try{
+const ref = db.collection("users").doc(user.uid).collection("stamps").doc(id);
+const existing=await ref.get();
+if(existing.exists){
+await ref.delete();
+button.innerHTML="🏷️ Add to Stamp";
+alert(name+" removed from passport.");
+}
+else{
+await ref.set({
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+button.innerHTML="🏷️ Stamped";
+alert(name+" added to your Flavorverse Passport 🏷️");
+}
+updateProfileCounts();
+}
+catch(error){
+console.error(error);
+alert("Stamp update failed: "+error.message);
+}
+}
+
+/* ================= RATING ================= */
+async function rateRecipe(recipeId,rating,element){
+const user=getCurrentUser();
+if(!user){
+alert("Please login first to rate recipes ⭐");
+window.location.href="login.html";
+return;
+}
+try{
+await db.collection("users").doc(user.uid).collection("ratings").doc(recipeId).set({
+recipeId:recipeId,
+rating:rating,
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+const stars=element.parentElement.querySelectorAll(".star");
+stars.forEach((star,index)=>{
+if(index<rating){
+star.classList.add("active");
+}
+else{
+star.classList.remove("active");
+}
+});
+document.getElementById("rating-"+recipeId).innerText = "You rated this recipe "+rating+"/5 ⭐";
+updateProfileCounts();
+}
+catch(error){
+console.error(error);
+alert("Rating failed: "+error.message);
+}
+}
+
+/* ================= LOAD USER RATINGS ================= */
+async function loadRatings(){
+const user=getCurrentUser();
+if(!user) return;
+for(const recipe of recipes){
+try{
+const doc=await db.collection("users").doc(user.uid).collection("ratings").doc(recipe.id).get();
+if(doc.exists){
+const rating=doc.data().rating;
+const container=document.querySelector('.stars[data-recipe="'+recipe.id+'"]');
+if(container){
+const stars=container.querySelectorAll(".star");
+stars.forEach((star,index)=>{
+if(index<rating){
+star.classList.add("active");
+}
+});
+}
+const text=document.getElementById("rating-"+recipe.id);
+if(text){
+text.innerText="You rated this recipe "+rating+"/5 ⭐";
+}
+}
+}
+catch(error){
+console.error(error);
+}
+}
+}
+
+/* ================= REVIEWS ================= */
+async function submitReview(recipeId,recipeName){
+const user=getCurrentUser();
+if(!user){
+alert("Please login first to post a review 💬");
+window.location.href="login.html";
+return;
+}
+const textarea=document.getElementById("review-text-"+recipeId);
+const text=textarea.value.trim();
+if(!text){
+alert("Please write a review first.");
+return;
+}
+try{
+const userDoc=await db.collection("users").doc(user.uid).get();
+let userName="Flavorverse User";
+if(userDoc.exists && userDoc.data().name){
+userName=userDoc.data().name;
+}
+await db.collection("recipes").doc(recipeId).collection("reviews").doc(user.uid).set({
+recipeId:recipeId,
+recipeName:recipeName,
+userId:user.uid,
+userName:userName,
+review:text,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+textarea.value="";
+alert("Review posted successfully! 💬");
+loadReviews(recipeId);
+updateProfileCounts();
+}
+catch(error){
+console.error(error);
+alert("Review failed: "+error.message);
+}
+}
+
+/* ================= LOAD REVIEWS ================= */
+async function loadReviews(recipeId){
+const container=document.getElementById("reviews-"+recipeId);
+if(!container) return;
+try{
+const snapshot=await db.collection("recipes").doc(recipeId).collection("reviews").orderBy("createdAt","desc").limit(10).get();
+container.innerHTML="";
+if(snapshot.empty){
+container.innerHTML='<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+return;
+}
+snapshot.forEach(doc=>{
+const data=doc.data();
+const review=document.createElement("div");
+review.className="single-review";
+const name=document.createElement("strong");
+name.textContent="💜 "+(data.userName || "Flavorverse User");
+const content=document.createElement("p");
+content.textContent=data.review || "";
+const date=document.createElement("small");
+if(data.createdAt){
+date.textContent=data.createdAt.toDate().toLocaleDateString();
+}
+review.appendChild(name);
+review.appendChild(content);
+review.appendChild(date);
+container.appendChild(review);
+});
+}
+catch(error){
+console.error(error);
+container.innerHTML='<p class="no-review">Reviews will appear here.</p>';
+}
+}
+
+/* ================= RECENTLY VIEWED ================= */
+async function addRecentlyViewed(recipeId,recipeName){
+const user=getCurrentUser();
+if(!user) return;
+try{
+await db.collection("users").doc(user.uid).collection("recentlyViewed").doc(recipeId).set({
+recipeId:recipeId,
+recipeName:recipeName,
+viewedAt:firebase.firestore.FieldValue.serverTimestamp()
+});
+}
+catch(error){
+console.error(error);
+}
+}
+
+/* ================= RECENTLY VIEWED DISPLAY ================= */
+async function loadRecentlyViewed(){
+const container=document.getElementById("recentContainer");
+const user=getCurrentUser();
+if(!user){
+container.innerHTML='<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+return;
+}
+try{
+const snapshot=await db.collection("users").doc(user.uid).collection("recentlyViewed").orderBy("viewedAt","desc").limit(8).get();
+container.innerHTML="";
+if(snapshot.empty){
+container.innerHTML='<p class="recent-empty">No recently viewed recipes yet.</p>';
+return;
+}
+snapshot.forEach(doc=>{
+const data=doc.data();
+const card=document.createElement("div");
+card.className="recent-card";
+const title=document.createElement("h3");
+title.textContent="🕐 "+data.recipeName;
+const text=document.createElement("p");
+text.textContent="You recently explored this recipe.";
+card.appendChild(title);
+card.appendChild(text);
+container.appendChild(card);
+});
+}
+catch(error){
+console.error(error);
+}
+}
+
+/* ================= TRACK RECIPE VIEW ================= */
+function setupRecentlyViewed(){
+const recipeSections=document.querySelectorAll(".recipe-section");
+const observer=new IntersectionObserver(
+entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+const id=entry.target.id;
+const recipe=recipes.find(item=>item.id===id);
+if(recipe){
+addRecentlyViewed(recipe.id,recipe.name);
+}
+}
+});
+},
+{threshold:0.35}
+);
+recipeSections.forEach(section=>{
+observer.observe(section);
+});
+}
+
+/* ================= PROFILE COUNTS ================= */
+async function updateProfileCounts(){
+const user=getCurrentUser();
+if(!user){
+document.getElementById("favouriteCount").innerText="0";
+document.getElementById("stampCount").innerText="0";
+document.getElementById("ratingCount").innerText="0";
+document.getElementById("reviewCount").innerText="0";
+return;
+}
+try{
+const userDoc=await db.collection("users").doc(user.uid).get();
+if(userDoc.exists){
+const data=userDoc.data();
+document.getElementById("profileName").innerText=data.name || "Flavorverse User";
+document.getElementById("profileEmail").innerText=data.email || user.email;
+}
+else{
+document.getElementById("profileName").innerText=user.email;
+document.getElementById("profileEmail").innerText=user.email;
+}
+
+const favourites=await db.collection("users").doc(user.uid).collection("favourites").get();
+const stamps=await db.collection("users").doc(user.uid).collection("stamps").get();
+const ratings=await db.collection("users").doc(user.uid).collection("ratings").get();
+
+/* Reviews are stored inside recipes/{recipeId}/reviews/{uid} */
+let reviewTotal=0;
+for(const recipe of recipes){
+const review=await db.collection("recipes").doc(recipe.id).collection("reviews").doc(user.uid).get();
+if(review.exists){
+reviewTotal++;
+}
+}
+
+document.getElementById("favouriteCount").innerText=favourites.size;
+document.getElementById("stampCount").innerText=stamps.size;
+document.getElementById("ratingCount").innerText=ratings.size;
+document.getElementById("reviewCount").innerText=reviewTotal;
+}
+catch(error){
+console.error(error);
+}
+}
+
+/* ================= UPDATE BUTTON STATUS ================= */
+async function updateButtons(){
+const user=getCurrentUser();
+if(!user) return;
+for(const recipe of recipes){
+try{
+const fav=await db.collection("users").doc(user.uid).collection("favourites").doc(recipe.id).get();
+const favButton=document.querySelector('[data-favourite-id="'+recipe.id+'"]');
+if(fav.exists && favButton){
+favButton.innerHTML="♥ Added to Favourite";
+}
+const stamp=await db.collection("users").doc(user.uid).collection("stamps").doc(recipe.id).get();
+const stampButton=document.querySelector('[data-stamp-id="'+recipe.id+'"]');
+if(stamp.exists && stampButton){
+stampButton.innerHTML="🏷️ Stamped";
+}
+}
+catch(error){
+console.error(error);
+}
+}
+}
+
+/* ================= SEARCH + FILTER ================= */
+function filterRecipes(){
+const search=document.getElementById("recipeSearch").value.toLowerCase().trim();
+const category=document.getElementById("categoryFilter").value;
+const cuisine=document.getElementById("cuisineFilter").value;
+let count=0;
+document.querySelectorAll(".recipe-section").forEach(section=>{
+const name=section.dataset.name.toLowerCase();
+const sectionCategory=section.dataset.category;
+const sectionCuisine=section.dataset.cuisine;
+const searchMatch=name.includes(search);
+const categoryMatch=category==="all" || sectionCategory===category;
+const cuisineMatch=cuisine==="all" || sectionCuisine===cuisine;
+if(searchMatch && categoryMatch && cuisineMatch){
+section.classList.remove("hidden-recipe");
+count++;
+}
+else{
+section.classList.add("hidden-recipe");
+}
+});
+document.getElementById("searchResult").innerText="Showing "+count+" recipe"+(count!==1?"s":"");
+}
+
+/* ================= RESET FILTER ================= */
+function resetFilters(){
+document.getElementById("recipeSearch").value="";
+document.getElementById("categoryFilter").value="all";
+document.getElementById("cuisineFilter").value="all";
+document.querySelectorAll(".recipe-section").forEach(section=>{
+section.classList.remove("hidden-recipe");
+});
+document.getElementById("searchResult").innerText="Showing all 4 Punjab recipes";
+}
+
+/* ================= SURPRISE ME ================= */
+function surpriseMe(){
+const visibleRecipes=Array.from(document.querySelectorAll(".recipe-section")).filter(recipe=>!recipe.classList.contains("hidden-recipe"));
+if(visibleRecipes.length===0){
+alert("No recipes available with the selected filter.");
+return;
+}
+const random=visibleRecipes[Math.floor(Math.random()*visibleRecipes.length)];
+random.scrollIntoView({behavior:"smooth",block:"center"});
+random.style.boxShadow="0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+setTimeout(()=>{
+random.style.boxShadow="0 8px 20px rgba(0,0,0,.12)";
+},2500);
+alert("🎲 Surprise Recipe: "+random.dataset.name);
+}
+
+/* ================= DARK MODE ================= */
+function toggleDarkMode(){
+document.body.classList.toggle("dark-mode");
+if(document.body.classList.contains("dark-mode")){
+localStorage.setItem("flavorverseDarkMode","on");
+}
+else{
+localStorage.setItem("flavorverseDarkMode","off");
+}
+}
+
+function loadDarkMode(){
+if(localStorage.getItem("flavorverseDarkMode")==="on"){
+document.body.classList.add("dark-mode");
+}
+}
+
+/* ================= AUTH STATE ================= */
+auth.onAuthStateChanged(async function(user){
+if(user){
+try{
+const userDoc=await db.collection("users").doc(user.uid).get();
+if(userDoc.exists){
+const data=userDoc.data();
+document.getElementById("profileName").innerText=data.name || "Flavorverse User";
+document.getElementById("profileEmail").innerText=data.email || user.email;
+}
+else{
+document.getElementById("profileName").innerText=user.email;
+document.getElementById("profileEmail").innerText=user.email;
+}
+}
+catch(error){
+console.error(error);
+}
+updateButtons();
+updateProfileCounts();
+loadRatings();
+loadRecentlyViewed();
+recipes.forEach(recipe=>{
+loadReviews(recipe.id);
+});
+}
+else{
+document.getElementById("profileName").innerText="Guest";
+document.getElementById("profileEmail").innerText="Login to see your profile";
+loadRecentlyViewed();
+}
+});
+
+/* ================= PAGE LOAD ================= */
+document.addEventListener("DOMContentLoaded",function(){
+loadDarkMode();
+setupRecentlyViewed();
+});
+</script>
+
+<!-- ================= EXPLORE DRAWER SCRIPT ================= -->
+<script>
+(function(){
+ const drawer=document.getElementById('exploreDrawer');
+ const backdrop=document.getElementById('menuBackdrop');
+ const openBtn=document.getElementById('openExploreMenu');
+ const closeBtn=document.getElementById('closeExploreMenu');
+ function openMenu(){drawer.classList.add('open');backdrop.classList.add('show');document.body.classList.add('drawer-open');drawer.setAttribute('aria-hidden','false');openBtn.setAttribute('aria-expanded','true');}
+ function closeMenu(){drawer.classList.remove('open');backdrop.classList.remove('show');document.body.classList.remove('drawer-open');drawer.setAttribute('aria-hidden','true');openBtn.setAttribute('aria-expanded','false');}
+ openBtn.addEventListener('click',openMenu);closeBtn.addEventListener('click',closeMenu);backdrop.addEventListener('click',closeMenu);
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+ drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+})();
+</script>
+</body>
+</html>

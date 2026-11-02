@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>My Favourites | The Flavorverse</title>
+
+
+<style>
+
+/* ================= GENERAL ================= */
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f7e7ce;
+    color:#5b4a45;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    background:#8e6c88;
+    min-height:88px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 6%;
+    gap:35px;
+}
+
+.logo{
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:24px;
+    flex:1;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+    white-space:nowrap;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#f4e5c5;
+}
+
+.nav-links a.active{
+    color:#f4e5c5;
+    font-weight:bold;
+}
+
+
+/* ================= HEADER ================= */
+
+.page-header{
+    text-align:center;
+    padding:45px 20px 25px;
+}
+
+.page-header h1{
+    color:#735267;
+    font-size:40px;
+    margin:0 0 10px;
+}
+
+.page-header p{
+    font-size:18px;
+    margin:0;
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+    width:88%;
+    max-width:1200px;
+    margin:0 auto 50px;
+    min-height:350px;
+}
+
+.section-title{
+    text-align:center;
+    color:#735267;
+    font-size:28px;
+    margin-bottom:30px;
+}
+
+
+/* ================= CARDS ================= */
+
+.favourites-container{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+}
+
+.favourite-card{
+    background:#fdf6ec;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.10);
+
+    transition:.3s;
+}
+
+.favourite-card:hover{
+    transform:translateY(-6px);
+
+    box-shadow:
+    0 10px 22px rgba(0,0,0,.15);
+}
+
+.favourite-link{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+}
+
+.favourite-icon{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.favourite-card h3{
+    color:#735267;
+    font-size:23px;
+    margin:10px 0 15px;
+}
+
+.category{
+    display:inline-block;
+
+    background:#f4e5c5;
+    color:#735267;
+
+    padding:7px 14px;
+
+    border-radius:20px;
+
+    font-size:14px;
+}
+
+.recipe-id{
+    color:#888;
+    font-size:12px;
+    margin-top:18px;
+    word-break:break-word;
+}
+
+.view-recipe{
+    color:#735267;
+    font-size:14px;
+    font-weight:bold;
+    margin-top:18px;
+}
+
+
+/* ================= EMPTY ================= */
+
+.empty-message{
+    background:#fdf6ec;
+
+    border-radius:18px;
+
+    padding:45px 20px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.08);
+}
+
+.big-heart{
+    font-size:50px;
+}
+
+.empty-message h2{
+    color:#735267;
+    margin:12px 0 8px;
+}
+
+.empty-message p{
+    color:#666;
+    font-size:16px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#4d3547;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px 20px 15px;
+
+    margin-top:30px;
+}
+
+footer h2{
+    color:#f4e5c5;
+
+    font-size:20px;
+
+    margin:0 0 6px;
+}
+
+footer p{
+    margin:4px;
+    font-size:13px;
+}
+
+.social{
+    margin:10px 0;
+}
+
+.social a{
+    color:white;
+    text-decoration:none;
+
+    font-size:18px;
+
+    margin:0 7px;
+
+    transition:.3s;
+}
+
+.social a:hover{
+    color:#f4e5c5;
+}
+
+.copy{
+    font-size:11px;
+    opacity:.8;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1200px){
+
+    .navbar{
+        padding:18px 4%;
+        gap:20px;
+    }
+
+    .nav-links{
+        gap:16px;
+    }
+
+    .nav-links a{
+        font-size:15px;
+    }
+
+}
+
+
+@media(max-width:950px){
+
+    .navbar{
+        flex-direction:column;
+        padding:20px;
+        gap:18px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:12px 20px;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .page-header h1{
+        font-size:32px;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .favourites-container{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="royal.html">
+            Royal
+        </a>
+
+        <a href="movies&cartoons.html">
+            Movies
+        </a>
+
+        <a href="worldcuisine.html">
+            World Cuisine
+        </a>
+
+        <a href="desertwrold.html">
+            Desserts
+        </a>
+
+        <a href="gallery.html">
+            Gallery
+        </a>
+
+        <a href="favourite.html"
+           ass="active">
+            Favourites
+        </a>
+
+        <a href="stamp.html">
+            stamp
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="page-header">
+
+    <h1>
+        ❤️ My Favourites
+    </h1>
+
+    <p>
+        Your favourite recipes from The Flavorverse
+    </p>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="container">
+
+    <h2 class="section-title">
+        🍽️ Your Saved Recipes
+    </h2>
+
+
+    <div id="favouritesContainer"
+         class="favourites-container">
+
+        <div class="empty-message">
+
+            <div class="big-heart">
+                ❤️
+            </div>
+
+            <h2>
+                Loading your favourites...
+            </h2>
+
+            <p>
+                Please wait while we load your recipes.
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h2>
+        🍴 The Flavorverse
+    </h2>
+
+    <p>
+        Discover India's rich culinary heritage,
+        one delicious recipe at a time.
+    </p>
+
+
+    <div class="social">
+
+        <a href="#">
+            📘
+        </a>
+
+        <a href="#">
+            📸
+        </a>
+
+        <a href="#">
+            ▶️
+        </a>
+
+        <a href="#">
+            🐦
+        </a>
+
+    </div>
+
+
+    <p class="copy">
+        © 2026 The Flavorverse |
+        All Rights Reserved
+    </p>
+
+</footer>
+
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js">
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js">
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js">
+</script>
+
+
+
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+    authDomain:
+    "the-flavoverse.firebaseapp.com",
+
+    projectId:
+    "the-flavoverse",
+
+    storageBucket:
+    "the-flavoverse.firebasestorage.app",
+
+    messagingSenderId:
+    "1064022248292",
+
+    appId:
+    "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+
+};
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+if(!firebase.apps.length){
+
+    firebase.initializeApp(firebaseConfig);
+
+}
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+
+
+/* =====================================================
+   LOAD FAVOURITES
+===================================================== */
+
+async function loadFavourites(){
+
+    const container =
+        document.getElementById(
+            "favouritesContainer"
+        );
+
+
+    /* ================= USER ================= */
+
+    const user = auth.currentUser;
+
+
+    if(!user){
+
+        container.innerHTML = `
+
+            <div class="empty-message">
+
+                <div class="big-heart">
+                    ❤️
+                </div>
+
+                <h2>
+                    Please Login
+                </h2>
+
+                <p>
+                    Login to see your favourite recipes.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    try{
+
+
+        /* ================= FIRESTORE ================= */
+
+        const snapshot =
+            await db
+
+            .collection("users")
+
+            .doc(user.uid)
+
+            .collection("favourites")
+
+            .get();
+
+
+
+        /* ================= EMPTY ================= */
+
+        if(snapshot.empty){
+
+            container.innerHTML = `
+
+                <div class="empty-message">
+
+                    <div class="big-heart">
+                        💔
+                    </div>
+
+                    <h2>
+                        No Favourites Yet
+                    </h2>
+
+                    <p>
+                        Add recipes to your favourites
+                        and they will appear here.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+
+        /* ================= CLEAR ================= */
+
+        container.innerHTML = "";
+
+
+
+        /* ================= ARRAY ================= */
+
+        const favourites = [];
+
+
+        snapshot.forEach(function(doc){
+
+            const data = doc.data();
+
+
+            favourites.push({
+
+                docId:doc.id,
+
+                data:data
+
+            });
+
+        });
+
+
+
+        /* =================================================
+           SORT NEWEST FIRST
+        ================================================= */
+
+        favourites.sort(function(a,b){
+
+            const aTime =
+                a.data.addedAt &&
+                typeof a.data.addedAt.toMillis === "function"
+
+                ? a.data.addedAt.toMillis()
+
+                : 0;
+
+
+            const bTime =
+                b.data.addedAt &&
+                typeof b.data.addedAt.toMillis === "function"
+
+                ? b.data.addedAt.toMillis()
+
+                : 0;
+
+
+            return bTime-aTime;
+
+        });
+
+
+
+        /* =================================================
+           CREATE CARDS
+        ================================================= */
+
+        favourites.forEach(function(item){
+
+
+            const data =
+                item.data;
+
+
+            const docId =
+                item.docId;
+
+
+
+            /*
+             IMPORTANT
+
+             Your favourite function saves:
+
+             name: recipeName
+
+             So read name first.
+            */
+
+
+            const recipeName =
+                data.name ||
+                data.recipeName ||
+                "Recipe";
+
+
+            const category =
+                data.category ||
+                "Recipe";
+
+
+            const recipeId =
+                data.recipeId ||
+                docId;
+
+
+
+            /*
+             NEW SYSTEM
+
+             page is saved from recipe page.
+
+             Example:
+
+             page: "kerala.html"
+
+             Then:
+
+             kerala.html#kerala-malabar-biryani
+            */
+
+
+            let recipeLink = "#";
+
+
+            if(data.page){
+
+                recipeLink =
+                    data.page +
+                    "#" +
+                    recipeId;
+
+            }
+
+
+
+            /* =================================================
+               CARD
+            ================================================= */
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "favourite-card";
+
+
+            card.innerHTML = `
+
+                <a
+                    href="${recipeLink}"
+                    class="favourite-link"
+                >
+
+                    <div class="favourite-icon">
+                        ❤️
+                    </div>
+
+
+                    <h3>
+                        ${escapeHTML(recipeName)}
+                    </h3>
+
+
+                    <span class="category">
+                        ${escapeHTML(category)}
+                    </span>
+
+
+                    <p class="recipe-id">
+                        Recipe ID:
+                        ${escapeHTML(recipeId)}
+                    </p>
+
+
+                
+
+                    </p>
+
+                </a>
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+
+    }
+
+
+    catch(error){
+
+        console.error(
+            "Favourite Error:",
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <div class="empty-message">
+
+                <div class="big-heart">
+                    ❌
+                </div>
+
+                <h2>
+                    Something went wrong
+                </h2>
+
+                <p>
+                    ${escapeHTML(error.message)}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(function(user){
+
+    loadFavourites();
+
+});
+
+</script>
+
+
+</body>
+
+</html>

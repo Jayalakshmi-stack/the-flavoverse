@@ -1,0 +1,2735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Andhra Pradesh | The Flavorverse</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#F7E7CE;
+color:#5B4A45;
+transition:.3s;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode{background:#241d23;color:#eee;}
+
+body.dark-mode .hero,
+body.dark-mode .about-text,
+body.dark-mode .recipe-section,
+body.dark-mode .fact-card,
+body.dark-mode .profile-card,
+body.dark-mode .explorer-box,
+body.dark-mode .review-box,
+body.dark-mode .recent-card{
+background:#342a32;
+color:#eee;
+}
+
+body.dark-mode .recipe-content h2,
+body.dark-mode .about-text h2,
+body.dark-mode .facts-section h2{color:#e9c9e4;}
+
+body.dark-mode .recipe-content h3{color:#d6aeca;}
+
+body.dark-mode .recipe-info div,
+body.dark-mode .chef-tip,
+body.dark-mode .fun-fact{background:#443640;}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea{
+background:#443640;
+color:white;
+border-color:#80647b;
+}
+
+body.dark-mode .search-box{background:#342a32;}
+
+/* ================= HEADER ================= */
+
+header{
+background:#8E6C88;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+font-family:'Cinzel',serif;
+font-size:32px;
+font-weight:bold;
+color:white;
+}
+
+/* ================= HAMBURGER DRAWER MENU ================= */
+header{
+    position:relative;
+    z-index:1000;
+    min-height:80px;
+}
+header nav{display:none !important;}
+.menu-open-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:44px;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:12px;
+    background:#4d3547;
+    color:#fff;
+    font-size:27px;
+    cursor:pointer;
+    transition:.25s;
+}
+.menu-open-btn:hover{background:#735267;transform:scale(1.04);}
+.menu-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(28,18,29,.48);
+    backdrop-filter:blur(2px);
+    z-index:2000;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .28s ease,visibility .28s ease;
+}
+.menu-overlay.show{opacity:1;visibility:visible;}
+.explore-drawer{
+    position:fixed;
+    top:0;
+    right:0;
+    width:350px;
+    max-width:90vw;
+    height:100vh;
+    overflow-y:auto;
+    background:#fff8f0;
+    color:#604b62;
+    z-index:2001;
+    transform:translateX(105%);
+    transition:transform .3s ease;
+    box-shadow:-8px 0 30px rgba(0,0,0,.18);
+}
+.explore-drawer.open{transform:translateX(0);}
+.drawer-heading{
+    position:sticky;
+    top:0;
+    z-index:2;
+    min-height:92px;
+    padding:25px 28px;
+    background:#9a7897;
+    color:#fffaf5;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.drawer-heading h2{
+    font-family:'Poppins',sans-serif;
+    font-size:25px;
+    margin:0;
+    color:#fffaf5;
+}
+.drawer-close{
+    border:0;
+    background:transparent;
+    color:white;
+    font-size:29px;
+    line-height:1;
+    cursor:pointer;
+    padding:0 0 4px 10px;
+}
+.drawer-links{padding:14px 22px 24px;}
+.drawer-link{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:12px 12px;
+    margin:2px 0;
+    border-radius:12px;
+    color:#604b62;
+    text-decoration:none;
+    transition:background .2s,transform .2s;
+}
+.drawer-link:hover,.drawer-link.active{
+    background:#f0e1ed;
+    transform:translateX(2px);
+}
+.drawer-icon{
+    width:28px;
+    flex:0 0 28px;
+    text-align:center;
+    font-size:22px;
+}
+.drawer-link strong{
+    display:block;
+    font-size:15px;
+    font-weight:600;
+    line-height:1.35;
+}
+.drawer-link small{
+    display:block;
+    margin-top:2px;
+    font-size:11px;
+    color:#927b91;
+    line-height:1.4;
+}
+.drawer-divider{
+    height:1px;
+    background:#e4d2df;
+    margin:12px 0;
+}
+.drawer-theme{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    border:0;
+    background:transparent;
+    padding:12px;
+    border-radius:12px;
+    color:#604b62;
+    text-align:left;
+    font-family:'Poppins',sans-serif;
+    cursor:pointer;
+}
+.drawer-theme:hover{background:#f0e1ed;}
+body.drawer-open{overflow:hidden;}
+@media(max-width:768px){
+    header{flex-direction:row;gap:12px;padding:16px 5%;}
+    .logo{font-size:24px;}
+    .menu-open-btn{width:44px;height:42px;flex:0 0 44px;}
+}
+
+/* ================= HERO ================= */
+
+.hero{
+width:90%;
+margin:40px auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 12px 25px rgba(0,0,0,.15);
+display:flex;
+align-items:center;
+gap:40px;
+padding:40px;
+}
+
+.image-box{
+width:450px;
+height:350px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#fff8f2;
+border-radius:20px;
+flex:1;
+}
+
+.image-box img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+display:block;
+}
+
+.hero-content{
+padding:40px;
+flex:1;
+text-align:left;
+}
+
+.hero-content h1{
+font-family:'Cinzel',serif;
+font-size:58px;
+color:#6F4B72;
+}
+
+.hero-content h2{
+margin-top:15px;
+color:#B58A4D;
+font-size:30px;
+}
+
+.hero-content p{
+margin-top:18px;
+font-size:18px;
+line-height:1.8;
+}
+
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:14px 35px;
+background:#8E6C88;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+}
+
+.btn:hover{background:#6F4B72;}
+
+/* ================= ABOUT ================= */
+
+.about-section{
+width:90%;
+margin:50px auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+
+.about-text{
+flex:2;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.about-text h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:20px;
+}
+
+.about-text p{
+line-height:1.9;
+font-size:17px;
+margin-bottom:18px;
+text-align:justify;
+}
+
+.about-box{
+flex:1;
+background:#8E6C88;
+color:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.about-box h3{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+text-align:center;
+}
+
+.about-box ul{list-style:none;}
+
+.about-box li{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.25);
+font-size:16px;
+}
+
+.about-box li:last-child{border-bottom:none;}
+
+/* ================= RECIPE EXPLORER ================= */
+
+.explorer-section{
+width:90%;
+margin:60px auto;
+}
+
+.explorer-box{
+background:#FFF9F4;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.explorer-box h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.search-filter-row{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.search-box,
+.filter-box{
+padding:13px 18px;
+border:1px solid #D8C5B0;
+border-radius:25px;
+background:white;
+color:#5B4A45;
+font-family:'Poppins',sans-serif;
+outline:none;
+}
+
+.search-box{
+width:45%;
+min-width:250px;
+}
+
+.filter-box{min-width:180px;}
+
+.explorer-buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+.explorer-btn{
+border:none;
+padding:12px 22px;
+border-radius:25px;
+background:#8E6C88;
+color:white;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.explorer-btn:hover{
+background:#6F4B72;
+transform:translateY(-2px);
+}
+
+.explorer-btn.random{background:#B58A4D;}
+
+/* ================= POPULAR ================= */
+
+.popular-section{
+width:90%;
+margin:40px auto;
+}
+
+.popular-title{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:32px;
+margin-bottom:25px;
+}
+
+.popular-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.popular-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+text-align:center;
+transition:.3s;
+}
+
+.popular-card:hover{transform:translateY(-6px);}
+
+.popular-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.popular-card p{
+font-size:14px;
+line-height:1.6;
+}
+
+/* ================= SEARCH RESULT ================= */
+
+.search-result{
+text-align:center;
+margin-top:18px;
+font-weight:600;
+color:#8E6C88;
+}
+
+/* ================= RECIPE SECTION ================= */
+
+.recipe-section{
+width:90%;
+margin:60px auto;
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:40px;
+align-items:stretch;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.recipe-image{grid-column:1;grid-row:1;}
+
+.recipe-image img{
+width:100%;
+border-radius:18px;
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+display:block;
+}
+
+.recipe-content{grid-column:2;grid-row:1;}
+
+.recipe-content h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:38px;
+margin-bottom:20px;
+}
+
+.recipe-content h3{
+margin-top:25px;
+margin-bottom:12px;
+color:#8E6C88;
+}
+
+.recipe-content p{
+line-height:1.8;
+text-align:justify;
+}
+
+.recipe-content ul,
+.recipe-content ol{
+margin-left:25px;
+line-height:1.9;
+}
+
+/* ================= RECIPE INFO ================= */
+
+.recipe-info{
+display:flex;
+justify-content:space-between;
+margin-top:25px;
+gap:20px;
+}
+
+.recipe-info div{
+flex:1;
+background:#F7E7CE;
+padding:18px;
+text-align:center;
+border-radius:15px;
+}
+
+/* ================= CHEF TIP + FUN FACT ================= */
+
+.chef-tip,
+.fun-fact{
+margin-top:25px;
+background:#F7E7CE;
+padding:20px;
+border-left:6px solid #8E6C88;
+border-radius:12px;
+}
+
+/* ================= BUTTONS ================= */
+
+.recipe-actions{
+grid-column:1;
+grid-row:1;
+align-self:end;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-end;
+gap:15px;
+padding-bottom:5px;
+}
+
+.recipe-actions button{
+width:200px;
+padding:14px 18px;
+border:none;
+border-radius:30px;
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 6px 15px rgba(91,74,69,.18);
+}
+
+.favorite-btn{background:#8E6C88;color:white;}
+.stamp-btn{background:#F4E5C5;color:#5B4A45;}
+
+.recipe-actions button:hover{
+transform:translateY(-3px);
+box-shadow:0 9px 20px rgba(91,74,69,.22);
+}
+
+/* ================= RATING ================= */
+
+.rating-area{
+margin-top:22px;
+padding:20px;
+background:rgba(244,229,197,.55);
+border-radius:15px;
+}
+
+.rating-area h3{margin-top:0;}
+
+.stars{
+display:flex;
+gap:5px;
+margin-top:8px;
+}
+
+.star{
+font-size:28px;
+cursor:pointer;
+color:#c8b9aa;
+transition:.2s;
+}
+
+.star.active{color:#E5A82F;}
+
+.rating-message{
+font-size:13px;
+margin-top:7px;
+}
+
+/* ================= REVIEWS ================= */
+
+.review-box{
+margin-top:18px;
+padding:20px;
+background:#FFF9F4;
+border:1px solid #eadbc9;
+border-radius:15px;
+}
+
+.review-box h3{margin-top:0;}
+
+.review-input{
+width:100%;
+min-height:80px;
+resize:vertical;
+padding:12px;
+border:1px solid #D8C5B0;
+border-radius:12px;
+outline:none;
+font-family:'Poppins',sans-serif;
+margin-top:8px;
+}
+
+.review-submit{
+margin-top:10px;
+border:none;
+background:#8E6C88;
+color:white;
+padding:10px 20px;
+border-radius:22px;
+cursor:pointer;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+}
+
+.review-submit:hover{background:#6F4B72;}
+
+.reviews-list{margin-top:15px;}
+
+.single-review{
+padding:12px;
+margin-top:10px;
+background:#F7E7CE;
+border-radius:12px;
+}
+
+.single-review strong{color:#6F4B72;}
+
+.single-review small{
+display:block;
+margin-top:4px;
+opacity:.7;
+}
+
+.no-review{
+font-size:13px;
+opacity:.7;
+margin-top:10px;
+}
+
+/* ================= REVERSE RECIPE ================= */
+
+.recipe-section.reverse{grid-template-columns:2fr 1fr;}
+
+.recipe-section.reverse .recipe-content{grid-column:1;grid-row:1;}
+.recipe-section.reverse .recipe-image{grid-column:2;grid-row:1;}
+.recipe-section.reverse .recipe-actions{grid-column:2;grid-row:1;}
+
+/* ================= FOOD FACTS ================= */
+
+.facts-section{
+width:90%;
+margin:60px auto;
+}
+
+.facts-section h2{
+text-align:center;
+font-family:'Cinzel',serif;
+font-size:40px;
+color:#6F4B72;
+margin-bottom:35px;
+}
+
+.facts-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.fact-card{
+background:#FFF9F4;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.fact-card:hover{transform:translateY(-8px);}
+
+.fact-card h3{
+color:#8E6C88;
+margin-bottom:15px;
+}
+
+.fact-card p{line-height:1.8;}
+
+/* ================= RECENTLY VIEWED ================= */
+
+.recent-section{
+width:90%;
+margin:60px auto;
+}
+
+.recent-section h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.recent-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.recent-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+}
+
+.recent-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.recent-card p{font-size:13px;}
+
+.recent-empty{
+text-align:center;
+opacity:.7;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-section{
+width:90%;
+margin:60px auto;
+}
+
+.profile-box{
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.profile-box h2{
+font-family:'Cinzel',serif;
+font-size:38px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.profile-name{
+text-align:center;
+font-size:20px;
+margin-bottom:30px;
+}
+
+.profile-email{
+text-align:center;
+opacity:.9;
+margin-bottom:25px;
+}
+
+.profile-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.profile-card{
+background:#FFF9F4;
+color:#5B4A45;
+padding:22px;
+border-radius:16px;
+text-align:center;
+}
+
+.profile-card .count{
+font-size:30px;
+font-weight:bold;
+color:#6F4B72;
+display:block;
+margin-bottom:5px;
+}
+
+.profile-card span:last-child{font-size:14px;}
+
+/* ================= CHEF ================= */
+
+.chef-section{
+width:90%;
+margin:60px auto;
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.chef-section h2{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+}
+
+.chef-section p{
+font-size:18px;
+line-height:1.8;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+background:#6F4B72;
+color:white;
+text-align:center;
+padding:40px 20px;
+margin-top:60px;
+}
+
+footer h2{
+font-family:'Cinzel',serif;
+margin-bottom:15px;
+}
+
+footer p{
+margin:10px 0;
+line-height:1.8;
+}
+
+.social{margin:25px 0;}
+
+.social a{
+text-decoration:none;
+font-size:30px;
+margin:0 12px;
+}
+
+.copy{
+margin-top:20px;
+font-size:15px;
+opacity:.9;
+}
+
+/* ================= HIDDEN SEARCH ================= */
+
+.recipe-section.hidden-recipe{display:none;}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+.hero{
+flex-direction:column;
+padding:20px;
+}
+
+.image-box{
+width:100%;
+height:280px;
+}
+
+.hero-content{
+padding:20px 5px;
+text-align:center;
+}
+
+.hero-content h1{font-size:42px;}
+.hero-content h2{font-size:24px;}
+
+.hero-content p{
+font-size:15px;
+text-align:justify;
+}
+
+.about-section{flex-direction:column;}
+
+.about-text,
+.about-box{width:100%;}
+
+.recipe-section,
+.recipe-section.reverse{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.recipe-image,
+.recipe-content{width:100%;}
+
+.recipe-info{flex-direction:column;}
+
+.recipe-actions,
+.recipe-section.reverse .recipe-actions{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:0;
+order:2;
+}
+
+.recipe-actions button{width:220px;}
+
+.profile-stats{grid-template-columns:repeat(2,1fr);}
+
+.search-box{width:100%;}
+
+}
+
+@media(max-width:450px){
+
+.profile-stats{grid-template-columns:1fr;}
+.hero-content h1{font-size:35px;}
+.recipe-content h2{font-size:30px;}
+
+}
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+</style>
+<link href="style.css" rel="stylesheet"/>
+<style>
+/* ================= RECIPE EXPLORER ================= */
+.search-section{
+width:90%;
+margin:60px auto;
+background:#FFF9F4;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.search-section h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.search-controls{
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.search-controls input,
+.search-controls select{
+padding:13px 18px;
+border:1px solid #D8C5B0;
+border-radius:25px;
+background:white;
+color:#5B4A45;
+font-family:'Poppins',sans-serif;
+outline:none;
+}
+
+.search-controls input{
+width:45%;
+min-width:250px;
+}
+
+.search-controls select{min-width:180px;}
+
+.search-controls button{
+border:none;
+padding:12px 22px;
+border-radius:25px;
+background:#8E6C88;
+color:white;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.search-controls button:hover{
+background:#6F4B72;
+transform:translateY(-2px);
+}
+
+.search-controls button:first-of-type{background:#B58A4D;}
+
+.showing-count{
+text-align:center;
+margin-top:18px;
+font-weight:600;
+color:#8E6C88;
+}
+
+/* ================= POPULAR ================= */
+.popular-section{
+width:90%;
+margin:40px auto;
+}
+
+.popular-section h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:32px;
+margin-bottom:25px;
+}
+
+.popular-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.popular-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+text-align:center;
+text-decoration:none;
+color:#5B4A45;
+display:flex;
+flex-direction:column;
+gap:8px;
+transition:.3s;
+}
+
+.popular-card:hover{transform:translateY(-6px);}
+
+.popular-card span{font-size:28px;}
+
+.popular-card b{
+font-size:18px;
+color:#6F4B72;
+}
+
+.popular-card small{
+color:#5B4A45;
+font-size:14px;
+line-height:1.6;
+}
+
+/* ================= RECIPE SECTION ================= */
+.recipe-section{
+width:90%;
+margin:60px auto;
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:40px;
+align-items:stretch;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.recipe-image{grid-column:1;grid-row:1;}
+
+.recipe-image img{
+width:100%;
+border-radius:18px;
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+display:block;
+}
+
+.recipe-content{grid-column:2;grid-row:1;}
+
+/* ================= FEEDBACK LAYOUT ================= */
+.feedback-row{
+grid-column:1 / -1;
+grid-row:3;
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:40px;
+align-items:stretch;
+width:100%;
+}
+
+.rating-area{
+grid-column:2;
+grid-row:1;
+margin-top:0;
+padding:25px;
+background:rgba(244,229,197,.55);
+border-radius:15px;
+align-self:stretch;
+min-height:210px;
+}
+
+.rating-area h3{
+margin-top:0;
+color:#5B4A45;
+margin-bottom:15px;
+}
+
+.stars{
+display:flex;
+gap:5px;
+margin-top:8px;
+}
+
+.star{
+font-size:28px;
+cursor:pointer;
+color:#c8b9aa;
+transition:.2s;
+}
+
+.star.active,
+.star:hover{color:#E5A82F;}
+
+.rating-message{
+font-size:13px;
+margin-top:7px;
+}
+
+.review-box{
+grid-column:1;
+grid-row:1;
+margin-top:0;
+padding:25px;
+background:#FFF9F4;
+border:1px solid #eadbc9;
+border-radius:15px;
+box-shadow:none;
+}
+
+.review-box h3{
+margin-top:0;
+color:#5B4A45;
+margin-bottom:15px;
+}
+
+.review-input{
+width:100%;
+min-height:100px;
+resize:vertical;
+padding:12px;
+border:1px solid #D8C5B0;
+border-radius:12px;
+outline:none;
+font-family:'Poppins',sans-serif;
+margin-top:0;
+}
+
+.review-submit{
+margin-top:12px;
+border:none;
+background:#8E6C88;
+color:white;
+padding:10px 20px;
+border-radius:22px;
+cursor:pointer;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+}
+
+.review-submit:hover{background:#6F4B72;}
+
+.reviews-list{margin-top:15px;}
+
+.review-item,
+.single-review{
+padding:12px;
+margin-top:10px;
+background:#F7E7CE;
+border-radius:12px;
+}
+
+.single-review strong{color:#6F4B72;}
+
+.single-review small{
+display:block;
+margin-top:4px;
+opacity:.7;
+}
+
+.no-review{
+font-size:13px;
+opacity:.7;
+margin-top:10px;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.recipe-actions{
+grid-column:1;
+grid-row:2;
+align-self:start;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-start;
+gap:15px;
+}
+
+.recipe-actions button{
+width:250px;
+padding:14px 18px;
+border:none;
+border-radius:30px;
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 6px 15px rgba(91,74,69,.18);
+}
+
+.favorite-btn{background:#8E6C88;color:white;}
+.stamp-btn{background:#F4E5C5;color:#5B4A45;}
+
+.recipe-actions button:hover{
+transform:translateY(-3px);
+box-shadow:0 9px 20px rgba(91,74,69,.22);
+}
+
+/* ================= REVERSE RECIPE ================= */
+.recipe-section.reverse{grid-template-columns:2fr 1fr;}
+
+.recipe-section.reverse .recipe-content{grid-column:1;grid-row:1;}
+.recipe-section.reverse .recipe-image{grid-column:2;grid-row:1;}
+.recipe-section.reverse .recipe-actions{grid-column:2;grid-row:2;}
+
+@media(max-width:900px){
+.popular-grid{grid-template-columns:repeat(2,1fr)}
+.recipe-section,
+.recipe-section.reverse{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+.recipe-image,
+.recipe-content,
+.recipe-actions,
+.recipe-section.reverse .recipe-actions,
+.rating-area,
+.recipe-section.reverse .rating-area,
+.review-box,
+.recipe-section.reverse .review-box{
+width:100%;
+order:initial;
+}
+.recipe-actions,
+.recipe-section.reverse .recipe-actions{
+order:2;
+align-items:center;
+justify-content:center;
+}
+.feedback-row{
+order:3;
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:25px;
+width:100%;
+}
+.rating-area{order:initial}
+.review-box{order:initial}
+}
+
+@media(max-width:600px){
+.feedback-row{grid-template-columns:1fr;}
+.feedback-row .review-box,
+.feedback-row .rating-area{
+grid-column:1;
+grid-row:auto;
+}
+}
+
+@media(max-width:600px){
+.popular-grid{grid-template-columns:1fr}
+.search-controls{flex-direction:column}
+.search-controls input,
+.search-controls select,
+.search-controls button{width:100%}
+}
+</style>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="logo">🍴 The Flavorverse</div>
+
+<button class="menu-open-btn" type="button" aria-label="Open menu" onclick="openExploreMenu()">☰</button>
+
+</header>
+
+<!-- ================= EXPLORE HAMBURGER MENU ================= -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeExploreMenu()"></div>
+
+<aside class="explore-drawer" id="exploreDrawer" aria-label="Explore menu" aria-hidden="true">
+    <div class="drawer-heading">
+        <h2>Explore</h2>
+        <button class="drawer-close" type="button" aria-label="Close menu" onclick="closeExploreMenu()">×</button>
+    </div>
+
+    <div class="drawer-links">
+        <a class="drawer-link" href="index.html">
+            <span class="drawer-icon">🏠</span><span><strong>Home</strong><small>Return to the homepage</small></span>
+        </a>
+        <a class="drawer-link" href="royal.html">
+            <span class="drawer-icon">👑</span><span><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span>
+        </a>
+        <a class="drawer-link" href="movies&cartoons.html">
+            <span class="drawer-icon">🎬</span><span><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span>
+        </a>
+        <a class="drawer-link" href="worldcuisine.html">
+            <span class="drawer-icon">🌎</span><span><strong>World Cuisine</strong><small>Flavours from around the world</small></span>
+        </a>
+        <a class="drawer-link" href="desertwrold.html">
+            <span class="drawer-icon">🍰</span><span><strong>Desserts</strong><small>Sweet treats and desserts</small></span>
+        </a>
+        <a class="drawer-link" href="gallery.html">
+            <span class="drawer-icon">🖼️</span><span><strong>Gallery</strong><small>Explore our food gallery</small></span>
+        </a>
+
+        <div class="drawer-divider"></div>
+
+        <a class="drawer-link" href="favourite.html">
+            <span class="drawer-icon">💗</span><span><strong>Favourites</strong><small>Your favourite recipes</small></span>
+        </a>
+        <a class="drawer-link" href="order.html">
+            <span class="drawer-icon">🛒</span><span><strong>Order</strong><small>Order ingredient kits</small></span>
+        </a>
+        <a class="drawer-link" href="stamp.html">
+            <span class="drawer-icon">🏷️</span><span><strong>Stamped</strong><small>Your stamped recipes</small></span>
+        </a>
+        <a class="drawer-link" href="contact.html">
+            <span class="drawer-icon">📩</span><span><strong>Contact</strong><small>Get in touch with us</small></span>
+        </a>
+        <a class="drawer-link" href="about.html">
+            <span class="drawer-icon">✨</span><span><strong>About</strong><small>Discover The Flavorverse</small></span>
+        </a>
+        <a class="drawer-link" href="profile.html">
+            <span class="drawer-icon">👤</span><span><strong>My Flavorverse</strong><small>Your personal food profile</small></span>
+        </a>
+        <div class="drawer-divider"></div>
+        <button class="drawer-theme" type="button" onclick="toggleDarkMode()">
+            <span class="drawer-icon" id="themeIcon">🌙</span><span><strong>Dark Mode</strong><small>Switch the page appearance</small></span>
+        </button>
+    </div>
+</aside>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+<div class="image-box"><img src="andharpradeshhero.png" alt="Andhra Pradesh"></div>
+<div class="hero-content">
+<h1>🌶️ Andhra Pradesh</h1>
+<h2>Land of Fiery Flavours</h2>
+<p>Experience the bold and authentic flavors of Andhra Pradesh through its spicy curries, tangy rice dishes, fresh seafood, and traditional sweets. Andhra cuisine is famous for its rich use of chilies, aromatic spices, and time-honored cooking techniques. Every dish reflects the state's vibrant culture, warm hospitality, and rich culinary heritage, making every meal a memorable experience.</p>
+<a href="#recipes" class="btn">Explore Recipes</a>
+</div>
+</section>
+
+<section id="about" class="about-section">
+<div class="about-text">
+<h2>🌶️ About Andhra Pradesh Cuisine</h2>
+<p>Andhra Pradesh is one of India's most famous culinary destinations, celebrated for its bold flavors, spicy dishes, and rich food traditions. The cuisine is known for its generous use of red chilies, tamarind, curry leaves, and aromatic spices, creating dishes that are both flavorful and unforgettable. Every meal reflects the state's vibrant culture and centuries-old cooking heritage.</p>
+<p>Rice is the staple food of Andhra Pradesh and is commonly served with spicy curries, dal, pickles, vegetable dishes, and seafood. The state is especially famous for its delicious Pulihora, fiery Andhra Chicken Curry, fresh prawn dishes, and traditional sweets. Coastal regions offer a wide variety of seafood recipes prepared with authentic local spices.</p>
+<p>Festivals and family celebrations are marked with special traditional dishes and homemade sweets. Recipes are often passed down through generations, preserving the authentic taste and cultural significance of Andhra cuisine. Fresh ingredients and traditional cooking methods continue to play an important role in everyday meals.</p>
+<p>Whether it is the tangy flavor of Pulihora, the spicy richness of Andhra Chicken Curry, the delicious Royyala Iguru, or the sweet delight of Pootharekulu, every dish showcases the warmth, hospitality, and culinary excellence of Andhra Pradesh.</p>
+</div>
+<div class="about-box">
+<h3>🌿 Andhra Pradesh Highlights</h3><ul>
+<li>🌶️ Famous for spicy cuisine</li><li>🍋 Pulihora is a popular festive rice dish</li><li>🍗 Andhra Chicken Curry is known for its bold flavors</li><li>🍤 Coastal regions are famous for fresh seafood</li><li>🍚 Rice is the staple food of the state</li><li>🍮 Pootharekulu is a traditional sweet delicacy</li><li>🌴 Tamarind, chilies, and curry leaves are widely used</li><li>❤️ Rich culinary heritage with authentic regional recipes</li>
+</ul></div>
+</section>
+
+<section class="search-section" id="recipes">
+<h2>🔎 Explore Andhra Recipes</h2>
+<div class="search-controls">
+<input id="recipeSearch" type="text" placeholder="Search Andhra recipes..." onkeyup="filterRecipes()">
+<select id="categoryFilter" onchange="filterRecipes()"><option value="all">All Categories</option><option value="main">Main Course</option><option value="seafood">Seafood</option><option value="dessert">Dessert</option></select>
+<select id="cuisineFilter" onchange="filterRecipes()"><option value="all">Andhra Pradesh Cuisine</option><option value="andhra">Andhra Pradesh</option></select>
+<button onclick="surpriseMe()">🎲 Surprise Me</button>
+<button onclick="showAllRecipes()">Show All Recipes</button>
+</div>
+<p class="showing-count" id="showingCount">Showing 4 recipes</p>
+</section>
+
+<section class="popular-section">
+<h2>🔥 Popular Andhra Pradesh Recipes</h2>
+<div class="popular-grid">
+<a href="#andhra-pulihora" class="popular-card"><span>🍋</span><b>Pulihora</b><small>Tangy Tamarind Rice</small></a>
+<a href="#andhra-chicken-curry" class="popular-card"><span>🍗</span><b>Andhra Chicken Curry</b><small>Spicy Andhra Curry</small></a>
+<a href="#andhra-royyala-iguru" class="popular-card"><span>🍤</span><b>Royyala Iguru</b><small>Spicy Prawn Curry</small></a>
+<a href="#andhra-pootharekulu" class="popular-card"><span>🍮</span><b>Pootharekulu</b><small>Traditional Andhra Sweet</small></a>
+</div>
+</section>
+
+<!-- ================= PULIHORA ================= -->
+<section class="recipe-section" data-category="main" data-cuisine="andhra" data-name="Pulihora" id="andhra-pulihora">
+<div class="recipe-image"><img src="pulihoraandhara.png" alt="Pulihora"></div>
+<div class="recipe-content">
+<h2>🍋 Pulihora</h2>
+<p>Pulihora, also known as Tamarind Rice, is one of the most famous traditional dishes of Andhra Pradesh. It is prepared using cooked rice, tamarind pulp, roasted peanuts, curry leaves, and aromatic spices. The combination of tangy tamarind and flavorful seasoning makes this dish refreshing and delicious. Pulihora is commonly prepared during festivals, temple celebrations, family gatherings, and special occasions. It is easy to prepare, stays fresh for a long time, and is loved by people of all ages.</p>
+<h3>🥘 Ingredients</h3><ul><li>2 cups Cooked Rice</li><li>2 tbsp Tamarind Pulp</li><li>2 tbsp Groundnuts (Peanuts)</li><li>1 tbsp Chana Dal</li><li>1 tbsp Urad Dal</li><li>2 Dry Red Chilies</li><li>2 Green Chilies</li><li>1 tsp Mustard Seeds</li><li>½ tsp Turmeric Powder</li><li>Curry Leaves</li><li>2 tbsp Sesame Oil</li><li>A pinch of Asafoetida (Hing)</li><li>Salt to Taste</li></ul>
+<h3>👩‍🍳 Preparation</h3><ol><li>Cook the rice until soft and allow it to cool completely.</li><li>Soak tamarind in warm water and extract a thick tamarind pulp.</li><li>Heat sesame oil in a pan and add mustard seeds.</li><li>Add chana dal, urad dal, peanuts, dry red chilies, green chilies, curry leaves, and asafoetida. Fry until golden.</li><li>Add turmeric powder and tamarind pulp. Cook until the raw smell disappears and the mixture thickens.</li><li>Add salt and mix the tamarind mixture well.</li><li>Pour the prepared mixture over the cooled rice.</li><li>Gently mix until every grain of rice is coated with the seasoning.</li><li>Allow the Pulihora to rest for 15 minutes before serving so the flavors blend perfectly.</li></ol>
+<div class="recipe-info"><div><h4>⏱ Cooking Time</h4><p>30 Minutes</p></div><div><h4>🍽 Serves</h4><p>4–5 People</p></div><div><h4>⭐ Difficulty</h4><p>Easy</p></div></div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Use sesame oil instead of regular cooking oil for an authentic Andhra flavor. Let the Pulihora rest for a few minutes before serving to enhance its taste and aroma.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Pulihora is one of the most popular temple prasadam dishes in Andhra Pradesh. It is prepared during festivals and religious ceremonies because it stays fresh for several hours and is easy to serve to large gatherings.</p></div>
+</div>
+<div class="feedback-row"><div class="review-box"><h3>💬 Reviews & Comments</h3><textarea id="review-text-andhra-pulihora" class="review-input" placeholder="Write your review..."></textarea><button class="review-submit" onclick="submitReview('andhra-pulihora','Pulihora')">Post Review</button><div id="reviews-andhra-pulihora" class="reviews-list"></div></div><div class="rating-area"><h3>⭐ Rate This Recipe</h3><div class="stars" data-recipe="andhra-pulihora"><span class="star" onclick="rateRecipe('andhra-pulihora',1,this)">★</span><span class="star" onclick="rateRecipe('andhra-pulihora',2,this)">★</span><span class="star" onclick="rateRecipe('andhra-pulihora',3,this)">★</span><span class="star" onclick="rateRecipe('andhra-pulihora',4,this)">★</span><span class="star" onclick="rateRecipe('andhra-pulihora',5,this)">★</span></div><p class="rating-message" id="rating-andhra-pulihora">Choose your rating</p></div></div>
+<div class="recipe-actions"><button class="favorite-btn" data-favourite-id="andhra-pulihora" onclick="addToFavourite('andhra-pulihora','Pulihora','Royal Heritage',this)">♡ Add to Favourite</button><button class="stamp-btn" data-stamp-id="andhra-pulihora" onclick="addToStamp('andhra-pulihora','Pulihora','Royal Heritage',this)">🏷️ Add to Stamp</button></div>
+</section>
+
+<!-- ================= ANDHRA CHICKEN CURRY ================= -->
+<section class="recipe-section reverse" data-category="main" data-cuisine="andhra" data-name="Andhra Chicken Curry" id="andhra-chicken-curry">
+<div class="recipe-image"><img src="andhrachickencurry.png" alt="Andhra Chicken Curry"></div>
+<div class="recipe-content">
+<h2>🍗 Andhra Chicken Curry</h2>
+<p>Andhra Chicken Curry is one of the most popular dishes in Andhra Pradesh, famous for its bold, spicy, and aromatic flavors. Fresh chicken is cooked with onions, tomatoes, ginger-garlic paste, and traditional Andhra spices to create a rich and flavorful curry. This dish is commonly served during family gatherings, festivals, and special occasions. It pairs perfectly with steamed rice, biryani, chapati, naan, or roti.</p>
+<h3>🥘 Ingredients</h3><ul><li>500 g Chicken (cleaned)</li><li>2 Onions (finely sliced)</li><li>2 Tomatoes (chopped)</li><li>2 tbsp Ginger-Garlic Paste</li><li>2 Green Chilies</li><li>2 tsp Red Chilli Powder</li><li>½ tsp Turmeric Powder</li><li>1 tsp Coriander Powder</li><li>1 tsp Garam Masala</li><li>Curry Leaves</li><li>Fresh Coriander Leaves</li><li>3 tbsp Oil</li><li>Salt to Taste</li></ul>
+<h3>👩‍🍳 Preparation</h3><ol><li>Heat oil in a pan and add curry leaves and sliced onions. Sauté until golden brown.</li><li>Add ginger-garlic paste and cook until the raw smell disappears.</li><li>Add chopped tomatoes and cook until they become soft.</li><li>Mix in turmeric powder, red chilli powder, coriander powder, garam masala, and salt.</li><li>Add the cleaned chicken pieces and mix well so that the spices coat the chicken evenly.</li><li>Cook for about 10 minutes while stirring occasionally.</li><li>Add a little water, cover the pan, and cook until the chicken becomes soft and tender.</li><li>Adjust the consistency of the gravy according to your preference.</li><li>Garnish with fresh coriander leaves and serve hot with rice, chapati, or naan.</li></ol>
+<div class="recipe-info"><div><h4>⏱ Cooking Time</h4><p>45 Minutes</p></div><div><h4>🍽 Serves</h4><p>4 People</p></div><div><h4>⭐ Difficulty</h4><p>Medium</p></div></div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>For authentic Andhra flavor, use freshly ground spices and allow the curry to simmer on low heat. This helps the chicken absorb all the rich spices and enhances the taste.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Andhra Chicken Curry is famous across India for its spicy taste and rich aroma. It is considered one of the signature non-vegetarian dishes of Andhra Pradesh and is loved by spice lovers everywhere.</p></div>
+</div>
+<div class="feedback-row"><div class="review-box"><h3>💬 Reviews & Comments</h3><textarea id="review-text-andhra-chicken-curry" class="review-input" placeholder="Write your review..."></textarea><button class="review-submit" onclick="submitReview('andhra-chicken-curry','Andhra Chicken Curry')">Post Review</button><div id="reviews-andhra-chicken-curry" class="reviews-list"></div></div><div class="rating-area"><h3>⭐ Rate This Recipe</h3><div class="stars" data-recipe="andhra-chicken-curry"><span class="star" onclick="rateRecipe('andhra-chicken-curry',1,this)">★</span><span class="star" onclick="rateRecipe('andhra-chicken-curry',2,this)">★</span><span class="star" onclick="rateRecipe('andhra-chicken-curry',3,this)">★</span><span class="star" onclick="rateRecipe('andhra-chicken-curry',4,this)">★</span><span class="star" onclick="rateRecipe('andhra-chicken-curry',5,this)">★</span></div><p class="rating-message" id="rating-andhra-chicken-curry">Choose your rating</p></div></div>
+<div class="recipe-actions"><button class="favorite-btn" data-favourite-id="andhra-chicken-curry" onclick="addToFavourite('andhra-chicken-curry','Andhra Chicken Curry','Royal Heritage',this)">♡ Add to Favourite</button><button class="stamp-btn" data-stamp-id="andhra-chicken-curry" onclick="addToStamp('andhra-chicken-curry','Andhra Chicken Curry','Royal Heritage',this)">🏷️ Add to Stamp</button></div>
+</section>
+
+<!-- ================= ROYYALA IGURU ================= -->
+<section class="recipe-section" data-category="seafood" data-cuisine="andhra" data-name="Royyala Iguru" id="andhra-royyala-iguru">
+<div class="recipe-image"><img src="Royyala Iguru.png" alt="Royyala Iguru"></div>
+<div class="recipe-content">
+<h2>🍤 Royyala Iguru</h2>
+<p>Royyala Iguru is a famous seafood delicacy from Andhra Pradesh, loved for its rich, spicy, and aromatic flavor. Fresh prawns are cooked with onions, tomatoes, ginger-garlic paste, and traditional Andhra spices to create a thick and flavorful curry. This dish is especially popular in the coastal regions of Andhra Pradesh and is commonly served during family gatherings and festive occasions. Royyala Iguru pairs perfectly with steamed rice, chapati, roti, or biryani.</p>
+<h3>🥘 Ingredients</h3><ul><li>500 g Fresh Prawns (cleaned)</li><li>2 Onions (finely sliced)</li><li>2 Tomatoes (chopped)</li><li>2 tbsp Ginger-Garlic Paste</li><li>2 Green Chilies</li><li>2 tsp Red Chilli Powder</li><li>½ tsp Turmeric Powder</li><li>1 tsp Coriander Powder</li><li>1 tsp Garam Masala</li><li>Curry Leaves</li><li>Fresh Coriander Leaves</li><li>3 tbsp Oil</li><li>Salt to Taste</li></ul>
+<h3>👩‍🍳 Preparation</h3><ol><li>Wash and clean the prawns thoroughly. Drain the excess water.</li><li>Heat oil in a pan and add curry leaves and sliced onions. Sauté until golden brown.</li><li>Add ginger-garlic paste and cook until the raw smell disappears.</li><li>Add chopped tomatoes and cook until soft.</li><li>Mix in turmeric powder, red chilli powder, coriander powder, garam masala, and salt.</li><li>Add the cleaned prawns and mix well with the masala.</li><li>Cook on medium flame for about 8–10 minutes until the prawns become tender.</li><li>Cook until the gravy becomes thick and coats the prawns well.</li><li>Garnish with fresh coriander leaves and serve hot with rice or chapati.</li></ol>
+<div class="recipe-info"><div><h4>⏱ Cooking Time</h4><p>30 Minutes</p></div><div><h4>🍽 Serves</h4><p>4 People</p></div><div><h4>⭐ Difficulty</h4><p>Easy</p></div></div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Do not overcook the prawns, as they can become rubbery. Cook them just until they turn pink and tender for the best taste and texture.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Royyala Iguru is one of the signature seafood dishes of Andhra Pradesh. Thanks to the state's long coastline, fresh prawns are widely available, making this curry a favorite among seafood lovers.</p></div>
+</div>
+<div class="feedback-row"><div class="review-box"><h3>💬 Reviews & Comments</h3><textarea id="review-text-andhra-royyala-iguru" class="review-input" placeholder="Write your review..."></textarea><button class="review-submit" onclick="submitReview('andhra-royyala-iguru','Royyala Iguru')">Post Review</button><div id="reviews-andhra-royyala-iguru" class="reviews-list"></div></div><div class="rating-area"><h3>⭐ Rate This Recipe</h3><div class="stars" data-recipe="andhra-royyala-iguru"><span class="star" onclick="rateRecipe('andhra-royyala-iguru',1,this)">★</span><span class="star" onclick="rateRecipe('andhra-royyala-iguru',2,this)">★</span><span class="star" onclick="rateRecipe('andhra-royyala-iguru',3,this)">★</span><span class="star" onclick="rateRecipe('andhra-royyala-iguru',4,this)">★</span><span class="star" onclick="rateRecipe('andhra-royyala-iguru',5,this)">★</span></div><p class="rating-message" id="rating-andhra-royyala-iguru">Choose your rating</p></div></div>
+<div class="recipe-actions"><button class="favorite-btn" data-favourite-id="andhra-royyala-iguru" onclick="addToFavourite('andhra-royyala-iguru','Royyala Iguru','Royal Heritage',this)">♡ Add to Favourite</button><button class="stamp-btn" data-stamp-id="andhra-royyala-iguru" onclick="addToStamp('andhra-royyala-iguru','Royyala Iguru','Royal Heritage',this)">🏷️ Add to Stamp</button></div>
+</section>
+
+<!-- ================= POOTHAREKULU ================= -->
+<section class="recipe-section reverse" data-category="dessert" data-cuisine="andhra" data-name="Pootharekulu" id="andhra-pootharekulu">
+<div class="recipe-image"><img src="pootharekulu.png" alt="Pootharekulu"></div>
+<div class="recipe-content">
+<h2>🍮 Pootharekulu</h2>
+<p>Pootharekulu is one of Andhra Pradesh's most famous traditional sweets, originating from the village of Atreyapuram. The name "Pootharekulu" means "coated sheets" because it is made using ultra-thin rice starch sheets filled with powdered sugar, pure ghee, and dry fruits. This delicate dessert has a light, crispy texture and a rich, sweet flavor. It is commonly prepared during festivals, weddings, and special family celebrations and is considered one of Andhra Pradesh's signature delicacies.</p>
+<h3>🥘 Ingredients</h3><ul><li>10 Rice Starch Sheets (Pootharekulu Papers)</li><li>1 cup Powdered Sugar</li><li>½ cup Pure Ghee</li><li>2 tbsp Cashew Nuts (Finely Chopped)</li><li>2 tbsp Almonds (Finely Chopped)</li><li>2 tbsp Pistachios (Optional)</li><li>½ tsp Cardamom Powder</li></ul>
+<h3>👩‍🍳 Preparation</h3><ol><li>Place one rice starch sheet carefully on a clean flat surface.</li><li>Brush a thin layer of melted ghee evenly over the sheet.</li><li>Sprinkle powdered sugar uniformly across the sheet.</li><li>Add chopped cashews, almonds, pistachios, and a little cardamom powder.</li><li>Gently fold the sheet from both sides.</li><li>Roll it carefully into a neat cylinder without tearing the sheet.</li><li>Repeat the same process for the remaining sheets.</li><li>Allow the rolls to rest for a few minutes before serving.</li><li>Store them in an airtight container to keep them fresh and crispy.</li></ol>
+<div class="recipe-info"><div><h4>⏱ Cooking Time</h4><p>25 Minutes</p></div><div><h4>🍽 Serves</h4><p>10 Pieces</p></div><div><h4>⭐ Difficulty</h4><p>Medium</p></div></div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Handle the rice starch sheets gently because they are very thin and delicate. Use fresh ghee and finely powdered sugar to achieve the authentic taste and texture.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Pootharekulu originated in Atreyapuram, Andhra Pradesh, and is one of the state's most famous traditional sweets. It is often gifted during festivals and weddings as a symbol of celebration and hospitality.</p></div>
+</div>
+<div class="feedback-row"><div class="review-box"><h3>💬 Reviews & Comments</h3><textarea id="review-text-andhra-pootharekulu" class="review-input" placeholder="Write your review..."></textarea><button class="review-submit" onclick="submitReview('andhra-pootharekulu','Pootharekulu')">Post Review</button><div id="reviews-andhra-pootharekulu" class="reviews-list"></div></div><div class="rating-area"><h3>⭐ Rate This Recipe</h3><div class="stars" data-recipe="andhra-pootharekulu"><span class="star" onclick="rateRecipe('andhra-pootharekulu',1,this)">★</span><span class="star" onclick="rateRecipe('andhra-pootharekulu',2,this)">★</span><span class="star" onclick="rateRecipe('andhra-pootharekulu',3,this)">★</span><span class="star" onclick="rateRecipe('andhra-pootharekulu',4,this)">★</span><span class="star" onclick="rateRecipe('andhra-pootharekulu',5,this)">★</span></div><p class="rating-message" id="rating-andhra-pootharekulu">Choose your rating</p></div></div>
+<div class="recipe-actions"><button class="favorite-btn" data-favourite-id="andhra-pootharekulu" onclick="addToFavourite('andhra-pootharekulu','Pootharekulu','Royal Heritage',this)">♡ Add to Favourite</button><button class="stamp-btn" data-stamp-id="andhra-pootharekulu" onclick="addToStamp('andhra-pootharekulu','Pootharekulu','Royal Heritage',this)">🏷️ Add to Stamp</button></div>
+</section>
+
+<section class="facts-section"><h2>🌶️ Andhra Pradesh Food Facts</h2><div class="facts-container">
+<div class="fact-card"><h3>🌶️ Land of Spices</h3><p>Andhra Pradesh is famous for its spicy cuisine. Red chilies, tamarind, curry leaves, and aromatic spices give Andhra dishes their bold and unforgettable flavor.</p></div>
+<div class="fact-card"><h3>🍋 Famous Pulihora</h3><p>Pulihora is one of the most popular traditional rice dishes of Andhra Pradesh. It is commonly prepared during festivals, temple celebrations, and family gatherings.</p></div>
+<div class="fact-card"><h3>🍤 Coastal Seafood</h3><p>With a long coastline along the Bay of Bengal, Andhra Pradesh is known for its fresh seafood. Prawns, fish, and crab are widely used in many authentic recipes.</p></div>
+<div class="fact-card"><h3>🍗 Andhra Chicken Curry</h3><p>Andhra Chicken Curry is loved across India for its rich aroma and spicy taste. It is one of the state's signature non-vegetarian dishes.</p></div>
+<div class="fact-card"><h3>🍮 Traditional Sweets</h3><p>Pootharekulu, Bobbatlu, Ariselu, and Sunnundalu are among Andhra Pradesh's most famous traditional sweets, enjoyed during festivals and weddings.</p></div>
+</div></section>
+
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+<h2>🕐 RECENTLY VIEWED</h2>
+<div class="recent-container" id="recentContainer"></div>
+</section>
+
+<!-- ================= MY FLAVORVERSE PROFILE ================= -->
+<section class="profile-section">
+<div class="profile-box">
+<h2>👤 MY FLAVORVERSE PROFILE</h2>
+<p class="profile-name" id="profileName">Flavorverse User</p>
+<p class="profile-email" id="profileEmail">Please login to view your profile</p>
+
+<div class="profile-stats">
+<div class="profile-card">
+<span class="count" id="favouriteCount">0</span>
+<span>❤️ Favourites</span>
+</div>
+
+<div class="profile-card">
+<span class="count" id="stampCount">0</span>
+<span>🏷️ Stamps</span>
+</div>
+
+<div class="profile-card">
+<span class="count" id="ratingCount">0</span>
+<span>⭐ Ratings</span>
+</div>
+
+<div class="profile-card">
+<span class="count" id="reviewCount">0</span>
+<span>💬 Reviews</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="chef-section"><h2>👨‍🍳 Chef's Recommendation</h2><p>Experience the authentic flavors of Andhra Pradesh by starting with the tangy <b>Pulihora</b>, followed by the spicy <b>Andhra Chicken Curry</b>, enjoy the rich seafood taste of <b>Royyala Iguru</b>, and finish your meal with the delicate sweetness of <b>Pootharekulu</b>. This combination perfectly represents the bold flavors, rich traditions, and culinary heritage of Andhra Pradesh.</p></section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+
+<footer><h2>🍴 The Flavorverse</h2><p>Discover India's rich culinary heritage, one delicious recipe at a time.</p><div class="social"><a href="#">📘</a><a href="#">📸</a><a href="#">▶️</a><a href="#">🐦</a></div><p class="copy">© 2026 The Flavorverse | All Rights Reserved</p></footer>
+
+</body>
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+authDomain: "the-flavoverse.firebaseapp.com",
+
+projectId: "the-flavoverse",
+
+storageBucket: "the-flavoverse.firebasestorage.app",
+
+messagingSenderId: "1064022248292",
+
+appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+
+};
+
+if(!firebase.apps.length){
+
+firebase.initializeApp(firebaseConfig);
+
+}
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipes = [
+{id:"andhra-pulihora",name:"Pulihora",category:"main",cuisine:"andhra"},
+{id:"andhra-chicken-curry",name:"Andhra Chicken Curry",category:"main",cuisine:"andhra"},
+{id:"andhra-royyala-iguru",name:"Royyala Iguru",category:"seafood",cuisine:"andhra"},
+{id:"andhra-pootharekulu",name:"Pootharekulu",category:"dessert",cuisine:"andhra"}
+];
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function getCurrentUser(){
+
+return auth.currentUser;
+
+}
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function addToFavourite(id,name,category,button){
+
+const user = getCurrentUser();
+
+if(!user){
+
+alert("Please login first to add favourites ❤️");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const ref =
+db.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.doc(id);
+
+const existing = await ref.get();
+
+if(existing.exists){
+
+await ref.delete();
+
+button.innerHTML="♡ Add to Favourite";
+
+alert(name+" removed from favourites.");
+
+}
+
+else{
+
+await ref.set({
+
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+button.innerHTML="♥ Added to Favourite";
+
+alert(name+" added to favourites ❤️");
+
+}
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Favourite update failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function addToStamp(id,name,category,button){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to add stamps 🏷️");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const ref =
+db.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.doc(id);
+
+const existing=await ref.get();
+
+if(existing.exists){
+
+await ref.delete();
+
+button.innerHTML="🏷️ Add to Stamp";
+
+alert(name+" removed from passport.");
+
+}
+
+else{
+
+await ref.set({
+
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+button.innerHTML="🏷️ Stamped";
+
+alert(name+" added to your Flavorverse Passport 🏷️");
+
+}
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Stamp update failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function rateRecipe(recipeId,rating,element){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to rate recipes ⭐");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.doc(recipeId)
+.set({
+
+recipeId:recipeId,
+rating:rating,
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+const stars=element.parentElement.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+
+if(index<rating){
+
+star.classList.add("active");
+
+}
+else{
+
+star.classList.remove("active");
+
+}
+
+});
+
+document.getElementById("rating-"+recipeId).innerText =
+"You rated this recipe "+rating+"/5 ⭐";
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Rating failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD USER RATINGS
+===================================================== */
+
+async function loadRatings(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const doc=await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.doc(recipe.id)
+.get();
+
+if(doc.exists){
+
+const rating=doc.data().rating;
+
+const container=
+document.querySelector(
+'.stars[data-recipe="'+recipe.id+'"]'
+);
+
+if(container){
+
+const stars=container.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+
+if(index<rating){
+
+star.classList.add("active");
+
+}
+
+});
+
+}
+
+const text=document.getElementById(
+"rating-"+recipe.id
+);
+
+if(text){
+
+text.innerText=
+"You rated this recipe "+rating+"/5 ⭐";
+
+}
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+async function submitReview(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to post a review 💬");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+const textarea=document.getElementById(
+"review-text-"+recipeId
+);
+
+const text=textarea.value.trim();
+
+if(!text){
+
+alert("Please write a review first.");
+
+return;
+
+}
+
+try{
+
+const userDoc=
+await db.collection("users")
+.doc(user.uid)
+.get();
+
+let userName="Flavorverse User";
+
+if(userDoc.exists && userDoc.data().name){
+
+userName=userDoc.data().name;
+
+}
+
+await db
+.collection("recipes")
+.doc(recipeId)
+.collection("reviews")
+.doc(user.uid)
+.set({
+
+recipeId:recipeId,
+recipeName:recipeName,
+userId:user.uid,
+userName:userName,
+review:text,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+textarea.value="";
+
+alert("Review posted successfully! 💬");
+
+loadReviews(recipeId);
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Review failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(recipeId){
+
+const container=
+document.getElementById("reviews-"+recipeId);
+
+if(!container) return;
+
+try{
+
+const snapshot=
+await db
+.collection("recipes")
+.doc(recipeId)
+.collection("reviews")
+.orderBy("createdAt","desc")
+.limit(10)
+.get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+
+container.innerHTML=
+'<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const review=document.createElement("div");
+
+review.className="single-review";
+
+const name=document.createElement("strong");
+
+name.textContent=
+"💜 "+(data.userName || "Flavorverse User");
+
+const content=document.createElement("p");
+
+content.textContent=data.review || "";
+
+const date=document.createElement("small");
+
+if(data.createdAt){
+
+date.textContent=
+data.createdAt.toDate().toLocaleDateString();
+
+}
+
+review.appendChild(name);
+
+review.appendChild(content);
+
+review.appendChild(date);
+
+container.appendChild(review);
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+container.innerHTML=
+'<p class="no-review">Reviews will appear here.</p>';
+
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED
+===================================================== */
+
+async function addRecentlyViewed(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+try{
+
+await db
+.collection("users")
+.doc(user.uid)
+.collection("recentlyViewed")
+.doc(recipeId)
+.set({
+
+recipeId:recipeId,
+recipeName:recipeName,
+viewedAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED DISPLAY
+===================================================== */
+
+async function loadRecentlyViewed(){
+
+const container=
+document.getElementById("recentContainer");
+
+if(!container) return;
+
+const user=getCurrentUser();
+
+if(!user){
+
+container.innerHTML=
+'<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+
+return;
+
+}
+
+try{
+
+const snapshot=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("recentlyViewed")
+.orderBy("viewedAt","desc")
+.limit(8)
+.get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+
+container.innerHTML=
+'<p class="recent-empty">No recently viewed recipes yet.</p>';
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const card=document.createElement("div");
+
+card.className="recent-card";
+
+const title=document.createElement("h3");
+
+title.textContent="🕐 "+data.recipeName;
+
+const text=document.createElement("p");
+
+text.textContent=
+"You recently explored this recipe.";
+
+card.appendChild(title);
+
+card.appendChild(text);
+
+container.appendChild(card);
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   TRACK RECIPE VIEW
+===================================================== */
+
+function setupRecentlyViewed(){
+
+const recipeSections=
+document.querySelectorAll(".recipe-section");
+
+const observer=
+new IntersectionObserver(
+
+entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const id=entry.target.id;
+
+const recipe=
+recipes.find(item=>item.id===id);
+
+if(recipe){
+
+addRecentlyViewed(
+recipe.id,
+recipe.name
+);
+
+}
+
+}
+
+});
+
+},
+
+{
+threshold:0.35
+}
+
+);
+
+recipeSections.forEach(section=>{
+
+observer.observe(section);
+
+});
+
+}
+
+
+/* =====================================================
+   PROFILE COUNTS
+===================================================== */
+
+async function updateProfileCounts(){
+
+const user=getCurrentUser();
+
+if(!document.getElementById("favouriteCount") || !document.getElementById("stampCount") || !document.getElementById("ratingCount") || !document.getElementById("reviewCount")) return;
+
+if(!user){
+
+document.getElementById("favouriteCount").innerText="0";
+
+document.getElementById("stampCount").innerText="0";
+
+document.getElementById("ratingCount").innerText="0";
+
+document.getElementById("reviewCount").innerText="0";
+
+return;
+
+}
+
+try{
+
+const userDoc=
+await db.collection("users")
+.doc(user.uid)
+.get();
+
+if(userDoc.exists){
+
+const data=userDoc.data();
+
+document.getElementById("profileName").innerText=
+data.name || "Flavorverse User";
+
+document.getElementById("profileEmail").innerText=
+data.email || user.email;
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+user.email;
+
+document.getElementById("profileEmail").innerText=
+user.email;
+
+}
+
+
+const favourites=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.get();
+
+const stamps=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.get();
+
+const ratings=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.get();
+
+
+/*
+   Reviews are stored inside
+   recipes/{recipeId}/reviews/{uid}
+*/
+
+let reviewTotal=0;
+
+for(const recipe of recipes){
+
+const review=
+await db
+.collection("recipes")
+.doc(recipe.id)
+.collection("reviews")
+.doc(user.uid)
+.get();
+
+if(review.exists){
+
+reviewTotal++;
+
+}
+
+}
+
+
+document.getElementById("favouriteCount").innerText=
+favourites.size;
+
+document.getElementById("stampCount").innerText=
+stamps.size;
+
+document.getElementById("ratingCount").innerText=
+ratings.size;
+
+document.getElementById("reviewCount").innerText=
+reviewTotal;
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   UPDATE BUTTON STATUS
+===================================================== */
+
+async function updateButtons(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const fav=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.doc(recipe.id)
+.get();
+
+const favButton=
+document.querySelector(
+'[data-favourite-id="'+recipe.id+'"]'
+);
+
+if(fav.exists && favButton){
+
+favButton.innerHTML=
+"♥ Added to Favourite";
+
+}
+
+
+const stamp=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.doc(recipe.id)
+.get();
+
+const stampButton=
+document.querySelector(
+'[data-stamp-id="'+recipe.id+'"]'
+);
+
+if(stamp.exists && stampButton){
+
+stampButton.innerHTML=
+"🏷️ Stamped";
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   SEARCH + FILTER
+===================================================== */
+
+function filterRecipes(){
+
+const search=
+document.getElementById("recipeSearch")
+.value
+.toLowerCase()
+.trim();
+
+const category=
+document.getElementById("categoryFilter")
+.value;
+
+const cuisine=
+document.getElementById("cuisineFilter")
+.value;
+
+let count=0;
+
+document.querySelectorAll(".recipe-section")
+.forEach(section=>{
+
+const name=
+section.dataset.name.toLowerCase();
+
+const sectionCategory=
+section.dataset.category;
+
+const sectionCuisine=
+section.dataset.cuisine;
+
+const searchMatch=
+name.includes(search);
+
+const categoryMatch=
+category==="all" ||
+sectionCategory===category;
+
+const cuisineMatch=
+cuisine==="all" ||
+sectionCuisine===cuisine;
+
+if(
+searchMatch &&
+categoryMatch &&
+cuisineMatch
+){
+
+section.classList.remove("hidden-recipe");
+
+count++;
+
+}
+else{
+
+section.classList.add("hidden-recipe");
+
+}
+
+});
+
+document.getElementById("showingCount").innerText=
+"Showing "+count+" recipe"+(count!==1?"s":"");
+
+}
+
+
+/* =====================================================
+   RESET FILTER
+===================================================== */
+
+function resetFilters(){
+
+document.getElementById("recipeSearch").value="";
+
+document.getElementById("categoryFilter").value="all";
+
+document.getElementById("cuisineFilter").value="all";
+
+document.querySelectorAll(".recipe-section")
+.forEach(section=>{
+
+section.classList.remove("hidden-recipe");
+
+});
+
+document.getElementById("showingCount").innerText=
+"Showing 4 recipes";
+
+}
+
+function showAllRecipes(){
+
+resetFilters();
+
+}
+
+
+/* =====================================================
+   SURPRISE ME
+===================================================== */
+
+function surpriseMe(){
+
+const visibleRecipes=
+Array.from(
+document.querySelectorAll(".recipe-section")
+)
+.filter(recipe=>
+!recipe.classList.contains("hidden-recipe")
+);
+
+if(visibleRecipes.length===0){
+
+alert("No recipes available with the selected filter.");
+
+return;
+
+}
+
+const random=
+visibleRecipes[
+Math.floor(Math.random()*visibleRecipes.length)
+];
+
+random.scrollIntoView({
+
+behavior:"smooth",
+block:"center"
+
+});
+
+random.style.boxShadow=
+"0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+
+setTimeout(()=>{
+
+random.style.boxShadow=
+"0 8px 20px rgba(0,0,0,.12)";
+
+},2500);
+
+alert(
+"🎲 Surprise Recipe: "+
+random.dataset.name
+);
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function updateDarkModeButton(){
+
+const icon=document.getElementById("themeIcon");
+
+if(!icon) return;
+
+icon.innerHTML=
+document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+
+}
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+if(document.body.classList.contains("dark-mode")){
+
+localStorage.setItem("flavorverseDarkMode","on");
+
+}else{
+
+localStorage.setItem("flavorverseDarkMode","off");
+
+}
+
+updateDarkModeButton();
+
+}
+
+function loadDarkMode(){
+
+if(localStorage.getItem("flavorverseDarkMode")==="on"){
+
+document.body.classList.add("dark-mode");
+
+}
+
+updateDarkModeButton();
+
+}
+
+
+/* ================= HAMBURGER MENU ================= */
+function openExploreMenu(){
+    const drawer=document.getElementById("exploreDrawer");
+    const overlay=document.getElementById("menuOverlay");
+    if(!drawer || !overlay) return;
+    drawer.classList.add("open");
+    overlay.classList.add("show");
+    drawer.setAttribute("aria-hidden","false");
+    document.body.classList.add("drawer-open");
+}
+function closeExploreMenu(){
+    const drawer=document.getElementById("exploreDrawer");
+    const overlay=document.getElementById("menuOverlay");
+    if(!drawer || !overlay) return;
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+    drawer.setAttribute("aria-hidden","true");
+    document.body.classList.remove("drawer-open");
+}
+document.addEventListener("keydown",function(event){
+    if(event.key==="Escape") closeExploreMenu();
+});
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(async function(user){
+
+if(user){
+
+try{
+
+const userDoc=
+await db
+.collection("users")
+.doc(user.uid)
+.get();
+
+if(userDoc.exists){
+
+const data=userDoc.data();
+
+document.getElementById("profileName").innerText=
+data.name || "Flavorverse User";
+
+document.getElementById("profileEmail").innerText=
+data.email || user.email;
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+user.email;
+
+document.getElementById("profileEmail").innerText=
+user.email;
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+updateButtons();
+
+updateProfileCounts();
+
+loadRatings();
+
+loadRecentlyViewed();
+
+recipes.forEach(recipe=>{
+
+loadReviews(recipe.id);
+
+});
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+"Guest";
+
+document.getElementById("profileEmail").innerText=
+"Login to see your profile";
+
+loadRecentlyViewed();
+
+}
+
+});
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+loadDarkMode();
+
+setupRecentlyViewed();
+
+});
+
+</script></body>
+</html>

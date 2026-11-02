@@ -1,0 +1,4372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Harry Potter Recipes | The Flavorverse</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:#eadbea;
+    color:#5d4b5f;
+    overflow-x:hidden;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+header{
+    width:100%;
+    padding:14px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#684c6b;
+    border-bottom:2px solid #d6b979;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 8px 25px rgba(40,25,45,.20);
+}
+
+.logo{
+    color:#f5dda2;
+    font-size:23px;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-toggle{
+    border:1px solid #d6b979;
+    background:#80617f;
+    color:#f5dda2;
+    padding:10px 18px;
+    border-radius:24px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1px;
+    cursor:pointer;
+    transition:.3s;
+    position:relative;
+    z-index:1002;
+}
+
+.menu-toggle:hover{
+    background:#d6b979;
+    color:#684c6b;
+    transform:translateY(-2px);
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.menu-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(40,25,45,.38);
+    opacity:0;
+    visibility:hidden;
+    transition:.35s ease;
+    z-index:1998;
+}
+
+.menu-overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+
+/* =====================================================
+   SMALL RIGHT SIDE EXPLORE MENU
+===================================================== */
+
+#mainMenu{
+
+    position:fixed;
+    top:0;
+    right:0;
+
+    width:360px;
+    max-width:82vw;
+    height:100vh;
+
+    background:#fff8ef;
+
+    box-shadow:
+        -15px 0 45px
+        rgba(40,25,45,.28);
+
+    z-index:2000;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow-y:auto;
+
+    transform:translateX(105%);
+
+    transition:
+        transform .4s
+        cubic-bezier(.22,.61,.36,1);
+
+    visibility:hidden;
+}
+
+#mainMenu.show{
+    transform:translateX(0);
+    visibility:visible;
+}
+
+
+/* =====================================================
+   MENU HEADER
+===================================================== */
+
+.menu-header{
+
+    min-height:90px;
+
+    padding:0 24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:#967492;
+
+    color:white;
+}
+
+.menu-title{
+
+    font-size:27px;
+
+    font-weight:bold;
+
+    color:#fffaf5;
+}
+
+.menu-close{
+
+    width:38px;
+    height:38px;
+
+    border:none;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:34px;
+
+    font-family:Arial,sans-serif;
+
+    font-weight:200;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.3s;
+}
+
+.menu-close:hover{
+    transform:rotate(90deg);
+    opacity:.75;
+}
+
+
+/* =====================================================
+   MENU CONTENT
+===================================================== */
+
+.menu-content{
+
+    padding:15px 24px 25px;
+
+    flex:1;
+}
+
+
+/* =====================================================
+   MENU ITEMS
+===================================================== */
+
+.menu-item{
+
+    width:100%;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    padding:13px 6px;
+
+    color:#684c6b;
+
+    text-decoration:none;
+
+    border-radius:12px;
+
+    transition:.25s ease;
+}
+
+.menu-item:hover{
+
+    background:#f3e5f0;
+
+    transform:translateX(4px);
+}
+
+
+/* =====================================================
+   MENU ICON
+===================================================== */
+
+.menu-icon{
+
+    width:32px;
+    min-width:32px;
+
+    text-align:center;
+
+    font-size:23px;
+
+    line-height:1;
+}
+
+
+/* =====================================================
+   MENU TEXT
+===================================================== */
+
+.menu-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:3px;
+}
+
+.menu-name{
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    color:#684c6b;
+}
+
+.menu-description{
+
+    font-size:11px;
+
+    color:#806184;
+
+    line-height:1.35;
+}
+
+
+/* =====================================================
+   DIVIDER
+===================================================== */
+
+.menu-divider{
+
+    height:1px;
+
+    background:#e4d3c8;
+
+    margin:7px 0 10px;
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+#mainMenu::-webkit-scrollbar{
+    width:6px;
+}
+
+#mainMenu::-webkit-scrollbar-track{
+    background:#fff8ef;
+}
+
+#mainMenu::-webkit-scrollbar-thumb{
+    background:#b99ab5;
+    border-radius:10px;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero-section{
+
+    min-height:470px;
+
+    padding:55px 7%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+    overflow:hidden;
+
+    background:#eadbea;
+}
+
+.hero-card{
+
+    width:100%;
+    max-width:1050px;
+
+    min-height:350px;
+
+    padding:40px 55px;
+
+    border-radius:32px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:40px;
+
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 25%,
+            rgba(124,94,153,0.45),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(212,182,113,0.25),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #211b35,
+            #302448,
+            #49335c,
+            #241d39
+        );
+
+    border:2px solid #c8a75d;
+
+    box-shadow:
+        0 25px 55px
+        rgba(48,32,65,0.35);
+
+    background-size:200% 200%;
+
+    animation:
+        heroMagic 9s ease-in-out infinite;
+}
+
+@keyframes heroMagic{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+.hero-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:200px;
+    height:200px;
+
+    border-radius:50%;
+
+    background:
+        rgba(173,139,210,0.25);
+
+    filter:blur(30px);
+
+    top:-80px;
+    left:-50px;
+
+    animation:
+        heroLight 6s infinite alternate;
+}
+
+.hero-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    border-radius:50%;
+
+    background:
+        rgba(220,188,102,0.18);
+
+    filter:blur(30px);
+
+    right:-50px;
+    bottom:-50px;
+
+    animation:
+        heroLight 7s infinite alternate-reverse;
+}
+
+@keyframes heroLight{
+
+    from{
+        transform:
+            translate(0,0)
+            scale(1);
+    }
+
+    to{
+        transform:
+            translate(70px,40px)
+            scale(1.3);
+    }
+}
+
+.hero-content{
+
+    position:relative;
+    z-index:5;
+    max-width:560px;
+}
+
+.hero-small{
+
+    color:#d9bc72;
+    font-size:11px;
+    letter-spacing:4px;
+    font-weight:bold;
+    margin-bottom:14px;
+}
+
+.hero-content h1{
+
+    color:#fff4d8;
+    font-size:46px;
+    line-height:1.15;
+    margin-bottom:15px;
+}
+
+.hero-content h1 span{
+    color:#c8a75d;
+}
+
+.hero-content p{
+
+    color:#ddd2e5;
+    font-size:13px;
+    line-height:1.8;
+    max-width:480px;
+    margin-bottom:22px;
+}
+
+.hero-btn{
+
+    display:inline-block;
+
+    padding:11px 23px;
+
+    border-radius:25px;
+
+    background:#c8a75d;
+
+    color:#29203b;
+
+    border:1px solid #e0c77d;
+
+    text-decoration:none;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+
+    transition:.4s;
+}
+
+.hero-btn:hover{
+
+    background:#efe0ad;
+    color:#392b4b;
+
+    transform:translateY(-3px);
+}
+
+.hero-image{
+
+    width:300px;
+    height:300px;
+
+    position:relative;
+    z-index:5;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    border-radius:32px;
+
+    display:block;
+
+    filter:
+        drop-shadow(
+            0 18px 25px
+            rgba(0,0,0,0.45)
+        );
+
+    animation:
+        heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat{
+
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+.hero-star{
+
+    position:absolute;
+
+    color:#e1c77b;
+
+    font-size:20px;
+
+    opacity:.6;
+
+    animation:
+        starFloat 5s infinite ease-in-out;
+
+    z-index:4;
+}
+
+.hero-star.one{
+    top:15%;
+    left:8%;
+}
+
+.hero-star.two{
+    top:20%;
+    right:42%;
+    animation-delay:1s;
+}
+
+.hero-star.three{
+    bottom:15%;
+    left:45%;
+    animation-delay:2s;
+}
+
+.hero-star.four{
+    bottom:20%;
+    right:8%;
+    animation-delay:3s;
+}
+
+@keyframes starFloat{
+
+    0%{
+        transform:
+            translateY(0)
+            rotate(0);
+
+        opacity:.3;
+    }
+
+    50%{
+        transform:
+            translateY(-20px)
+            rotate(180deg);
+
+        opacity:.9;
+    }
+
+    100%{
+        transform:
+            translateY(0)
+            rotate(360deg);
+
+        opacity:.3;
+    }
+}
+
+
+/* =====================================================
+   RECIPES
+===================================================== */
+
+.recipes{
+
+    position:relative;
+
+    padding:90px 6% 110px;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(244,211,142,0.18),
+            transparent 22%
+        ),
+
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(168,135,166,0.25),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #604763,
+            #80617f,
+            #a987a6,
+            #80617f,
+            #604763
+        );
+
+    background-size:200% 200%;
+
+    animation:
+        magicalBackground 14s ease infinite;
+
+    overflow:hidden;
+}
+
+@keyframes magicalBackground{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+.magic{
+
+    position:absolute;
+
+    color:#f5dda2;
+
+    font-size:21px;
+
+    opacity:.55;
+
+    animation:
+        floatMagic 7s infinite ease-in-out;
+
+    pointer-events:none;
+}
+
+.magic:nth-child(1){
+    top:8%;
+    left:8%;
+}
+
+.magic:nth-child(2){
+    top:20%;
+    right:10%;
+    animation-delay:2s;
+}
+
+.magic:nth-child(3){
+    top:50%;
+    left:3%;
+    animation-delay:1s;
+}
+
+.magic:nth-child(4){
+    top:72%;
+    right:5%;
+    animation-delay:3s;
+}
+
+.magic:nth-child(5){
+    top:35%;
+    left:48%;
+    animation-delay:2.5s;
+}
+
+.magic:nth-child(6){
+    bottom:8%;
+    left:20%;
+    animation-delay:4s;
+}
+
+@keyframes floatMagic{
+
+    0%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity:.25;
+    }
+
+    50%{
+        transform:
+            translateY(-35px)
+            rotate(180deg);
+
+        opacity:.85;
+    }
+
+    100%{
+        transform:
+            translateY(0)
+            rotate(360deg);
+
+        opacity:.25;
+    }
+}
+
+
+/* =====================================================
+   RECIPE HEADING
+===================================================== */
+
+.recipe-heading{
+
+    position:relative;
+    z-index:5;
+
+    text-align:center;
+
+    margin-bottom:70px;
+}
+
+.recipe-heading span{
+
+    color:#f2d18b;
+
+    font-size:11px;
+
+    letter-spacing:5px;
+
+    font-weight:bold;
+}
+
+.recipe-heading h1{
+
+    margin-top:15px;
+
+    color:#fff3df;
+
+    font-size:46px;
+}
+
+.recipe-heading p{
+
+    margin:15px auto 0;
+
+    max-width:600px;
+
+    color:#eadde8;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+
+/* =====================================================
+   RECIPE CARDS
+===================================================== */
+
+.recipe-wrapper{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:55px;
+
+    position:relative;
+
+    z-index:10;
+}
+
+.recipe-card{
+
+    height:520px;
+
+    perspective:1200px;
+
+    position:relative;
+}
+
+.card-inner{
+
+    width:100%;
+    height:100%;
+
+    position:relative;
+
+    transform-style:preserve-3d;
+
+    transition:
+        transform .9s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+.recipe-card:hover .card-inner{
+
+    transform:
+        rotateY(180deg);
+}
+
+.card-front,
+.card-back{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    border-radius:25px;
+
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+
+    overflow:hidden;
+
+    border:
+        2px solid #c8a75d;
+
+    box-shadow:
+        0 25px 50px
+        rgba(40,25,45,.38);
+}
+
+.card-front{
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f1e8f5,
+            #dfcee6,
+            #cfb7d7
+        );
+
+    display:flex;
+
+    flex-direction:column;
+
+    transform:
+        rotateY(0deg);
+}
+
+.card-image{
+
+    height:58%;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#b69ac0;
+}
+
+.card-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.8s;
+}
+
+.recipe-card:hover
+.card-image img{
+    transform:scale(1.08);
+}
+
+.card-image::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+            to top,
+            rgba(60,35,70,.5),
+            transparent 55%
+        );
+}
+
+.card-tag{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    padding:8px 14px;
+
+    background:#4d385d;
+
+    color:#f5dda2;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    font-weight:bold;
+
+    border-radius:20px;
+
+    z-index:5;
+}
+
+.card-content{
+
+    flex:1;
+
+    padding:
+        22px 27px;
+
+    position:relative;
+}
+
+.card-content small{
+
+    color:#84619a;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+}
+
+.card-content h2{
+
+    margin:8px 0;
+
+    color:#563b63;
+
+    font-size:27px;
+}
+
+.card-content p{
+
+    color:#705d73;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+.card-info{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-top:14px;
+}
+
+.card-info span{
+
+    padding:
+        7px 12px;
+
+    border-radius:20px;
+
+    background:#eee3f1;
+
+    color:#60446c;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+.gold-line{
+
+    width:55px;
+
+    height:2px;
+
+    background:#b48a4c;
+
+    margin-top:13px;
+
+    transition:.5s;
+}
+
+.recipe-card:hover
+.gold-line{
+    width:120px;
+}
+
+.front-star{
+
+    position:absolute;
+
+    right:22px;
+    bottom:20px;
+
+    color:#89649c;
+
+    font-size:22px;
+
+    animation:
+        starGlow 2s infinite alternate;
+}
+
+@keyframes starGlow{
+
+    from{
+        opacity:.4;
+        transform:scale(.9);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.2);
+    }
+}
+
+
+/* =====================================================
+   CARD BACK
+===================================================== */
+
+.card-back{
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #dac5e2,
+            #c7add1,
+            #b798c2
+        );
+
+    transform:
+        rotateY(180deg);
+
+    padding:30px;
+
+    color:#5d4b5f;
+}
+
+.back-inner{
+
+    height:100%;
+
+    border:
+        1px solid #b48a4c;
+
+    border-radius:17px;
+
+    padding:25px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.back-inner::before{
+
+    content:"⚡";
+
+    position:absolute;
+
+    top:-25px;
+    right:20px;
+
+    font-size:100px;
+
+    color:
+        rgba(93,68,110,.10);
+}
+
+.back-inner h3{
+
+    color:#563b63;
+
+    font-size:25px;
+
+    margin-bottom:15px;
+}
+
+.back-inner h4{
+
+    color:#79537f;
+
+    margin-top:15px;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+}
+
+.back-inner ul,
+.back-inner ol{
+
+    padding-left:20px;
+}
+
+.back-inner li{
+
+    color:#625367;
+
+    font-size:11px;
+
+    line-height:1.5;
+
+    margin-bottom:5px;
+}
+
+.flip-hint{
+
+    position:absolute;
+
+    bottom:20px;
+    right:25px;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#79537f;
+}
+
+
+/* =====================================================
+   FEATURE BUTTONS
+===================================================== */
+
+.recipe-feature-area{
+
+    margin-top:16px;
+
+    background:rgba(255,255,255,.94);
+
+    border:
+        1px solid #c8a75d;
+
+    border-radius:20px;
+
+    padding:15px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(40,25,45,.25);
+
+    position:relative;
+
+    z-index:20;
+}
+
+.feature-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.feature-btn{
+
+    border:none;
+
+    border-radius:25px;
+
+    padding:10px 16px;
+
+    cursor:pointer;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+.feature-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(40,25,45,.18);
+}
+
+.favourite-btn{
+
+    background:#f1dce9;
+
+    color:#684c6b;
+}
+
+.stamp-btn{
+
+    background:#f3e6c9;
+
+    color:#684c6b;
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.rating-area{
+
+    margin-top:12px;
+
+    text-align:center;
+}
+
+.rating-label{
+
+    color:#684c6b;
+
+    font-size:11px;
+
+    margin-bottom:3px;
+}
+
+.rating-stars{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:3px;
+}
+
+.rating-star{
+
+    background:transparent;
+
+    border:none;
+
+    padding:0;
+
+    cursor:pointer;
+
+    font-size:23px;
+
+    color:#c9b8c8;
+
+    transition:.2s;
+}
+
+.rating-star:hover{
+    transform:scale(1.15);
+}
+
+.rating-star.active{
+    color:#d6b979;
+}
+
+.rating-message{
+
+    margin-top:4px;
+
+    color:#806184;
+
+    font-size:10px;
+}
+
+
+/* =====================================================
+   FLAVORVERSE CARD
+===================================================== */
+
+.flavorverse-card{
+
+    max-width:900px;
+
+    margin:65px auto 0;
+
+    padding:30px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff8ef,
+            #f0dfee
+        );
+
+    border:
+        2px solid #c8a75d;
+
+    border-radius:28px;
+
+    box-shadow:
+        0 20px 45px
+        rgba(40,25,45,.28);
+
+    position:relative;
+
+    z-index:20;
+}
+
+.flavorverse-card h2{
+
+    text-align:center;
+
+    color:#563b63;
+
+    font-size:28px;
+
+    margin-bottom:8px;
+}
+
+.flavorverse-subtitle{
+
+    text-align:center;
+
+    color:#806184;
+
+    font-size:12px;
+
+    margin-bottom:25px;
+}
+
+.activity-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:14px;
+}
+
+.activity-item{
+
+    background:#fff;
+
+    border:
+        1px solid #dfcee2;
+
+    border-radius:18px;
+
+    padding:18px 10px;
+
+    text-align:center;
+}
+
+.activity-icon{
+    font-size:23px;
+}
+
+.activity-count{
+
+    display:block;
+
+    color:#684c6b;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    margin:5px 0;
+}
+
+.activity-label{
+
+    color:#806184;
+
+    font-size:11px;
+}
+
+
+/* =====================================================
+   REVIEW
+===================================================== */
+
+.review-section{
+
+    max-width:900px;
+
+    margin:35px auto 0;
+
+    padding:30px;
+
+    background:rgba(255,255,255,.95);
+
+    border:
+        2px solid #c8a75d;
+
+    border-radius:28px;
+
+    box-shadow:
+        0 20px 45px
+        rgba(40,25,45,.25);
+
+    position:relative;
+
+    z-index:20;
+}
+
+.review-section h2{
+
+    text-align:center;
+
+    color:#563b63;
+
+    font-size:26px;
+
+    margin-bottom:20px;
+}
+
+.review-form{
+
+    display:grid;
+
+    gap:12px;
+}
+
+.review-form select,
+.review-form textarea{
+
+    width:100%;
+
+    border:
+        1px solid #d7c1da;
+
+    border-radius:14px;
+
+    padding:12px;
+
+    background:#fff;
+
+    color:#5d4b5f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    outline:none;
+}
+
+.review-form textarea{
+
+    min-height:120px;
+
+    resize:vertical;
+}
+
+.review-submit{
+
+    width:fit-content;
+
+    margin:auto;
+
+    padding:11px 22px;
+
+    border:none;
+
+    border-radius:24px;
+
+    background:#684c6b;
+
+    color:#f5dda2;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.review-submit:hover{
+
+    background:#80617f;
+
+    transform:translateY(-2px);
+}
+
+.reviews-list{
+
+    margin-top:25px;
+}
+
+.review-item{
+
+    background:#f8eef7;
+
+    border-left:
+        4px solid #c8a75d;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    margin-bottom:12px;
+}
+
+.review-user{
+
+    color:#684c6b;
+
+    font-weight:bold;
+
+    font-size:13px;
+}
+
+.review-recipe{
+
+    color:#806184;
+
+    font-size:10px;
+
+    margin-top:3px;
+}
+
+.review-date{
+
+    color:#927f91;
+
+    font-size:10px;
+
+    margin-left:7px;
+}
+
+.review-text{
+
+    color:#5d4b5f;
+
+    font-size:12px;
+
+    line-height:1.6;
+
+    margin-top:7px;
+}
+
+.no-reviews{
+
+    text-align:center;
+
+    color:#806184;
+
+    font-size:12px;
+
+    padding:15px;
+}
+
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quote{
+
+    position:relative;
+
+    padding:
+        65px 20px 75px;
+
+    text-align:center;
+
+    background:transparent;
+}
+
+.quote span{
+
+    color:#f2d18b;
+
+    font-size:22px;
+
+    letter-spacing:7px;
+}
+
+.quote h2{
+
+    max-width:700px;
+
+    margin:18px auto;
+
+    color:#fff3df;
+
+    font-size:28px;
+
+    line-height:1.6;
+
+    font-style:italic;
+
+    font-weight:normal;
+}
+
+.quote p{
+
+    color:#eadde8;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-movies{
+
+    width:100%;
+
+    padding:0 6% 25px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    background:transparent;
+}
+
+.back-movies a{
+
+    display:inline-block;
+
+    padding:11px 20px;
+
+    border:
+        1px solid #d6b979;
+
+    border-radius:25px;
+
+    background:#684c6b;
+
+    color:#f5dda2;
+
+    text-decoration:none;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+
+    transition:.4s;
+}
+
+.back-movies a:hover{
+
+    background:#d6b979;
+
+    color:#684c6b;
+
+    transform:translateY(-3px);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    position:relative;
+
+    z-index:100;
+
+    padding:48px 20px;
+
+    text-align:center;
+
+    background:#684c6b;
+
+    color:white;
+
+    border-top:
+        2px solid #d6b979;
+}
+
+footer h3{
+
+    color:#f3dda5;
+
+    font-size:22px;
+
+    margin-bottom:10px;
+}
+
+footer p{
+
+    color:#eadde8;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+#toast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:25px;
+
+    transform:
+        translate(-50%,120px);
+
+    background:#684c6b;
+
+    color:white;
+
+    border:
+        1px solid #d6b979;
+
+    padding:12px 22px;
+
+    border-radius:25px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.4s;
+
+    z-index:9999;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.3);
+
+    font-size:12px;
+}
+
+#toast.show{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+    .hero-card{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:40px 30px;
+    }
+
+    .hero-content p{
+
+        margin-left:auto;
+
+        margin-right:auto;
+    }
+
+    .hero-image{
+
+        width:240px;
+        height:240px;
+    }
+
+    .recipe-wrapper{
+
+        grid-template-columns:1fr;
+
+        max-width:600px;
+    }
+
+    .activity-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    header{
+        padding:13px 5%;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .menu-toggle{
+        font-size:10px;
+        padding:9px 14px;
+    }
+
+    #mainMenu{
+
+        width:340px;
+
+        max-width:88vw;
+    }
+
+    .menu-header{
+
+        min-height:85px;
+
+        padding:0 20px;
+    }
+
+    .menu-title{
+        font-size:25px;
+    }
+
+    .menu-content{
+
+        padding:13px 20px 25px;
+    }
+
+    .menu-item{
+
+        padding:12px 4px;
+
+        gap:13px;
+    }
+
+    .menu-icon{
+
+        width:30px;
+
+        min-width:30px;
+
+        font-size:21px;
+    }
+
+    .menu-name{
+        font-size:15px;
+    }
+
+    .menu-description{
+        font-size:10px;
+    }
+
+}
+
+
+@media(max-width:500px){
+
+    .hero-section{
+        padding:35px 5%;
+    }
+
+    .hero-card{
+
+        min-height:570px;
+
+        padding:35px 22px;
+    }
+
+    .hero-content h1{
+        font-size:36px;
+    }
+
+    .hero-image{
+
+        width:220px;
+
+        height:220px;
+    }
+
+    .recipes{
+
+        padding:
+            70px 6%
+            90px;
+    }
+
+    .recipe-heading h1{
+        font-size:34px;
+    }
+
+    .recipe-card{
+        height:560px;
+    }
+
+    .card-content h2{
+        font-size:24px;
+    }
+
+    .card-back{
+        padding:20px;
+    }
+
+    .back-inner{
+        padding:18px;
+    }
+
+    .quote h2{
+        font-size:22px;
+    }
+
+    .feature-buttons{
+        flex-direction:column;
+    }
+
+    .feature-btn{
+        width:100%;
+    }
+
+    .review-section,
+    .flavorverse-card{
+        padding:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <button
+        class="menu-toggle"
+        onclick="toggleMenu()"
+    >
+        ☰ MENU
+    </button>
+
+</header>
+
+
+<!-- =====================================================
+     OVERLAY
+===================================================== -->
+
+<div
+    class="menu-overlay"
+    id="menuOverlay"
+    onclick="closeMenu()"
+></div>
+
+
+<!-- =====================================================
+     EXPLORE MENU
+===================================================== -->
+
+<nav id="mainMenu">
+
+
+    <div class="menu-header">
+
+        <div class="menu-title">
+            Explore
+        </div>
+
+        <button
+            class="menu-close"
+            onclick="closeMenu()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="menu-content">
+
+
+        <a
+            href="royal.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                👑
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Royal Heritage
+                </div>
+
+                <div class="menu-description">
+                    Traditional royal recipes
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="movies&cartoons.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🎬
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Movies & Cartoons
+                </div>
+
+                <div class="menu-description">
+                    Recipes inspired by magical worlds
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="worldcuisine.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🌍
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    World Cuisine
+                </div>
+
+                <div class="menu-description">
+                    Flavours from around the world
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="desertwrold.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🍰
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Desserts
+                </div>
+
+                <div class="menu-description">
+                    Sweet treats and desserts
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="gallery.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🖼️
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Gallery
+                </div>
+
+                <div class="menu-description">
+                    Explore our food gallery
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <div class="menu-divider"></div>
+
+
+        <a
+            href="favourite.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                ❤️
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Favourites
+                </div>
+
+                <div class="menu-description">
+                    Your favourite recipes
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="order.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🛒
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Order
+                </div>
+
+                <div class="menu-description">
+                    Order ingredient kits
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="stamp.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🎟️
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Stamped
+                </div>
+
+                <div class="menu-description">
+                    Your stamped recipes
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="contact.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                📩
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Contact
+                </div>
+
+                <div class="menu-description">
+                    Get in touch with us
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="about.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                ✨
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    About
+                </div>
+
+                <div class="menu-description">
+                    Discover The Flavorverse
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="index.html"
+            class="menu-item"
+        >
+
+            <div class="menu-icon">
+                🏠
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-name">
+                    Home
+                </div>
+
+                <div class="menu-description">
+                    Back to Flavorverse home
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero-section">
+
+    <div class="hero-card">
+
+        <div class="hero-star one">
+            ✦
+        </div>
+
+        <div class="hero-star two">
+            ✧
+        </div>
+
+        <div class="hero-star three">
+            ⚡
+        </div>
+
+        <div class="hero-star four">
+            ✦
+        </div>
+
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                ✦ THE WIZARDING KITCHEN ✦
+            </div>
+
+            <h1>
+                A Taste of
+                <span>Hogwarts</span>
+            </h1>
+
+            <p>
+                Step into a magical recipe collection
+                inspired by the enchanting world of
+                Harry Potter. Discover delicious
+                wizarding treats filled with magic.
+            </p>
+
+            <a
+                href="#recipes"
+                class="hero-btn"
+            >
+                ✦ EXPLORE RECIPES
+            </a>
+
+        </div>
+
+
+        <div class="hero-image">
+
+            <img
+                src="heroharrypotter.png"
+                alt="Harry Potter"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RECIPES
+===================================================== -->
+
+<section
+    class="recipes"
+    id="recipes"
+>
+
+
+    <div class="magic">
+        ✦
+    </div>
+
+    <div class="magic">
+        ✧
+    </div>
+
+    <div class="magic">
+        ⚡
+    </div>
+
+    <div class="magic">
+        ✦
+    </div>
+
+    <div class="magic">
+        ✧
+    </div>
+
+    <div class="magic">
+        ⚡
+    </div>
+
+
+    <div class="recipe-heading">
+
+        <span>
+            ✦ THE WIZARDING KITCHEN ✦
+        </span>
+
+        <h1>
+            Magical Recipes
+        </h1>
+
+        <p>
+            Discover enchanting dishes inspired
+            by the magical world of Hogwarts.
+        </p>
+
+    </div>
+
+
+    <div class="recipe-wrapper">
+
+
+        <!-- BUTTERBEER -->
+
+        <div>
+
+            <div class="recipe-card">
+
+                <div class="card-inner">
+
+
+                    <div class="card-front">
+
+                        <div class="card-image">
+
+                            <div class="card-tag">
+                                ✦ MAGICAL DRINK
+                            </div>
+
+                            <img
+                                src="harrybutterbeer.png"
+                                alt="Butterbeer"
+                            >
+
+                        </div>
+
+
+                        <div class="card-content">
+
+                            <small>
+                                RECIPE • 01
+                            </small>
+
+                            <h2>
+                                🧈 Butterbeer
+                            </h2>
+
+                            <p>
+                                A creamy wizarding drink
+                                with delicious caramel
+                                and butterscotch flavours.
+                            </p>
+
+                            <div class="gold-line"></div>
+
+                            <div class="card-info">
+
+                                <span>
+                                    ⏱ 10 MIN
+                                </span>
+
+                                <span>
+                                    ✦ EASY
+                                </span>
+
+                            </div>
+
+                            <span class="front-star">
+                                ✦
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-back">
+
+                        <div class="back-inner">
+
+                            <h3>
+                                🧈 Butterbeer
+                            </h3>
+
+                            <h4>
+                                ✦ Ingredients
+                            </h4>
+
+                            <ul>
+
+                                <li>
+                                    1 cup chilled cream soda
+                                </li>
+
+                                <li>
+                                    2 tbsp caramel syrup
+                                </li>
+
+                                <li>
+                                    1 tbsp butterscotch syrup
+                                </li>
+
+                                <li>
+                                    ½ tsp vanilla essence
+                                </li>
+
+                                <li>
+                                    2 tbsp whipped cream
+                                </li>
+
+                                <li>
+                                    A pinch of cinnamon
+                                </li>
+
+                            </ul>
+
+
+                            <h4>
+                                ✦ Preparation
+                            </h4>
+
+                            <ol>
+
+                                <li>
+                                    Pour chilled cream soda
+                                    into a glass.
+                                </li>
+
+                                <li>
+                                    Add caramel and
+                                    butterscotch syrup.
+                                </li>
+
+                                <li>
+                                    Add vanilla essence
+                                    and mix gently.
+                                </li>
+
+                                <li>
+                                    Top with whipped cream.
+                                </li>
+
+                                <li>
+                                    Drizzle caramel syrup
+                                    and sprinkle cinnamon.
+                                </li>
+
+                            </ol>
+
+
+                            <div class="flip-hint">
+                                HOVER TO RETURN ✦
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="recipe-feature-area">
+
+                <div class="feature-buttons">
+
+                    <button
+                        class="feature-btn favourite-btn"
+                        id="fav-butterbeer"
+                        onclick="toggleFavourite(
+                            'harry-butterbeer',
+                            'Butterbeer',
+                            this
+                        )"
+                    >
+                        ♡ Add to Favourite
+                    </button>
+
+
+                    <button
+                        class="feature-btn stamp-btn"
+                        id="stamp-butterbeer"
+                        onclick="toggleStamp(
+                            'harry-butterbeer',
+                            'Butterbeer',
+                            this
+                        )"
+                    >
+                        🏷️ Add to Stamp
+                    </button>
+
+                </div>
+
+
+                <div class="rating-area">
+
+                    <div class="rating-label">
+                        ⭐ Rate this recipe
+                    </div>
+
+                    <div
+                        class="rating-stars"
+                        id="stars-butterbeer"
+                    >
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-butterbeer',
+                                1,
+                                'butterbeer'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-butterbeer',
+                                2,
+                                'butterbeer'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-butterbeer',
+                                3,
+                                'butterbeer'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-butterbeer',
+                                4,
+                                'butterbeer'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-butterbeer',
+                                5,
+                                'butterbeer'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="rating-message"
+                        id="rating-message-butterbeer"
+                    >
+                        Not rated yet
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PUMPKIN PASTIES -->
+
+        <div>
+
+            <div class="recipe-card">
+
+                <div class="card-inner">
+
+
+                    <div class="card-front">
+
+                        <div class="card-image">
+
+                            <div class="card-tag">
+                                ✦ MAGICAL PASTRY
+                            </div>
+
+                            <img
+                                src="harrypumpkinpasties.png"
+                                alt="Pumpkin Pasties"
+                            >
+
+                        </div>
+
+
+                        <div class="card-content">
+
+                            <small>
+                                RECIPE • 02
+                            </small>
+
+                            <h2>
+                                🥧 Pumpkin Pasties
+                            </h2>
+
+                            <p>
+                                Golden pastry pockets
+                                filled with pumpkin,
+                                honey and warm spices.
+                            </p>
+
+                            <div class="gold-line"></div>
+
+                            <div class="card-info">
+
+                                <span>
+                                    ⏱ 45 MIN
+                                </span>
+
+                                <span>
+                                    ✦ MEDIUM
+                                </span>
+
+                            </div>
+
+                            <span class="front-star">
+                                ✧
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-back">
+
+                        <div class="back-inner">
+
+                            <h3>
+                                🥧 Pumpkin Pasties
+                            </h3>
+
+                            <h4>
+                                ✦ Ingredients
+                            </h4>
+
+                            <ul>
+
+                                <li>
+                                    1 cup pumpkin puree
+                                </li>
+
+                                <li>
+                                    1½ cups all-purpose flour
+                                </li>
+
+                                <li>
+                                    ½ cup butter
+                                </li>
+
+                                <li>
+                                    3 tbsp powdered sugar
+                                </li>
+
+                                <li>
+                                    1 tbsp milk
+                                </li>
+
+                                <li>
+                                    ½ tsp cinnamon
+                                </li>
+
+                                <li>
+                                    ¼ tsp nutmeg
+                                </li>
+
+                                <li>
+                                    1 tbsp honey
+                                </li>
+
+                            </ul>
+
+
+                            <h4>
+                                ✦ Preparation
+                            </h4>
+
+                            <ol>
+
+                                <li>
+                                    Mix flour, butter
+                                    and powdered sugar.
+                                </li>
+
+                                <li>
+                                    Add milk and make
+                                    a soft dough.
+                                </li>
+
+                                <li>
+                                    Chill the dough
+                                    for 15 minutes.
+                                </li>
+
+                                <li>
+                                    Mix pumpkin with
+                                    honey and spices.
+                                </li>
+
+                                <li>
+                                    Roll dough and
+                                    cut circles.
+                                </li>
+
+                                <li>
+                                    Add filling and
+                                    seal the edges.
+                                </li>
+
+                                <li>
+                                    Bake at 180°C
+                                    for 20–25 minutes.
+                                </li>
+
+                            </ol>
+
+
+                            <div class="flip-hint">
+                                HOVER TO RETURN ✦
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="recipe-feature-area">
+
+                <div class="feature-buttons">
+
+                    <button
+                        class="feature-btn favourite-btn"
+                        id="fav-pumpkin"
+                        onclick="toggleFavourite(
+                            'harry-pumpkin-pasties',
+                            'Pumpkin Pasties',
+                            this
+                        )"
+                    >
+                        ♡ Add to Favourite
+                    </button>
+
+
+                    <button
+                        class="feature-btn stamp-btn"
+                        id="stamp-pumpkin"
+                        onclick="toggleStamp(
+                            'harry-pumpkin-pasties',
+                            'Pumpkin Pasties',
+                            this
+                        )"
+                    >
+                        🏷️ Add to Stamp
+                    </button>
+
+                </div>
+
+
+                <div class="rating-area">
+
+                    <div class="rating-label">
+                        ⭐ Rate this recipe
+                    </div>
+
+                    <div
+                        class="rating-stars"
+                        id="stars-pumpkin"
+                    >
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-pumpkin-pasties',
+                                1,
+                                'pumpkin'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-pumpkin-pasties',
+                                2,
+                                'pumpkin'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-pumpkin-pasties',
+                                3,
+                                'pumpkin'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-pumpkin-pasties',
+                                4,
+                                'pumpkin'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                        <button
+                            class="rating-star"
+                            onclick="saveRating(
+                                'harry-pumpkin-pasties',
+                                5,
+                                'pumpkin'
+                            )"
+                        >
+                            ★
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="rating-message"
+                        id="rating-message-pumpkin"
+                    >
+                        Not rated yet
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FLAVORVERSE ACTIVITY
+    ================================================== -->
+
+    <div class="flavorverse-card">
+
+        <h2>
+            ✨ Your Flavorverse
+        </h2>
+
+        <div class="flavorverse-subtitle">
+            Your magical recipe activity
+        </div>
+
+
+        <div class="activity-grid">
+
+            <div class="activity-item">
+
+                <div class="activity-icon">
+                    ❤️
+                </div>
+
+                <span
+                    class="activity-count"
+                    id="favCount"
+                >
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Favourites
+                </span>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="activity-icon">
+                    🏷️
+                </div>
+
+                <span
+                    class="activity-count"
+                    id="stampCount"
+                >
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Stamps
+                </span>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="activity-icon">
+                    ⭐
+                </div>
+
+                <span
+                    class="activity-count"
+                    id="ratingCount"
+                >
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Ratings
+                </span>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="activity-icon">
+                    💬
+                </div>
+
+                <span
+                    class="activity-count"
+                    id="reviewCount"
+                >
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Reviews
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         REVIEW
+    ================================================== -->
+
+    <div class="review-section">
+
+        <h2>
+            💬 Share Your Magical Experience
+        </h2>
+
+
+        <div class="review-form">
+
+            <select id="reviewRecipe">
+
+                <option value="harry-butterbeer">
+                    🧈 Butterbeer
+                </option>
+
+                <option value="harry-pumpkin-pasties">
+                    🥧 Pumpkin Pasties
+                </option>
+
+            </select>
+
+
+            <textarea
+                id="reviewText"
+                placeholder="Write your review about this magical recipe..."
+            ></textarea>
+
+
+            <button
+                class="review-submit"
+                onclick="submitReview()"
+            >
+                ✨ Submit Review
+            </button>
+
+        </div>
+
+
+        <div
+            class="reviews-list"
+            id="reviewsList"
+        >
+
+            <div class="no-reviews">
+                Loading reviews...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         QUOTE
+    ================================================== -->
+
+    <div class="quote">
+
+        <span>
+            ✦ ⚡ ✦
+        </span>
+
+        <h2>
+            "Every delicious recipe begins
+            with a little bit of magic."
+        </h2>
+
+        <p>
+            — The Flavorverse
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- BACK -->
+
+<div class="back-movies">
+
+    <a href="movies&cartoons.html">
+        ← BACK TO MOVIES & CARTOONS
+    </a>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        🍴 The Flavorverse
+    </h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+
+<div id="toast"></div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById("mainMenu");
+
+    const overlay =
+        document.getElementById("menuOverlay");
+
+    menu.classList.toggle("show");
+
+    overlay.classList.toggle("show");
+
+}
+
+
+function closeMenu(){
+
+    const menu =
+        document.getElementById("mainMenu");
+
+    const overlay =
+        document.getElementById("menuOverlay");
+
+    menu.classList.remove("show");
+
+    overlay.classList.remove("show");
+
+}
+
+
+document
+    .querySelectorAll("#mainMenu a")
+    .forEach(function(link){
+
+        link.addEventListener(
+            "click",
+            function(){
+                closeMenu();
+            }
+        );
+
+    });
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+            closeMenu();
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+    authDomain:
+        "the-flavoverse.firebaseapp.com",
+
+    projectId:
+        "the-flavoverse",
+
+    storageBucket:
+        "the-flavoverse.firebasestorage.app",
+
+    messagingSenderId:
+        "1064022248292",
+
+    appId:
+        "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+
+    measurementId:
+        "G-16Z0K1687Z"
+
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+const auth =
+    firebase.auth();
+
+const db =
+    firebase.firestore();
+
+let currentUser = null;
+
+
+const recipeNames = {
+
+    "harry-butterbeer":
+        "Butterbeer",
+
+    "harry-pumpkin-pasties":
+        "Pumpkin Pasties"
+
+};
+
+const recipeIds =
+    Object.keys(recipeNames);
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    setTimeout(
+        function(){
+
+            toast.classList.remove("show");
+
+        },
+        2500
+    );
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function checkLogin(){
+
+    if(!currentUser){
+
+        showToast(
+            "Please login first 🔐"
+        );
+
+        setTimeout(
+            function(){
+
+                window.location.href =
+                    "login.html";
+
+            },
+            900
+        );
+
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(
+    function(user){
+
+        currentUser = user;
+
+        if(user){
+
+            loadFavouriteStatus();
+
+            loadStampStatus();
+
+            loadMyRatings();
+
+            loadActivity();
+
+        }else{
+
+            document.getElementById(
+                "favCount"
+            ).textContent = "0";
+
+            document.getElementById(
+                "stampCount"
+            ).textContent = "0";
+
+            document.getElementById(
+                "ratingCount"
+            ).textContent = "0";
+
+            document.getElementById(
+                "reviewCount"
+            ).textContent = "0";
+
+        }
+
+        loadReviews();
+
+    }
+);
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function toggleFavourite(
+    recipeId,
+    recipeName,
+    button
+){
+
+    if(!checkLogin())
+        return;
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("favourites")
+        .doc(recipeId);
+
+    try{
+
+        const doc =
+            await ref.get();
+
+        if(doc.exists){
+
+            await ref.delete();
+
+            button.innerHTML =
+                "♡ Add to Favourite";
+
+            showToast(
+                recipeName +
+                " removed from favourites"
+            );
+
+        }else{
+
+            await ref.set({
+
+                name:
+                    recipeName,
+
+                category:
+                    "Movies & Cartoons",
+
+                addedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+            button.innerHTML =
+                "❤️ Added to Favourite";
+
+            showToast(
+                recipeName +
+                " added to favourites ❤️"
+            );
+
+        }
+
+        loadActivity();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to update favourite"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD FAVOURITES
+===================================================== */
+
+async function loadFavouriteStatus(){
+
+    if(!currentUser)
+        return;
+
+    for(
+        const recipeId
+        of recipeIds
+    ){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("favourites")
+                .doc(recipeId)
+                .get();
+
+            let button = null;
+
+            if(
+                recipeId ===
+                "harry-butterbeer"
+            ){
+
+                button =
+                    document.getElementById(
+                        "fav-butterbeer"
+                    );
+
+            }
+
+            if(
+                recipeId ===
+                "harry-pumpkin-pasties"
+            ){
+
+                button =
+                    document.getElementById(
+                        "fav-pumpkin"
+                    );
+
+            }
+
+            if(button){
+
+                button.innerHTML =
+                    doc.exists
+                    ?
+                    "❤️ Added to Favourite"
+                    :
+                    "♡ Add to Favourite";
+
+            }
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function toggleStamp(
+    recipeId,
+    recipeName,
+    button
+){
+
+    if(!checkLogin())
+        return;
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("stamps")
+        .doc(recipeId);
+
+    try{
+
+        const doc =
+            await ref.get();
+
+        if(doc.exists){
+
+            await ref.delete();
+
+            button.innerHTML =
+                "🏷️ Add to Stamp";
+
+            showToast(
+                recipeName +
+                " stamp removed"
+            );
+
+        }else{
+
+            await ref.set({
+
+                name:
+                    recipeName,
+
+                category:
+                    "Movies & Cartoons",
+
+                stampedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+            button.innerHTML =
+                "🏷️ Recipe Stamped ✓";
+
+            showToast(
+                recipeName +
+                " added to your stamp 🏷️"
+            );
+
+        }
+
+        loadActivity();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to update stamp"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD STAMPS
+===================================================== */
+
+async function loadStampStatus(){
+
+    if(!currentUser)
+        return;
+
+    for(
+        const recipeId
+        of recipeIds
+    ){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("stamps")
+                .doc(recipeId)
+                .get();
+
+            let button = null;
+
+            if(
+                recipeId ===
+                "harry-butterbeer"
+            ){
+
+                button =
+                    document.getElementById(
+                        "stamp-butterbeer"
+                    );
+
+            }
+
+            if(
+                recipeId ===
+                "harry-pumpkin-pasties"
+            ){
+
+                button =
+                    document.getElementById(
+                        "stamp-pumpkin"
+                    );
+
+            }
+
+            if(button){
+
+                button.innerHTML =
+                    doc.exists
+                    ?
+                    "🏷️ Recipe Stamped ✓"
+                    :
+                    "🏷️ Add to Stamp";
+
+            }
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function saveRating(
+    recipeId,
+    rating,
+    shortName
+){
+
+    if(!checkLogin())
+        return;
+
+    try{
+
+        await db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("ratings")
+        .doc(recipeId)
+        .set({
+
+            rating:
+                rating,
+
+            name:
+                recipeNames[recipeId],
+
+            ratedAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+        updateStars(
+            shortName,
+            rating
+        );
+
+        document.getElementById(
+            "rating-message-" +
+            shortName
+        ).textContent =
+            "You rated this recipe ⭐ " +
+            rating +
+            "/5";
+
+        showToast(
+            "Rating saved ⭐"
+        );
+
+        loadActivity();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to save rating"
+        );
+
+    }
+
+}
+
+
+function updateStars(
+    shortName,
+    rating
+){
+
+    const container =
+        document.getElementById(
+            "stars-" +
+            shortName
+        );
+
+    if(!container)
+        return;
+
+    const stars =
+        container.querySelectorAll(
+            ".rating-star"
+        );
+
+    stars.forEach(
+        function(star,index){
+
+            if(index < rating){
+
+                star.classList.add(
+                    "active"
+                );
+
+            }else{
+
+                star.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LOAD RATINGS
+===================================================== */
+
+async function loadMyRatings(){
+
+    if(!currentUser)
+        return;
+
+    for(
+        const recipeId
+        of recipeIds
+    ){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("ratings")
+                .doc(recipeId)
+                .get();
+
+            if(doc.exists){
+
+                const rating =
+                    doc.data().rating;
+
+                if(
+                    recipeId ===
+                    "harry-butterbeer"
+                ){
+
+                    updateStars(
+                        "butterbeer",
+                        rating
+                    );
+
+                    document.getElementById(
+                        "rating-message-butterbeer"
+                    ).textContent =
+                        "You rated this recipe ⭐ " +
+                        rating +
+                        "/5";
+
+                }
+
+                if(
+                    recipeId ===
+                    "harry-pumpkin-pasties"
+                ){
+
+                    updateStars(
+                        "pumpkin",
+                        rating
+                    );
+
+                    document.getElementById(
+                        "rating-message-pumpkin"
+                    ).textContent =
+                        "You rated this recipe ⭐ " +
+                        rating +
+                        "/5";
+
+                }
+
+            }
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   REVIEW
+===================================================== */
+
+async function submitReview(){
+
+    if(!checkLogin())
+        return;
+
+    const recipeId =
+        document.getElementById(
+            "reviewRecipe"
+        ).value;
+
+    const textarea =
+        document.getElementById(
+            "reviewText"
+        );
+
+    const text =
+        textarea.value.trim();
+
+    if(!text){
+
+        showToast(
+            "Please write a review 💬"
+        );
+
+        return;
+    }
+
+    const userName =
+        currentUser.displayName ||
+        (
+            currentUser.email
+            ?
+            currentUser.email.split("@")[0]
+            :
+            "Flavorverse User"
+        );
+
+    try{
+
+        await db
+        .collection("recipes")
+        .doc(recipeId)
+        .collection("reviews")
+        .add({
+
+            userId:
+                currentUser.uid,
+
+            userName:
+                userName,
+
+            text:
+                text,
+
+            createdAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+        textarea.value = "";
+
+        showToast(
+            "Review added successfully 💬"
+        );
+
+        loadReviews();
+
+        loadActivity();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to submit review"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(){
+
+    const list =
+        document.getElementById(
+            "reviewsList"
+        );
+
+    let allReviews = [];
+
+    try{
+
+        for(
+            const recipeId
+            of recipeIds
+        ){
+
+            const snapshot =
+                await db
+                .collection("recipes")
+                .doc(recipeId)
+                .collection("reviews")
+                .get();
+
+            snapshot.forEach(
+                function(doc){
+
+                    const data =
+                        doc.data();
+
+                    allReviews.push({
+
+                        ...data,
+
+                        recipeName:
+                            recipeNames[
+                                recipeId
+                            ]
+
+                    });
+
+                }
+            );
+
+        }
+
+
+        allReviews.sort(
+            function(a,b){
+
+                const aTime =
+                    a.createdAt
+                    ?
+                    a.createdAt.toMillis()
+                    :
+                    0;
+
+                const bTime =
+                    b.createdAt
+                    ?
+                    b.createdAt.toMillis()
+                    :
+                    0;
+
+                return bTime - aTime;
+
+            }
+        );
+
+
+        if(
+            allReviews.length === 0
+        ){
+
+            list.innerHTML = `
+
+                <div class="no-reviews">
+
+                    No reviews yet.
+                    Be the first to share
+                    your thoughts! ✨
+
+                </div>
+
+            `;
+
+            return;
+        }
+
+
+        list.innerHTML = "";
+
+
+        allReviews.forEach(
+            function(review){
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+                item.className =
+                    "review-item";
+
+                const date =
+                    review.createdAt
+                    ?
+                    review.createdAt
+                    .toDate()
+                    .toLocaleDateString()
+                    :
+                    "Recently";
+
+
+                item.innerHTML = `
+
+                    <div class="review-user">
+
+                        ${escapeHTML(
+                            review.userName ||
+                            "Flavorverse User"
+                        )}
+
+                        <span
+                            class="review-date"
+                        >
+                            ${date}
+                        </span>
+
+                    </div>
+
+
+                    <div class="review-recipe">
+
+                        ${escapeHTML(
+                            review.recipeName
+                        )}
+
+                    </div>
+
+
+                    <div class="review-text">
+
+                        ${escapeHTML(
+                            review.text
+                        )}
+
+                    </div>
+
+                `;
+
+
+                list.appendChild(item);
+
+            }
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        list.innerHTML = `
+
+            <div class="no-reviews">
+
+                Unable to load reviews
+                right now.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+async function loadActivity(){
+
+    if(!currentUser)
+        return;
+
+    try{
+
+        const userRef =
+            db
+            .collection("users")
+            .doc(currentUser.uid);
+
+
+        const favourites =
+            await userRef
+            .collection("favourites")
+            .get();
+
+
+        const stamps =
+            await userRef
+            .collection("stamps")
+            .get();
+
+
+        const ratings =
+            await userRef
+            .collection("ratings")
+            .get();
+
+
+        let reviewCount = 0;
+
+
+        for(
+            const recipeId
+            of recipeIds
+        ){
+
+            const reviews =
+                await db
+                .collection("recipes")
+                .doc(recipeId)
+                .collection("reviews")
+                .where(
+                    "userId",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+            reviewCount +=
+                reviews.size;
+
+        }
+
+
+        document.getElementById(
+            "favCount"
+        ).textContent =
+            favourites.size;
+
+
+        document.getElementById(
+            "stampCount"
+        ).textContent =
+            stamps.size;
+
+
+        document.getElementById(
+            "ratingCount"
+        ).textContent =
+            ratings.size;
+
+
+        document.getElementById(
+            "reviewCount"
+        ).textContent =
+            reviewCount;
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

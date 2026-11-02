@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Passport | The Flavorverse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+:root {
+    --mauve: #8E6C88;
+    --deep: #4d3547;
+    --primary: #735267;
+    --champagne: #f4e5c5;
+    --cream: #FDF6EC;
+    --background: #F7E7CE;
+    --text: #5B4A45;
+    --border: #e6d4c0;
+    --green: #536c54;
+    --shadow: 0 8px 25px rgba(77,53,71,.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+}
+
+button, input, select {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    color: inherit;
+}
+
+/* =========================
+   NAVIGATION BAR
+   UPDATED MAUVE COLOUR
+========================= */
+
+.navbar {
+    height: 76px;
+    background: #8E6C88;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 15px rgba(77,53,71,.12);
+}
+
+.logo {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #F4E5C5;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo small {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #F4E5C5;
+    text-align: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    position: relative;
+}
+
+.menu-btn {
+    background: #4D3547;
+    color: #F4E5C5;
+    border: 1px solid #F4E5C5;
+    border-radius: 8px;
+    padding: 9px 14px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: .2s;
+}
+
+.menu-btn:hover {
+    background: #735267;
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 47px;
+    width: 205px;
+    padding: 9px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.menu-dropdown.show {
+    display: block;
+}
+
+.menu-dropdown a {
+    display: block;
+    padding: 11px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    border-radius: 7px;
+    color: var(--deep);
+}
+
+.menu-dropdown a:hover,
+.menu-dropdown a.active {
+    background: var(--champagne);
+    color: var(--deep);
+}
+
+/* =========================
+   HERO / PASSPORT BANNER
+========================= */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 350px;
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    align-items: center;
+    gap: 30px;
+    padding: 42px 8%;
+    background:
+        radial-gradient(
+            ellipse at 80% 20%,
+            rgba(244,229,197,.8),
+            transparent 35%
+        ),
+        linear-gradient(125deg, #4d3547, #8E6C88);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 370px;
+    height: 370px;
+    border: 1px dashed rgba(244,229,197,.4);
+    border-radius: 50%;
+    right: -90px;
+    top: -110px;
+}
+
+.hero::after {
+    content: "✦     ✧       ✦";
+    position: absolute;
+    color: rgba(244,229,197,.45);
+    font-size: 23px;
+    right: 7%;
+    bottom: 30px;
+    letter-spacing: 18px;
+}
+
+.passport-art {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 245px;
+}
+
+.passport {
+    width: 235px;
+    height: 255px;
+    background: #392c35;
+    border: 2px solid #c6a66c;
+    border-radius: 10px 19px 19px 10px;
+    transform: rotate(-7deg);
+    padding: 18px;
+    box-shadow: 13px 17px 25px rgba(0,0,0,.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    outline: 1px solid rgba(244,229,197,.5);
+    outline-offset: -9px;
+}
+
+.passport-top {
+    font-family: 'Cinzel', serif;
+    color: var(--champagne);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.passport-globe {
+    margin: 14px 0;
+    width: 105px;
+    height: 105px;
+    border: 2px solid #c6a66c;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 55px;
+    color: var(--champagne);
+    background: radial-gradient(circle, #635046, #392c35);
+}
+
+.passport-title {
+    font-family: 'Cinzel', serif;
+    color: #e5c48a;
+    font-size: 23px;
+    line-height: 1.4;
+}
+
+.passport-bottom {
+    color: var(--champagne);
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    margin-top: 14px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 570px;
+    margin: auto;
+}
+
+.hero-kicker {
+    color: var(--champagne);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(30px, 4vw, 46px);
+    color: var(--cream);
+    line-height: 1.35;
+}
+
+.hero h1 span {
+    color: var(--champagne);
+    display: block;
+}
+
+.hero-description {
+    color: #fff1e5;
+    font-family: 'Kalam', cursive;
+    font-size: 18px;
+    line-height: 1.7;
+    margin: 15px auto 22px;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 12px 21px;
+    border: 1px solid var(--champagne);
+    border-radius: 30px;
+    color: var(--deep);
+    background: var(--champagne);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.hero-btn:hover {
+    background: var(--cream);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   PASSPORT WORKSPACE
+========================= */
+
+.workspace {
+    width: min(1400px, 92%);
+    margin: 27px auto 55px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 235px minmax(0, 1fr);
+    overflow: hidden;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    padding: 28px 17px;
+    border-right: 1px solid var(--border);
+    background: #fcf1e1;
+}
+
+.sidebar-title {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: var(--deep);
+    padding: 0 10px 19px;
+}
+
+.side-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-align: left;
+    border: none;
+    background: transparent;
+    padding: 13px 11px;
+    margin-bottom: 5px;
+    border-radius: 9px;
+    cursor: pointer;
+    color: var(--deep);
+    font-size: 12px;
+}
+
+.side-link .side-icon {
+    font-size: 18px;
+}
+
+.side-link:hover,
+.side-link.active {
+    background: #f0dfd8;
+    color: var(--deep);
+}
+
+.sidebar-note {
+    border-top: 1px dashed #d8bca9;
+    margin-top: 25px;
+    padding: 22px 10px 0;
+    font-family: 'Kalam', cursive;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--primary);
+}
+
+.sidebar-note span {
+    display: block;
+    font-size: 25px;
+    margin-top: 8px;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    padding: 29px;
+    min-width: 0;
+}
+
+.content-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.content-heading h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--deep);
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.content-heading p {
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.account-label {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+    color: var(--primary);
+    overflow-wrap: anywhere;
+}
+
+/* STAT CARDS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 11px;
+    margin-bottom: 30px;
+}
+
+.stat {
+    background: #f4e9dd;
+    padding: 16px 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    border: 1px solid #eadaca;
+    min-width: 0;
+}
+
+.stat-icon {
+    font-size: 24px;
+}
+
+.stat h3 {
+    font-size: 21px;
+    color: var(--deep);
+}
+
+.stat p {
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* SEARCH */
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.search-box {
+    flex: 1 1 180px;
+}
+
+.search-box input,
+.filter-row select {
+    width: 100%;
+    padding: 12px 14px;
+    background: #fffaf3;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    color: var(--deep);
+    font-size: 12px;
+}
+
+.search-box input:focus,
+.filter-row select:focus {
+    border-color: var(--mauve);
+    box-shadow: 0 0 0 3px rgba(142,108,136,.1);
+}
+
+.filter-row select {
+    flex: 0 1 160px;
+}
+
+.clear-btn {
+    background: var(--deep);
+    color: var(--cream);
+    border: none;
+    border-radius: 9px;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+/* STAMP CARDS */
+
+.stamp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.stamp-card {
+    background: #fffaf3;
+    border: 1px solid #dfcbb8;
+    border-radius: 12px;
+    padding: 10px;
+    position: relative;
+    min-width: 0;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.stamp-card:nth-child(4n + 1) {
+    border-top: 3px solid #bd8a78;
+}
+
+.stamp-card:nth-child(4n + 2) {
+    border-top: 3px solid #849a7c;
+}
+
+.stamp-card:nth-child(4n + 3) {
+    border-top: 3px solid #a38ab3;
+}
+
+.stamp-card:nth-child(4n) {
+    border-top: 3px solid #cfad6c;
+}
+
+.stamp-card:hover {
+    transform: translateY(-4px) rotate(-.5deg);
+    box-shadow: var(--shadow);
+}
+
+.recipe-image {
+    width: 100%;
+    height: 135px;
+    object-fit: cover;
+    display: block;
+    border-radius: 7px;
+    background: #ead8c6;
+}
+
+.recipe-placeholder {
+    width: 100%;
+    height: 135px;
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    font-size: 43px;
+    background: linear-gradient(135deg, #f1dfc8, #e5cbd9);
+}
+
+.recipe-details {
+    padding: 12px 3px 4px;
+}
+
+.category-tag {
+    display: inline-block;
+    background: #eee2ec;
+    color: var(--deep);
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    margin-bottom: 9px;
+}
+
+.recipe-details h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--deep);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 7px;
+    overflow-wrap: anywhere;
+}
+
+.recipe-details p {
+    font-size: 10px;
+    line-height: 1.7;
+    margin-bottom: 9px;
+    overflow-wrap: anywhere;
+}
+
+.stamp-date {
+    border-top: 1px dashed #ddcbb8;
+    padding-top: 9px;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.stamp-seal {
+    position: absolute;
+    top: 112px;
+    right: 15px;
+    width: 57px;
+    height: 57px;
+    border: 2px solid #a55e61;
+    outline: 1px dashed #a55e61;
+    outline-offset: -5px;
+    border-radius: 50%;
+    color: #a55e61;
+    background: rgba(255,250,243,.94);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(12deg);
+    pointer-events: none;
+}
+
+.stamp-seal span {
+    font-size: 16px;
+    line-height: 1.1;
+}
+
+.stamp-seal small {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.stamp-actions {
+    display: flex;
+    gap: 7px;
+    margin-top: 11px;
+}
+
+.stamp-actions button {
+    flex: 1;
+    padding: 9px 5px;
+    font-size: 10px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.view-btn {
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--primary);
+}
+
+.remove-btn {
+    background: transparent;
+    color: #98595c;
+    border: 1px solid #d8b6b6;
+}
+
+/* EMPTY STATE */
+
+.empty-state {
+    text-align: center;
+    padding: 45px 18px;
+    border: 1px dashed #d8bda8;
+    border-radius: 13px;
+    background: #fffaf3;
+}
+
+.empty-state .empty-icon {
+    font-size: 43px;
+    margin-bottom: 13px;
+}
+
+.empty-state h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--deep);
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    font-size: 12px;
+    line-height: 1.9;
+    margin-bottom: 17px;
+}
+
+.primary-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--primary);
+    color: white;
+    padding: 11px 17px;
+    border-radius: 8px;
+    font-size: 11px;
+    border: none;
+    cursor: pointer;
+}
+
+/* JOURNEY AND ACHIEVEMENTS */
+
+.extra-section {
+    display: none;
+}
+
+.extra-section.show {
+    display: block;
+}
+
+.journey-card {
+    padding: 22px;
+    background: #fffaf3;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    margin-bottom: 15px;
+}
+
+.journey-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 17px;
+    color: var(--deep);
+    margin-bottom: 8px;
+}
+
+.journey-card p {
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.progress-track {
+    height: 8px;
+    border-radius: 20px;
+    background: #eadaca;
+    margin: 14px 0 8px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--mauve), var(--deep));
+    border-radius: 20px;
+    transition: width .4s;
+}
+
+.progress-label {
+    font-size: 10px;
+    color: var(--primary);
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.achievement {
+    background: #fffaf3;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.achievement .badge {
+    font-size: 33px;
+    margin-bottom: 8px;
+    filter: grayscale(1);
+    opacity: .45;
+}
+
+.achievement.unlocked .badge {
+    filter: none;
+    opacity: 1;
+}
+
+.achievement h4 {
+    font-size: 12px;
+    color: var(--deep);
+    margin-bottom: 6px;
+}
+
+.achievement p {
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* FOOTER */
+
+.footer {
+    background: var(--deep);
+    color: var(--champagne);
+    text-align: center;
+    padding: 29px 20px;
+}
+
+.footer h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 19px;
+    margin-bottom: 9px;
+}
+
+.footer p {
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+/* TOAST */
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    max-width: calc(100% - 40px);
+    padding: 13px 18px;
+    background: var(--deep);
+    color: var(--champagne);
+    border-radius: 9px;
+    box-shadow: var(--shadow);
+    font-size: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: .25s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+
+    .stamp-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .workspace {
+        grid-template-columns: 195px minmax(0, 1fr);
+    }
+
+    .main-content {
+        padding: 22px;
+    }
+
+}
+
+@media (max-width: 760px) {
+
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 28px 6% 40px;
+    }
+
+    .passport-art {
+        min-height: 220px;
+    }
+
+    .passport {
+        width: 190px;
+        height: 215px;
+    }
+
+    .passport-globe {
+        width: 75px;
+        height: 75px;
+        font-size: 39px;
+        margin: 10px 0;
+    }
+
+    .passport-title {
+        font-size: 19px;
+    }
+
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 16px;
+    }
+
+    .sidebar-title {
+        padding-bottom: 10px;
+    }
+
+    .side-link {
+        display: inline-flex;
+        width: auto;
+        margin: 3px;
+        padding: 10px;
+    }
+
+    .sidebar-note {
+        display: none;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat {
+        padding: 12px 15px;
+    }
+
+    .main-content {
+        padding: 19px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .navbar {
+        height: 65px;
+        padding: 0 4%;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .logo small {
+        font-size: 8px;
+    }
+
+    .stamp-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-row {
+        align-items: stretch;
+    }
+
+    .filter-row select,
+    .clear-btn {
+        flex: 1 1 100%;
+    }
+
+    .achievement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .content-heading h2 {
+        font-size: 21px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+
+    <a class="logo" href="index.html">
+        The Flavorverse
+        <small>EXPLORE · COOK · COLLECT</small>
+    </a>
+
+    <div class="nav-right">
+
+        <button
+            class="menu-btn"
+            id="menuButton"
+            type="button"
+            aria-expanded="false">
+            ☰ Menu
+        </button>
+
+        <div class="menu-dropdown" id="menuDropdown">
+
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="movies&cartoons.html">Movies&cartoon</a>
+            <a href="worldcuisine.html" class="active">worlds</a>
+            <a href="desertwrold.html">dessert</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="favourite.html">favourite</a>
+            <a href="order.html">order</a>
+            <a href="stamp.html">stamp</a>
+            <a href="contact.html">contact</a>
+
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- HERO -->
+
+<header class="hero" id="top">
+
+    <div class="passport-art">
+
+        <div class="passport">
+
+            <div class="passport-top">
+                MY FLAVORVERSE
+            </div>
+
+            <div class="passport-globe">
+                🌍
+            </div>
+
+            <div class="passport-title">
+                FOOD<br>PASSPORT
+            </div>
+
+            <div class="passport-bottom">
+                REAL RECIPES · NEW PLACES
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-content">
+
+        <div class="hero-kicker">
+            Your Personal Culinary Journal
+        </div>
+
+        <h1>
+            My Flavorverse
+            <span>Stamped Page</span>
+        </h1>
+
+        <p class="hero-description">
+            Every recipe you try leaves a little memory
+            on your delicious journey.
+        </p>
+
+        <a href="#passportWorkspace" class="hero-btn">
+            EXPLORE MY PASSPORT &nbsp; →
+        </a>
+
+    </div>
+
+</header>
+
+<!-- PASSPORT DASHBOARD -->
+
+<main class="workspace" id="passportWorkspace">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-title">
+            MY FOOD JOURNAL
+        </div>
+
+        <button class="side-link active" data-section="stamps">
+            <span class="side-icon">🏵️</span>
+            My Stamps
+        </button>
+
+        <button class="side-link" data-section="journey">
+            <span class="side-icon">🌍</span>
+            Cuisine Journey
+        </button>
+
+        <button class="side-link" data-section="statistics">
+            <span class="side-icon">📊</span>
+            Statistics
+        </button>
+
+        <button class="side-link" data-section="achievements">
+            <span class="side-icon">🏆</span>
+            Achievements
+        </button>
+
+        <button class="side-link" data-section="stamps">
+            <span class="side-icon">🔎</span>
+            Search & Filter
+        </button>
+
+        <div class="sidebar-note">
+            Small bites...
+            <br>
+            Big adventures!
+            <span>♡ ✈</span>
+        </div>
+
+    </aside>
+
+    <section class="main-content">
+
+        <div class="content-heading">
+
+            <div>
+
+                <h2 id="sectionTitle">My Stamps ♡</h2>
+
+                <p id="sectionDescription">
+                    These are the recipes you have collected
+                    on your culinary journey!
+                </p>
+
+                <span class="account-label" id="accountStatus">
+                    Connecting to your Flavorverse account...
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- STATISTICS -->
+
+        <section class="stats" id="stats">
+
+            <div class="stat">
+                <div class="stat-icon">🏵️</div>
+                <div>
+                    <h3 id="totalStamps">0</h3>
+                    <p>Total Stamps</p>
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">🌍</div>
+                <div>
+                    <h3 id="totalCuisines">0</h3>
+                    <p>Cuisines Explored</p>
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">📅</div>
+                <div>
+                    <h3 id="latestStamp">—</h3>
+                    <p>Latest Stamp</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- MY STAMPS -->
+
+        <section id="stampsSection">
+
+            <div class="filter-row">
+
+                <div class="search-box">
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="🔎 Search your recipes..."
+                        aria-label="Search recipes">
+
+                </div>
+
+                <select id="categoryFilter" aria-label="Filter category">
+
+                    <option value="all">All Categories</option>
+                    <option value="heritage">Royal Heritage</option>
+                    <option value="world">World Cuisine</option>
+                    <option value="movie">Movies</option>
+                    <option value="cartoon">Cartoons</option>
+                    <option value="dessert">Desserts</option>
+
+                </select>
+
+                <button class="clear-btn" id="clearFilters">
+                    Clear
+                </button>
+
+            </div>
+
+            <div class="stamp-grid" id="stampGrid"></div>
+
+            <div class="empty-state" id="emptyState">
+
+                <div class="empty-icon">🏵️</div>
+
+                <h3 id="emptyTitle">
+                    Your Passport Is Waiting!
+                </h3>
+
+                <p id="emptyDescription">
+                    Discover a recipe, try it in your kitchen,
+                    and add your first stamp to begin your journey.
+                </p>
+
+                <a href="index.html" class="primary-btn" id="exploreButton">
+                    Explore Recipes
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- CUISINE JOURNEY -->
+
+        <section class="extra-section" id="journeySection">
+
+            <div class="journey-card">
+
+                <h3>🌍 Your Culinary Journey</h3>
+
+                <p>
+                    Every stamp adds another memory to your
+                    Flavorverse food passport.
+                </p>
+
+            </div>
+
+            <div id="journeyList"></div>
+
+        </section>
+
+        <!-- STATISTICS DETAILS -->
+
+        <section class="extra-section" id="statisticsSection">
+
+            <div class="journey-card">
+
+                <h3>📊 Your Recipe Statistics</h3>
+
+                <p id="statisticsText">
+                    Your culinary journey starts with your first stamp!
+                </p>
+
+            </div>
+
+            <div id="statisticsList"></div>
+
+        </section>
+
+        <!-- ACHIEVEMENTS -->
+
+        <section class="extra-section" id="achievementsSection">
+
+            <div class="journey-card">
+
+                <h3>🏆 Passport Achievements</h3>
+
+                <p>
+                    Collect recipe stamps to unlock milestones
+                    on your culinary journey.
+                </p>
+
+            </div>
+
+            <div class="achievement-grid" id="achievementGrid"></div>
+
+        </section>
+
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <h3>The Flavorverse</h3>
+
+    <p>
+        Explore cultures. Collect memories. Celebrate food.<br>
+        Your journey, one recipe at a time. ♡
+    </p>
+
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+
+/* ========================================
+   1. FIREBASE CONFIGURATION
+======================================== */
+
+/*
+Use the SAME Firebase configuration as your
+existing Flavorverse recipe pages.
+*/
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+  authDomain: "the-flavoverse.firebaseapp.com",
+  projectId: "the-flavoverse",
+  storageBucket: "the-flavoverse.firebasestorage.app",
+  messagingSenderId: "1064022248292",
+  appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+  measurementId: "G-16Z0K1687Z"
+};
+
+
+/* ========================================
+   2. FIREBASE INITIALIZATION
+======================================== */
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+
+/* ========================================
+   3. GLOBAL VARIABLES
+======================================== */
+
+let currentUser = null;
+let recipes = [];
+let stopListening = null;
+
+
+/* ========================================
+   4. DOM ELEMENTS
+======================================== */
+
+const stampGrid = document.getElementById("stampGrid");
+const emptyState = document.getElementById("emptyState");
+
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+
+const accountStatus = document.getElementById("accountStatus");
+
+const sectionTitle = document.getElementById("sectionTitle");
+const sectionDescription = document.getElementById("sectionDescription");
+
+
+/* ========================================
+   5. TOAST MESSAGE
+======================================== */
+
+let toastTimer;
+
+function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(function() {
+        toast.classList.remove("show");
+    }, 2800);
+
+}
+
+
+/* ========================================
+   6. SMALL MENU
+======================================== */
+
+const menuButton = document.getElementById("menuButton");
+const menuDropdown = document.getElementById("menuDropdown");
+
+menuButton.addEventListener("click", function() {
+
+    const opened = menuDropdown.classList.toggle("show");
+
+    menuButton.setAttribute("aria-expanded", String(opened));
+
+});
+
+document.addEventListener("click", function(event) {
+
+    if (
+        !menuButton.contains(event.target) &&
+        !menuDropdown.contains(event.target)
+    ) {
+
+        menuDropdown.classList.remove("show");
+
+        menuButton.setAttribute("aria-expanded", "false");
+
+    }
+
+});
+
+
+/* ========================================
+   7. SIDEBAR NAVIGATION
+======================================== */
+
+const sectionNames = {
+
+    stamps: {
+        title: "My Stamps ♡",
+        description:
+            "These are the recipes you have collected on your culinary journey!"
+    },
+
+    journey: {
+        title: "Cuisine Journey 🌍",
+        description:
+            "Discover which cuisines you have explored through your recipe stamps."
+    },
+
+    statistics: {
+        title: "My Food Statistics 📊",
+        description:
+            "A little look at your culinary adventures."
+    },
+
+    achievements: {
+        title: "My Achievements 🏆",
+        description:
+            "Collect stamps and unlock your Flavorverse milestones."
+    }
+
+};
+
+function showSection(section) {
+
+    document.querySelectorAll(".side-link").forEach(function(button) {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.section === section
+        );
+
+    });
+
+    document.getElementById("stampsSection").style.display =
+        section === "stamps" ? "block" : "none";
+
+    document.getElementById("journeySection").classList.toggle(
+        "show",
+        section === "journey"
+    );
+
+    document.getElementById("statisticsSection").classList.toggle(
+        "show",
+        section === "statistics"
+    );
+
+    document.getElementById("achievementsSection").classList.toggle(
+        "show",
+        section === "achievements"
+    );
+
+    document.getElementById("stats").style.display =
+        section === "statistics" ? "grid" : "none";
+
+    sectionTitle.textContent = sectionNames[section].title;
+
+    sectionDescription.textContent =
+        sectionNames[section].description;
+
+}
+
+document.querySelectorAll(".side-link").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        showSection(button.dataset.section);
+
+    });
+
+});
+
+
+/* ========================================
+   8. CATEGORY NORMALIZATION
+======================================== */
+
+function normalizeCategory(category) {
+
+    const value = String(category || "").toLowerCase().trim();
+
+    if (
+        value.includes("heritage") ||
+        value.includes("tamil nadu") ||
+        value.includes("kerala") ||
+        value.includes("karnataka") ||
+        value.includes("rajasthan") ||
+        value.includes("punjab") ||
+        value.includes("uttar pradesh") ||
+        value.includes("west bengal") ||
+        value.includes("kashmir") ||
+        value.includes("andhra")
+    ) {
+        return "heritage";
+    }
+
+    if (
+        value.includes("world") ||
+        value.includes("cuisine") ||
+        value.includes("brazil") ||
+        value.includes("thailand") ||
+        value.includes("vietnam") ||
+        value.includes("turkey") ||
+        value.includes("canada") ||
+        value.includes("usa")
+    ) {
+        return "world";
+    }
+
+    if (value.includes("movie") || value.includes("film")) {
+        return "movie";
+    }
+
+    if (value.includes("cartoon") || value.includes("shinchan")) {
+        return "cartoon";
+    }
+
+    if (value.includes("dessert") || value.includes("sweet")) {
+        return "dessert";
+    }
+
+    return value || "other";
+
+}
+
+
+/* ========================================
+   9. DATE HELPERS
+======================================== */
+
+function timestampOf(value) {
+
+    if (!value) return 0;
+
+    if (typeof value.toDate === "function") {
+        return value.toDate().getTime();
+    }
+
+    if (typeof value.seconds === "number") {
+        return value.seconds * 1000;
+    }
+
+    const result = new Date(value).getTime();
+
+    return Number.isNaN(result) ? 0 : result;
+
+}
+
+function formatDate(value) {
+
+    const timestamp = timestampOf(value);
+
+    if (!timestamp) return "Date not available";
+
+    return new Date(timestamp).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
+
+}
+
+
+/* ========================================
+   10. EMPTY STATE
+======================================== */
+
+function showEmpty(title, description, buttonText) {
+
+    stampGrid.replaceChildren();
+
+    stampGrid.style.display = "none";
+
+    emptyState.style.display = "block";
+
+    document.getElementById("emptyTitle").textContent = title;
+
+    document.getElementById("emptyDescription").textContent =
+        description;
+
+    document.getElementById("exploreButton").textContent =
+        buttonText || "Explore Recipes";
+
+}
+
+
+/* ========================================
+   11. FIREBASE AUTHENTICATION
+======================================== */
+
+auth.onAuthStateChanged(function(user) {
+
+    if (stopListening) {
+
+        stopListening();
+        stopListening = null;
+
+    }
+
+    currentUser = user;
+
+    recipes = [];
+
+    updateStatistics();
+
+    if (!user) {
+
+        accountStatus.textContent =
+            "Please sign in to view your personal passport.";
+
+        showEmpty(
+            "Your Passport Is Waiting!",
+            "Sign in to your Flavorverse account to view the recipes you have stamped.",
+            "Sign In"
+        );
+
+        document.getElementById("exploreButton").href = "login.html";
+
+        return;
+
+    }
+
+    accountStatus.textContent =
+        "Your personal Flavorverse collection";
+
+    listenToStamps(user.uid);
+
+});
+
+
+/* ========================================
+   12. FIRESTORE LISTENER
+======================================== */
+
+function listenToStamps(uid) {
+
+    showEmpty(
+        "Opening Your Passport...",
+        "Loading your recipe stamps from the database.",
+        "Explore Recipes"
+    );
+
+    /*
+       Firestore structure:
+
+       users
+         └── USER_UID
+               └── stamps
+                     └── RECIPE_ID
+    */
+
+    stopListening = db
+        .collection("users")
+        .doc(uid)
+        .collection("stamps")
+        .onSnapshot(function(snapshot) {
+
+            recipes = [];
+
+            snapshot.forEach(function(document) {
+
+                const data = document.data();
+
+                recipes.push({
+
+                    id: document.id,
+
+                    name:
+                        data.name ||
+                        data.recipeName ||
+                        "Untitled Recipe",
+
+                    category:
+                        data.category ||
+                        "Other",
+
+                    image:
+                        data.image ||
+                        data.imageUrl ||
+                        "",
+
+                    description:
+                        data.description ||
+                        "",
+
+                    recipeUrl:
+                        data.recipeUrl ||
+                        data.url ||
+                        "",
+
+                    triedAt:
+                        data.triedAt ||
+                        data.stampedAt ||
+                        data.createdAt ||
+                        null
+
+                });
+
+            });
+
+            recipes.sort(function(a, b) {
+
+                return timestampOf(b.triedAt) -
+                       timestampOf(a.triedAt);
+
+            });
+
+            updateStatistics();
+
+            renderStamps();
+
+            renderJourney();
+
+            renderAchievements();
+
+        }, function(error) {
+
+            console.error("Firestore error:", error);
+
+            showEmpty(
+                "Unable to Load Your Passport",
+                "Check your Firebase configuration, Firestore security rules and internet connection.",
+                "Try Again"
+            );
+
+        });
+
+}
+
+
+/* ========================================
+   13. UPDATE STATISTICS
+======================================== */
+
+function updateStatistics() {
+
+    document.getElementById("totalStamps").textContent =
+        recipes.length;
+
+    const cuisines = new Set(
+        recipes.map(function(recipe) {
+            return recipe.category.toLowerCase().trim();
+        })
+    );
+
+    document.getElementById("totalCuisines").textContent =
+        cuisines.size;
+
+    document.getElementById("latestStamp").textContent =
+        recipes.length ? formatDate(recipes[0].triedAt) : "—";
+
+    document.getElementById("statisticsText").textContent =
+        "You have collected " + recipes.length +
+        " recipe stamp(s) across " + cuisines.size +
+        " category/categories.";
+
+    const statisticsList = document.getElementById("statisticsList");
+
+    statisticsList.replaceChildren();
+
+    const categoryCounts = {};
+
+    recipes.forEach(function(recipe) {
+
+        categoryCounts[recipe.category] =
+            (categoryCounts[recipe.category] || 0) + 1;
+
+    });
+
+    Object.entries(categoryCounts).forEach(function(entry) {
+
+        const card = document.createElement("div");
+
+        card.className = "journey-card";
+
+        const heading = document.createElement("h3");
+
+        heading.textContent = "🍽️ " + entry[0];
+
+        const description = document.createElement("p");
+
+        description.textContent =
+            entry[1] + " recipe stamp(s) collected.";
+
+        card.append(heading, description);
+
+        statisticsList.appendChild(card);
+
+    });
+
+}
+
+
+/* ========================================
+   14. SEARCH AND FILTER
+======================================== */
+
+searchInput.addEventListener("input", renderStamps);
+
+categoryFilter.addEventListener("change", renderStamps);
+
+document.getElementById("clearFilters").addEventListener(
+    "click",
+    function() {
+
+        searchInput.value = "";
+
+        categoryFilter.value = "all";
+
+        renderStamps();
+
+    }
+);
+
+
+/* ========================================
+   15. RENDER STAMPS
+======================================== */
+
+function renderStamps() {
+
+    if (!currentUser) return;
+
+    const search = searchInput.value.toLowerCase().trim();
+
+    const selectedCategory = categoryFilter.value;
+
+    const filtered = recipes.filter(function(recipe) {
+
+        const matchesSearch =
+            recipe.name.toLowerCase().includes(search) ||
+            recipe.category.toLowerCase().includes(search);
+
+        const matchesCategory =
+            selectedCategory === "all" ||
+            normalizeCategory(recipe.category) === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+
+    });
+
+    stampGrid.replaceChildren();
+
+    if (recipes.length === 0) {
+
+        showEmpty(
+            "Your Passport Is Waiting!",
+            "No recipe stamps yet. Open a recipe page and click Add to Stamp after trying the recipe.",
+            "Explore Recipes"
+        );
+
+        return;
+
+    }
+
+    if (filtered.length === 0) {
+
+        showEmpty(
+            "No Matching Stamps",
+            "Try another recipe name or choose a different category.",
+            "Explore Recipes"
+        );
+
+        return;
+
+    }
+
+    emptyState.style.display = "none";
+
+    stampGrid.style.display = "grid";
+
+    filtered.forEach(function(recipe) {
+
+        const card = document.createElement("article");
+
+        card.className = "stamp-card";
+
+        /* IMAGE */
+
+        if (recipe.image) {
+
+            const image = document.createElement("img");
+
+            image.className = "recipe-image";
+
+            image.src = recipe.image;
+
+            image.alt = recipe.name;
+
+            image.loading = "lazy";
+
+            image.onerror = function() {
+
+                const placeholder = document.createElement("div");
+
+                placeholder.className = "recipe-placeholder";
+
+                placeholder.textContent = "🍲";
+
+                image.replaceWith(placeholder);
+
+            };
+
+            card.appendChild(image);
+
+        } else {
+
+            const placeholder = document.createElement("div");
+
+            placeholder.className = "recipe-placeholder";
+
+            placeholder.textContent = "🍲";
+
+            card.appendChild(placeholder);
+
+        }
+
+        /* STAMP SEAL */
+
+        const seal = document.createElement("div");
+
+        seal.className = "stamp-seal";
+
+        const sealIcon = document.createElement("span");
+
+        sealIcon.textContent = "✿";
+
+        const sealText = document.createElement("small");
+
+        sealText.textContent = "STAMPED";
+
+        seal.append(sealIcon, sealText);
+
+        card.appendChild(seal);
+
+        /* DETAILS */
+
+        const details = document.createElement("div");
+
+        details.className = "recipe-details";
+
+        const category = document.createElement("span");
+
+        category.className = "category-tag";
+
+        category.textContent = recipe.category;
+
+        const title = document.createElement("h3");
+
+        title.textContent = recipe.name;
+
+        const description = document.createElement("p");
+
+        description.textContent =
+            recipe.description ||
+            "A delicious memory in your Flavorverse journey.";
+
+        const date = document.createElement("div");
+
+        date.className = "stamp-date";
+
+        date.textContent =
+            "🏵️ Stamped: " + formatDate(recipe.triedAt);
+
+        /* ACTION BUTTONS */
+
+        const actions = document.createElement("div");
+
+        actions.className = "stamp-actions";
+
+        const viewButton = document.createElement("button");
+
+        viewButton.className = "view-btn";
+
+        viewButton.type = "button";
+
+        viewButton.textContent = "View Recipe";
+
+        viewButton.addEventListener("click", function() {
+
+            openRecipe(recipe);
+
+        });
+
+        const removeButton = document.createElement("button");
+
+        removeButton.className = "remove-btn";
+
+        removeButton.type = "button";
+
+        removeButton.textContent = "Remove";
+
+        removeButton.addEventListener("click", function() {
+
+            removeStamp(recipe.id);
+
+        });
+
+        actions.append(viewButton, removeButton);
+
+        details.append(
+            category,
+            title,
+            description,
+            date,
+            actions
+        );
+
+        card.appendChild(details);
+
+        stampGrid.appendChild(card);
+
+    });
+
+}
+
+
+/* ========================================
+   16. OPEN ORIGINAL RECIPE
+======================================== */
+
+function openRecipe(recipe) {
+
+    if (!recipe.recipeUrl) {
+
+        showToast(
+            "Recipe page link is not saved for this recipe."
+        );
+
+        return;
+
+    }
+
+    try {
+
+        const destination = new URL(
+            recipe.recipeUrl,
+            window.location.href
+        );
+
+        if (destination.origin !== window.location.origin) {
+
+            showToast("Invalid recipe page link.");
+
+            return;
+
+        }
+
+        window.location.href = destination.href;
+
+    } catch (error) {
+
+        showToast("Invalid recipe page link.");
+
+    }
+
+}
+
+
+/* ========================================
+   17. REMOVE STAMP
+======================================== */
+
+async function removeStamp(recipeId) {
+
+    if (!currentUser) {
+
+        showToast("Please sign in first.");
+
+        return;
+
+    }
+
+    if (!window.confirm(
+        "Remove this stamp from your Flavorverse Passport?"
+    )) {
+
+        return;
+
+    }
+
+    try {
+
+        await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("stamps")
+            .doc(recipeId)
+            .delete();
+
+        showToast("Stamp removed from your passport!");
+
+    } catch (error) {
+
+        console.error("Remove stamp error:", error);
+
+        showToast("Unable to remove stamp. Please try again.");
+
+    }
+
+}
+
+
+/* ========================================
+   18. CUISINE JOURNEY
+======================================== */
+
+function renderJourney() {
+
+    const journeyList = document.getElementById("journeyList");
+
+    journeyList.replaceChildren();
+
+    const counts = {};
+
+    recipes.forEach(function(recipe) {
+
+        counts[recipe.category] =
+            (counts[recipe.category] || 0) + 1;
+
+    });
+
+    if (Object.keys(counts).length === 0) {
+
+        const message = document.createElement("div");
+
+        message.className = "journey-card";
+
+        message.textContent =
+            "Your cuisine journey will appear after you collect your first stamp.";
+
+        journeyList.appendChild(message);
+
+        return;
+
+    }
+
+    Object.entries(counts).forEach(function(entry) {
+
+        const card = document.createElement("div");
+
+        card.className = "journey-card";
+
+        const heading = document.createElement("h3");
+
+        heading.textContent = "🌍 " + entry[0];
+
+        const description = document.createElement("p");
+
+        description.textContent =
+            entry[1] + " recipe(s) collected from this category.";
+
+        const track = document.createElement("div");
+
+        track.className = "progress-track";
+
+        const fill = document.createElement("div");
+
+        fill.className = "progress-fill";
+
+        const progress = Math.min(entry[1] / 10 * 100, 100);
+
+        fill.style.width = progress + "%";
+
+        track.appendChild(fill);
+
+        const label = document.createElement("div");
+
+        label.className = "progress-label";
+
+        label.textContent =
+            entry[1] + " / 10 recipes towards your next milestone";
+
+        card.append(heading, description, track, label);
+
+        journeyList.appendChild(card);
+
+    });
+
+}
+
+
+/* ========================================
+   19. ACHIEVEMENTS
+======================================== */
+
+function renderAchievements() {
+
+    const achievementGrid =
+        document.getElementById("achievementGrid");
+
+    achievementGrid.replaceChildren();
+
+    const milestones = [
+
+        {
+            count: 1,
+            icon: "🌱",
+            title: "First Bite",
+            description: "Collect your first stamp."
+        },
+
+        {
+            count: 5,
+            icon: "🍽️",
+            title: "Food Explorer",
+            description: "Collect five recipe stamps."
+        },
+
+        {
+            count: 10,
+            icon: "🧭",
+            title: "Taste Traveller",
+            description: "Collect ten recipe stamps."
+        },
+
+        {
+            count: 25,
+            icon: "🌍",
+            title: "Cuisine Adventurer",
+            description: "Collect twenty-five stamps."
+        },
+
+        {
+            count: 50,
+            icon: "👑",
+            title: "Flavorverse Royal",
+            description: "Collect fifty recipe stamps."
+        },
+
+        {
+            count: 100,
+            icon: "🏆",
+            title: "Master Explorer",
+            description: "Collect one hundred stamps."
+        }
+
+    ];
+
+    milestones.forEach(function(milestone) {
+
+        const unlocked = recipes.length >= milestone.count;
+
+        const card = document.createElement("div");
+
+        card.className =
+            "achievement" + (unlocked ? " unlocked" : "");
+
+        const badge = document.createElement("div");
+
+        badge.className = "badge";
+
+        badge.textContent = milestone.icon;
+
+        const title = document.createElement("h4");
+
+        title.textContent = milestone.title;
+
+        const description = document.createElement("p");
+
+        description.textContent = unlocked
+            ? "Unlocked! 🎉"
+            : milestone.description;
+
+        card.append(badge, title, description);
+
+        achievementGrid.appendChild(card);
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

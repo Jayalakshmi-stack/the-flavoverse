@@ -1,0 +1,3282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cheese & Cookies | The Flavorverse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
+<style>
+
+/* =====================================================
+   THEME
+===================================================== */
+
+:root{
+    --bg:#fff8f4;
+    --section:#f8eee8;
+    --card:#ffffff;
+
+    --purple:#704b72;
+    --purple2:#91698e;
+
+    --text:#51404e;
+    --soft-text:#816d7d;
+
+    --gold:#d8b66c;
+    --border:#eadbd2;
+
+    --input:#ffffff;
+
+    --shadow:rgba(70,45,70,.18);
+}
+
+body.dark{
+    --bg:#17131a;
+    --section:#241c27;
+    --card:#2a212d;
+
+    --purple:#d3add2;
+    --purple2:#ae82ad;
+
+    --text:#f4eaf4;
+    --soft-text:#c9b7ca;
+
+    --gold:#e1c477;
+    --border:#493b4c;
+
+    --input:#332a36;
+
+    --shadow:rgba(0,0,0,.45);
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
+}
+
+
+/* =====================================================
+   CLEAN NAVIGATION BAR
+===================================================== */
+
+header{
+    min-height:85px;
+    padding:15px 5%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:25px;
+
+    background:var(--card);
+
+    border-bottom:1px solid var(--border);
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+
+/* LOGO */
+
+.logo{
+    font-family:Cinzel,serif;
+    font-size:24px;
+    font-weight:700;
+    color:var(--purple);
+    white-space:nowrap;
+}
+
+
+/* MENU */
+
+.main-menu{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    gap:5px;
+
+    background:var(--section);
+
+    padding:7px;
+
+    border:1px solid var(--border);
+
+    border-radius:40px;
+}
+
+
+/* LINKS */
+
+.main-menu a{
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-family:Poppins,sans-serif;
+
+    font-size:12px;
+    font-weight:500;
+
+    padding:10px 13px;
+
+    border-radius:25px;
+
+    white-space:nowrap;
+
+    transition:.3s;
+}
+
+.main-menu a:hover{
+    background:var(--purple);
+    color:white;
+}
+
+
+/* CURRENT PAGE */
+
+.main-menu a[href="movies&cartoons.html"]{
+    background:var(--purple);
+    color:white;
+}
+
+
+/* THEME */
+
+.theme-btn{
+    border:none;
+
+    background:var(--purple);
+
+    color:white;
+
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    margin-left:4px;
+
+    transition:.3s;
+}
+
+.theme-btn:hover{
+    transform:rotate(15deg) scale(1.05);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    min-height:390px;
+
+    padding:45px 8%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:50px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #704b72,
+            #906889,
+            #765276
+        );
+}
+
+.hero-text{
+    max-width:560px;
+    color:white;
+}
+
+.hero-text > span{
+    color:#f8e8c9;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+}
+
+.hero-text h1{
+    margin:15px 0;
+
+    font-family:Cinzel,serif;
+
+    font-size:50px;
+
+    line-height:1.05;
+
+    color:#fffaf2;
+}
+
+.hero-text p{
+    max-width:500px;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    color:#fff7ef;
+}
+
+.hero-text a{
+    display:inline-block;
+
+    margin-top:22px;
+
+    padding:11px 24px;
+
+    border-radius:25px;
+
+    background:#f7e7ce;
+
+    color:#704b72;
+
+    text-decoration:none;
+
+    font-family:Poppins,sans-serif;
+
+    font-weight:bold;
+
+    font-size:13px;
+
+    transition:.3s;
+}
+
+.hero-text a:hover{
+    background:#d7b5c7;
+    color:white;
+}
+
+
+/* HERO IMAGE */
+
+.hero-image{
+    width:360px;
+    height:290px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    border-radius:35px;
+
+    padding:8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7e7ce,
+            #c8a4ba,
+            #f7e7ce
+        );
+
+    box-shadow:
+        0 20px 45px
+        rgba(0,0,0,.25);
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:29px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-section{
+    padding:35px 7%;
+
+    text-align:center;
+
+    background:var(--section);
+}
+
+.search-title{
+    margin-bottom:18px;
+
+    font-family:Cinzel,serif;
+
+    font-size:25px;
+
+    color:var(--purple);
+}
+
+.search-box{
+    width:100%;
+    max-width:650px;
+
+    padding:15px 20px;
+
+    border-radius:30px;
+
+    border:1px solid var(--border);
+
+    outline:none;
+
+    background:var(--input);
+
+    color:var(--text);
+
+    font-family:Poppins,sans-serif;
+
+    font-size:14px;
+}
+
+.search-box:focus{
+    border-color:var(--purple2);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(145,105,142,.12);
+}
+
+
+/* =====================================================
+   RECIPES
+===================================================== */
+
+.recipes{
+    padding:80px 7%;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--bg),
+            var(--section)
+        );
+}
+
+.section-heading{
+    text-align:center;
+
+    margin-bottom:50px;
+}
+
+.section-heading span{
+    color:var(--purple2);
+
+    font-family:Poppins,sans-serif;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+}
+
+.section-heading h2{
+    margin:10px 0;
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    font-size:38px;
+}
+
+.section-heading p{
+    color:var(--soft-text);
+
+    font-family:Poppins,sans-serif;
+
+    font-size:14px;
+}
+
+
+/* =====================================================
+   RECIPE GRID
+===================================================== */
+
+.recipe-grid{
+    max-width:1100px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:45px;
+}
+
+
+/* =====================================================
+   RECIPE CARD
+===================================================== */
+
+.recipe-card{
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #704b72,
+            #936b8d
+        );
+
+    border-radius:32px;
+
+    border:2px solid #c7a45f;
+
+    box-shadow:
+        0 20px 40px
+        rgba(90,55,80,.2);
+
+    transition:.4s;
+}
+
+.recipe-card:hover{
+    transform:translateY(-9px);
+
+    box-shadow:
+        0 30px 50px
+        rgba(90,55,80,.3);
+}
+
+.recipe-card.hide{
+    display:none;
+}
+
+
+/* =====================================================
+   RECIPE IMAGE
+===================================================== */
+
+.recipe-image{
+    height:260px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.recipe-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.5s;
+}
+
+.recipe-card:hover
+.recipe-image img{
+    transform:scale(1.06);
+}
+
+.recipe-image span{
+    position:absolute;
+
+    left:18px;
+    bottom:18px;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    background:#fff4df;
+
+    color:#704b72;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:11px;
+
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.recipe-content{
+    padding:27px;
+
+    color:white;
+}
+
+.recipe-content small{
+    color:#f8e8c9;
+
+    letter-spacing:2px;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:10px;
+
+    font-weight:bold;
+}
+
+.recipe-content h3{
+    margin:8px 0;
+
+    font-family:Cinzel,serif;
+
+    font-size:25px;
+
+    color:#fffaf2;
+}
+
+.recipe-content p{
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    color:#fff5ef;
+
+    margin-bottom:18px;
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.info{
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:20px;
+}
+
+.info span{
+    padding:7px 13px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    border:
+        1px solid
+        rgba(255,235,220,.35);
+
+    font-family:Poppins,sans-serif;
+
+    font-size:11px;
+}
+
+
+/* =====================================================
+   INGREDIENTS
+===================================================== */
+
+.recipe-content h4{
+    margin-top:20px;
+
+    margin-bottom:10px;
+
+    color:#f8e8c9;
+
+    font-family:Cinzel,serif;
+
+    font-size:16px;
+}
+
+.recipe-content ul,
+.recipe-content ol{
+    padding-left:20px;
+}
+
+.recipe-content li{
+    margin-bottom:7px;
+
+    color:#fff8f1;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.actions{
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:22px;
+}
+
+.action-btn{
+    border:1px solid #f4e5c5;
+
+    background:
+        rgba(255,255,255,.12);
+
+    color:white;
+
+    padding:10px 14px;
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:12px;
+
+    transition:.3s;
+}
+
+.action-btn:hover{
+    background:#f4e5c5;
+    color:#704b72;
+}
+
+.action-btn.active{
+    background:#f4e5c5;
+
+    color:#704b72;
+
+    font-weight:600;
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.rating-box{
+    margin-top:25px;
+
+    padding-top:20px;
+
+    border-top:
+        1px solid
+        rgba(244,229,197,.35);
+}
+
+.rating-title{
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    margin-bottom:8px;
+}
+
+.stars{
+    display:flex;
+
+    gap:5px;
+}
+
+.star{
+    border:none;
+
+    background:none;
+
+    color:
+        rgba(255,255,255,.45);
+
+    cursor:pointer;
+
+    font-size:25px;
+
+    padding:0;
+
+    transition:.2s;
+}
+
+.star:hover,
+.star.active{
+    color:#f4e5c5;
+
+    transform:scale(1.1);
+}
+
+.rating-message{
+    font-family:Poppins,sans-serif;
+
+    font-size:11px;
+
+    margin-top:7px;
+}
+
+
+/* =====================================================
+   REVIEW SECTION
+===================================================== */
+
+.review-section{
+    max-width:1050px;
+
+    margin:70px auto 0;
+
+    padding:35px;
+
+    background:var(--section);
+
+    border:1px solid var(--border);
+
+    border-radius:30px;
+}
+
+.review-section h2{
+    text-align:center;
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    margin-bottom:25px;
+}
+
+.review-form{
+    display:grid;
+
+    gap:15px;
+}
+
+.review-form select,
+.review-form textarea{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    background:var(--input);
+
+    color:var(--text);
+
+    border-radius:15px;
+
+    padding:13px;
+
+    font-family:Poppins,sans-serif;
+
+    outline:none;
+}
+
+.review-form textarea{
+    min-height:130px;
+
+    resize:vertical;
+}
+
+.review-btn{
+    border:none;
+
+    background:var(--purple);
+
+    color:white;
+
+    padding:13px 20px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-family:Poppins,sans-serif;
+
+    font-weight:600;
+}
+
+.review-btn:hover{
+    background:var(--purple2);
+}
+
+.reviews-list{
+    margin-top:30px;
+
+    display:grid;
+
+    gap:15px;
+}
+
+.review-item{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:18px;
+}
+
+.review-item strong{
+    color:var(--purple);
+
+    font-family:Poppins,sans-serif;
+}
+
+.review-item small{
+    display:block;
+
+    color:var(--soft-text);
+
+    font-family:Poppins,sans-serif;
+
+    margin:5px 0 10px;
+}
+
+.review-item p{
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+.activity-section{
+    max-width:1050px;
+
+    margin:45px auto 0;
+}
+
+.activity-title{
+    text-align:center;
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    font-size:28px;
+
+    margin-bottom:25px;
+}
+
+.activity-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.activity-box{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:
+        0 8px 20px
+        var(--shadow);
+}
+
+.activity-icon{
+    font-size:30px;
+
+    margin-bottom:8px;
+}
+
+.activity-number{
+    display:block;
+
+    font-family:Cinzel,serif;
+
+    color:var(--purple);
+
+    font-size:30px;
+
+    font-weight:bold;
+}
+
+.activity-label{
+    font-family:Poppins,sans-serif;
+
+    font-size:12px;
+
+    color:var(--soft-text);
+}
+
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quote{
+    padding:65px 20px;
+
+    text-align:center;
+
+    background:var(--section);
+}
+
+.quote div{
+    max-width:750px;
+
+    margin:auto;
+}
+
+.quote span{
+    color:var(--gold);
+
+    font-size:20px;
+}
+
+.quote h2{
+    margin:15px 0;
+
+    color:var(--purple);
+
+    font-family:Cinzel,serif;
+
+    font-size:28px;
+
+    font-style:italic;
+}
+
+.quote p{
+    color:var(--soft-text);
+
+    font-family:Poppins,sans-serif;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-movies{
+    width:100%;
+
+    padding:25px 6%;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    background:var(--bg);
+}
+
+.back-movies a{
+    display:inline-block;
+
+    padding:11px 20px;
+
+    border:1px solid #d6b979;
+
+    border-radius:25px;
+
+    background:#684c6b;
+
+    color:#f5dda2;
+
+    text-decoration:none;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+
+    transition:.4s;
+}
+
+.back-movies a:hover{
+    background:#d6b979;
+
+    color:#684c6b;
+
+    transform:translateY(-3px);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    padding:40px 20px;
+
+    text-align:center;
+
+    background:#704b72;
+
+    color:white;
+
+    border-top:4px solid #f7e7ce;
+}
+
+footer h3{
+    color:#f7e7ce;
+
+    font-family:Cinzel,serif;
+
+    margin-bottom:10px;
+
+    font-size:23px;
+}
+
+footer p{
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+    position:fixed;
+
+    bottom:25px;
+    right:25px;
+
+    background:#4d3547;
+
+    color:white;
+
+    padding:14px 20px;
+
+    border-radius:15px;
+
+    font-family:Poppins,sans-serif;
+
+    font-size:13px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.25);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(20px);
+
+    transition:.3s;
+
+    z-index:5000;
+}
+
+.toast.show{
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateY(0);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+    header{
+        flex-direction:column;
+
+        padding:15px 4%;
+    }
+
+    .main-menu{
+        width:100%;
+
+        justify-content:center;
+
+        flex-wrap:wrap;
+
+        border-radius:25px;
+    }
+}
+
+
+@media(max-width:900px){
+
+    .hero{
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:50px 7%;
+    }
+
+    .hero-text p{
+        margin:auto;
+    }
+
+    .hero-text h1{
+        font-size:42px;
+    }
+
+    .hero-image{
+        width:90%;
+
+        max-width:360px;
+    }
+
+    .recipe-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:21px;
+    }
+
+    .main-menu{
+        gap:3px;
+
+        padding:6px;
+    }
+
+    .main-menu a{
+        font-size:11px;
+
+        padding:8px 10px;
+    }
+
+    .theme-btn{
+        width:34px;
+        height:34px;
+
+        font-size:14px;
+    }
+
+    .hero-text h1{
+        font-size:38px;
+    }
+
+    .hero-image{
+        height:240px;
+    }
+
+    .section-heading h2{
+        font-size:30px;
+    }
+
+    .recipe-content{
+        padding:22px;
+    }
+
+    .activity-grid{
+        grid-template-columns:1fr;
+    }
+
+    .review-section{
+        margin-left:5%;
+        margin-right:5%;
+
+        padding:22px;
+    }
+
+    .back-movies{
+        justify-content:center;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+
+    <nav class="main-menu">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="royal.html">
+            Royal
+        </a>
+
+        <a href="movies&cartoons.html">
+            Movies & Cartoons
+        </a>
+
+        <a href="worldcuisine.html">
+            World Cuisine
+        </a>
+
+        <a href="desertwrold.html">
+            Desserts
+        </a>
+
+        <a href="gallery.html">
+            Gallery
+        </a>
+
+        <a href="favourite.html">favourite</a>
+
+        <a href="stamp.html">stamp</a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <button
+            class="theme-btn"
+            id="themeButton"
+            onclick="toggleTheme()">
+
+            🌙
+
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <span>
+            🧀 COMFORT FOOD COLLECTION
+        </span>
+
+        <h1>
+            Cozy<br>
+            Fun Flavours
+        </h1>
+
+        <p>
+            Discover two simple and delicious treats
+            perfect for sharing, relaxing and enjoying
+            a little moment of comfort.
+        </p>
+
+        <a href="#recipes">
+            Explore Recipes ↓
+        </a>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img
+            src="tom&jerry.png"
+            alt="Cheese and Cookies">
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SEARCH
+===================================================== -->
+
+<section class="search-section">
+
+    <div class="search-title">
+        🔍 Search Recipes
+    </div>
+
+    <input
+        type="text"
+        id="searchInput"
+        class="search-box"
+        placeholder="Search Cheese Platter or Milk & Cookies..."
+        onkeyup="searchRecipes()">
+
+</section>
+
+
+
+<!-- =====================================================
+     RECIPES
+===================================================== -->
+
+<section
+    class="recipes"
+    id="recipes">
+
+
+    <div class="section-heading">
+
+        <span>
+            THE FLAVORVERSE KITCHEN
+        </span>
+
+        <h2>
+            Two Delicious Recipes
+        </h2>
+
+        <p>
+            Simple • Cozy • Delicious
+        </p>
+
+    </div>
+
+
+
+    <div class="recipe-grid">
+
+
+        <!-- =================================================
+             CHEESE PLATTER
+        ================================================== -->
+
+        <article
+            class="recipe-card"
+            data-name="Cheese Platter cheese savoury">
+
+
+            <div class="recipe-image">
+
+                <img
+                    src="recipetom and jerry cheese.png"
+                    alt="Cheese Platter">
+
+                <span>
+                    🧀 SAVOURY
+                </span>
+
+            </div>
+
+
+            <div class="recipe-content">
+
+                <small>
+                    RECIPE • 01
+                </small>
+
+                <h3>
+                    🧀 Cheese Platter
+                </h3>
+
+                <p>
+                    A colourful and elegant platter with
+                    creamy cheese, fresh fruits, crunchy
+                    crackers and delicious toppings.
+                </p>
+
+
+                <div class="info">
+
+                    <span>
+                        ⏱ 15 mins
+                    </span>
+
+                    <span>
+                        🧀 Easy
+                    </span>
+
+                </div>
+
+
+                <h4>
+                    Ingredients
+                </h4>
+
+                <ul>
+
+                    <li>
+                        Cheese cubes or slices
+                    </li>
+
+                    <li>
+                        Crackers
+                    </li>
+
+                    <li>
+                        Grapes
+                    </li>
+
+                    <li>
+                        Apple slices
+                    </li>
+
+                    <li>
+                        Almonds or cashews
+                    </li>
+
+                    <li>
+                        Olives
+                    </li>
+
+                    <li>
+                        Honey or fruit jam
+                    </li>
+
+                </ul>
+
+
+                <h4>
+                    Preparation
+                </h4>
+
+                <ol>
+
+                    <li>
+                        Cut the cheese into small cubes
+                        or attractive slices.
+                    </li>
+
+                    <li>
+                        Wash the grapes and slice the apple.
+                    </li>
+
+                    <li>
+                        Arrange the cheese in the centre
+                        of a large serving plate.
+                    </li>
+
+                    <li>
+                        Place crackers, fruits, nuts and
+                        olives around the cheese.
+                    </li>
+
+                    <li>
+                        Add a small bowl of honey or jam.
+                    </li>
+
+                    <li>
+                        Serve fresh and enjoy.
+                    </li>
+
+                </ol>
+
+
+                <!-- ACTIONS -->
+
+                <div class="actions">
+
+                    <button
+                        class="action-btn"
+                        id="fav-cheese"
+                        onclick="toggleFavourite(
+                            'cheese-platter',
+                            'Cheese Platter',
+                            this
+                        )">
+
+                        ❤️ Add to Favourite
+
+                    </button>
+
+
+                    <button
+                        class="action-btn"
+                        id="stamp-cheese"
+                        onclick="toggleStamp(
+                            'cheese-platter',
+                            'Cheese Platter',
+                            this
+                        )">
+
+                        🎟️ Add to Stamp
+
+                    </button>
+
+                </div>
+
+
+                <!-- RATING -->
+
+                <div class="rating-box">
+
+                    <div class="rating-title">
+                        Rate this recipe
+                    </div>
+
+
+                    <div
+                        class="stars"
+                        id="stars-cheese">
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'cheese-platter',
+                                1,
+                                this
+                            )">
+                            ★
+                        </button>
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'cheese-platter',
+                                2,
+                                this
+                            )">
+                            ★
+                        </button>
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'cheese-platter',
+                                3,
+                                this
+                            )">
+                            ★
+                        </button>
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'cheese-platter',
+                                4,
+                                this
+                            )">
+                            ★
+                        </button>
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'cheese-platter',
+                                5,
+                                this
+                            )">
+                            ★
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="rating-message"
+                        id="rating-message-cheese">
+
+                        Choose your rating
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             MILK & COOKIES
+        ================================================== -->
+
+        <article
+            class="recipe-card"
+            data-name="Milk Cookies milk chocolate cookies sweet">
+
+
+            <div class="recipe-image">
+
+                <img
+                    src="recipe tom and jerry white cookie.png"
+                    alt="Milk and Cookies">
+
+                <span>
+                    🥛 SWEET
+                </span>
+
+            </div>
+
+
+            <div class="recipe-content">
+
+                <small>
+                    RECIPE • 02
+                </small>
+
+                <h3>
+                    🥛 Milk & Cookies
+                </h3>
+
+                <p>
+                    Warm homemade chocolate chip cookies
+                    served with a refreshing glass of milk
+                    for the perfect classic combination.
+                </p>
+
+
+                <div class="info">
+
+                    <span>
+                        ⏱ 30 mins
+                    </span>
+
+                    <span>
+                        🍪 Easy
+                    </span>
+
+                </div>
+
+
+                <h4>
+                    Ingredients
+                </h4>
+
+                <ul>
+
+                    <li>
+                        1 cup all-purpose flour
+                    </li>
+
+                    <li>
+                        ½ cup butter
+                    </li>
+
+                    <li>
+                        ½ cup brown sugar
+                    </li>
+
+                    <li>
+                        ¼ cup white sugar
+                    </li>
+
+                    <li>
+                        ½ tsp baking powder
+                    </li>
+
+                    <li>
+                        ½ tsp vanilla essence
+                    </li>
+
+                    <li>
+                        ½ cup chocolate chips
+                    </li>
+
+                    <li>
+                        1 glass chilled or warm milk
+                    </li>
+
+                </ul>
+
+
+                <h4>
+                    Preparation
+                </h4>
+
+                <ol>
+
+                    <li>
+                        Cream the butter and both sugars
+                        until smooth.
+                    </li>
+
+                    <li>
+                        Add vanilla essence and mix well.
+                    </li>
+
+                    <li>
+                        Add flour and baking powder gradually.
+                    </li>
+
+                    <li>
+                        Fold in the chocolate chips.
+                    </li>
+
+                    <li>
+                        Shape the dough into small balls
+                        and place them on a baking tray.
+                    </li>
+
+                    <li>
+                        Bake at 180°C for about 10–12 minutes.
+                    </li>
+
+                    <li>
+                        Allow the cookies to cool slightly
+                        and serve with milk.
+                    </li>
+
+                </ol>
+
+
+                <!-- ACTIONS -->
+
+                <div class="actions">
+
+                    <button
+                        class="action-btn"
+                        id="fav-cookies"
+                        onclick="toggleFavourite(
+                            'milk-cookies',
+                            'Milk & Cookies',
+                            this
+                        )">
+
+                        ❤️ Add to Favourite
+
+                    </button>
+
+
+                    <button
+                        class="action-btn"
+                        id="stamp-cookies"
+                        onclick="toggleStamp(
+                            'milk-cookies',
+                            'Milk & Cookies',
+                            this
+                        )">
+
+                        🎟️ Add to Stamp
+
+                    </button>
+
+                </div>
+
+
+                <!-- RATING -->
+
+                <div class="rating-box">
+
+                    <div class="rating-title">
+                        Rate this recipe
+                    </div>
+
+
+                    <div
+                        class="stars"
+                        id="stars-cookies">
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'milk-cookies',
+                                1,
+                                this
+                            )">
+                            ★
+                        </button>
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'milk-cookies',
+                                2,
+                                this
+                            )">
+                            ★
+                        </button>
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'milk-cookies',
+                                3,
+                                this
+                            )">
+                            ★
+                        </button>
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'milk-cookies',
+                                4,
+                                this
+                            )">
+                            ★
+                        </button>
+
+
+                        <button
+                            class="star"
+                            onclick="saveRating(
+                                'milk-cookies',
+                                5,
+                                this
+                            )">
+                            ★
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="rating-message"
+                        id="rating-message-cookies">
+
+                        Choose your rating
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         REVIEW SECTION
+    ================================================== -->
+
+    <div class="review-section">
+
+        <h2>
+            💬 Share Your Review
+        </h2>
+
+
+        <div class="review-form">
+
+
+            <select id="reviewRecipe">
+
+                <option value="cheese-platter">
+                    🧀 Cheese Platter
+                </option>
+
+                <option value="milk-cookies">
+                    🥛 Milk & Cookies
+                </option>
+
+            </select>
+
+
+            <textarea
+                id="reviewText"
+                placeholder="Tell us what you think about this recipe..."></textarea>
+
+
+            <button
+                class="review-btn"
+                onclick="submitReview()">
+
+                Submit Review
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="reviews-list"
+            id="reviewsList">
+
+            <p style="
+                text-align:center;
+                color:var(--soft-text);
+                font-family:Poppins,sans-serif;">
+                Loading reviews...
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ACTIVITY
+    ================================================== -->
+
+    <div class="activity-section">
+
+        <h2 class="activity-title">
+            ✨ Your Flavorverse Activity
+        </h2>
+
+
+        <div class="activity-grid">
+
+
+            <div class="activity-box">
+
+                <div class="activity-icon">
+                    ❤️
+                </div>
+
+                <span
+                    class="activity-number"
+                    id="favouriteCount">
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Favourite Recipes
+                </span>
+
+            </div>
+
+
+            <div class="activity-box">
+
+                <div class="activity-icon">
+                    🎟️
+                </div>
+
+                <span
+                    class="activity-number"
+                    id="stampCount">
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Recipe Stamps
+                </span>
+
+            </div>
+
+
+            <div class="activity-box">
+
+                <div class="activity-icon">
+                    ⭐
+                </div>
+
+                <span
+                    class="activity-number"
+                    id="ratingCount">
+                    0
+                </span>
+
+                <span class="activity-label">
+                    Ratings Given
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUOTE
+===================================================== -->
+
+<section class="quote">
+
+    <div>
+
+        <span>✦</span>
+
+        <h2>
+            "The best moments are made with simple flavours!"
+        </h2>
+
+        <p>
+            — The Flavorverse
+        </p>
+
+        <span>✦</span>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BACK
+===================================================== -->
+
+<div class="back-movies">
+
+    <a href="movies&cartoons.html">
+        ← BACK TO MOVIES & CARTOONS
+    </a>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        🍴 The Flavorverse
+    </h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+    authDomain:
+    "the-flavoverse.firebaseapp.com",
+
+    projectId:
+    "the-flavoverse",
+
+    storageBucket:
+    "the-flavoverse.firebasestorage.app",
+
+    messagingSenderId:
+    "1064022248292",
+
+    appId:
+    "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+
+    measurementId:
+    "G-16Z0K1687Z"
+
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+let currentUser = null;
+
+
+
+/* =====================================================
+   RECIPE NAMES
+===================================================== */
+
+const recipeNames = {
+
+    "cheese-platter":
+        "Cheese Platter",
+
+    "milk-cookies":
+        "Milk & Cookies"
+
+};
+
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function applyTheme(){
+
+    const theme =
+        localStorage.getItem(
+            "flavorverseTheme"
+        ) || "light";
+
+
+    if(theme === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById(
+            "themeButton"
+        ).textContent = "☀️";
+
+    }
+
+    else{
+
+        document.body.classList.remove("dark");
+
+        document.getElementById(
+            "themeButton"
+        ).textContent = "🌙";
+
+    }
+
+}
+
+
+function toggleTheme(){
+
+    const isDark =
+        document.body.classList.toggle("dark");
+
+
+    localStorage.setItem(
+        "flavorverseTheme",
+        isDark ? "dark" : "light"
+    );
+
+
+    document.getElementById(
+        "themeButton"
+    ).textContent =
+        isDark ? "☀️" : "🌙";
+
+}
+
+
+applyTheme();
+
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+auth.onAuthStateChanged(async user => {
+
+    currentUser = user;
+
+
+    if(user){
+
+        await loadFavouriteStatus();
+
+        await loadStampStatus();
+
+        await loadMyRatings();
+
+        await loadActivity();
+
+    }
+
+
+    loadReviews();
+
+});
+
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },3000);
+
+}
+
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function checkLogin(){
+
+    if(!currentUser){
+
+        showToast(
+            "Please login to use this feature ❤️"
+        );
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "login.html";
+
+        },1200);
+
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function searchRecipes(){
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const cards =
+        document.querySelectorAll(
+            ".recipe-card"
+        );
+
+
+    cards.forEach(card => {
+
+        const name =
+            card.dataset.name
+            .toLowerCase();
+
+
+        if(name.includes(search)){
+
+            card.classList.remove("hide");
+
+        }
+
+        else{
+
+            card.classList.add("hide");
+
+        }
+
+    });
+
+}
+
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function toggleFavourite(
+    recipeId,
+    recipeName,
+    button
+){
+
+    if(!checkLogin()) return;
+
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("favourites")
+        .doc(recipeId);
+
+
+    try{
+
+        const doc =
+            await ref.get();
+
+
+        if(doc.exists){
+
+            await ref.delete();
+
+
+            button.classList.remove(
+                "active"
+            );
+
+
+            button.innerHTML =
+                "❤️ Add to Favourite";
+
+
+            showToast(
+                recipeName +
+                " removed from favourites"
+            );
+
+        }
+
+        else{
+
+            await ref.set({
+
+                recipeId:recipeId,
+
+                recipeName:recipeName,
+
+                category:"Comfort Food",
+
+                addedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            button.innerHTML =
+                "❤️ Added to Favourite";
+
+
+            showToast(
+                recipeName +
+                " added to favourite ❤️"
+            );
+
+        }
+
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to update favourite"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function toggleStamp(
+    recipeId,
+    recipeName,
+    button
+){
+
+    if(!checkLogin()) return;
+
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("stamps")
+        .doc(recipeId);
+
+
+    try{
+
+        const doc =
+            await ref.get();
+
+
+        if(doc.exists){
+
+            await ref.delete();
+
+
+            button.classList.remove(
+                "active"
+            );
+
+
+            button.innerHTML =
+                "🎟️ Add to Stamp";
+
+
+            showToast(
+                recipeName +
+                " removed from stamps"
+            );
+
+        }
+
+        else{
+
+            await ref.set({
+
+                recipeId:recipeId,
+
+                recipeName:recipeName,
+
+                category:"Comfort Food",
+
+                stampedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            button.innerHTML =
+                "🎟️ Added to Stamp";
+
+
+            showToast(
+                recipeName +
+                " added to stamp 🎟️"
+            );
+
+        }
+
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to update stamp"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD FAVOURITE STATUS
+===================================================== */
+
+async function loadFavouriteStatus(){
+
+    const recipes = [
+
+        {
+            id:"cheese-platter",
+            button:"fav-cheese"
+        },
+
+        {
+            id:"milk-cookies",
+            button:"fav-cookies"
+        }
+
+    ];
+
+
+    for(const recipe of recipes){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("favourites")
+                .doc(recipe.id)
+                .get();
+
+
+            const button =
+                document.getElementById(
+                    recipe.button
+                );
+
+
+            if(doc.exists){
+
+                button.classList.add(
+                    "active"
+                );
+
+                button.innerHTML =
+                    "❤️ Added to Favourite";
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD STAMP STATUS
+===================================================== */
+
+async function loadStampStatus(){
+
+    const recipes = [
+
+        {
+            id:"cheese-platter",
+            button:"stamp-cheese"
+        },
+
+        {
+            id:"milk-cookies",
+            button:"stamp-cookies"
+        }
+
+    ];
+
+
+    for(const recipe of recipes){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("stamps")
+                .doc(recipe.id)
+                .get();
+
+
+            const button =
+                document.getElementById(
+                    recipe.button
+                );
+
+
+            if(doc.exists){
+
+                button.classList.add(
+                    "active"
+                );
+
+                button.innerHTML =
+                    "🎟️ Added to Stamp";
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SAVE RATING
+===================================================== */
+
+async function saveRating(
+    recipeId,
+    rating,
+    clickedStar
+){
+
+    if(!checkLogin()) return;
+
+
+    try{
+
+        await db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("ratings")
+        .doc(recipeId)
+        .set({
+
+            recipeId:recipeId,
+
+            rating:rating,
+
+            updatedAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+
+        const parent =
+            clickedStar.parentElement;
+
+
+        const stars =
+            parent.querySelectorAll(
+                ".star"
+            );
+
+
+        stars.forEach((star,index) => {
+
+            if(index < rating){
+
+                star.classList.add(
+                    "active"
+                );
+
+            }
+
+            else{
+
+                star.classList.remove(
+                    "active"
+                );
+
+            }
+
+        });
+
+
+        const messageId =
+            recipeId === "cheese-platter"
+
+            ? "rating-message-cheese"
+
+            : "rating-message-cookies";
+
+
+        document.getElementById(
+            messageId
+        ).textContent =
+            "You rated this recipe " +
+            rating +
+            " / 5 ⭐";
+
+
+        showToast(
+            "Your rating has been saved ⭐"
+        );
+
+
+        loadActivity();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to save rating"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD RATINGS
+===================================================== */
+
+async function loadMyRatings(){
+
+    const recipes = [
+
+        "cheese-platter",
+
+        "milk-cookies"
+
+    ];
+
+
+    for(const recipeId of recipes){
+
+        try{
+
+            const doc =
+                await db
+                .collection("users")
+                .doc(currentUser.uid)
+                .collection("ratings")
+                .doc(recipeId)
+                .get();
+
+
+            if(!doc.exists) continue;
+
+
+            const rating =
+                doc.data().rating;
+
+
+            const container =
+                document.getElementById(
+
+                    recipeId ===
+                    "cheese-platter"
+
+                    ? "stars-cheese"
+
+                    : "stars-cookies"
+
+                );
+
+
+            const stars =
+                container.querySelectorAll(
+                    ".star"
+                );
+
+
+            stars.forEach((star,index) => {
+
+                if(index < rating){
+
+                    star.classList.add(
+                        "active"
+                    );
+
+                }
+
+                else{
+
+                    star.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            });
+
+
+            const messageId =
+                recipeId === "cheese-platter"
+
+                ? "rating-message-cheese"
+
+                : "rating-message-cookies";
+
+
+            document.getElementById(
+                messageId
+            ).textContent =
+                "You rated this recipe " +
+                rating +
+                " / 5 ⭐";
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SUBMIT REVIEW
+===================================================== */
+
+async function submitReview(){
+
+    if(!checkLogin()) return;
+
+
+    const recipeId =
+        document.getElementById(
+            "reviewRecipe"
+        ).value;
+
+
+    const review =
+        document.getElementById(
+            "reviewText"
+        ).value.trim();
+
+
+    if(!review){
+
+        showToast(
+            "Please write your review first 💬"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await db
+        .collection("recipes")
+        .doc(recipeId)
+        .collection("reviews")
+        .add({
+
+            userId:
+                currentUser.uid,
+
+            userName:
+                currentUser.displayName ||
+                currentUser.email
+                .split("@")[0],
+
+            review:review,
+
+            createdAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+
+        document.getElementById(
+            "reviewText"
+        ).value = "";
+
+
+        showToast(
+            "Your review has been posted 💬"
+        );
+
+
+        loadReviews();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to post review"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(){
+
+    const reviewList =
+        document.getElementById(
+            "reviewsList"
+        );
+
+
+    reviewList.innerHTML =
+
+        `<p style="
+        text-align:center;
+        color:var(--soft-text);
+        font-family:Poppins,sans-serif;">
+        Loading reviews...
+        </p>`;
+
+
+    const recipeIds = [
+
+        "cheese-platter",
+
+        "milk-cookies"
+
+    ];
+
+
+    let allReviews = [];
+
+
+    try{
+
+        for(const recipeId of recipeIds){
+
+            const snapshot =
+                await db
+                .collection("recipes")
+                .doc(recipeId)
+                .collection("reviews")
+                .get();
+
+
+            snapshot.forEach(doc => {
+
+                const data =
+                    doc.data();
+
+
+                allReviews.push({
+
+                    id:doc.id,
+
+                    recipeId:recipeId,
+
+                    ...data
+
+                });
+
+            });
+
+        }
+
+
+        allReviews.sort((a,b) => {
+
+            const timeA =
+                a.createdAt
+                ? a.createdAt.toMillis()
+                : 0;
+
+
+            const timeB =
+                b.createdAt
+                ? b.createdAt.toMillis()
+                : 0;
+
+
+            return timeB - timeA;
+
+        });
+
+
+        if(allReviews.length === 0){
+
+            reviewList.innerHTML =
+
+                `<p style="
+                text-align:center;
+                color:var(--soft-text);
+                font-family:Poppins,sans-serif;">
+                No reviews yet. Be the first to share your experience! 💜
+                </p>`;
+
+            return;
+
+        }
+
+
+        reviewList.innerHTML = "";
+
+
+        allReviews.forEach(item => {
+
+            const recipeName =
+                recipeNames[
+                    item.recipeId
+                ];
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "review-item";
+
+
+            const date =
+                item.createdAt
+
+                ? item.createdAt
+                    .toDate()
+                    .toLocaleDateString()
+
+                : "Recently";
+
+
+            div.innerHTML = `
+
+                <strong>
+                    ${escapeHTML(
+                        item.userName ||
+                        "Flavorverse User"
+                    )}
+                </strong>
+
+                <small>
+                    ${escapeHTML(
+                        recipeName
+                    )}
+                    •
+                    ${date}
+                </small>
+
+                <p>
+                    ${escapeHTML(
+                        item.review
+                    )}
+                </p>
+
+            `;
+
+
+            reviewList.appendChild(
+                div
+            );
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        reviewList.innerHTML =
+
+            `<p style="
+            text-align:center;
+            color:var(--soft-text);
+            font-family:Poppins,sans-serif;">
+            Reviews could not be loaded.
+            </p>`;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+async function loadActivity(){
+
+    if(!currentUser) return;
+
+
+    try{
+
+        const userRef =
+            db
+            .collection("users")
+            .doc(currentUser.uid);
+
+
+        const favouriteSnapshot =
+            await userRef
+            .collection("favourites")
+            .get();
+
+
+        const stampSnapshot =
+            await userRef
+            .collection("stamps")
+            .get();
+
+
+        const ratingSnapshot =
+            await userRef
+            .collection("ratings")
+            .get();
+
+
+        document.getElementById(
+            "favouriteCount"
+        ).textContent =
+            favouriteSnapshot.size;
+
+
+        document.getElementById(
+            "stampCount"
+        ).textContent =
+            stampSnapshot.size;
+
+
+        document.getElementById(
+            "ratingCount"
+        ).textContent =
+            ratingSnapshot.size;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dessert Collection | The Flavorverse</title>
+
+<style>
+
+/* ROOT */
+:root{
+    --mauve:#735267;
+    --deep:#4d3547;
+    --rose:#a7654d;
+    --cream:#fffaf2;
+    --paper:#fffdf8;
+    --champagne:#f4e5c5;
+    --gold:#b9945c;
+    --brown:#60473d;
+    --soft:#eee0d8;
+}
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    color:var(--brown);
+
+    background:
+        radial-gradient(circle at 8% 12%,rgba(255,255,255,.85),transparent 25%),
+        radial-gradient(circle at 90% 80%,rgba(115,82,103,.15),transparent 28%),
+        linear-gradient(135deg,#f2e5df,#eadbd5);
+
+    min-height:100vh;
+}
+
+/* HEADER */
+header{
+    min-height:76px;
+    padding:16px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(77,53,71,.97);
+    color:var(--champagne);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 8px 25px rgba(45,25,40,.18);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+    letter-spacing:.3px;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--champagne);
+    font-size:11px;
+    letter-spacing:1px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:white;
+    transform:translateY(-2px);
+}
+
+/* HERO */
+.hero{
+    width:88%;
+    max-width:1050px;
+    margin:85px auto 70px;
+    text-align:center;
+    position:relative;
+}
+
+.hero::before{
+    content:"✦";
+    position:absolute;
+    left:8%;
+    top:10px;
+    color:var(--gold);
+    font-size:25px;
+    opacity:.7;
+}
+
+.hero::after{
+    content:"✦";
+    position:absolute;
+    right:8%;
+    bottom:10px;
+    color:var(--rose);
+    font-size:22px;
+    opacity:.7;
+}
+
+.hero-tag{
+    display:inline-block;
+    padding:8px 18px;
+    border:1px solid var(--gold);
+    border-radius:30px;
+    color:#8d674f;
+    font-size:9px;
+    letter-spacing:4px;
+    background:rgba(255,250,242,.4);
+}
+
+.hero h1{
+    margin-top:22px;
+    font-size:72px;
+    line-height:.95;
+    color:var(--mauve);
+    letter-spacing:-2px;
+}
+
+.hero h1 span{
+    color:var(--rose);
+    font-style:italic;
+}
+
+.hero p{
+    max-width:650px;
+    margin:25px auto 0;
+    font-size:13px;
+    line-height:1.9;
+    color:#70594f;
+}
+
+.hero-line{
+    width:130px;
+    height:1px;
+    background:var(--gold);
+    margin:27px auto 0;
+    position:relative;
+}
+
+.hero-line::after{
+    content:"✦";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:#eee0e8;
+    padding:0 10px;
+    color:var(--rose);
+}
+
+/* COLLECTION HEADING */
+.collection-heading{
+    width:88%;
+    max-width:1200px;
+    margin:0 auto 28px;
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(185,148,92,.5);
+    padding-bottom:16px;
+}
+
+.collection-heading small{
+    font-size:8px;
+    letter-spacing:4px;
+    color:#9b6c4d;
+}
+
+.collection-heading h2{
+    color:var(--mauve);
+    font-size:28px;
+    margin-top:5px;
+}
+
+.collection-heading span{
+    font-size:10px;
+    color:#866b60;
+}
+
+/* FOUR PAGE BUTTONS */
+.dessert-pagination{
+    width:88%;
+    max-width:1200px;
+    margin:0 auto 42px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.dessert-pagination a{
+    min-width:145px;
+    padding:13px 22px;
+    text-align:center;
+    text-decoration:none;
+    color:var(--mauve);
+    background:var(--cream);
+    border:1px solid var(--gold);
+    border-radius:30px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:12px;
+    letter-spacing:1px;
+    box-shadow:0 5px 14px rgba(70,40,45,.08);
+    transition:all .3s ease;
+}
+
+.dessert-pagination a:hover{
+    background:var(--mauve);
+    color:var(--champagne);
+    transform:translateY(-4px);
+    box-shadow:0 10px 20px rgba(70,40,45,.16);
+}
+
+.dessert-pagination a.active{
+    background:var(--deep);
+    color:var(--champagne);
+    border-color:var(--deep);
+    box-shadow:0 6px 16px rgba(70,40,45,.16);
+}
+
+/* DESSERT AREA */
+.dessert-section{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding-bottom:70px;
+}
+
+.dessert-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:42px 28px;
+    align-items:start;
+}
+
+/* DESSERT CARD */
+.dessert-card{
+    position:relative;
+    background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,248,238,.96));
+    border:1px solid rgba(185,148,92,.55);
+    border-radius:24px;
+    padding:10px;
+    box-shadow:
+        0 12px 25px rgba(70,40,45,.10),
+        0 2px 4px rgba(70,40,45,.08);
+    transition:transform .45s ease,box-shadow .45s ease;
+    overflow:visible;
+    transform:translateY(0);
+}
+
+.dessert-card:hover{
+    transform:translateY(-16px) rotate(-1deg);
+    box-shadow:
+        0 30px 50px rgba(70,40,45,.20),
+        0 5px 10px rgba(70,40,45,.08);
+    z-index:10;
+}
+
+/* CARD DECORATION */
+.card-top{
+    position:absolute;
+    top:-8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:48px;
+    height:16px;
+    border-radius:0 0 12px 12px;
+    background:var(--mauve);
+    opacity:.9;
+    z-index:5;
+}
+
+.card-top::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-5px;
+    transform:translateX(-50%);
+    width:8px;
+    height:8px;
+    background:var(--gold);
+    border-radius:50%;
+}
+
+/* IMAGE */
+.photo{
+    height:205px;
+    border-radius:17px;
+    overflow:hidden;
+    position:relative;
+    background:#ead9cf;
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .6s ease;
+}
+
+.dessert-card:hover .photo img{
+    transform:scale(1.08);
+}
+
+/* NUMBER BADGE */
+.number{
+    position:absolute;
+    top:12px;
+    left:12px;
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:rgba(77,53,71,.93);
+    color:var(--champagne);
+    font-size:9px;
+    border:2px solid rgba(244,229,197,.8);
+    z-index:4;
+    box-shadow:0 4px 8px rgba(30,15,25,.2);
+}
+
+/* FAVORITE DECORATION */
+.favorite{
+    position:absolute;
+    right:12px;
+    top:12px;
+    width:34px;
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:rgba(255,250,242,.9);
+    color:var(--rose);
+    font-size:15px;
+    z-index:4;
+    box-shadow:0 4px 10px rgba(30,15,25,.12);
+}
+
+/* CONTENT */
+.card-content{
+    padding:18px 10px 12px;
+    text-align:center;
+}
+
+.category{
+    font-size:7px;
+    letter-spacing:3px;
+    color:#a16e56;
+    text-transform:uppercase;
+}
+
+.card-content h3{
+    margin-top:7px;
+    color:var(--mauve);
+    font-size:22px;
+    line-height:1.15;
+}
+
+.card-content p{
+    margin-top:9px;
+    font-size:10px;
+    line-height:1.65;
+    color:#79635a;
+    min-height:34px;
+}
+
+/* CARD FOOTER */
+.card-footer{
+    margin-top:15px;
+    padding-top:12px;
+    border-top:1px dotted rgba(185,148,92,.7);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.origin{
+    font-size:8px;
+    color:#866d60;
+}
+
+.view{
+    padding:6px 11px;
+    border-radius:20px;
+    background:#f0dfc3;
+    color:#65493c;
+    font-size:8px;
+    letter-spacing:1px;
+    transition:.3s;
+}
+
+.dessert-card:hover .view{
+    background:var(--mauve);
+    color:var(--champagne);
+}
+
+/* DECORATIVE DOTS */
+.dot{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--gold);
+    opacity:.65;
+}
+
+.dot.one{
+    left:-5px;
+    top:65px;
+}
+
+.dot.two{
+    right:-5px;
+    bottom:70px;
+    background:var(--rose);
+}
+
+/* SWEET MESSAGE */
+.sweet-message{
+    width:85%;
+    max-width:900px;
+    margin:30px auto 100px;
+    padding:45px 30px;
+    text-align:center;
+    background:linear-gradient(135deg,#735267,#604353);
+    color:var(--champagne);
+    border-radius:30px;
+    box-shadow:0 22px 40px rgba(50,30,40,.20);
+    position:relative;
+    overflow:hidden;
+}
+
+.sweet-message::before{
+    content:"✦";
+    position:absolute;
+    left:30px;
+    top:20px;
+    font-size:35px;
+    opacity:.25;
+}
+
+.sweet-message::after{
+    content:"✦";
+    position:absolute;
+    right:30px;
+    bottom:15px;
+    font-size:35px;
+    opacity:.25;
+}
+
+.sweet-message h2{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.sweet-message p{
+    max-width:600px;
+    margin:auto;
+    font-size:12px;
+    line-height:1.8;
+    opacity:.9;
+}
+
+/* FOOTER */
+footer{
+    padding:35px 20px;
+    text-align:center;
+    background:#513547;
+    color:var(--champagne);
+}
+
+footer h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+footer p{
+    font-size:10px;
+    opacity:.8;
+}
+
+/* TABLET */
+@media(max-width:1000px){
+
+    .dessert-grid{
+        grid-template-columns:repeat(3,1fr);
+        gap:35px 22px;
+    }
+
+    .hero h1{
+        font-size:60px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:750px){
+
+    nav{
+        display:none;
+    }
+
+    header{
+        padding:16px 5%;
+    }
+
+    .hero{
+        margin-top:60px;
+    }
+
+    .hero h1{
+        font-size:48px;
+    }
+
+    .collection-heading{
+        display:block;
+        text-align:center;
+    }
+
+    .collection-heading span{
+        display:block;
+        margin-top:8px;
+    }
+
+    .dessert-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:30px 15px;
+    }
+
+    .photo{
+        height:170px;
+    }
+
+    .card-content h3{
+        font-size:18px;
+    }
+
+    .dessert-pagination{
+        gap:10px;
+    }
+
+    .dessert-pagination a{
+        min-width:calc(50% - 10px);
+        padding:12px 10px;
+    }
+}
+
+/* SMALL MOBILE */
+@media(max-width:500px){
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .hero p{
+        font-size:11px;
+    }
+
+    .dessert-grid{
+        grid-template-columns:1fr;
+        width:90%;
+        margin:auto;
+    }
+
+    .dessert-card{
+        transform:translateY(0);
+    }
+
+    .dessert-card:hover{
+        transform:translateY(-12px);
+    }
+
+    .photo{
+        height:220px;
+    }
+
+    .sweet-message{
+        width:90%;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html">about</a>
+        <a href="movies&cartoons.html">movies&cartoons</a>
+        <a href="desertwrold.html">dessert</a>
+        <a href="worldcuisine.html">worldcuisine</a>
+        <a href="favourite.html">favourite</a>
+        <a href="order.html">order</a>
+        <a href="stamp.html">stamp</a>
+        <a href="contact">Contact</a>
+    </nav>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-tag">
+        ✦ SWEET COLLECTION ✦
+    </div>
+
+    <h1>
+        Dessert <span>Heaven</span> 🍰
+    </h1>
+
+    <p>
+        A collection of delicious desserts from
+        creamy classics to chocolate favourites,
+        fruity treats and traditional sweets.
+    </p>
+
+    <div class="hero-line"></div>
+
+</section>
+
+<!-- COLLECTION HEADING -->
+<div class="collection-heading">
+
+    <div>
+        <small>✦ THE DESSERT COLLECTION ✦</small>
+
+        <h2>20 Sweet Favourites</h2>
+    </div>
+
+    <span>Choose your sweet moment 🍰</span>
+
+</div>
+
+<!-- FOUR PAGE NAVIGATION BUTTONS -->
+<div class="dessert-pagination">
+
+    <a href="desertpage1.html" class="active">
+        🍰 Dessert Page 1
+    </a>
+
+    <a href="desertpage2.html">
+        🍰 Dessert Page 2
+    </a>
+
+    <a href="desertpage3.html">
+        🍰 Dessert Page 3
+    </a>
+
+    <a href="desertpage4.html">
+        🍰 Dessert Page 4
+    </a>
+
+</div>
+
+<!-- DESSERT SECTION -->
+<section class="dessert-section">
+
+<div class="dessert-grid" id="dessertGrid"></div>
+
+</section>
+
+<!-- SWEET MESSAGE -->
+<section class="sweet-message">
+
+    <h2>✦ Life is Better with Dessert ✦</h2>
+
+    <p>
+        Every dessert has its own flavour,
+        story and little moment of happiness.
+        Explore the sweet side of The Flavorverse.
+    </p>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <h3>🍴 The Flavorverse</h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+<script>
+
+/* DESSERT DATABASE */
+
+const desserts = [
+
+{
+    name:"Chocolate Cake",
+    image:"chocolate cake.png",
+    category:"Chocolate Classic",
+    description:"Rich, soft and chocolatey cake with a delicious creamy finish.",
+    origin:"🍫 Classic",
+    tag:"SWEET"
+},
+
+{
+    name:"Cheesecake",
+    image:"cheesecake.jpg",
+    category:"Creamy Classic",
+    description:"Smooth creamy filling resting on a delicious biscuit crust.",
+    origin:"🧀 Creamy",
+    tag:"CLASSIC"
+},
+
+{
+    name:"Tiramisu",
+    image:"tiramisu2.jpg",
+    category:"Italian Dessert",
+    description:"Soft coffee-soaked layers with a smooth creamy topping.",
+    origin:"🇮🇹 Italy",
+    tag:"COFFEE"
+},
+
+{
+    name:"Brownie",
+    image:"brownie2.jpg",
+    category:"Chocolate Treat",
+    description:"Soft, rich and fudgy chocolate squares with a deep cocoa taste.",
+    origin:"🍫 Fudgy",
+    tag:"RICH"
+},
+
+{
+    name:"Ice Cream",
+    image:"icecream2.jpg",
+    category:"Frozen Treat",
+    description:"Cool, creamy and refreshing dessert available in many flavours.",
+    origin:"🍦 Chilled",
+    tag:"COOL"
+},
+
+{
+    name:"Gulab Jamun",
+    image:"gulabjamun.jpg",
+    category:"Indian Sweet",
+    description:"Soft sweet dumplings soaked in fragrant sugar syrup.",
+    origin:"🇮🇳 India",
+    tag:"SWEET"
+},
+
+{
+    name:"Rasmalai",
+    image:"rasamalai.jpg",
+    category:"Indian Dessert",
+    description:"Soft cheese dumplings served in sweet and creamy milk.",
+    origin:"🇮🇳 India",
+    tag:"CREAMY"
+},
+
+{
+    name:"Jalebi",
+    image:"jelabi.jpg",
+    category:"Indian Sweet",
+    description:"Crispy golden spirals soaked in sweet syrup.",
+    origin:"🇮🇳 India",
+    tag:"CRISPY"
+},
+
+{
+    name:"Macarons",
+    image:"macroons.jpg",
+    category:"French Sweet",
+    description:"Delicate little treats with crisp shells and creamy filling.",
+    origin:"🇫🇷 France",
+    tag:"DELICATE"
+},
+
+{
+    name:"Donut",
+    image:"donut.jpg",
+    category:"Bakery Treat",
+    description:"Soft fried dough covered with glaze, chocolate or sprinkles.",
+    origin:"🍩 Bakery",
+    tag:"FUN"
+},
+
+{
+    name:"Apple Pie",
+    image:"apple pie.jpg",
+    category:"Fruit Dessert",
+    description:"Warm cinnamon apples wrapped inside a golden pastry crust.",
+    origin:"🍎 Fruity",
+    tag:"WARM"
+},
+
+{
+    name:"Cupcake",
+    image:"cupcake.jpg",
+    category:"Bakery Sweet",
+    description:"Small fluffy cakes topped with creamy and colourful frosting.",
+    origin:"🧁 Baked",
+    tag:"CUTE"
+},
+
+{
+    name:"Panna Cotta",
+    image:"pannacotta.jpg",
+    category:"Italian Classic",
+    description:"Silky smooth cream dessert with a delicate sweet flavour.",
+    origin:"🇮🇹 Italy",
+    tag:"SILKY"
+},
+
+{
+    name:"Crème Brûlée",
+    image:"creamebrulee.jpg",
+    category:"French Classic",
+    description:"Smooth custard finished with a thin caramelized sugar top.",
+    origin:"🇫🇷 France",
+    tag:"CUSTARD"
+},
+
+{
+    name:"Mochi",
+    image:"mochi.jpg",
+    category:"Japanese Sweet",
+    description:"Soft rice cakes with delicious sweet fillings inside.",
+    origin:"🇯🇵 Japan",
+    tag:"SOFT"
+},
+
+{
+    name:"Churros",
+    image:"churros.jpg",
+    category:"Spanish Treat",
+    description:"Golden fried dough coated with sugar and cinnamon.",
+    origin:"🇪🇸 Spain",
+    tag:"CRISPY"
+},
+
+{
+    name:"Baklava",
+    image:"baklava.jpg",
+    category:"Middle Eastern",
+    description:"Flaky pastry layers filled with nuts and sweet syrup.",
+    origin:"🌰 Nutty",
+    tag:"FLAKY"
+},
+
+{
+    name:"Carrot Cake",
+    image:"carrotcake.jpg",
+    category:"Cake Classic",
+    description:"Moist spiced cake with carrots and creamy frosting.",
+    origin:"🥕 Spiced",
+    tag:"MOIST"
+},
+
+{
+    name:"Mango Pudding",
+    image:"mangopudding.jpg",
+    category:"Fruity Dessert",
+    description:"Smooth and refreshing pudding with sweet mango flavour.",
+    origin:"🥭 Mango",
+    tag:"FRESH"
+},
+
+{
+    name:"Red Velvet",
+    image:"redvelvet.jpg",
+    category:"Cake Classic",
+    description:"Soft cocoa cake paired with smooth cream cheese frosting.",
+    origin:"❤️ Classic",
+    tag:"VELVET"
+}
+
+];
+
+/* DISPLAY DESSERT CARDS */
+
+const dessertGrid = document.getElementById("dessertGrid");
+
+desserts.forEach((dessert,index)=>{
+
+    const card = document.createElement("div");
+
+    card.className = "dessert-card";
+
+    card.innerHTML = `
+
+        <div class="card-top"></div>
+
+        <span class="dot one"></span>
+        <span class="dot two"></span>
+
+        <div class="photo">
+
+            <span class="number">
+                ${String(index+1).padStart(2,"0")}
+            </span>
+
+            <span class="favorite">
+                ✦
+            </span>
+
+            <img
+                src="${dessert.image}"
+                alt="${dessert.name}"
+                loading="lazy"
+            >
+
+        </div>
+
+        <div class="card-content">
+
+            <span class="category">
+                ${dessert.category}
+            </span>
+
+            <h3>
+                ${dessert.name}
+            </h3>
+
+            <p>
+                ${dessert.description}
+            </p>
+
+            <div class="card-footer">
+
+                <span class="origin">
+                    ${dessert.origin}
+                </span>
+
+                <span class="view">
+                    ${dessert.tag}
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+    dessertGrid.appendChild(card);
+
+});
+
+</script>
+
+</body>
+
+</html>

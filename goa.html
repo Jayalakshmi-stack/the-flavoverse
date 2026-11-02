@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flavorverse | Goa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:20px;}
+body{font-family:'Poppins',sans-serif;background:#F7E7CE;color:#5B4A45;transition:.3s;}
+
+/* ===== DARK MODE ===== */
+body.dark-mode{background:#241d23;color:#eee;}
+body.dark-mode .hero,body.dark-mode .about-text,body.dark-mode .recipe-section,body.dark-mode .fact-card,body.dark-mode .profile-card,body.dark-mode .explorer-box,body.dark-mode .review-box,body.dark-mode .recent-card,body.dark-mode .popular-card{background:#342a32;color:#eee;}
+body.dark-mode .recipe-content h2,body.dark-mode .about-text h2,body.dark-mode .facts-section h2,body.dark-mode .explorer-box h2,body.dark-mode .popular-title,body.dark-mode .recent-section h2{color:#e9c9e4;}
+body.dark-mode .recipe-content h3{color:#d6aeca;}
+body.dark-mode .recipe-info div,body.dark-mode .chef-tip,body.dark-mode .fun-fact,body.dark-mode .single-review{background:#443640;}
+body.dark-mode .rating-area{background:rgba(68,54,64,.7);}
+body.dark-mode .image-box{background:#443640;}
+body.dark-mode .profile-card{color:#eee;}
+body.dark-mode .profile-card .count{color:#e9c9e4;}
+body.dark-mode input,body.dark-mode select,body.dark-mode textarea,body.dark-mode .search-box{background:#443640;color:white;border-color:#80647b;}
+
+/* ===== HEADER ===== */
+header{background:#8E6C88;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 5px 15px rgba(0,0,0,.15);}
+.logo{font-family:'Cinzel',serif;font-size:32px;font-weight:bold;color:white;}
+nav{display:flex;align-items:center;justify-content:flex-end;}
+.dark-toggle{margin-right:12px;border:none;background:#F4E5C5;color:#5B4A45;padding:9px 14px;border-radius:20px;cursor:pointer;font-weight:bold;}
+
+/* ===== HAMBURGER DRAWER ===== */
+.menu-open-btn{border:0;background:transparent;color:#fff;font-size:32px;line-height:1;cursor:pointer;padding:5px 8px;}
+.menu-backdrop{position:fixed;inset:0;background:rgba(25,16,28,.55);z-index:9998;opacity:0;visibility:hidden;transition:.25s;}
+.menu-backdrop.show{opacity:1;visibility:visible;}
+.explore-drawer{position:fixed;top:0;right:0;width:418px;max-width:88vw;height:100vh;background:#fff8ef;z-index:9999;transform:translateX(102%);transition:transform .3s ease;box-shadow:-8px 0 25px rgba(0,0,0,.2);overflow-y:auto;color:#5b4a45;}
+.explore-drawer.open{transform:translateX(0);}
+.drawer-heading{height:115px;background:#a083a2;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 35px;position:sticky;top:0;z-index:2;}
+.drawer-heading h2{font-family:'Cinzel',serif;font-size:32px;font-weight:700;}
+.drawer-close{border:0;background:transparent;color:#fff;font-size:34px;font-weight:300;cursor:pointer;line-height:1;}
+.drawer-links{padding:18px 27px 30px;}
+.drawer-link{display:flex;align-items:center;gap:22px;text-decoration:none;color:#654b70;padding:16px 12px;border-radius:8px;transition:background .2s;}
+.drawer-link:hover{background:#f0e3ed;}
+.drawer-icon{width:36px;flex:0 0 36px;text-align:center;font-size:25px;}
+.drawer-copy strong{display:block;font-family:'Cinzel',serif;font-size:18px;line-height:1.35;color:#654b70;}
+.drawer-copy small{display:block;font-size:13px;color:#806d91;line-height:1.5;}
+.drawer-divider{height:1px;background:#e4cedd;margin:10px 0 12px;}
+body.drawer-open{overflow:hidden;}
+
+/* ===== HERO ===== */
+.hero{width:90%;margin:40px auto;background:white;border-radius:25px;overflow:hidden;box-shadow:0 12px 25px rgba(0,0,0,.15);display:flex;align-items:center;gap:40px;padding:40px;}
+.image-box{width:450px;height:350px;display:flex;justify-content:center;align-items:center;background:#fff8f2;border-radius:20px;flex:1;}
+.image-box img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.hero-content{padding:40px;flex:1;text-align:left;}
+.hero-content h1{font-family:'Cinzel',serif;font-size:58px;color:#6F4B72;}
+.hero-content h2{margin-top:15px;color:#B58A4D;font-size:30px;}
+.hero-content p{margin-top:18px;font-size:18px;line-height:1.8;}
+.btn{display:inline-block;margin-top:25px;padding:14px 35px;background:#8E6C88;color:white;text-decoration:none;border-radius:30px;font-weight:bold;transition:.3s;}
+.btn:hover{background:#6F4B72;}
+
+/* ===== ABOUT ===== */
+.about-section{width:90%;margin:50px auto;display:flex;justify-content:space-between;align-items:center;gap:40px;}
+.about-text{flex:2;background:#FFF9F4;padding:35px;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.12);}
+.about-text h2{font-family:'Cinzel',serif;color:#6F4B72;font-size:36px;margin-bottom:20px;}
+.about-text p{line-height:1.9;font-size:17px;margin-bottom:18px;text-align:justify;}
+.about-box{flex:1;background:#8E6C88;color:white;padding:30px;border-radius:20px;box-shadow:0 8px 18px rgba(0,0,0,.15);}
+.about-box h3{font-family:'Cinzel',serif;margin-bottom:20px;text-align:center;}
+.about-box ul{list-style:none;}
+.about-box li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.25);font-size:16px;}
+.about-box li:last-child{border-bottom:none;}
+
+/* ===== EXPLORER ===== */
+.explorer-section{width:90%;margin:60px auto;}
+.explorer-box{background:#FFF9F4;padding:30px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.explorer-box h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:36px;margin-bottom:25px;}
+.search-filter-row{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;}
+.search-box,.filter-box{padding:13px 18px;border:1px solid #D8C5B0;border-radius:25px;background:white;color:#5B4A45;font-family:'Poppins',sans-serif;outline:none;}
+.search-box{width:45%;min-width:250px;}
+.filter-box{min-width:180px;}
+.explorer-buttons{display:flex;justify-content:center;gap:15px;margin-top:20px;flex-wrap:wrap;}
+.explorer-btn{border:none;padding:12px 22px;border-radius:25px;background:#8E6C88;color:white;font-family:'Poppins',sans-serif;font-weight:600;cursor:pointer;transition:.3s;}
+.explorer-btn:hover{background:#6F4B72;transform:translateY(-2px);}
+.explorer-btn.random{background:#B58A4D;}
+.search-result{text-align:center;margin-top:18px;font-weight:600;color:#8E6C88;}
+
+/* ===== POPULAR ===== */
+.popular-section{width:90%;margin:40px auto;}
+.popular-title{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:32px;margin-bottom:25px;}
+.popular-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.popular-card{display:block;text-decoration:none;color:inherit;background:#FFF9F4;padding:22px;border-radius:18px;box-shadow:0 7px 17px rgba(0,0,0,.12);text-align:center;transition:.3s;}
+.popular-card:hover{transform:translateY(-6px);}
+.popular-card h3{color:#8E6C88;margin-bottom:8px;}
+.popular-card p{font-size:14px;line-height:1.6;}
+
+/* ===== RECIPE ===== */
+.recipe-section{width:90%;margin:60px auto;display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:stretch;background:#FFF9F4;padding:35px;border-radius:20px;box-shadow:0 8px 20px rgba(0,0,0,.12);transition:box-shadow .3s;}
+.recipe-image{grid-column:1;grid-row:1;}
+.recipe-image img{width:100%;border-radius:18px;box-shadow:0 6px 15px rgba(0,0,0,.15);display:block;}
+.recipe-content{grid-column:2;grid-row:1;}
+.recipe-content h2{font-family:'Cinzel',serif;color:#6F4B72;font-size:38px;margin-bottom:20px;}
+.recipe-content h3{margin-top:25px;margin-bottom:12px;color:#8E6C88;}
+.recipe-content p{line-height:1.8;text-align:justify;}
+.recipe-content ul,.recipe-content ol{margin-left:25px;line-height:1.9;}
+.recipe-info{display:flex;justify-content:space-between;margin-top:25px;gap:20px;}
+.recipe-info div{flex:1;background:#F7E7CE;padding:18px;text-align:center;border-radius:15px;}
+.chef-tip,.fun-fact{margin-top:25px;background:#F7E7CE;padding:20px;border-left:6px solid #8E6C88;border-radius:12px;}
+.recipe-section.reverse{grid-template-columns:2fr 1fr;}
+.recipe-section.reverse .recipe-content{grid-column:1;grid-row:1;}
+.recipe-section.reverse .recipe-image{grid-column:2;grid-row:1;}
+.recipe-section.reverse .recipe-actions{grid-column:2;grid-row:1;}
+.recipe-section.hidden-recipe{display:none;}
+
+/* ===== BUTTONS ===== */
+.recipe-actions{grid-column:1;grid-row:1;align-self:end;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:15px;padding-bottom:5px;}
+.recipe-actions button{width:200px;padding:14px 18px;border:none;border-radius:30px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;box-shadow:0 6px 15px rgba(91,74,69,.18);}
+.favorite-btn{background:#8E6C88;color:white;}
+.stamp-btn{background:#F4E5C5;color:#5B4A45;}
+.recipe-actions button:hover{transform:translateY(-3px);box-shadow:0 9px 20px rgba(91,74,69,.22);}
+
+/* ===== RATING ===== */
+.rating-area{margin-top:22px;padding:20px;background:rgba(244,229,197,.55);border-radius:15px;}
+.rating-area h3{margin-top:0;}
+.stars{display:flex;gap:5px;margin-top:8px;}
+.star{font-size:28px;cursor:pointer;color:#c8b9aa;transition:.2s;}
+.star.active{color:#E5A82F;}
+.rating-message{font-size:13px;margin-top:7px;}
+
+/* ===== REVIEWS ===== */
+.review-box{margin-top:18px;padding:20px;background:#FFF9F4;border:1px solid #eadbc9;border-radius:15px;}
+.review-box h3{margin-top:0;}
+.review-input{width:100%;min-height:80px;resize:vertical;padding:12px;border:1px solid #D8C5B0;border-radius:12px;outline:none;font-family:'Poppins',sans-serif;margin-top:8px;}
+.review-submit{margin-top:10px;border:none;background:#8E6C88;color:white;padding:10px 20px;border-radius:22px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;}
+.review-submit:hover{background:#6F4B72;}
+.reviews-list{margin-top:15px;}
+.single-review{padding:12px;margin-top:10px;background:#F7E7CE;border-radius:12px;}
+.single-review strong{color:#6F4B72;}
+body.dark-mode .single-review strong{color:#e9c9e4;}
+.single-review small{display:block;margin-top:4px;opacity:.7;}
+.no-review{font-size:13px;opacity:.7;margin-top:10px;}
+
+/* ===== FACTS ===== */
+.facts-section{width:90%;margin:60px auto;}
+.facts-section h2{text-align:center;font-family:'Cinzel',serif;font-size:40px;color:#6F4B72;margin-bottom:35px;}
+.facts-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.fact-card{background:#FFF9F4;padding:25px;border-radius:20px;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,.12);transition:.3s;}
+.fact-card:hover{transform:translateY(-8px);}
+.fact-card h3{color:#8E6C88;margin-bottom:15px;}
+.fact-card p{line-height:1.8;}
+
+/* ===== RECENTLY VIEWED ===== */
+.recent-section{width:90%;margin:60px auto;}
+.recent-section h2{font-family:'Cinzel',serif;text-align:center;color:#6F4B72;font-size:36px;margin-bottom:25px;}
+.recent-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.recent-card{background:#FFF9F4;padding:22px;border-radius:18px;box-shadow:0 7px 17px rgba(0,0,0,.12);}
+.recent-card h3{color:#8E6C88;margin-bottom:8px;}
+.recent-card p{font-size:13px;}
+.recent-empty{text-align:center;opacity:.7;grid-column:1/-1;}
+
+/* ===== PROFILE ===== */
+.profile-section{width:90%;margin:60px auto;}
+.profile-box{background:#8E6C88;color:white;padding:40px;border-radius:22px;box-shadow:0 10px 25px rgba(0,0,0,.15);}
+.profile-box h2{font-family:'Cinzel',serif;font-size:38px;text-align:center;margin-bottom:10px;}
+.profile-name{text-align:center;font-size:20px;margin-bottom:10px;}
+.profile-email{text-align:center;opacity:.9;margin-bottom:25px;}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.profile-card{background:#FFF9F4;color:#5B4A45;padding:22px;border-radius:16px;text-align:center;}
+.profile-card .count{font-size:30px;font-weight:bold;color:#6F4B72;display:block;margin-bottom:5px;}
+.profile-card span:last-child{font-size:14px;}
+
+/* ===== CHEF + FOOTER ===== */
+.chef-section{width:90%;margin:60px auto;background:#8E6C88;color:white;padding:40px;border-radius:20px;text-align:center;}
+.chef-section h2{font-family:'Cinzel',serif;margin-bottom:20px;}
+.chef-section p{font-size:18px;line-height:1.8;}
+footer{background:#6F4B72;color:white;text-align:center;padding:40px 20px;margin-top:60px;}
+footer h2{font-family:'Cinzel',serif;margin-bottom:15px;}
+footer p{margin:10px 0;line-height:1.8;}
+.social{margin:25px 0;}
+.social a{text-decoration:none;font-size:30px;margin:0 12px;}
+.copy{margin-top:20px;font-size:15px;opacity:.9;}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+header{padding:14px 5%;}
+.logo{font-size:22px;}
+.hero{flex-direction:column;padding:20px;gap:20px;}
+.image-box{width:100%;height:280px;flex:none;}
+.hero-content{padding:20px 5px;text-align:center;}
+.hero-content h1{font-size:42px;}
+.hero-content h2{font-size:24px;}
+.hero-content p{font-size:15px;text-align:justify;}
+.about-section{flex-direction:column;}
+.about-text,.about-box{width:100%;}
+.recipe-section,.recipe-section.reverse{display:flex;flex-direction:column;gap:25px;}
+.recipe-image,.recipe-content{width:100%;}
+.recipe-info{flex-direction:column;}
+.recipe-actions,.recipe-section.reverse .recipe-actions{width:100%;padding:0;order:2;}
+.recipe-actions button{width:220px;}
+.profile-stats{grid-template-columns:repeat(2,1fr);}
+.search-box{width:100%;}
+}
+@media(max-width:450px){
+.profile-stats{grid-template-columns:1fr;}
+.hero-content h1{font-size:35px;}
+.recipe-content h2{font-size:30px;}
+}
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+</style>
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header>
+<div class="logo">🍴 The Flavorverse</div>
+<nav>
+<button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
+<button class="menu-open-btn" id="openExploreMenu" aria-label="Open menu" aria-expanded="false">☰</button>
+</nav>
+</header>
+
+<div class="menu-backdrop" id="menuBackdrop"></div>
+<aside class="explore-drawer" id="exploreDrawer" aria-label="Explore menu" aria-hidden="true">
+<div class="drawer-heading"><h2>Explore</h2><button class="drawer-close" id="closeExploreMenu" aria-label="Close menu">×</button></div>
+<div class="drawer-links">
+<a class="drawer-link" href="index.html"><span class="drawer-icon">🏠</span><span class="drawer-copy"><strong>Home</strong><small>Return to the homepage</small></span></a>
+<a class="drawer-link" href="royal.html"><span class="drawer-icon">👑</span><span class="drawer-copy"><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span></a>
+<a class="drawer-link" href="movies.html"><span class="drawer-icon">🎬</span><span class="drawer-copy"><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span></a>
+<a class="drawer-link" href="world.html"><span class="drawer-icon">🌎</span><span class="drawer-copy"><strong>World Cuisine</strong><small>Flavours from around the world</small></span></a>
+<a class="drawer-link" href="desserts.html"><span class="drawer-icon">🍰</span><span class="drawer-copy"><strong>Desserts</strong><small>Sweet treats and desserts</small></span></a>
+<a class="drawer-link" href="gallery.html"><span class="drawer-icon">🖼️</span><span class="drawer-copy"><strong>Gallery</strong><small>Explore our food gallery</small></span></a>
+<div class="drawer-divider"></div>
+<a class="drawer-link" href="favourites.html"><span class="drawer-icon">💗</span><span class="drawer-copy"><strong>Favourites</strong><small>Your favourite recipes</small></span></a>
+<a class="drawer-link" href="order.html"><span class="drawer-icon">🛒</span><span class="drawer-copy"><strong>Order</strong><small>Order ingredient kits</small></span></a>
+<a class="drawer-link" href="stamped.html"><span class="drawer-icon">🎟️</span><span class="drawer-copy"><strong>Stamped</strong><small>Your stamped recipes</small></span></a>
+<a class="drawer-link" href="contact.html"><span class="drawer-icon">💌</span><span class="drawer-copy"><strong>Contact</strong><small>Get in touch with us</small></span></a>
+</div>
+</aside>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+<div class="image-box"><img src="goa.png" alt="Goa"></div>
+<div class="hero-content">
+<h1>🌴 Goa</h1>
+<h2>Coastal Heritage &amp; Tropical Flavours</h2>
+<p>Welcome to Goa, a beautiful coastal state known for its beaches, colourful traditions, Portuguese influence, and vibrant food culture. Goan cuisine beautifully combines fresh seafood, coconut, aromatic spices, tamarind, kokum, and regional ingredients. From the tangy Goan Fish Curry to the aromatic Chicken Xacuti, spicy Prawn Balchão, and delicate Bebinca, every dish reflects Goa's unique culinary heritage.</p>
+<a href="#goa-fishcurry" class="btn">Explore Recipes</a>
+</div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="about-section">
+<div class="about-text">
+<h2>🌴 About Goa Cuisine</h2>
+<p>Goan cuisine is deeply influenced by the state's coastal location, local traditions, and centuries of cultural exchange. Seafood, coconut, rice, spices, and tropical ingredients form an important part of traditional Goan cooking. The cuisine is known for its balance of spicy, sour, tangy, and aromatic flavours.</p>
+<p>Goan Fish Curry is one of the state's most famous dishes. It is traditionally prepared with fish, coconut, spices, and a souring ingredient such as kokum or tamarind. It is commonly enjoyed with steamed rice and reflects Goa's strong coastal food traditions.</p>
+<p>Chicken Xacuti is a rich and aromatic Goan curry made with chicken, roasted spices, coconut, and other flavourful ingredients. The carefully roasted spice mixture gives the dish its distinctive aroma and deep flavour.</p>
+<p>Prawn Balchão is a spicy and tangy prawn preparation made with a flavourful masala containing spices, vinegar, and other ingredients. Bebinca is one of Goa's most famous traditional desserts. This layered sweet is made with coconut milk, eggs, flour, sugar, and ghee and is especially enjoyed during celebrations.</p>
+</div>
+<div class="about-box">
+<h3>🌴 Goa Highlights</h3>
+<ul>
+<li>🐟 Goan Fish Curry is a famous coastal speciality</li>
+<li>🍗 Chicken Xacuti is known for its roasted spice blend</li>
+<li>🍤 Prawn Balchão is a spicy and tangy seafood preparation</li>
+<li>🍰 Bebinca is a traditional layered Goan dessert</li>
+<li>🥥 Coconut is an important ingredient in Goan cuisine</li>
+<li>🌶️ Local spices create bold and aromatic flavours</li>
+<li>🌊 Seafood plays an important role in coastal Goan food culture</li>
+<li>❤️ Cuisine reflects Goa's diverse cultural heritage</li>
+</ul>
+</div>
+</section>
+
+<!-- ================= RECIPE EXPLORER ================= -->
+<section class="explorer-section">
+<div class="explorer-box">
+<h2>🔍 Explore Goa Recipes</h2>
+<div class="search-filter-row">
+<input class="search-box" id="recipeSearch" onkeyup="filterRecipes()" placeholder="🔍 Search recipe..." type="text">
+<select class="filter-box" id="categoryFilter" onchange="filterRecipes()">
+<option value="all">All Categories</option>
+<option value="main">Main Course</option>
+<option value="dessert">Sweets</option>
+</select>
+</div>
+<div class="explorer-buttons">
+<button class="explorer-btn random" onclick="surpriseMe()">🎲 Surprise Me</button>
+<button class="explorer-btn" onclick="resetFilters()">↻ Show All Recipes</button>
+</div>
+<p class="search-result" id="searchResult">Showing all 4 Goa recipes</p>
+</div>
+</section>
+
+<!-- ================= POPULAR ================= -->
+<section class="popular-section">
+<h2 class="popular-title">🔥 Popular Goa Recipes</h2>
+<div class="popular-container"><a class="popular-card" href="#goa-fishcurry"><h3>🐟 Goan Fish Curry</h3><p>Tangy coconut-based coastal curry served with steamed rice.</p></a><a class="popular-card" href="#goa-xacuti"><h3>🍗 Chicken Xacuti</h3><p>Aromatic curry with freshly roasted spices and coconut.</p></a><a class="popular-card" href="#goa-balchao"><h3>🍤 Prawn Balchão</h3><p>Spicy and tangy prawn masala with a vinegar kick.</p></a><a class="popular-card" href="#goa-bebinca"><h3>🍰 Bebinca</h3><p>Famous layered Goan dessert with coconut milk and ghee.</p></a></div>
+</section>
+
+<!-- ================= RECIPES ================= -->
+
+<!-- ===== Goan Fish Curry ===== -->
+<section class="recipe-section" data-category="main" data-cuisine="goa" data-name="goan fish curry" id="goa-fishcurry">
+<div class="recipe-image"><img alt="Goan Fish Curry" src="Goan Fish Curry.png"></div>
+<div class="recipe-content">
+<h2>🐟 Goan Fish Curry</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Goan Fish Curry is one of Goa's most famous traditional coastal dishes. It is prepared with fresh fish cooked in a rich coconut-based gravy flavoured with red chilies, turmeric, coriander, cumin, and a tangy ingredient such as tamarind or kokum. The curry is traditionally served with steamed rice and is loved for its creamy, spicy, and tangy flavours.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Goa</li><li><b>Cuisine :</b> Traditional Goan Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>500 g Fish Pieces</li>
+<li>1 cup Fresh Grated Coconut</li>
+<li>5–6 Dry Red Chilies</li>
+<li>1 tsp Coriander Seeds</li>
+<li>½ tsp Cumin Seeds</li>
+<li>½ tsp Turmeric Powder</li>
+<li>1 tbsp Tamarind Pulp</li>
+<li>3 Garlic Cloves</li>
+<li>1 Small Piece Ginger</li>
+<li>1 Onion, Chopped</li>
+<li>1 Tomato, Chopped</li>
+<li>2 Green Chilies</li>
+<li>1 tbsp Oil</li>
+<li>Salt to Taste</li>
+<li>Water as Required</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Clean the fish pieces thoroughly and lightly season them with salt and turmeric.</li>
+<li>Keep the fish aside for about 10 minutes.</li>
+<li>Take grated coconut, dry red chilies, coriander seeds, cumin seeds, garlic, ginger, and turmeric powder in a blender.</li>
+<li>Add a little water and grind the ingredients into a smooth paste.</li>
+<li>Heat oil in a deep pan.</li>
+<li>Add chopped onions and sauté until they become soft.</li>
+<li>Add chopped tomatoes and cook until they become soft.</li>
+<li>Add the prepared coconut masala paste.</li>
+<li>Cook the masala for a few minutes until the raw aroma disappears.</li>
+<li>Add water to create a smooth curry consistency.</li>
+<li>Add tamarind pulp and salt.</li>
+<li>Bring the curry to a gentle boil.</li>
+<li>Carefully place the fish pieces into the curry.</li>
+<li>Cover and cook on low heat until the fish is completely cooked.</li>
+<li>Avoid stirring the curry too much so that the fish pieces remain intact.</li>
+<li>Add slit green chilies for additional flavour.</li>
+<li>Simmer for a few more minutes.</li>
+<li>Turn off the heat and allow the curry to rest for a few minutes.</li>
+<li>Serve hot with steamed rice.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>40 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Medium</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Use fresh fish and grind the coconut masala smoothly for a rich curry. Add the fish only after the gravy begins to simmer and cook gently to prevent the pieces from breaking.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Goan Fish Curry is often enjoyed with steamed rice and is one of the dishes that best represents Goa's coastal culinary traditions.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="goa-fishcurry">
+<span class="star" onclick="rateRecipe('goa-fishcurry',1,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-fishcurry',2,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-fishcurry',3,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-fishcurry',4,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-fishcurry',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-goa-fishcurry">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-goa-fishcurry" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('goa-fishcurry','Goan Fish Curry')">Post Review</button>
+<div class="reviews-list" id="reviews-goa-fishcurry"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="goa-fishcurry" onclick="addToFavourite('goa-fishcurry','Goan Fish Curry','Goa Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="goa-fishcurry" onclick="addToStamp('goa-fishcurry','Goan Fish Curry','Goa Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Chicken Xacuti ===== -->
+<section class="recipe-section reverse" data-category="main" data-cuisine="goa" data-name="chicken xacuti" id="goa-xacuti">
+<div class="recipe-image"><img alt="Goan Chicken Xacuti" src="Chicken Xacuti.png"></div>
+<div class="recipe-content">
+<h2>🍗 Chicken Xacuti</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Chicken Xacuti is a famous Goan curry known for its rich roasted spice blend and deep aromatic flavour. It is prepared with chicken, coconut, onions, and a variety of roasted spices. The spices are carefully roasted and ground to create a flavourful masala that gives Xacuti its distinctive taste. It is traditionally served with rice, bread, or other Goan accompaniments.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Goa</li><li><b>Cuisine :</b> Traditional Goan Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>500 g Chicken, Cut into Pieces</li>
+<li>1 cup Grated Coconut</li>
+<li>2 Onions, Chopped</li>
+<li>2 Tomatoes, Chopped</li>
+<li>1 tbsp Ginger-Garlic Paste</li>
+<li>5–6 Dry Red Chilies</li>
+<li>1 tsp Coriander Seeds</li>
+<li>1 tsp Cumin Seeds</li>
+<li>½ tsp Fennel Seeds</li>
+<li>½ tsp Black Peppercorns</li>
+<li>4 Cloves</li>
+<li>1 Small Cinnamon Stick</li>
+<li>2 Green Cardamoms</li>
+<li>½ tsp Turmeric Powder</li>
+<li>1 tbsp Tamarind Pulp</li>
+<li>2 tbsp Oil</li>
+<li>Salt to Taste</li>
+<li>Water as Required</li>
+<li>Fresh Coriander Leaves</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Clean the chicken pieces thoroughly and keep them aside.</li>
+<li>Heat a dry pan and add coriander seeds, cumin seeds, fennel seeds, black peppercorns, cloves, cinnamon, cardamom, and dry red chilies.</li>
+<li>Roast the spices over low heat until they become aromatic.</li>
+<li>Add grated coconut and roast gently until it becomes lightly golden.</li>
+<li>Allow the roasted mixture to cool.</li>
+<li>Grind the roasted spices and coconut with a little water to make a smooth masala paste.</li>
+<li>Heat oil in a heavy-bottomed pan.</li>
+<li>Add chopped onions and sauté until golden.</li>
+<li>Add ginger-garlic paste and cook until the raw aroma disappears.</li>
+<li>Add chopped tomatoes and cook until soft.</li>
+<li>Add turmeric powder and mix well.</li>
+<li>Add the prepared Xacuti masala and cook for a few minutes.</li>
+<li>Add the chicken pieces and mix thoroughly with the masala.</li>
+<li>Cook for a few minutes until the chicken absorbs the spices.</li>
+<li>Add water according to the required curry consistency.</li>
+<li>Cover and cook on medium-low heat until the chicken becomes tender.</li>
+<li>Add tamarind pulp and salt.</li>
+<li>Simmer the curry for another few minutes.</li>
+<li>Garnish with fresh coriander leaves.</li>
+<li>Serve hot with steamed rice or Goan bread.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>60 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Medium</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Roast the spices gently without burning them. Freshly roasted and ground spices give Chicken Xacuti its characteristic aroma and rich flavour.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>The name Xacuti is associated with a traditional Goan curry style known for its complex roasted spice mixture and coconut-based preparation.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="goa-xacuti">
+<span class="star" onclick="rateRecipe('goa-xacuti',1,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-xacuti',2,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-xacuti',3,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-xacuti',4,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-xacuti',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-goa-xacuti">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-goa-xacuti" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('goa-xacuti','Chicken Xacuti')">Post Review</button>
+<div class="reviews-list" id="reviews-goa-xacuti"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="goa-xacuti" onclick="addToFavourite('goa-xacuti','Chicken Xacuti','Goa Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="goa-xacuti" onclick="addToStamp('goa-xacuti','Chicken Xacuti','Goa Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Prawn Balchão ===== -->
+<section class="recipe-section" data-category="main" data-cuisine="goa" data-name="prawn balchão" id="goa-balchao">
+<div class="recipe-image"><img alt="Goan Prawn Balchão" src="Prawn Balchão.png"></div>
+<div class="recipe-content">
+<h2>🍤 Prawn Balchão</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Prawn Balchão is a traditional Goan seafood preparation known for its spicy, tangy, and aromatic flavour. Fresh prawns are cooked in a rich masala prepared with red chilies, vinegar, garlic, ginger, onions, and tomatoes. It is commonly enjoyed with steamed rice or Goan bread and represents the bold flavours of Goa's coastal cuisine.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Goa</li><li><b>Cuisine :</b> Traditional Goan Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>500 g Fresh Prawns</li>
+<li>2 Onions, Finely Chopped</li>
+<li>3 Tomatoes, Chopped</li>
+<li>8–10 Dry Red Chilies</li>
+<li>6 Garlic Cloves</li>
+<li>1 Small Piece Ginger</li>
+<li>1 tsp Cumin Seeds</li>
+<li>1 tsp Coriander Seeds</li>
+<li>½ tsp Black Peppercorns</li>
+<li>3 Cloves</li>
+<li>1 Small Cinnamon Stick</li>
+<li>¼ tsp Turmeric Powder</li>
+<li>3 tbsp Vinegar</li>
+<li>2 tbsp Oil</li>
+<li>1 tsp Sugar</li>
+<li>Salt to Taste</li>
+<li>Water as Required</li>
+<li>Fresh Coriander Leaves</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Clean and devein the prawns thoroughly.</li>
+<li>Lightly season the prawns with turmeric and salt.</li>
+<li>Allow the prawns to rest for about 10 minutes.</li>
+<li>Take dry red chilies, cumin seeds, coriander seeds, black peppercorns, cloves, cinnamon, garlic, and ginger in a blender.</li>
+<li>Add a little vinegar and water and grind into a smooth paste.</li>
+<li>Heat oil in a pan.</li>
+<li>Add chopped onions and sauté until they become soft and lightly golden.</li>
+<li>Add chopped tomatoes and cook until they become soft and mushy.</li>
+<li>Add the prepared spice paste and cook until the raw aroma disappears.</li>
+<li>Add turmeric powder and mix well.</li>
+<li>Add the marinated prawns to the masala.</li>
+<li>Cook the prawns gently until they become tender and fully cooked.</li>
+<li>Add the remaining vinegar and sugar.</li>
+<li>Mix everything thoroughly and simmer for a few minutes.</li>
+<li>Adjust the salt and tanginess according to taste.</li>
+<li>Cook until the masala becomes thick and coats the prawns.</li>
+<li>Garnish with fresh coriander leaves.</li>
+<li>Serve hot with steamed rice or Goan bread.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>35 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>4 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Medium</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Do not overcook the prawns as they can become tough. Balance the vinegar, spices, and sugar carefully to achieve the characteristic spicy and tangy flavour of Balchão.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Prawn Balchão is one of Goa's well-known seafood preparations and is valued for its bold combination of spicy, sour, and aromatic flavours.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="goa-balchao">
+<span class="star" onclick="rateRecipe('goa-balchao',1,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-balchao',2,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-balchao',3,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-balchao',4,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-balchao',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-goa-balchao">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-goa-balchao" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('goa-balchao','Prawn Balchão')">Post Review</button>
+<div class="reviews-list" id="reviews-goa-balchao"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="goa-balchao" onclick="addToFavourite('goa-balchao','Prawn Balchão','Goa Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="goa-balchao" onclick="addToStamp('goa-balchao','Prawn Balchão','Goa Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+<!-- ===== Bebinca ===== -->
+<section class="recipe-section reverse" data-category="dessert" data-cuisine="goa" data-name="bebinca" id="goa-bebinca">
+<div class="recipe-image"><img alt="Goan Bebinca" src="Bebinca.png"></div>
+<div class="recipe-content">
+<h2>🍰 Bebinca</h2>
+<p class="recipe-about"><b>📖 About the Dish</b><br><br>Bebinca is one of Goa's most famous traditional desserts. It is a rich, layered cake made with coconut milk, eggs, flour, sugar, and ghee. Each layer is cooked separately before adding the next, creating its characteristic golden-brown layers. Bebinca is especially enjoyed during Christmas, celebrations, and other special occasions.</p>
+<h3>🌍 Origin</h3>
+<ul><li><b>State :</b> Goa</li><li><b>Cuisine :</b> Traditional Goan Cuisine</li></ul>
+<h3>🥘 Ingredients</h3>
+<ul>
+<li>1 cup All-Purpose Flour</li>
+<li>8 Eggs</li>
+<li>2 cups Coconut Milk</li>
+<li>1½ cups Sugar</li>
+<li>½ cup Ghee</li>
+<li>½ tsp Cardamom Powder</li>
+<li>1 Small Pinch of Salt</li>
+<li>1 tsp Vanilla Essence</li>
+</ul>
+<h3>👩‍🍳 Preparation</h3>
+<ol>
+<li>Take eggs in a large mixing bowl and whisk them gently.</li>
+<li>Add sugar gradually and mix until the sugar dissolves.</li>
+<li>Add coconut milk and vanilla essence and mix well.</li>
+<li>Gradually add the all-purpose flour while whisking to avoid lumps.</li>
+<li>Add cardamom powder and a small pinch of salt.</li>
+<li>Mix the batter until it becomes smooth and slightly thin.</li>
+<li>Preheat the oven to 180°C.</li>
+<li>Grease a baking pan generously with ghee.</li>
+<li>Pour a thin layer of batter into the pan.</li>
+<li>Bake the first layer until it becomes golden brown.</li>
+<li>Remove the pan and brush the baked layer lightly with ghee.</li>
+<li>Pour another thin layer of batter over the first layer.</li>
+<li>Bake again until the second layer becomes golden.</li>
+<li>Continue adding and baking thin layers one at a time.</li>
+<li>Brush each layer lightly with ghee before adding the next layer.</li>
+<li>Repeat the process until all the batter has been used.</li>
+<li>Allow the Bebinca to cool completely after the final layer is baked.</li>
+<li>Gently remove it from the pan.</li>
+<li>Cut into neat slices.</li>
+<li>Serve warm or at room temperature.</li>
+</ol>
+<div class="recipe-info">
+<div><h4>⏱ Cooking Time</h4><p>90 Minutes</p></div>
+<div><h4>🍽 Serves</h4><p>8 People</p></div>
+<div><h4>⭐ Difficulty</h4><p>Hard</p></div>
+</div>
+<div class="chef-tip"><h3>👨‍🍳 Chef's Tip</h3><p>Pour very thin layers and allow each layer to cook properly before adding the next. Brushing each layer with ghee helps create the traditional rich texture and golden appearance.</p></div>
+<div class="fun-fact"><h3>🌟 Fun Fact</h3><p>Bebinca is often called a traditional Goan layered cake. Its many thin layers and slow preparation make it one of Goa's most distinctive festive desserts.</p></div>
+<div class="rating-area">
+<h3>⭐ Rate This Recipe</h3>
+<div class="stars" data-recipe="goa-bebinca">
+<span class="star" onclick="rateRecipe('goa-bebinca',1,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-bebinca',2,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-bebinca',3,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-bebinca',4,this)">★</span>
+<span class="star" onclick="rateRecipe('goa-bebinca',5,this)">★</span>
+</div>
+<p class="rating-message" id="rating-goa-bebinca">Choose your rating</p>
+</div>
+<div class="review-box">
+<h3>💬 Reviews &amp; Comments</h3>
+<textarea class="review-input" id="review-text-goa-bebinca" placeholder="Write your review..."></textarea>
+<button class="review-submit" onclick="submitReview('goa-bebinca','Bebinca')">Post Review</button>
+<div class="reviews-list" id="reviews-goa-bebinca"></div>
+</div>
+</div>
+<div class="recipe-actions">
+<button class="favorite-btn" data-favourite-id="goa-bebinca" onclick="addToFavourite('goa-bebinca','Bebinca','Goa Cuisine',this)">♡ Add to Favourite</button>
+<button class="stamp-btn" data-stamp-id="goa-bebinca" onclick="addToStamp('goa-bebinca','Bebinca','Goa Cuisine',this)">🏷️ Add to Stamp</button>
+</div>
+</section>
+
+
+<!-- ================= FOOD FACTS ================= -->
+<section class="facts-section">
+<h2>🌴 Goa Food Facts</h2>
+<div class="facts-container">
+<div class="fact-card"><h3>🐟 Famous Goan Fish Curry</h3><p>Goan Fish Curry is one of Goa's most iconic coastal dishes. Fish is cooked in a flavourful coconut-based gravy with spices and a tangy ingredient such as kokum or tamarind.</p></div>
+<div class="fact-card"><h3>🍗 Aromatic Chicken Xacuti</h3><p>Chicken Xacuti is known for its rich roasted spice blend. Coconut and freshly roasted spices give this traditional Goan curry its distinctive aroma and flavour.</p></div>
+<div class="fact-card"><h3>🍤 Spicy Prawn Balchão</h3><p>Prawn Balchão is a bold Goan preparation combining prawns with a spicy and tangy masala. Vinegar and aromatic spices give it its characteristic flavour.</p></div>
+<div class="fact-card"><h3>🌊 Seafood Heritage</h3><p>Goa's coastal location has made seafood an important part of its traditional food culture. Fish and prawns feature prominently in many regional dishes.</p></div>
+<div class="fact-card"><h3>❤️ Cultural Influences</h3><p>Goan cuisine reflects a rich blend of local traditions and historical cultural influences, creating a distinctive culinary identity unlike any other region in India.</p></div>
+</div>
+</section>
+
+<!-- ================= RECENTLY VIEWED ================= -->
+<section class="recent-section">
+<h2>🕐 Recently Viewed</h2>
+<div class="recent-container" id="recentContainer">
+<p class="recent-empty">Login to see your recently viewed recipes.</p>
+</div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section class="profile-section">
+<div class="profile-box">
+<h2>👤 My Flavorverse Profile</h2>
+<p class="profile-name" id="profileName">Guest</p>
+<p class="profile-email" id="profileEmail">Login to see your profile</p>
+<div class="profile-stats">
+<div class="profile-card"><span class="count" id="favouriteCount">0</span><span>❤️ Favourites</span></div>
+<div class="profile-card"><span class="count" id="stampCount">0</span><span>🏷️ Stamps</span></div>
+<div class="profile-card"><span class="count" id="ratingCount">0</span><span>⭐ Ratings</span></div>
+<div class="profile-card"><span class="count" id="reviewCount">0</span><span>💬 Reviews</span></div>
+</div>
+</div>
+</section>
+
+<!-- ================= CHEF ================= -->
+<section class="chef-section">
+<h2>👨‍🍳 Chef's Recommendation</h2>
+<p>Explore the vibrant flavours of Goa with the tangy <b>Goan Fish Curry</b>, aromatic <b>Chicken Xacuti</b>, spicy <b>Prawn Balchão</b>, and beautifully layered <b>Bebinca</b>. Together, these dishes showcase Goa's coastal ingredients, bold spices, coconut-rich cooking, and fascinating culinary heritage.</p>
+</section>
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+<h2>🍴 The Flavorverse</h2>
+<p>Discover India's rich culinary heritage, one delicious recipe at a time.</p>
+<div class="social"><a href="#">📘</a><a href="#">📸</a><a href="#">▶️</a><a href="#">🐦</a></div>
+<p class="copy">© 2026 The Flavorverse | All Rights Reserved</p>
+</footer>
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ===== FIREBASE CONFIG ===== */
+const firebaseConfig = {
+  apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+  authDomain: "the-flavoverse.firebaseapp.com",
+  projectId: "the-flavoverse",
+  storageBucket: "the-flavoverse.firebasestorage.app",
+  messagingSenderId: "1064022248292",
+  appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+};
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+/* ===== RECIPE DATA ===== */
+const recipes = [
+{id:"goa-fishcurry",name:"Goan Fish Curry",category:"main",cuisine:"goa"},
+{id:"goa-xacuti",name:"Chicken Xacuti",category:"main",cuisine:"goa"},
+{id:"goa-balchao",name:"Prawn Balchão",category:"main",cuisine:"goa"},
+{id:"goa-bebinca",name:"Bebinca",category:"dessert",cuisine:"goa"}
+];
+
+function getCurrentUser() { return auth.currentUser; }
+function userDoc(uid) { return db.collection("users").doc(uid); }
+function setText(id, text) { const el = document.getElementById(id); if (el) el.innerText = text; }
+function goLogin(message) { alert(message); window.location.href = "login.html"; }
+
+/* ===== FAVOURITE + STAMP ===== */
+async function toggleSaved(collectionName, id, name, category, button, onLabel, offLabel, addMsg, removeMsg) {
+  const user = getCurrentUser();
+  if (!user) { goLogin(collectionName === "favourites" ? "Please login first to add favourites ❤️" : "Please login first to add stamps 🏷️"); return; }
+  try {
+    const ref = userDoc(user.uid).collection(collectionName).doc(id);
+    const existing = await ref.get();
+    if (existing.exists) {
+      await ref.delete();
+      button.innerHTML = offLabel;
+      alert(name + removeMsg);
+    } else {
+      await ref.set({
+        recipeId: id,
+        recipeName: name,
+        category: category,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      button.innerHTML = onLabel;
+      alert(name + addMsg);
+    }
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Update failed: " + error.message);
+  }
+}
+
+function addToFavourite(id, name, category, button) {
+  toggleSaved("favourites", id, name, category, button, "♥ Added to Favourite", "♡ Add to Favourite", " added to favourites ❤️", " removed from favourites.");
+}
+
+function addToStamp(id, name, category, button) {
+  toggleSaved("stamps", id, name, category, button, "🏷️ Stamped", "🏷️ Add to Stamp", " added to your Flavorverse Passport 🏷️", " removed from passport.");
+}
+
+/* ===== RATING ===== */
+async function rateRecipe(recipeId, rating, element) {
+  const user = getCurrentUser();
+  if (!user) { goLogin("Please login first to rate recipes ⭐"); return; }
+  try {
+    await userDoc(user.uid).collection("ratings").doc(recipeId).set({
+      recipeId: recipeId,
+      rating: rating,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    element.parentElement.querySelectorAll(".star").forEach(function (star, index) {
+      star.classList.toggle("active", index < rating);
+    });
+    setText("rating-" + recipeId, "You rated this recipe " + rating + "/5 ⭐");
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Rating failed: " + error.message);
+  }
+}
+
+async function loadRatings() {
+  const user = getCurrentUser();
+  if (!user) return;
+  for (const recipe of recipes) {
+    try {
+      const doc = await userDoc(user.uid).collection("ratings").doc(recipe.id).get();
+      if (!doc.exists) continue;
+      const rating = doc.data().rating;
+      const container = document.querySelector('.stars[data-recipe="' + recipe.id + '"]');
+      if (container) {
+        container.querySelectorAll(".star").forEach(function (star, index) {
+          star.classList.toggle("active", index < rating);
+        });
+      }
+      setText("rating-" + recipe.id, "You rated this recipe " + rating + "/5 ⭐");
+    } catch (error) { console.error(error); }
+  }
+}
+
+/* ===== REVIEWS ===== */
+async function submitReview(recipeId, recipeName) {
+  const user = getCurrentUser();
+  if (!user) { goLogin("Please login first to post a review 💬"); return; }
+  const textarea = document.getElementById("review-text-" + recipeId);
+  const text = textarea.value.trim();
+  if (!text) { alert("Please write a review first."); return; }
+  try {
+    const profile = await userDoc(user.uid).get();
+    let userName = "Flavorverse User";
+    if (profile.exists && profile.data().name) { userName = profile.data().name; }
+    await db.collection("recipes").doc(recipeId).collection("reviews").doc(user.uid).set({
+      recipeId: recipeId,
+      recipeName: recipeName,
+      userId: user.uid,
+      userName: userName,
+      review: text,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    textarea.value = "";
+    alert("Review posted successfully! 💬");
+    loadReviews(recipeId);
+    updateProfileCounts();
+  } catch (error) {
+    console.error(error);
+    alert("Review failed: " + error.message);
+  }
+}
+
+async function loadReviews(recipeId) {
+  const container = document.getElementById("reviews-" + recipeId);
+  if (!container) return;
+  try {
+    const snapshot = await db.collection("recipes").doc(recipeId).collection("reviews")
+      .orderBy("createdAt", "desc").limit(10).get();
+    container.innerHTML = "";
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+      return;
+    }
+    snapshot.forEach(function (doc) {
+      const data = doc.data();
+      const review = document.createElement("div");
+      review.className = "single-review";
+      const name = document.createElement("strong");
+      name.textContent = "💜 " + (data.userName || "Flavorverse User");
+      const content = document.createElement("p");
+      content.textContent = data.review || "";
+      const date = document.createElement("small");
+      if (data.createdAt) { date.textContent = data.createdAt.toDate().toLocaleDateString(); }
+      review.appendChild(name);
+      review.appendChild(content);
+      review.appendChild(date);
+      container.appendChild(review);
+    });
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="no-review">Reviews will appear here.</p>';
+  }
+}
+
+/* ===== RECENTLY VIEWED ===== */
+function findRecipe(id) {
+  return recipes.find(function (r) { return r.id === id; });
+}
+
+async function addRecentlyViewed(recipeId) {
+  const user = getCurrentUser();
+  const recipe = findRecipe(recipeId);
+  if (!user || !recipe) return;
+  try {
+    await userDoc(user.uid).collection("recentlyViewed").doc(recipeId).set({
+      recipeId: recipeId,
+      recipeName: recipe.name,
+      name: recipe.name,
+      viewedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    loadRecentlyViewed(true); /* refresh list silently */
+  } catch (error) {
+    console.error("Could not save Recently Viewed recipe:", error);
+  }
+}
+
+async function loadRecentlyViewed(silent) {
+  const container = document.getElementById("recentContainer");
+  if (!container) return;
+  const user = getCurrentUser();
+  if (!user) {
+    container.innerHTML = '<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+    return;
+  }
+  if (!silent) {
+    container.innerHTML = '<p class="recent-empty">Loading recently viewed recipes...</p>';
+  }
+  try {
+    const snapshot = await userDoc(user.uid).collection("recentlyViewed").limit(30).get();
+    const items = [];
+    snapshot.forEach(function (doc) {
+      const data = doc.data() || {};
+      const id = data.recipeId || doc.id;
+      const recipe = findRecipe(id);
+      if (!recipe) return; /* ignores recipes from other state pages */
+      items.push({
+        id: id,
+        name: recipe.name,
+        time: data.viewedAt && data.viewedAt.toMillis ? data.viewedAt.toMillis() : Date.now()
+      });
+    });
+    items.sort(function (a, b) { return b.time - a.time; });
+    container.innerHTML = "";
+    if (items.length === 0) {
+      container.innerHTML = '<p class="recent-empty">No recently viewed Goa recipes yet. Open a recipe to add it here.</p>';
+      return;
+    }
+    items.slice(0, 8).forEach(function (item) {
+      const card = document.createElement("div");
+      card.className = "recent-card";
+      const title = document.createElement("h3");
+      title.textContent = "🕐 " + item.name;
+      const desc = document.createElement("p");
+      desc.textContent = "You recently explored this recipe.";
+      card.appendChild(title);
+      card.appendChild(desc);
+      const section = document.getElementById(item.id);
+      if (section) {
+        card.style.cursor = "pointer";
+        card.addEventListener("click", function () {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="recent-empty">Recently Viewed could not be loaded. Please check your Firestore rules.</p>';
+  }
+}
+
+function setupRecentlyViewed() {
+  const sections = document.querySelectorAll(".recipe-section");
+  const visibleIds = new Set();
+  const lastRecorded = new Map();
+
+  function record(id) {
+    if (!getCurrentUser()) return; /* wait for login */
+    const now = Date.now();
+    if (now - (lastRecorded.get(id) || 0) < 15000) return;
+    lastRecorded.set(id, now);
+    addRecentlyViewed(id);
+  }
+
+  /* Recipe sections are very tall, so a low threshold is needed */
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      const id = entry.target.id;
+      if (entry.isIntersecting) { visibleIds.add(id); record(id); }
+      else { visibleIds.delete(id); }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(function (s) { observer.observe(s); });
+
+  /* called after login finishes, to save recipes already on screen */
+  window.recordVisibleRecipes = function () { visibleIds.forEach(record); };
+}
+
+/* ===== PROFILE ===== */
+async function showProfileInfo(user) {
+  try {
+    const doc = await userDoc(user.uid).get();
+    if (doc.exists) {
+      setText("profileName", doc.data().name || "Flavorverse User");
+      setText("profileEmail", doc.data().email || user.email);
+    } else {
+      setText("profileName", user.email);
+      setText("profileEmail", user.email);
+    }
+  } catch (error) { console.error(error); }
+}
+
+async function updateProfileCounts() {
+  const user = getCurrentUser();
+  if (!user) {
+    ["favouriteCount", "stampCount", "ratingCount", "reviewCount"].forEach(function (id) { setText(id, "0"); });
+    return;
+  }
+  try {
+    await showProfileInfo(user);
+    const favourites = await userDoc(user.uid).collection("favourites").get();
+    const stamps = await userDoc(user.uid).collection("stamps").get();
+    const ratings = await userDoc(user.uid).collection("ratings").get();
+    let reviewTotal = 0;
+    for (const recipe of recipes) {
+      const review = await db.collection("recipes").doc(recipe.id).collection("reviews").doc(user.uid).get();
+      if (review.exists) reviewTotal++;
+    }
+    setText("favouriteCount", favourites.size);
+    setText("stampCount", stamps.size);
+    setText("ratingCount", ratings.size);
+    setText("reviewCount", reviewTotal);
+  } catch (error) { console.error(error); }
+}
+
+/* ===== BUTTON STATUS ===== */
+async function updateButtons() {
+  const user = getCurrentUser();
+  if (!user) return;
+  for (const recipe of recipes) {
+    try {
+      const fav = await userDoc(user.uid).collection("favourites").doc(recipe.id).get();
+      const favButton = document.querySelector('[data-favourite-id="' + recipe.id + '"]');
+      if (fav.exists && favButton) favButton.innerHTML = "♥ Added to Favourite";
+      const stamp = await userDoc(user.uid).collection("stamps").doc(recipe.id).get();
+      const stampButton = document.querySelector('[data-stamp-id="' + recipe.id + '"]');
+      if (stamp.exists && stampButton) stampButton.innerHTML = "🏷️ Stamped";
+    } catch (error) { console.error(error); }
+  }
+}
+
+/* ===== SEARCH + FILTER ===== */
+function filterRecipes() {
+  const search = document.getElementById("recipeSearch").value.toLowerCase().trim();
+  const category = document.getElementById("categoryFilter").value;
+  let count = 0;
+  document.querySelectorAll(".recipe-section").forEach(function (section) {
+    const nameMatch = section.dataset.name.toLowerCase().includes(search);
+    const categoryMatch = category === "all" || section.dataset.category === category;
+    if (nameMatch && categoryMatch) {
+      section.classList.remove("hidden-recipe");
+      count++;
+    } else {
+      section.classList.add("hidden-recipe");
+    }
+  });
+  setText("searchResult", "Showing " + count + " recipe" + (count !== 1 ? "s" : ""));
+}
+
+function resetFilters() {
+  document.getElementById("recipeSearch").value = "";
+  document.getElementById("categoryFilter").value = "all";
+  document.querySelectorAll(".recipe-section").forEach(function (s) { s.classList.remove("hidden-recipe"); });
+  setText("searchResult", "Showing all 4 Goa recipes");
+}
+
+function surpriseMe() {
+  const visible = Array.from(document.querySelectorAll(".recipe-section")).filter(function (r) {
+    return !r.classList.contains("hidden-recipe");
+  });
+  if (visible.length === 0) { alert("No recipes available with the selected filter."); return; }
+  const random = visible[Math.floor(Math.random() * visible.length)];
+  random.scrollIntoView({ behavior: "smooth", block: "center" });
+  random.style.boxShadow = "0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+  setTimeout(function () { random.style.boxShadow = ""; }, 2500);
+  alert("🎲 Surprise Recipe: " + random.dataset.name);
+}
+
+/* ===== DARK MODE ===== */
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("flavorverseDarkMode", document.body.classList.contains("dark-mode") ? "on" : "off");
+}
+
+function loadDarkMode() {
+  if (localStorage.getItem("flavorverseDarkMode") === "on") {
+    document.body.classList.add("dark-mode");
+  }
+}
+
+/* ===== AUTH STATE ===== */
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+    showProfileInfo(user);
+    updateButtons();
+    updateProfileCounts();
+    loadRatings();
+    recipes.forEach(function (recipe) { loadReviews(recipe.id); });
+    if (window.recordVisibleRecipes) window.recordVisibleRecipes();
+  } else {
+    setText("profileName", "Guest");
+    setText("profileEmail", "Login to see your profile");
+    updateProfileCounts();
+    recipes.forEach(function (recipe) { loadReviews(recipe.id); });
+  }
+  loadRecentlyViewed();
+});
+
+/* ===== PAGE LOAD ===== */
+document.addEventListener("DOMContentLoaded", function () {
+  loadDarkMode();
+  setupRecentlyViewed();
+});
+
+/* ===== HAMBURGER DRAWER ===== */
+(function () {
+  const drawer = document.getElementById("exploreDrawer");
+  const backdrop = document.getElementById("menuBackdrop");
+  const openBtn = document.getElementById("openExploreMenu");
+  const closeBtn = document.getElementById("closeExploreMenu");
+  function openMenu() {
+    drawer.classList.add("open"); backdrop.classList.add("show");
+    document.body.classList.add("drawer-open");
+    drawer.setAttribute("aria-hidden", "false"); openBtn.setAttribute("aria-expanded", "true");
+  }
+  function closeMenu() {
+    drawer.classList.remove("open"); backdrop.classList.remove("show");
+    document.body.classList.remove("drawer-open");
+    drawer.setAttribute("aria-hidden", "true"); openBtn.setAttribute("aria-expanded", "false");
+  }
+  openBtn.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+  backdrop.addEventListener("click", closeMenu);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+  drawer.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+})();
+
+</script>
+</body>
+</html>

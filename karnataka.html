@@ -1,0 +1,3645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Karnataka | The Flavorverse</title>
+
+<script src="recipe-actions.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#F7E7CE;
+color:#5B4A45;
+transition:.3s;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark-mode{
+background:#241d23;
+color:#eee;
+}
+
+body.dark-mode .hero,
+body.dark-mode .about-text,
+body.dark-mode .recipe-section,
+body.dark-mode .fact-card,
+body.dark-mode .profile-card,
+body.dark-mode .explorer-box,
+body.dark-mode .review-box,
+body.dark-mode .recent-card,
+body.dark-mode .popular-card{
+background:#342a32;
+color:#eee;
+}
+
+body.dark-mode .recipe-content h2,
+body.dark-mode .about-text h2,
+body.dark-mode .facts-section h2,
+body.dark-mode .recent-section h2,
+body.dark-mode .explorer-box h2,
+body.dark-mode .popular-title{
+color:#e9c9e4;
+}
+
+body.dark-mode .recipe-content h3{
+color:#d6aeca;
+}
+
+body.dark-mode .recipe-info div,
+body.dark-mode .chef-tip,
+body.dark-mode .fun-fact,
+body.dark-mode .single-review{
+background:#443640;
+}
+
+body.dark-mode .rating-area{
+background:rgba(68,54,64,.7);
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea{
+background:#443640;
+color:white;
+border-color:#80647b;
+}
+
+body.dark-mode .search-box{
+background:#342a32;
+}
+
+/* ================= HEADER ================= */
+
+header{
+background:#8E6C88;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+position:relative;
+z-index:1000;
+min-height:80px;
+}
+
+.logo{
+font-family:'Cinzel',serif;
+font-size:32px;
+font-weight:bold;
+color:white;
+}
+
+
+/* ================= HAMBURGER DRAWER MENU ================= */
+
+header nav{display:none !important;}
+
+.menu-open-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:44px;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:12px;
+    background:#4d3547;
+    color:#fff;
+    font-size:27px;
+    cursor:pointer;
+    transition:.25s;
+}
+.menu-open-btn:hover{background:#735267;transform:scale(1.04);}
+.menu-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(28,18,29,.48);
+    backdrop-filter:blur(2px);
+    z-index:2000;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .28s ease,visibility .28s ease;
+}
+.menu-overlay.show{opacity:1;visibility:visible;}
+.explore-drawer{
+    position:fixed;
+    top:0;
+    right:0;
+    width:350px;
+    max-width:90vw;
+    height:100vh;
+    overflow-y:auto;
+    background:#fff8f0;
+    color:#604b62;
+    z-index:2001;
+    transform:translateX(105%);
+    transition:transform .3s ease;
+    box-shadow:-8px 0 30px rgba(0,0,0,.18);
+}
+.explore-drawer.open{transform:translateX(0);}
+.drawer-heading{
+    position:sticky;
+    top:0;
+    z-index:2;
+    min-height:92px;
+    padding:25px 28px;
+    background:#9a7897;
+    color:#fffaf5;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.drawer-heading h2{
+    font-family:'Poppins',sans-serif;
+    font-size:25px;
+    margin:0;
+    color:#fffaf5;
+}
+.drawer-close{
+    border:0;
+    background:transparent;
+    color:white;
+    font-size:29px;
+    line-height:1;
+    cursor:pointer;
+    padding:0 0 4px 10px;
+}
+.drawer-links{padding:14px 22px 24px;}
+.drawer-link{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:12px 12px;
+    margin:2px 0;
+    border-radius:12px;
+    color:#604b62;
+    text-decoration:none;
+    transition:background .2s,transform .2s;
+}
+.drawer-link:hover,.drawer-link.active{
+    background:#f0e1ed;
+    transform:translateX(2px);
+}
+.drawer-icon{
+    width:28px;
+    flex:0 0 28px;
+    text-align:center;
+    font-size:22px;
+}
+.drawer-link strong{
+    display:block;
+    font-size:15px;
+    font-weight:600;
+    line-height:1.35;
+}
+.drawer-link small{
+    display:block;
+    margin-top:2px;
+    font-size:11px;
+    color:#927b91;
+    line-height:1.4;
+}
+.drawer-divider{
+    height:1px;
+    background:#e4d2df;
+    margin:12px 0;
+}
+.drawer-theme{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    border:0;
+    background:transparent;
+    padding:12px;
+    border-radius:12px;
+    color:#604b62;
+    text-align:left;
+    font-family:'Poppins',sans-serif;
+    cursor:pointer;
+}
+.drawer-theme:hover{background:#f0e1ed;}
+body.drawer-open{overflow:hidden;}
+
+/* ================= HERO ================= */
+
+.hero{
+
+width:90%;
+margin:40px auto;
+background:white;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 12px 25px rgba(0,0,0,.15);
+
+display:flex;
+align-items:center;
+gap:40px;
+padding:40px;
+
+}
+
+.image-box{
+
+width:450px;
+height:350px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#fff8f2;
+border-radius:20px;
+flex:1;
+
+}
+
+.image-box img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+display:block;
+}
+
+.hero-content{
+
+padding:40px;
+flex:1;
+text-align:left;
+
+}
+
+.hero-content h1{
+
+font-family:'Cinzel',serif;
+font-size:58px;
+color:#6F4B72;
+
+}
+
+.hero-content h2{
+
+margin-top:15px;
+color:#B58A4D;
+font-size:30px;
+
+}
+
+.hero-content p{
+
+margin-top:18px;
+font-size:18px;
+line-height:1.8;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:25px;
+padding:14px 35px;
+background:#8E6C88;
+color:white;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#6F4B72;
+
+}
+
+/* ================= ABOUT ================= */
+
+.about-section{
+width:90%;
+margin:50px auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+
+.about-text{
+flex:2;
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.about-text h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:20px;
+}
+
+.about-text p{
+line-height:1.9;
+font-size:17px;
+margin-bottom:18px;
+text-align:justify;
+}
+
+.about-box{
+flex:1;
+background:#8E6C88;
+color:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.about-box h3{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+text-align:center;
+}
+
+.about-box ul{
+list-style:none;
+}
+
+.about-box li{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,.25);
+font-size:16px;
+}
+
+.about-box li:last-child{
+border-bottom:none;
+}
+
+/* =====================================================
+   RECIPE EXPLORER
+===================================================== */
+
+.explorer-section{
+width:90%;
+margin:60px auto;
+}
+
+.explorer-box{
+background:#FFF9F4;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.explorer-box h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.search-filter-row{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.search-box,
+.filter-box{
+padding:13px 18px;
+border:1px solid #D8C5B0;
+border-radius:25px;
+background:white;
+color:#5B4A45;
+font-family:'Poppins',sans-serif;
+outline:none;
+}
+
+.search-box{
+width:45%;
+min-width:250px;
+}
+
+.filter-box{
+min-width:180px;
+}
+
+.explorer-buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+.explorer-btn{
+border:none;
+padding:12px 22px;
+border-radius:25px;
+background:#8E6C88;
+color:white;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.explorer-btn:hover{
+background:#6F4B72;
+transform:translateY(-2px);
+}
+
+.explorer-btn.random{
+background:#B58A4D;
+}
+
+/* ================= POPULAR ================= */
+
+.popular-section{
+width:90%;
+margin:40px auto;
+}
+
+.popular-title{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:32px;
+margin-bottom:25px;
+}
+
+.popular-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.popular-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+text-align:center;
+transition:.3s;
+}
+
+.popular-card:hover{
+transform:translateY(-6px);
+}
+
+.popular-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.popular-card p{
+font-size:14px;
+line-height:1.6;
+}
+
+/* ================= SEARCH RESULT ================= */
+
+.search-result{
+text-align:center;
+margin-top:18px;
+font-weight:600;
+color:#8E6C88;
+}
+
+/* ================= RECIPE SECTION ================= */
+
+.recipe-section{
+width:90%;
+margin:60px auto;
+
+display:grid;
+grid-template-columns:1fr 2fr;
+gap:40px;
+
+align-items:stretch;
+
+background:#FFF9F4;
+padding:35px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.recipe-image{
+grid-column:1;
+grid-row:1;
+}
+
+.recipe-image img{
+width:100%;
+border-radius:18px;
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+display:block;
+}
+
+.recipe-content{
+grid-column:2;
+grid-row:1;
+}
+
+.recipe-content h2{
+font-family:'Cinzel',serif;
+color:#6F4B72;
+font-size:38px;
+margin-bottom:20px;
+}
+
+.recipe-content h3{
+margin-top:25px;
+margin-bottom:12px;
+color:#8E6C88;
+}
+
+.recipe-content p{
+line-height:1.8;
+text-align:justify;
+}
+
+.recipe-content ul,
+.recipe-content ol{
+margin-left:25px;
+line-height:1.9;
+}
+
+/* ================= RECIPE INFO ================= */
+
+.recipe-info{
+display:flex;
+justify-content:space-between;
+margin-top:25px;
+gap:20px;
+}
+
+.recipe-info div{
+flex:1;
+background:#F7E7CE;
+padding:18px;
+text-align:center;
+border-radius:15px;
+}
+
+/* ================= CHEF TIP + FUN FACT ================= */
+
+.chef-tip,
+.fun-fact{
+margin-top:25px;
+background:#F7E7CE;
+padding:20px;
+border-left:6px solid #8E6C88;
+border-radius:12px;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.recipe-actions{
+grid-column:1;
+grid-row:1;
+
+align-self:end;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-end;
+
+gap:15px;
+
+padding-bottom:5px;
+}
+
+.recipe-actions button{
+
+width:200px;
+padding:14px 18px;
+
+border:none;
+border-radius:30px;
+
+font-family:'Poppins',sans-serif;
+font-size:14px;
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 6px 15px rgba(91,74,69,.18);
+
+}
+
+.favorite-btn{
+background:#8E6C88;
+color:white;
+}
+
+.stamp-btn{
+background:#F4E5C5;
+color:#5B4A45;
+}
+
+.recipe-actions button:hover{
+transform:translateY(-3px);
+box-shadow:0 9px 20px rgba(91,74,69,.22);
+}
+
+/* ================= RATING ================= */
+
+.rating-area{
+margin-top:22px;
+padding:20px;
+background:rgba(244,229,197,.55);
+border-radius:15px;
+}
+
+.rating-area h3{
+margin-top:0;
+}
+
+.stars{
+display:flex;
+gap:5px;
+margin-top:8px;
+}
+
+.star{
+font-size:28px;
+cursor:pointer;
+color:#c8b9aa;
+transition:.2s;
+}
+
+.star.active{
+color:#E5A82F;
+}
+
+.rating-message{
+font-size:13px;
+margin-top:7px;
+}
+
+/* ================= REVIEWS ================= */
+
+.review-box{
+margin-top:18px;
+padding:20px;
+background:#FFF9F4;
+border:1px solid #eadbc9;
+border-radius:15px;
+}
+
+.review-box h3{
+margin-top:0;
+}
+
+.review-input{
+width:100%;
+min-height:80px;
+resize:vertical;
+padding:12px;
+border:1px solid #D8C5B0;
+border-radius:12px;
+outline:none;
+font-family:'Poppins',sans-serif;
+margin-top:8px;
+}
+
+.review-submit{
+margin-top:10px;
+border:none;
+background:#8E6C88;
+color:white;
+padding:10px 20px;
+border-radius:22px;
+cursor:pointer;
+font-family:'Poppins',sans-serif;
+font-weight:600;
+}
+
+.review-submit:hover{
+background:#6F4B72;
+}
+
+.reviews-list{
+margin-top:15px;
+}
+
+.single-review{
+padding:12px;
+margin-top:10px;
+background:#F7E7CE;
+border-radius:12px;
+}
+
+.single-review strong{
+color:#6F4B72;
+}
+
+.single-review small{
+display:block;
+margin-top:4px;
+opacity:.7;
+}
+
+.no-review{
+font-size:13px;
+opacity:.7;
+margin-top:10px;
+}
+
+/* =====================================================
+   REVERSE RECIPE
+===================================================== */
+
+.recipe-section.reverse{
+grid-template-columns:2fr 1fr;
+}
+
+.recipe-section.reverse .recipe-content{
+grid-column:1;
+grid-row:1;
+}
+
+.recipe-section.reverse .recipe-image{
+grid-column:2;
+grid-row:1;
+}
+
+.recipe-section.reverse .recipe-actions{
+grid-column:2;
+grid-row:1;
+}
+
+/* ================= FOOD FACTS ================= */
+
+.facts-section{
+width:90%;
+margin:60px auto;
+}
+
+.facts-section h2{
+text-align:center;
+font-family:'Cinzel',serif;
+font-size:40px;
+color:#6F4B72;
+margin-bottom:35px;
+}
+
+.facts-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.fact-card{
+background:#FFF9F4;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.fact-card:hover{
+transform:translateY(-8px);
+}
+
+.fact-card h3{
+color:#8E6C88;
+margin-bottom:15px;
+}
+
+.fact-card p{
+line-height:1.8;
+}
+
+/* ================= RECENTLY VIEWED ================= */
+
+.recent-section{
+width:90%;
+margin:60px auto;
+}
+
+.recent-section h2{
+font-family:'Cinzel',serif;
+text-align:center;
+color:#6F4B72;
+font-size:36px;
+margin-bottom:25px;
+}
+
+.recent-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.recent-card{
+background:#FFF9F4;
+padding:22px;
+border-radius:18px;
+box-shadow:0 7px 17px rgba(0,0,0,.12);
+}
+
+.recent-card h3{
+color:#8E6C88;
+margin-bottom:8px;
+}
+
+.recent-card p{
+font-size:13px;
+}
+
+.recent-empty{
+text-align:center;
+opacity:.7;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-section{
+width:90%;
+margin:60px auto;
+}
+
+.profile-box{
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:22px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.profile-box h2{
+font-family:'Cinzel',serif;
+font-size:38px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.profile-name{
+text-align:center;
+font-size:20px;
+margin-bottom:30px;
+}
+
+.profile-email{
+text-align:center;
+opacity:.9;
+margin-bottom:25px;
+}
+
+.profile-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.profile-card{
+background:#FFF9F4;
+color:#5B4A45;
+padding:22px;
+border-radius:16px;
+text-align:center;
+}
+
+.profile-card .count{
+font-size:30px;
+font-weight:bold;
+color:#6F4B72;
+display:block;
+margin-bottom:5px;
+}
+
+.profile-card span:last-child{
+font-size:14px;
+}
+
+/* ================= CHEF ================= */
+
+.chef-section{
+width:90%;
+margin:60px auto;
+background:#8E6C88;
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.chef-section h2{
+font-family:'Cinzel',serif;
+margin-bottom:20px;
+}
+
+.chef-section p{
+font-size:18px;
+line-height:1.8;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+background:#6F4B72;
+color:white;
+text-align:center;
+padding:40px 20px;
+margin-top:60px;
+}
+
+footer h2{
+font-family:'Cinzel',serif;
+margin-bottom:15px;
+}
+
+footer p{
+margin:10px 0;
+line-height:1.8;
+}
+
+.social{
+margin:25px 0;
+}
+
+.social a{
+text-decoration:none;
+font-size:30px;
+margin:0 12px;
+}
+
+.copy{
+margin-top:20px;
+font-size:15px;
+opacity:.9;
+}
+
+/* ================= HIDDEN SEARCH ================= */
+
+.recipe-section.hidden-recipe{
+display:none;
+}
+
+/* ================= BACK BUTTON ================= */
+
+.back-heritage {
+    display: table;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #735267;
+    color: #F7E7CE;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.back-heritage:hover {
+    background: #4d3547;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+header{
+flex-direction:row;
+gap:12px;
+padding:16px 5%;
+}
+
+.logo{
+font-size:24px;
+}
+
+.menu-open-btn{
+width:44px;
+height:42px;
+flex:0 0 44px;
+}
+
+.hero{
+flex-direction:column;
+padding:20px;
+}
+
+.image-box{
+width:100%;
+height:280px;
+}
+
+.hero-content{
+padding:20px 5px;
+text-align:center;
+}
+
+.hero-content h1{
+font-size:42px;
+}
+
+.hero-content h2{
+font-size:24px;
+}
+
+.hero-content p{
+font-size:15px;
+text-align:justify;
+}
+
+.about-section{
+flex-direction:column;
+}
+
+.about-text,
+.about-box{
+width:100%;
+}
+
+.recipe-section,
+.recipe-section.reverse{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.recipe-image,
+.recipe-content{
+width:100%;
+}
+
+.recipe-info{
+flex-direction:column;
+}
+
+.recipe-actions,
+.recipe-section.reverse .recipe-actions{
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:0;
+order:2;
+}
+
+.recipe-actions button{
+width:220px;
+}
+
+.profile-stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.search-box{
+width:100%;
+}
+
+}
+
+@media(max-width:450px){
+
+.profile-stats{
+grid-template-columns:1fr;
+}
+
+.hero-content h1{
+font-size:35px;
+}
+
+.recipe-content h2{
+font-size:30px;
+}
+
+}
+
+</style>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="logo">
+🍴 The Flavorverse
+</div>
+
+<button class="menu-open-btn" type="button" aria-label="Open menu" onclick="openExploreMenu()">
+☰
+</button>
+
+</header>
+
+<!-- ================= EXPLORE HAMBURGER MENU ================= -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeExploreMenu()"></div>
+
+<aside class="explore-drawer" id="exploreDrawer" aria-label="Explore menu" aria-hidden="true">
+    <div class="drawer-heading">
+        <h2>Explore</h2>
+        <button class="drawer-close" type="button" aria-label="Close menu" onclick="closeExploreMenu()">×</button>
+    </div>
+
+    <div class="drawer-links">
+        <a class="drawer-link" href="index.html">
+            <span class="drawer-icon">🏠</span><span><strong>Home</strong><small>Return to the homepage</small></span>
+        </a>
+        <a class="drawer-link" href="royal.html">
+            <span class="drawer-icon">👑</span><span><strong>Royal Heritage</strong><small>Traditional royal recipes</small></span>
+        </a>
+        <a class="drawer-link" href="movies&cartoons.html">
+            <span class="drawer-icon">🎬</span><span><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by magical worlds</small></span>
+        </a>
+        <a class="drawer-link" href="worldcuisine.html">
+            <span class="drawer-icon">🌎</span><span><strong>World Cuisine</strong><small>Flavours from around the world</small></span>
+        </a>
+        <a class="drawer-link" href="desertwrold.html">
+            <span class="drawer-icon">🍰</span><span><strong>Desserts</strong><small>Sweet treats and desserts</small></span>
+        </a>
+        <a class="drawer-link" href="gallery.html">
+            <span class="drawer-icon">🖼️</span><span><strong>Gallery</strong><small>Explore our food gallery</small></span>
+        </a>
+
+        <div class="drawer-divider"></div>
+
+        <a class="drawer-link" href="favourite.html">
+            <span class="drawer-icon">💗</span><span><strong>Favourites</strong><small>Your favourite recipes</small></span>
+        </a>
+        <a class="drawer-link" href="order.html">
+            <span class="drawer-icon">🛒</span><span><strong>Order</strong><small>Order ingredient kits</small></span>
+        </a>
+        <a class="drawer-link" href="stamp.html">
+            <span class="drawer-icon">🏷️</span><span><strong>Stamped</strong><small>Your stamped recipes</small></span>
+        </a>
+        <a class="drawer-link" href="contact.html">
+            <span class="drawer-icon">📩</span><span><strong>Contact</strong><small>Get in touch with us</small></span>
+        </a>
+        <a class="drawer-link" href="about.html">
+            <span class="drawer-icon">✨</span><span><strong>About</strong><small>Discover The Flavorverse</small></span>
+        </a>
+        
+        <div class="drawer-divider"></div>
+        <button class="drawer-theme" type="button" onclick="toggleDarkMode()">
+            <span class="drawer-icon">🌙</span><span><strong>Dark Mode</strong><small>Switch the page appearance</small></span>
+        </button>
+    </div>
+</aside>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="image-box">
+
+<img src="karnataka1heroimage.png" alt="Karnataka">
+
+</div>
+
+<div class="hero-content">
+
+<h1>🏰 Karnataka</h1>
+
+<h2>Royal Heritage &amp; Authentic Flavours</h2>
+
+<p>
+
+Experience the rich and diverse cuisine of Karnataka through its traditional recipes, royal heritage, aromatic spices, and authentic regional flavors. From the famous sweets of Mysore to wholesome millet-based dishes and delicious breakfasts, every recipe reflects the state's vibrant culture, history, and culinary excellence. Karnataka cuisine offers a perfect balance of taste, nutrition, and tradition.
+
+</p>
+
+<a href="#recipes" class="btn">
+
+Explore Recipes
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ================= ABOUT KARNATAKA ================= -->
+
+<section id="about" class="about-section">
+
+<div class="about-text">
+
+<h2>🏰 About Karnataka Cuisine</h2>
+
+<p>
+
+Karnataka is one of South India's most culturally rich states, known for its royal heritage, ancient temples, beautiful hill stations, and diverse culinary traditions. The cuisine of Karnataka varies from region to region, offering a perfect blend of spicy, sweet, and mildly flavored dishes prepared using fresh local ingredients. Rice, ragi (finger millet), coconut, lentils, and aromatic spices form the foundation of most traditional meals.
+
+</p>
+
+<p>
+
+The state is famous for its delicious breakfasts such as Neer Dosa, Ragi Mudde, Akki Roti, and Maddur Vada. Karnataka is also well known for its royal Mysore cuisine, especially the world-famous Mysore Pak. Traditional meals are served with rice, sambar, rasam, vegetable curries, chutneys, and flavorful pickles, creating a wholesome dining experience.
+
+</p>
+
+<p>
+
+Every festival in Karnataka is celebrated with special sweets and festive dishes prepared using traditional family recipes. Karnataka cuisine perfectly balances nutrition, taste, and culture, making it one of India's most loved regional cuisines.
+
+</p>
+
+<p>
+
+Whether it is the spicy Bisi Bele Bath, soft Neer Dosa, healthy Ragi Mudde, or the rich sweetness of Mysore Pak, every dish reflects Karnataka's history, traditions, and warm hospitality. These recipes continue to be enjoyed by people across India and around the world.
+
+</p>
+
+</div>
+
+<div class="about-box">
+
+<h3>🌿 Karnataka Highlights</h3>
+
+<ul>
+
+<li>🏰 Home of the Mysore Palace</li>
+
+<li>🍬 Famous for Mysore Pak</li>
+
+<li>🌾 Ragi is a staple food in many regions</li>
+
+<li>🥥 Coconut is widely used in cooking</li>
+
+<li>🍛 Bisi Bele Bath is Karnataka's signature rice dish</li>
+
+<li>🥞 Neer Dosa is a popular breakfast specialty</li>
+
+<li>☕ Karnataka is one of India's largest coffee producers</li>
+
+<li>❤️ Rich in royal heritage and traditional cuisine</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RECIPE EXPLORER
+===================================================== -->
+
+<section class="explorer-section" id="recipes">
+
+<div class="explorer-box">
+
+<h2>🔍 Explore Karnataka Recipes</h2>
+
+<div class="search-filter-row">
+
+<input
+type="text"
+id="recipeSearch"
+class="search-box"
+placeholder="🔍 Search recipe..."
+onkeyup="filterRecipes()"
+>
+
+<select id="categoryFilter" class="filter-box" onchange="filterRecipes()">
+
+<option value="all">🏷️ All Categories</option>
+<option value="main">Main Course</option>
+<option value="seafood">Seafood</option>
+<option value="dessert">Dessert</option>
+<option value="vegetarian">Vegetarian</option>
+
+</select>
+
+<select id="cuisineFilter" class="filter-box" onchange="filterRecipes()">
+
+<option value="all">🌍 All Cuisine</option>
+<option value="karnataka">Karnataka Cuisine</option>
+
+</select>
+
+</div>
+
+<div class="explorer-buttons">
+
+<button class="explorer-btn random" onclick="surpriseMe()">
+🎲 Surprise Me
+</button>
+
+<button class="explorer-btn" onclick="resetFilters()">
+↻ Show All Recipes
+</button>
+
+</div>
+
+<p id="searchResult" class="search-result">
+Showing all 4 Karnataka recipes
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= POPULAR RECIPES ================= -->
+
+<section class="popular-section">
+
+<h2 class="popular-title">
+🔥 Popular Karnataka Recipes
+</h2>
+
+<div class="popular-container">
+
+<div class="popular-card">
+
+<h3>🍬 Mysore Pak</h3>
+
+<p>
+Karnataka's famous traditional royal sweet.
+</p>
+
+</div>
+
+<div class="popular-card">
+
+<h3>🍛 Bisi Bele Bath</h3>
+
+<p>
+A flavorful Karnataka rice and lentil speciality.
+</p>
+
+</div>
+
+<div class="popular-card">
+
+<h3>🥞 Neer Dosa</h3>
+
+<p>
+Soft and delicate traditional coastal breakfast.
+</p>
+
+</div>
+
+<div class="popular-card">
+
+<h3>🌾 Ragi Mudde</h3>
+
+<p>
+A healthy and traditional Karnataka staple.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MYSORE PAK
+===================================================== -->
+
+<section
+id="karnataka-mysore-pak"
+class="recipe-section"
+data-name="Mysore Pak"
+data-category="dessert"
+data-cuisine="karnataka"
+>
+
+<div class="recipe-image">
+
+<img src="mysorepak.png" alt="Mysore Pak">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🍬 Mysore Pak</h2>
+
+<p>
+
+Mysore Pak is Karnataka's most famous traditional sweet, originating from the royal kitchens of the Mysore Palace. It is prepared using gram flour, pure ghee, sugar, and a touch of cardamom. The sweet is known for its rich aroma, melt-in-the-mouth texture, and golden color. Mysore Pak is a popular dessert served during festivals, weddings, and special family celebrations across Karnataka.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>1 cup Gram Flour (Besan)</li>
+
+<li>2 cups Sugar</li>
+
+<li>2 cups Pure Ghee</li>
+
+<li>½ cup Water</li>
+
+<li>¼ tsp Cardamom Powder (Optional)</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Sieve the gram flour to remove lumps and keep it ready.</li>
+
+<li>Heat the ghee separately until warm.</li>
+
+<li>In another pan, combine sugar and water. Cook until it forms a one-string sugar syrup.</li>
+
+<li>Slowly add the gram flour while stirring continuously to avoid lumps.</li>
+
+<li>Gradually pour the warm ghee into the mixture while stirring constantly.</li>
+
+<li>Continue cooking until the mixture becomes thick, frothy, and starts leaving the sides of the pan.</li>
+
+<li>Add cardamom powder for extra flavor if desired.</li>
+
+<li>Pour the mixture into a greased tray and spread it evenly.</li>
+
+<li>Allow it to cool slightly, cut into square pieces, and let it cool completely before serving.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>30 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>10 Pieces</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Medium</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Use fresh, high-quality ghee and stir continuously while adding it. This gives Mysore Pak its soft texture, rich flavor, and beautiful golden color.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Mysore Pak was first created in the royal kitchen of the Mysore Palace during the reign of the Wadiyar kings. Today, it is one of India's most famous traditional sweets and a symbol of Karnataka's culinary heritage.
+
+</p>
+
+</div>
+
+
+<!-- ================= RATING ================= -->
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div class="stars" data-recipe="karnataka-mysore-pak">
+
+<span class="star" onclick="rateRecipe('karnataka-mysore-pak',1,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-mysore-pak',2,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-mysore-pak',3,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-mysore-pak',4,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-mysore-pak',5,this)">★</span>
+
+</div>
+
+<p id="rating-karnataka-mysore-pak" class="rating-message">
+Choose your rating
+</p>
+
+</div>
+
+
+<!-- ================= REVIEW ================= -->
+
+<div class="review-box">
+
+<h3>💬 Reviews &amp; Comments</h3>
+
+<textarea
+id="review-text-karnataka-mysore-pak"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('karnataka-mysore-pak','Mysore Pak')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-karnataka-mysore-pak"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="karnataka-mysore-pak"
+onclick="addToFavourite(
+'karnataka-mysore-pak',
+'Mysore Pak',
+'Royal Heritage',
+this
+)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="karnataka-mysore-pak"
+onclick="addToStamp(
+'karnataka-mysore-pak',
+'Mysore Pak',
+'Royal Heritage',
+this
+)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     BISI BELE BATH
+===================================================== -->
+
+<section
+id="karnataka-bisi-bele-bath"
+class="recipe-section reverse"
+data-name="Bisi Bele Bath"
+data-category="main"
+data-cuisine="karnataka"
+>
+
+<div class="recipe-image">
+
+<img src="Bisi-Bele-Bath.jpg" alt="Bisi Bele Bath">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🍛 Bisi Bele Bath</h2>
+
+<p>
+
+Bisi Bele Bath is one of Karnataka's most famous traditional rice dishes. The name means <b>"Hot Lentil Rice"</b> in Kannada. It is prepared using rice, toor dal, fresh vegetables, tamarind, and a special Bisi Bele Bath spice powder. This wholesome one-pot meal is rich in flavor, highly nutritious, and is commonly served during festivals, family lunches, and special occasions. It is usually enjoyed with potato chips, papad, boondi, or curd.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>1 cup Rice</li>
+
+<li>½ cup Toor Dal</li>
+
+<li>1 Carrot (chopped)</li>
+
+<li>10 Beans (chopped)</li>
+
+<li>½ cup Green Peas</li>
+
+<li>1 Potato (cubed)</li>
+
+<li>1 Onion (sliced)</li>
+
+<li>1 Tomato (chopped)</li>
+
+<li>2 tbsp Tamarind Pulp</li>
+
+<li>2 tbsp Bisi Bele Bath Powder</li>
+
+<li>½ tsp Turmeric Powder</li>
+
+<li>2 tbsp Ghee</li>
+
+<li>Mustard Seeds</li>
+
+<li>Curry Leaves</li>
+
+<li>Cashew Nuts</li>
+
+<li>Salt to Taste</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Wash and cook the rice and toor dal separately until soft.</li>
+
+<li>Cook the chopped vegetables until they become tender.</li>
+
+<li>Heat ghee in a pan and add mustard seeds, curry leaves, and cashew nuts.</li>
+
+<li>Add onions and tomatoes. Cook until they become soft.</li>
+
+<li>Add turmeric powder, Bisi Bele Bath powder, tamarind pulp, and salt. Mix well.</li>
+
+<li>Add the cooked vegetables and simmer for a few minutes.</li>
+
+<li>Mix the cooked rice and dal into the masala and stir gently.</li>
+
+<li>Add a little hot water if needed to get a soft consistency.</li>
+
+<li>Cook for another 5 minutes and serve hot with papad, chips, or raita.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>45 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4–5 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+For the best taste, prepare fresh Bisi Bele Bath powder at home and finish the dish with a spoon of hot ghee before serving. This enhances both the aroma and flavor.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Bisi Bele Bath has been a beloved Karnataka comfort food for generations. It is often served in homes, restaurants, and festive gatherings because it combines rice, lentils, vegetables, and spices into one complete and satisfying meal.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div class="stars" data-recipe="karnataka-bisi-bele-bath">
+
+<span class="star" onclick="rateRecipe('karnataka-bisi-bele-bath',1,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-bisi-bele-bath',2,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-bisi-bele-bath',3,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-bisi-bele-bath',4,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-bisi-bele-bath',5,this)">★</span>
+
+</div>
+
+<p id="rating-karnataka-bisi-bele-bath" class="rating-message">
+Choose your rating
+</p>
+
+</div>
+
+<div class="review-box">
+
+<h3>💬 Reviews &amp; Comments</h3>
+
+<textarea
+id="review-text-karnataka-bisi-bele-bath"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('karnataka-bisi-bele-bath','Bisi Bele Bath')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-karnataka-bisi-bele-bath"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="karnataka-bisi-bele-bath"
+onclick="addToFavourite(
+'karnataka-bisi-bele-bath',
+'Bisi Bele Bath',
+'Royal Heritage',
+this
+)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="karnataka-bisi-bele-bath"
+onclick="addToStamp(
+'karnataka-bisi-bele-bath',
+'Bisi Bele Bath',
+'Royal Heritage',
+this
+)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     NEER DOSA
+===================================================== -->
+
+<section
+id="karnataka-neer-dosa"
+class="recipe-section"
+data-name="Neer Dosa"
+data-category="vegetarian"
+data-cuisine="karnataka"
+>
+
+<div class="recipe-image">
+
+<img src="Neer-Dosas.jpg" alt="Neer Dosa">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🥞 Neer Dosa</h2>
+
+<p>
+
+Neer Dosa is one of Karnataka's most popular traditional breakfast dishes, especially in the coastal regions of Mangaluru and Udupi. The word "Neer" means water in Kannada, referring to the thin rice batter used to prepare the dosa. It is soft, delicate, and light, making it an excellent choice for breakfast or dinner. Neer Dosa is commonly served with coconut chutney, vegetable curry, chicken curry, or fish curry.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>2 cups Raw Rice</li>
+
+<li>1 cup Fresh Grated Coconut (Optional)</li>
+
+<li>Water as Required</li>
+
+<li>Salt to Taste</li>
+
+<li>1 tsp Coconut Oil or Ghee</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Wash the raw rice thoroughly and soak it in water for about 5 hours.</li>
+
+<li>Drain the water and grind the rice into a smooth batter using fresh water.</li>
+
+<li>Add grated coconut while grinding for a richer taste (optional).</li>
+
+<li>Mix enough water to make the batter very thin and smooth.</li>
+
+<li>Add salt and mix well until the batter has a watery consistency.</li>
+
+<li>Heat a non-stick dosa pan and lightly grease it with coconut oil.</li>
+
+<li>Pour the thin batter quickly over the pan in a circular motion.</li>
+
+<li>Cover with a lid and cook for about 1–2 minutes. Do not flip the dosa.</li>
+
+<li>Fold gently and serve hot with coconut chutney or your favorite curry.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>25 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+The batter should always be thin like buttermilk. Stir it before making every dosa so the rice flour remains evenly mixed, resulting in soft and delicate Neer Dosas.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Neer Dosa originated in the Tulu Nadu region of Karnataka and is famous for its soft texture and simple preparation. Unlike many other dosas, it does not require fermentation.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div class="stars" data-recipe="karnataka-neer-dosa">
+
+<span class="star" onclick="rateRecipe('karnataka-neer-dosa',1,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-neer-dosa',2,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-neer-dosa',3,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-neer-dosa',4,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-neer-dosa',5,this)">★</span>
+
+</div>
+
+<p id="rating-karnataka-neer-dosa" class="rating-message">
+Choose your rating
+</p>
+
+</div>
+
+<div class="review-box">
+
+<h3>💬 Reviews &amp; Comments</h3>
+
+<textarea
+id="review-text-karnataka-neer-dosa"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('karnataka-neer-dosa','Neer Dosa')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-karnataka-neer-dosa"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="karnataka-neer-dosa"
+onclick="addToFavourite(
+'karnataka-neer-dosa',
+'Neer Dosa',
+'Royal Heritage',
+this
+)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="karnataka-neer-dosa"
+onclick="addToStamp(
+'karnataka-neer-dosa',
+'Neer Dosa',
+'Royal Heritage',
+this
+)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     RAGI MUDDE
+===================================================== -->
+
+<section
+id="karnataka-ragi-mudde"
+class="recipe-section reverse"
+data-name="Ragi Mudde"
+data-category="vegetarian"
+data-cuisine="karnataka"
+>
+
+<div class="recipe-image">
+
+<img src="karragimudee.png" alt="Ragi Mudde">
+
+</div>
+
+<div class="recipe-content">
+
+<h2>🌾 Ragi Mudde</h2>
+
+<p>
+
+Ragi Mudde is one of Karnataka's most traditional and nutritious dishes. It is made from finger millet (ragi) flour and is widely enjoyed across the state, especially in rural regions. Rich in calcium, iron, fiber, and essential nutrients, Ragi Mudde is considered a healthy meal that provides long-lasting energy. It is usually served with spicy sambar, vegetable curry, mutton curry, or chicken curry and is loved for its simple preparation and wholesome taste.
+
+</p>
+
+<h3>🥘 Ingredients</h3>
+
+<ul>
+
+<li>1 cup Ragi Flour (Finger Millet Flour)</li>
+
+<li>2½ cups Water</li>
+
+<li>½ tsp Salt</li>
+
+<li>1 tsp Ghee (Optional)</li>
+
+</ul>
+
+<h3>👩‍🍳 Preparation</h3>
+
+<ol>
+
+<li>Boil water in a deep pan and add salt.</li>
+
+<li>Reduce the flame and sprinkle a small amount of ragi flour into the boiling water without stirring.</li>
+
+<li>Cover and cook for about 2–3 minutes.</li>
+
+<li>Add the remaining ragi flour gradually.</li>
+
+<li>Using a wooden stick or spatula, mix continuously until the flour combines well with the water.</li>
+
+<li>Cook for another 5–7 minutes on low flame until the mixture becomes smooth and thick.</li>
+
+<li>Apply a little ghee to your hands and shape the hot mixture into round balls.</li>
+
+<li>Serve hot with sambar, bassaru, chicken curry, or mutton curry.</li>
+
+<li>Enjoy by breaking small portions of the mudde and dipping them into the curry before eating.</li>
+
+</ol>
+
+<div class="recipe-info">
+
+<div>
+
+<h4>⏱ Cooking Time</h4>
+
+<p>20 Minutes</p>
+
+</div>
+
+<div>
+
+<h4>🍽 Serves</h4>
+
+<p>4 People</p>
+
+</div>
+
+<div>
+
+<h4>⭐ Difficulty</h4>
+
+<p>Easy</p>
+
+</div>
+
+</div>
+
+<div class="chef-tip">
+
+<h3>👨‍🍳 Chef's Tip</h3>
+
+<p>
+
+Always stir the ragi flour continuously while cooking to avoid lumps. Serve the mudde immediately while it is hot for the best texture and taste.
+
+</p>
+
+</div>
+
+<div class="fun-fact">
+
+<h3>🌟 Fun Fact</h3>
+
+<p>
+
+Ragi Mudde has been a staple food in Karnataka for centuries. It is highly valued for its nutritional benefits and is often called one of the healthiest traditional foods in South India because it is naturally rich in calcium, iron, and dietary fiber.
+
+</p>
+
+</div>
+
+
+<div class="rating-area">
+
+<h3>⭐ Rate This Recipe</h3>
+
+<div class="stars" data-recipe="karnataka-ragi-mudde">
+
+<span class="star" onclick="rateRecipe('karnataka-ragi-mudde',1,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-ragi-mudde',2,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-ragi-mudde',3,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-ragi-mudde',4,this)">★</span>
+<span class="star" onclick="rateRecipe('karnataka-ragi-mudde',5,this)">★</span>
+
+</div>
+
+<p id="rating-karnataka-ragi-mudde" class="rating-message">
+Choose your rating
+</p>
+
+</div>
+
+<div class="review-box">
+
+<h3>💬 Reviews &amp; Comments</h3>
+
+<textarea
+id="review-text-karnataka-ragi-mudde"
+class="review-input"
+placeholder="Write your review..."
+></textarea>
+
+<button
+class="review-submit"
+onclick="submitReview('karnataka-ragi-mudde','Ragi Mudde')"
+>
+Post Review
+</button>
+
+<div
+id="reviews-karnataka-ragi-mudde"
+class="reviews-list"
+>
+</div>
+
+</div>
+
+</div>
+
+<div class="recipe-actions">
+
+<button
+class="favorite-btn"
+data-favourite-id="karnataka-ragi-mudde"
+onclick="addToFavourite(
+'karnataka-ragi-mudde',
+'Ragi Mudde',
+'Royal Heritage',
+this
+)"
+>
+♡ Add to Favourite
+</button>
+
+<button
+class="stamp-btn"
+data-stamp-id="karnataka-ragi-mudde"
+onclick="addToStamp(
+'karnataka-ragi-mudde',
+'Ragi Mudde',
+'Royal Heritage',
+this
+)"
+>
+🏷️ Add to Stamp
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= KARNATAKA FOOD FACTS ================= -->
+
+<section class="facts-section">
+
+<h2>🏰 Karnataka Food Facts</h2>
+
+<div class="facts-container">
+
+<div class="fact-card">
+<h3>🍬 Home of Mysore Pak</h3>
+<p>
+Mysore Pak is Karnataka's most famous sweet, first prepared in the royal kitchen of Mysore Palace. Today, it is enjoyed across India and is a symbol of Karnataka's rich culinary heritage.
+</p>
+</div>
+
+<div class="fact-card">
+<h3>🥞 Famous Breakfasts</h3>
+<p>
+Karnataka is well known for its delicious breakfast dishes such as Neer Dosa, Akki Roti, Rava Idli, and Mangalore Buns, enjoyed by people of all ages.
+</p>
+</div>
+
+<div class="fact-card">
+<h3>🍛 Signature Rice Dish</h3>
+<p>
+Bisi Bele Bath is Karnataka's signature comfort food. It combines rice, lentils, vegetables, and aromatic spices into one wholesome and flavorful meal.
+</p>
+</div>
+
+<div class="fact-card">
+<h3>☕ Coffee Capital</h3>
+<p>
+Karnataka is India's largest coffee-producing state. The famous coffee-growing regions of Coorg and Chikkamagaluru are known worldwide for their premium-quality coffee beans.
+</p>
+</div>
+
+<div class="fact-card">
+<h3>🥥 Traditional Cooking</h3>
+<p>
+Fresh coconut, curry leaves, lentils, rice, and local spices are widely used in Karnataka cuisine, giving every dish its authentic taste and aroma.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= RECENTLY VIEWED ================= -->
+
+<section class="recent-section">
+
+<h2>🕐 Recently Viewed</h2>
+
+<div id="recentContainer" class="recent-container">
+
+<p class="recent-empty">
+Login to see your recently viewed recipes.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= MY FLAVORVERSE PROFILE ================= -->
+
+<section class="profile-section">
+
+<div class="profile-box">
+
+<h2>👤 My Flavorverse Profile</h2>
+
+<p id="profileName" class="profile-name">
+Guest
+</p>
+
+<p id="profileEmail" class="profile-email">
+Login to see your profile
+</p>
+
+<div class="profile-stats">
+
+<div class="profile-card">
+
+<span id="favouriteCount" class="count">
+0
+</span>
+
+<span>❤️ Favourites</span>
+
+</div>
+
+<div class="profile-card">
+
+<span id="stampCount" class="count">
+0
+</span>
+
+<span>🏷️ Stamps</span>
+
+</div>
+
+<div class="profile-card">
+
+<span id="ratingCount" class="count">
+0
+</span>
+
+<span>⭐ Ratings</span>
+
+</div>
+
+<div class="profile-card">
+
+<span id="reviewCount" class="count">
+0
+</span>
+
+<span>💬 Reviews</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CHEF RECOMMENDATION ================= -->
+
+<section class="chef-section">
+
+<h2>👨‍🍳 Chef's Recommendation</h2>
+
+<p>
+
+For an authentic Karnataka dining experience, begin with the rich sweetness of <b>Mysore Pak</b>, enjoy the flavorful <b>Bisi Bele Bath</b>, taste the soft and delicate <b>Neer Dosa</b> with coconut chutney or vegetable curry, and complete your meal with the healthy and traditional <b>Ragi Mudde</b> served with spicy sambar or curry. This combination beautifully represents Karnataka's royal heritage, nutrition, and culinary excellence.
+
+</p>
+
+</section>
+
+<a href="royal.html" class="back-heritage">
+    ← Back to Royal Heritage
+</a>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<h2>🍴 The Flavorverse</h2>
+
+<p>
+
+Discover India's rich culinary heritage, one delicious recipe at a time.
+
+</p>
+
+<div class="social">
+
+<a href="#">📘</a>
+<a href="#">📸</a>
+<a href="#">▶️</a>
+<a href="#">🐦</a>
+
+</div>
+
+<p class="copy">
+
+© 2026 The Flavorverse | All Rights Reserved
+
+</p>
+
+</footer>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+authDomain: "the-flavoverse.firebaseapp.com",
+
+projectId: "the-flavoverse",
+
+storageBucket: "the-flavoverse.firebasestorage.app",
+
+messagingSenderId: "1064022248292",
+
+appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+
+};
+
+if(!firebase.apps.length){
+
+firebase.initializeApp(firebaseConfig);
+
+}
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipes = [
+
+{
+id:"karnataka-mysore-pak",
+name:"Mysore Pak",
+category:"dessert",
+cuisine:"karnataka"
+},
+
+{
+id:"karnataka-bisi-bele-bath",
+name:"Bisi Bele Bath",
+category:"main",
+cuisine:"karnataka"
+},
+
+{
+id:"karnataka-neer-dosa",
+name:"Neer Dosa",
+category:"vegetarian",
+cuisine:"karnataka"
+},
+
+{
+id:"karnataka-ragi-mudde",
+name:"Ragi Mudde",
+category:"vegetarian",
+cuisine:"karnataka"
+}
+
+];
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function getCurrentUser(){
+
+return auth.currentUser;
+
+}
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function addToFavourite(id,name,category,button){
+
+const user = getCurrentUser();
+
+if(!user){
+
+alert("Please login first to add favourites ❤️");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const ref =
+db.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.doc(id);
+
+const existing = await ref.get();
+
+if(existing.exists){
+
+await ref.delete();
+
+button.innerHTML="♡ Add to Favourite";
+
+alert(name+" removed from favourites.");
+
+}
+
+else{
+
+await ref.set({
+
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+button.innerHTML="♥ Added to Favourite";
+
+alert(name+" added to favourites ❤️");
+
+}
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Favourite update failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function addToStamp(id,name,category,button){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to add stamps 🏷️");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+const ref =
+db.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.doc(id);
+
+const existing=await ref.get();
+
+if(existing.exists){
+
+await ref.delete();
+
+button.innerHTML="🏷️ Add to Stamp";
+
+alert(name+" removed from passport.");
+
+}
+
+else{
+
+await ref.set({
+
+recipeId:id,
+recipeName:name,
+category:category,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+button.innerHTML="🏷️ Stamped";
+
+alert(name+" added to your Flavorverse Passport 🏷️");
+
+}
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Stamp update failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+async function rateRecipe(recipeId,rating,element){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to rate recipes ⭐");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+try{
+
+await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.doc(recipeId)
+.set({
+
+recipeId:recipeId,
+rating:rating,
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+const stars=element.parentElement.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+
+if(index<rating){
+
+star.classList.add("active");
+
+}
+else{
+
+star.classList.remove("active");
+
+}
+
+});
+
+document.getElementById("rating-"+recipeId).innerText =
+"You rated this recipe "+rating+"/5 ⭐";
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Rating failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD USER RATINGS
+===================================================== */
+
+async function loadRatings(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const doc=await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.doc(recipe.id)
+.get();
+
+if(doc.exists){
+
+const rating=doc.data().rating;
+
+const container=
+document.querySelector(
+'.stars[data-recipe="'+recipe.id+'"]'
+);
+
+if(container){
+
+const stars=container.querySelectorAll(".star");
+
+stars.forEach((star,index)=>{
+
+if(index<rating){
+
+star.classList.add("active");
+
+}
+
+});
+
+}
+
+const text=document.getElementById(
+"rating-"+recipe.id
+);
+
+if(text){
+
+text.innerText=
+"You rated this recipe "+rating+"/5 ⭐";
+
+}
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+async function submitReview(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user){
+
+alert("Please login first to post a review 💬");
+
+window.location.href="login.html";
+
+return;
+
+}
+
+const textarea=document.getElementById(
+"review-text-"+recipeId
+);
+
+const text=textarea.value.trim();
+
+if(!text){
+
+alert("Please write a review first.");
+
+return;
+
+}
+
+try{
+
+const userDoc=
+await db.collection("users")
+.doc(user.uid)
+.get();
+
+let userName="Flavorverse User";
+
+if(userDoc.exists && userDoc.data().name){
+
+userName=userDoc.data().name;
+
+}
+
+await db
+.collection("recipes")
+.doc(recipeId)
+.collection("reviews")
+.doc(user.uid)
+.set({
+
+recipeId:recipeId,
+recipeName:recipeName,
+userId:user.uid,
+userName:userName,
+review:text,
+createdAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+textarea.value="";
+
+alert("Review posted successfully! 💬");
+
+loadReviews(recipeId);
+
+updateProfileCounts();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert("Review failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews(recipeId){
+
+const container=
+document.getElementById("reviews-"+recipeId);
+
+if(!container) return;
+
+try{
+
+const snapshot=
+await db
+.collection("recipes")
+.doc(recipeId)
+.collection("reviews")
+.orderBy("createdAt","desc")
+.limit(10)
+.get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+
+container.innerHTML=
+'<p class="no-review">No reviews yet. Be the first to review! 💜</p>';
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const review=document.createElement("div");
+
+review.className="single-review";
+
+const name=document.createElement("strong");
+
+name.textContent=
+"💜 "+(data.userName || "Flavorverse User");
+
+const content=document.createElement("p");
+
+content.textContent=data.review || "";
+
+const date=document.createElement("small");
+
+if(data.createdAt){
+
+date.textContent=
+data.createdAt.toDate().toLocaleDateString();
+
+}
+
+review.appendChild(name);
+
+review.appendChild(content);
+
+review.appendChild(date);
+
+container.appendChild(review);
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+container.innerHTML=
+'<p class="no-review">Reviews will appear here.</p>';
+
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED
+===================================================== */
+
+async function addRecentlyViewed(recipeId,recipeName){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+try{
+
+await db
+.collection("users")
+.doc(user.uid)
+.collection("recentlyViewed")
+.doc(recipeId)
+.set({
+
+recipeId:recipeId,
+recipeName:recipeName,
+viewedAt:firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   RECENTLY VIEWED DISPLAY
+===================================================== */
+
+async function loadRecentlyViewed(){
+
+const container=
+document.getElementById("recentContainer");
+
+const user=getCurrentUser();
+
+if(!user){
+
+container.innerHTML=
+'<p class="recent-empty">Login to see your recently viewed recipes.</p>';
+
+return;
+
+}
+
+try{
+
+const snapshot=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("recentlyViewed")
+.orderBy("viewedAt","desc")
+.limit(8)
+.get();
+
+container.innerHTML="";
+
+if(snapshot.empty){
+
+container.innerHTML=
+'<p class="recent-empty">No recently viewed recipes yet.</p>';
+
+return;
+
+}
+
+snapshot.forEach(doc=>{
+
+const data=doc.data();
+
+const card=document.createElement("div");
+
+card.className="recent-card";
+
+const title=document.createElement("h3");
+
+title.textContent="🕐 "+data.recipeName;
+
+const text=document.createElement("p");
+
+text.textContent=
+"You recently explored this recipe.";
+
+card.appendChild(title);
+
+card.appendChild(text);
+
+container.appendChild(card);
+
+});
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   TRACK RECIPE VIEW
+===================================================== */
+
+function setupRecentlyViewed(){
+
+const recipeSections=
+document.querySelectorAll(".recipe-section");
+
+const observer=
+new IntersectionObserver(
+
+entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const id=entry.target.id;
+
+const recipe=
+recipes.find(item=>item.id===id);
+
+if(recipe){
+
+addRecentlyViewed(
+recipe.id,
+recipe.name
+);
+
+}
+
+}
+
+});
+
+},
+
+{
+threshold:0.35
+}
+
+);
+
+recipeSections.forEach(section=>{
+
+observer.observe(section);
+
+});
+
+}
+
+
+/* =====================================================
+   PROFILE COUNTS
+===================================================== */
+
+async function updateProfileCounts(){
+
+const user=getCurrentUser();
+
+if(!user){
+
+document.getElementById("favouriteCount").innerText="0";
+
+document.getElementById("stampCount").innerText="0";
+
+document.getElementById("ratingCount").innerText="0";
+
+document.getElementById("reviewCount").innerText="0";
+
+return;
+
+}
+
+try{
+
+const userDoc=
+await db.collection("users")
+.doc(user.uid)
+.get();
+
+if(userDoc.exists){
+
+const data=userDoc.data();
+
+document.getElementById("profileName").innerText=
+data.name || "Flavorverse User";
+
+document.getElementById("profileEmail").innerText=
+data.email || user.email;
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+user.email;
+
+document.getElementById("profileEmail").innerText=
+user.email;
+
+}
+
+
+const favourites=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.get();
+
+const stamps=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.get();
+
+const ratings=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("ratings")
+.get();
+
+
+/*
+   Reviews are stored inside
+   recipes/{recipeId}/reviews/{uid}
+*/
+
+let reviewTotal=0;
+
+for(const recipe of recipes){
+
+const review=
+await db
+.collection("recipes")
+.doc(recipe.id)
+.collection("reviews")
+.doc(user.uid)
+.get();
+
+if(review.exists){
+
+reviewTotal++;
+
+}
+
+}
+
+
+document.getElementById("favouriteCount").innerText=
+favourites.size;
+
+document.getElementById("stampCount").innerText=
+stamps.size;
+
+document.getElementById("ratingCount").innerText=
+ratings.size;
+
+document.getElementById("reviewCount").innerText=
+reviewTotal;
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   UPDATE BUTTON STATUS
+===================================================== */
+
+async function updateButtons(){
+
+const user=getCurrentUser();
+
+if(!user) return;
+
+for(const recipe of recipes){
+
+try{
+
+const fav=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("favourites")
+.doc(recipe.id)
+.get();
+
+const favButton=
+document.querySelector(
+'[data-favourite-id="'+recipe.id+'"]'
+);
+
+if(fav.exists && favButton){
+
+favButton.innerHTML=
+"♥ Added to Favourite";
+
+}
+
+
+const stamp=
+await db
+.collection("users")
+.doc(user.uid)
+.collection("stamps")
+.doc(recipe.id)
+.get();
+
+const stampButton=
+document.querySelector(
+'[data-stamp-id="'+recipe.id+'"]'
+);
+
+if(stamp.exists && stampButton){
+
+stampButton.innerHTML=
+"🏷️ Stamped";
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   SEARCH + FILTER
+===================================================== */
+
+function filterRecipes(){
+
+const search=
+document.getElementById("recipeSearch")
+.value
+.toLowerCase()
+.trim();
+
+const category=
+document.getElementById("categoryFilter")
+.value;
+
+const cuisine=
+document.getElementById("cuisineFilter")
+.value;
+
+let count=0;
+
+document.querySelectorAll(".recipe-section")
+.forEach(section=>{
+
+const name=
+section.dataset.name.toLowerCase();
+
+const sectionCategory=
+section.dataset.category;
+
+const sectionCuisine=
+section.dataset.cuisine;
+
+const searchMatch=
+name.includes(search);
+
+const categoryMatch=
+category==="all" ||
+sectionCategory===category;
+
+const cuisineMatch=
+cuisine==="all" ||
+sectionCuisine===cuisine;
+
+if(
+searchMatch &&
+categoryMatch &&
+cuisineMatch
+){
+
+section.classList.remove("hidden-recipe");
+
+count++;
+
+}
+else{
+
+section.classList.add("hidden-recipe");
+
+}
+
+});
+
+document.getElementById("searchResult").innerText=
+"Showing "+count+" recipe"+(count!==1?"s":"");
+
+}
+
+
+/* =====================================================
+   RESET FILTER
+===================================================== */
+
+function resetFilters(){
+
+document.getElementById("recipeSearch").value="";
+
+document.getElementById("categoryFilter").value="all";
+
+document.getElementById("cuisineFilter").value="all";
+
+document.querySelectorAll(".recipe-section")
+.forEach(section=>{
+
+section.classList.remove("hidden-recipe");
+
+});
+
+document.getElementById("searchResult").innerText=
+"Showing all 4 Karnataka recipes";
+
+}
+
+
+/* =====================================================
+   SURPRISE ME
+===================================================== */
+
+function surpriseMe(){
+
+const visibleRecipes=
+Array.from(
+document.querySelectorAll(".recipe-section")
+)
+.filter(recipe=>
+!recipe.classList.contains("hidden-recipe")
+);
+
+if(visibleRecipes.length===0){
+
+alert("No recipes available with the selected filter.");
+
+return;
+
+}
+
+const random=
+visibleRecipes[
+Math.floor(Math.random()*visibleRecipes.length)
+];
+
+random.scrollIntoView({
+
+behavior:"smooth",
+block:"center"
+
+});
+
+random.style.boxShadow=
+"0 0 0 5px #B58A4D, 0 15px 30px rgba(0,0,0,.2)";
+
+setTimeout(()=>{
+
+random.style.boxShadow=
+"0 8px 20px rgba(0,0,0,.12)";
+
+},2500);
+
+alert(
+"🎲 Surprise Recipe: "+
+random.dataset.name
+);
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode");
+
+if(
+document.body.classList.contains("dark-mode")
+){
+
+localStorage.setItem(
+"flavorverseDarkMode",
+"on"
+);
+
+}
+else{
+
+localStorage.setItem(
+"flavorverseDarkMode",
+"off"
+);
+
+}
+
+}
+
+
+function loadDarkMode(){
+
+if(
+localStorage.getItem("flavorverseDarkMode")==="on"
+){
+
+document.body.classList.add("dark-mode");
+
+}
+
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(async function(user){
+
+if(user){
+
+try{
+
+const userDoc=
+await db
+.collection("users")
+.doc(user.uid)
+.get();
+
+if(userDoc.exists){
+
+const data=userDoc.data();
+
+document.getElementById("profileName").innerText=
+data.name || "Flavorverse User";
+
+document.getElementById("profileEmail").innerText=
+data.email || user.email;
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+user.email;
+
+document.getElementById("profileEmail").innerText=
+user.email;
+
+}
+
+}
+
+catch(error){
+
+console.error(error);
+
+}
+
+updateButtons();
+
+updateProfileCounts();
+
+loadRatings();
+
+loadRecentlyViewed();
+
+recipes.forEach(recipe=>{
+
+loadReviews(recipe.id);
+
+});
+
+}
+else{
+
+document.getElementById("profileName").innerText=
+"Guest";
+
+document.getElementById("profileEmail").innerText=
+"Login to see your profile";
+
+loadRecentlyViewed();
+
+recipes.forEach(recipe=>{
+
+loadReviews(recipe.id);
+
+});
+
+}
+
+});
+
+
+/* ================= HAMBURGER MENU ================= */
+
+function openExploreMenu(){
+    const drawer=document.getElementById("exploreDrawer");
+    const overlay=document.getElementById("menuOverlay");
+    if(!drawer || !overlay) return;
+    drawer.classList.add("open");
+    overlay.classList.add("show");
+    drawer.setAttribute("aria-hidden","false");
+    document.body.classList.add("drawer-open");
+}
+
+function closeExploreMenu(){
+    const drawer=document.getElementById("exploreDrawer");
+    const overlay=document.getElementById("menuOverlay");
+    if(!drawer || !overlay) return;
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+    drawer.setAttribute("aria-hidden","true");
+    document.body.classList.remove("drawer-open");
+}
+
+document.addEventListener("keydown",function(event){
+    if(event.key==="Escape") closeExploreMenu();
+});
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+loadDarkMode();
+
+setupRecentlyViewed();
+
+});
+
+</script>
+
+</body>
+
+</html>

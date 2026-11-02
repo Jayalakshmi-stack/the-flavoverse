@@ -1,0 +1,3639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ratatouille Recipes | The Flavorverse</title>
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #f7f2e8;
+    color: #5c5262;
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   NAVBAR + COMPACT MENU (Lion King menu style)
+===================================================== */
+
+header {
+    width: 100%;
+    padding: 16px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #66546f;
+    border-bottom: 2px solid #b8c9b1;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: #f5ead2;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.menu-toggle {
+    width: 42px;
+    height: 36px;
+    border: 1px solid #d6b979;
+    border-radius: 8px;
+    background: #684c6b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 20px;
+    height: 2px;
+    background: #f5dda2;
+    display: block;
+    border-radius: 5px;
+}
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(40,25,45,.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s;
+    z-index: 1998;
+}
+
+.menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -365px;
+    width: 350px;
+    max-width: 88vw;
+    height: 100vh;
+    background: #fff8ef;
+    z-index: 1999;
+    box-shadow: -12px 0 30px rgba(40,25,45,.20);
+    transition: .35s ease;
+    overflow-y: auto;
+}
+
+.side-menu.show { right: 0; }
+
+.menu-top {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #735267;
+    min-height: 92px;
+    padding: 22px 24px 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-top h2 {
+    color: #fff8ef;
+    font-size: 27px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.menu-close {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 29px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+
+.menu-links { padding: 14px 22px 25px; }
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 62px;
+    padding: 8px 10px;
+    text-decoration: none;
+    color: #684c6b;
+    transition: .25s;
+    border-radius: 11px;
+}
+
+.menu-link:hover { background: #eee2ed; }
+
+.menu-icon {
+    width: 32px;
+    flex: 0 0 32px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.menu-text { min-width: 0; }
+
+.menu-text strong {
+    display: block;
+    font-size: 15px;
+    line-height: 1.25;
+    margin-bottom: 2px;
+    color: #684c6b;
+}
+
+.menu-text small {
+    display: block;
+    color: #8b7189;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.menu-divider {
+    height: 1px;
+    background: #d8c4d4;
+    margin: 8px 0 7px;
+}
+
+@media (max-width: 600px) {
+    header { padding: 14px 5%; }
+    .logo { font-size: 20px; }
+}
+
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+
+.hero-section {
+
+    min-height: 470px;
+
+    padding: 55px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #f7f2e8;
+}
+
+
+/* =====================================================
+   HERO CARD
+===================================================== */
+
+.hero-card {
+
+    width: 100%;
+    max-width: 1050px;
+
+    min-height: 350px;
+
+    padding: 40px 55px;
+
+    border-radius: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(184,201,177,0.40),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(218,203,226,0.55),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fffaf0,
+            #f1e9f4,
+            #e3eee0,
+            #fff8e9
+        );
+
+    border: 2px solid #b8c9b1;
+
+    box-shadow:
+        0 25px 55px
+        rgba(91,75,99,0.20);
+
+    animation:
+        heroCardGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes heroCardGlow {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+
+/* =====================================================
+   HERO MOVING LIGHT
+===================================================== */
+
+.hero-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(184,201,177,0.35);
+
+    filter: blur(25px);
+
+    top: -80px;
+    left: -60px;
+
+    animation:
+        heroLight 6s infinite alternate;
+}
+
+.hero-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(190,169,202,0.25);
+
+    filter: blur(25px);
+
+    right: -50px;
+    bottom: -50px;
+
+    animation:
+        heroLight 7s infinite alternate-reverse;
+}
+
+@keyframes heroLight {
+
+    from {
+        transform: translate(0,0) scale(1);
+    }
+
+    to {
+        transform: translate(80px,40px) scale(1.3);
+    }
+}
+
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
+
+.hero-content {
+
+    position: relative;
+    z-index: 5;
+
+    max-width: 560px;
+}
+
+.hero-small {
+
+    color: #718a6b;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    margin-bottom: 14px;
+}
+
+.hero-content h1 {
+
+    color: #66546f;
+
+    font-size: 46px;
+
+    line-height: 1.15;
+
+    margin-bottom: 15px;
+}
+
+.hero-content h1 span {
+
+    color: #718a6b;
+}
+
+.hero-content p {
+
+    color: #6c6170;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    max-width: 480px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =====================================================
+   HERO BUTTON
+===================================================== */
+
+.hero-btn {
+
+    display: inline-block;
+
+    padding: 11px 23px;
+
+    border-radius: 25px;
+
+    background: #66546f;
+
+    color: #f5ead2;
+
+    border: 1px solid #b8c9b1;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    transition: 0.4s;
+}
+
+.hero-btn:hover {
+
+    background: #b8c9b1;
+
+    color: #66546f;
+
+    transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   HERO IMAGE
+===================================================== */
+
+.hero-image {
+
+    width: 300px;
+    height: 300px;
+
+    position: relative;
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 18px 25px
+            rgba(102,84,111,0.25)
+        );
+
+    animation:
+        heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+
+/* =====================================================
+   HERO STARS
+===================================================== */
+
+.hero-star {
+
+    position: absolute;
+
+    color: #7d9876;
+
+    font-size: 20px;
+
+    opacity: 0.6;
+
+    animation:
+        starFloat 5s infinite ease-in-out;
+
+    z-index: 4;
+}
+
+.hero-star.one {
+    top: 15%;
+    left: 8%;
+}
+
+.hero-star.two {
+    top: 20%;
+    right: 42%;
+    animation-delay: 1s;
+}
+
+.hero-star.three {
+    bottom: 15%;
+    left: 45%;
+    animation-delay: 2s;
+}
+
+.hero-star.four {
+    bottom: 20%;
+    right: 8%;
+    animation-delay: 3s;
+}
+
+@keyframes starFloat {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0);
+
+        opacity: 0.3;
+    }
+
+    50% {
+
+        transform:
+            translateY(-20px)
+            rotate(180deg);
+
+        opacity: 0.9;
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(360deg);
+
+        opacity: 0.3;
+    }
+}
+
+
+/* =====================================================
+   RECIPE SECTION
+===================================================== */
+
+.recipes {
+
+    position: relative;
+
+    padding: 90px 6% 110px;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(184,201,177,0.30),
+            transparent 22%
+        ),
+
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(211,192,219,0.30),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #70617a,
+            #83748d,
+            #95869d,
+            #83748d,
+            #70617a
+        );
+
+    background-size: 200% 200%;
+
+    animation:
+        magicalBackground 14s ease infinite;
+
+    overflow: hidden;
+}
+
+@keyframes magicalBackground {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* =====================================================
+   MAGIC PARTICLES
+===================================================== */
+
+.magic {
+
+    position: absolute;
+
+    color: #dce9d8;
+
+    font-size: 21px;
+
+    opacity: 0.55;
+
+    animation:
+        floatMagic 7s infinite ease-in-out;
+
+    pointer-events: none;
+}
+
+.magic:nth-child(1) {
+    top: 8%;
+    left: 8%;
+}
+
+.magic:nth-child(2) {
+    top: 20%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.magic:nth-child(3) {
+    top: 50%;
+    left: 3%;
+    animation-delay: 1s;
+}
+
+.magic:nth-child(4) {
+    top: 72%;
+    right: 5%;
+    animation-delay: 3s;
+}
+
+.magic:nth-child(5) {
+    top: 35%;
+    left: 48%;
+    animation-delay: 2.5s;
+}
+
+.magic:nth-child(6) {
+    bottom: 8%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes floatMagic {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0.25;
+    }
+
+    50% {
+
+        transform:
+            translateY(-35px)
+            rotate(180deg);
+
+        opacity: 0.85;
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(360deg);
+
+        opacity: 0.25;
+    }
+}
+
+
+/* =====================================================
+   RECIPE HEADING
+===================================================== */
+
+.recipe-heading {
+
+    position: relative;
+
+    z-index: 5;
+
+    text-align: center;
+
+    margin-bottom: 70px;
+}
+
+.recipe-heading span {
+
+    color: #dce9d8;
+
+    font-size: 11px;
+
+    letter-spacing: 5px;
+
+    font-weight: bold;
+}
+
+.recipe-heading h1 {
+
+    margin-top: 15px;
+
+    color: #fff7e8;
+
+    font-size: 46px;
+}
+
+.recipe-heading p {
+
+    margin: 15px auto 0;
+
+    max-width: 600px;
+
+    color: #e9e1eb;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   CARD WRAPPER
+===================================================== */
+
+.recipe-wrapper {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 55px;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =====================================================
+   KEEP ORIGINAL CARD SIZE
+===================================================== */
+
+.recipe-item {
+    width: 100%;
+}
+
+
+/* =====================================================
+   3D FLIP CARD
+===================================================== */
+
+.recipe-card {
+
+    height: 520px;
+
+    perspective: 1200px;
+
+    position: relative;
+}
+
+.card-inner {
+
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform 0.9s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+.recipe-card:hover .card-inner {
+
+    transform:
+        rotateY(180deg);
+}
+
+
+/* =====================================================
+   CARD SIDES
+===================================================== */
+
+.card-front,
+.card-back {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 25px;
+
+    backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+
+    overflow: hidden;
+
+    border: 2px solid #b8c9b1;
+
+    box-shadow:
+        0 25px 50px
+        rgba(40,25,45,0.35);
+}
+
+
+/* =====================================================
+   FRONT CARD
+===================================================== */
+
+.card-front {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff9ec,
+            #eee4f2,
+            #e2eedf
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    transform:
+        rotateY(0deg);
+}
+
+
+/* =====================================================
+   CARD IMAGE
+===================================================== */
+
+.card-image {
+
+    height: 58%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #c8d8c1;
+}
+
+.card-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.8s;
+}
+
+.recipe-card:hover
+.card-image img {
+
+    transform: scale(1.08);
+}
+
+.card-image::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            to top,
+            rgba(73,58,77,0.48),
+            transparent 55%
+        );
+}
+
+
+/* =====================================================
+   CARD TAG
+===================================================== */
+
+.card-tag {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    padding: 8px 14px;
+
+    background: #66546f;
+
+    color: #f5ead2;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+    border-radius: 20px;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   FRONT CONTENT
+===================================================== */
+
+.card-content {
+
+    flex: 1;
+
+    padding: 22px 27px;
+
+    position: relative;
+}
+
+.card-content small {
+
+    color: #718a6b;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+}
+
+.card-content h2 {
+
+    margin: 8px 0;
+
+    color: #66546f;
+
+    font-size: 27px;
+}
+
+.card-content p {
+
+    color: #665e69;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   CARD INFO
+===================================================== */
+
+.card-info {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 14px;
+}
+
+.card-info span {
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background: #e2ebdf;
+
+    color: #66546f;
+
+    font-size: 9px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   JADE LINE
+===================================================== */
+
+.gold-line {
+
+    width: 55px;
+
+    height: 2px;
+
+    background: #829b7b;
+
+    margin-top: 13px;
+
+    transition: 0.5s;
+}
+
+.recipe-card:hover
+.gold-line {
+
+    width: 120px;
+}
+
+
+/* =====================================================
+   STAR
+===================================================== */
+
+.front-star {
+
+    position: absolute;
+
+    right: 22px;
+    bottom: 20px;
+
+    color: #718a6b;
+
+    font-size: 22px;
+
+    animation:
+        starGlow 2s infinite alternate;
+}
+
+@keyframes starGlow {
+
+    from {
+        opacity: 0.4;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+
+/* =====================================================
+   BACK CARD
+===================================================== */
+
+.card-back {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e4eee0,
+            #d4e3d0,
+            #c3d6bf
+        );
+
+    transform:
+        rotateY(180deg);
+
+    padding: 30px;
+
+    color: #5d5361;
+}
+
+
+/* =====================================================
+   BACK INNER
+===================================================== */
+
+.back-inner {
+
+    height: 100%;
+
+    border:
+        1px solid #829b7b;
+
+    border-radius: 17px;
+
+    padding: 25px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.back-inner::before {
+
+    content: "☯";
+
+    position: absolute;
+
+    top: -20px;
+    right: 20px;
+
+    font-size: 100px;
+
+    color:
+        rgba(102,84,111,0.08);
+}
+
+.back-inner h3 {
+
+    color: #66546f;
+
+    font-size: 25px;
+
+    margin-bottom: 15px;
+}
+
+.back-inner h4 {
+
+    color: #66805f;
+
+    margin-top: 15px;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+}
+
+.back-inner ul,
+.back-inner ol {
+
+    padding-left: 20px;
+}
+
+.back-inner li {
+
+    color: #5e625d;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    margin-bottom: 5px;
+}
+
+
+/* =====================================================
+   FLIP HINT
+===================================================== */
+
+.flip-hint {
+
+    position: absolute;
+
+    bottom: 20px;
+    right: 25px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #66805f;
+}
+
+
+/* =====================================================
+   RATATOUILLE STYLE FEATURES
+===================================================== */
+
+.recipe-feature-area {
+
+    margin-top: 15px;
+
+    background: rgba(255,255,255,.94);
+
+    border: 1px solid #c8a75d;
+
+    border-radius: 20px;
+
+    padding: 15px;
+
+    box-shadow:
+        0 12px 25px
+        rgba(40,25,45,.16);
+
+    position: relative;
+
+    z-index: 20;
+}
+
+.feature-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.feature-btn {
+
+    border: none;
+
+    padding: 10px 16px;
+
+    border-radius: 25px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.feature-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 6px 12px
+        rgba(0,0,0,.12);
+}
+
+.favourite-btn {
+
+    background: #f1dce9;
+
+    color: #684c6b;
+}
+
+.stamp-btn {
+
+    background: #f3e6c9;
+
+    color: #684c6b;
+}
+
+.rating-box {
+
+    text-align: center;
+
+    margin-top: 12px;
+}
+
+.rating-title {
+
+    font-size: 10px;
+
+    color: #684c6b;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+.stars {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 3px;
+}
+
+.star-btn {
+
+    background: none;
+
+    border: none;
+
+    font-size: 23px;
+
+    color: #d7c7d7;
+
+    cursor: pointer;
+
+    padding: 0 2px;
+
+    transition: .2s;
+}
+
+.star-btn.active {
+
+    color: #d6b979;
+}
+
+.rating-message {
+
+    font-size: 10px;
+
+    color: #7b697b;
+
+    margin-top: 4px;
+
+    min-height: 12px;
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+.activity {
+
+    max-width: 900px;
+
+    margin: 65px auto 0;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff7ed,
+            #f3e6d6,
+            #ead9c8
+        );
+
+    border: 2px solid #d6b979;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 45px
+        rgba(40,25,45,.25);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.activity h2 {
+
+    text-align: center;
+
+    color: #684c6b;
+
+    font-size: 27px;
+
+    margin-bottom: 22px;
+}
+
+.activity-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 15px;
+}
+
+.activity-item {
+
+    background:
+        rgba(255,255,255,.88);
+
+    border:
+        1px solid #d6b979;
+
+    border-radius: 18px;
+
+    padding: 18px 10px;
+
+    text-align: center;
+}
+
+.activity-item .icon {
+
+    font-size: 24px;
+
+    margin-bottom: 5px;
+}
+
+.activity-item .count {
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #684c6b;
+}
+
+.activity-item .label {
+
+    font-size: 10px;
+
+    color: #7b697b;
+
+    margin-top: 3px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+.reviews {
+
+    max-width: 900px;
+
+    margin: 35px auto 0;
+
+    padding: 30px;
+
+    background:
+        rgba(255,255,255,.94);
+
+    border:
+        2px solid #d6b979;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 45px
+        rgba(40,25,45,.22);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.reviews h2 {
+
+    text-align: center;
+
+    color: #684c6b;
+
+    font-size: 27px;
+
+    margin-bottom: 20px;
+}
+
+.review-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.review-form select,
+.review-form textarea {
+
+    width: 100%;
+
+    border:
+        1px solid #c8a75d;
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background: #fffaf3;
+
+    color: #5d4b5f;
+
+    outline: none;
+}
+
+.review-form textarea {
+
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+.review-submit {
+
+    align-self: center;
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background: #684c6b;
+
+    color: #f5dda2;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border:
+        1px solid #d6b979;
+}
+
+.review-list {
+
+    margin-top: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.review-item {
+
+    background: #f5edf5;
+
+    border-left:
+        4px solid #c8a75d;
+
+    border-radius: 12px;
+
+    padding: 12px;
+}
+
+.review-item strong {
+
+    color: #684c6b;
+
+    font-size: 11px;
+}
+
+.review-item p {
+
+    color: #675568;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    margin-top: 4px;
+}
+
+.review-item small {
+
+    color: #9a8b9c;
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 25px;
+
+    transform:
+        translate(-50%,120px);
+
+    background: #684c6b;
+
+    color: #f5dda2;
+
+    border:
+        1px solid #d6b979;
+
+    border-radius: 25px;
+
+    padding: 12px 20px;
+
+    font-size: 11px;
+
+    z-index: 3000;
+
+    opacity: 0;
+
+    transition: .4s;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.25);
+}
+
+.toast.show {
+
+    transform:
+        translate(-50%,0);
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quote {
+
+    position: relative;
+
+    padding: 65px 20px 75px;
+
+    text-align: center;
+
+    background: transparent;
+
+    border: none;
+}
+
+.quote span {
+
+    color: #dce9d8;
+
+    font-size: 22px;
+
+    letter-spacing: 7px;
+}
+
+.quote h2 {
+
+    max-width: 700px;
+
+    margin: 18px auto;
+
+    color: #fff7e8;
+
+    font-size: 28px;
+
+    line-height: 1.6;
+
+    font-style: italic;
+
+    font-weight: normal;
+}
+
+.quote p {
+
+    color: #e9e1eb;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    position: relative;
+
+    z-index: 100;
+
+    padding: 48px 20px;
+
+    text-align: center;
+
+    background: #66546f;
+
+    color: white;
+
+    border-top:
+        2px solid #b8c9b1;
+}
+
+footer h3 {
+
+    color: #e2eedf;
+
+    font-size: 22px;
+
+    margin-bottom: 10px;
+}
+
+footer p {
+
+    color: #e9e1eb;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   BACK TO MOVIES & CARTOONS
+===================================================== */
+
+.back-movies {
+
+    width: 100%;
+
+    padding:
+        0 6% 25px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    background: transparent;
+}
+
+.back-movies a {
+
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    border:
+        1px solid #d6b979;
+
+    border-radius: 25px;
+
+    background: #684c6b;
+
+    color: #f5dda2;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    transition: 0.4s;
+}
+
+.back-movies a:hover {
+
+    background: #d6b979;
+
+    color: #684c6b;
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 850px) {
+
+    header {
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+    .hero-card {
+
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 40px 30px;
+    }
+
+    .hero-content p {
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-image {
+
+        width: 240px;
+        height: 240px;
+    }
+
+    .recipe-wrapper {
+
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+    }
+
+    .activity-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .feature-buttons {
+
+        flex-direction: column;
+    }
+
+    .feature-btn {
+
+        width: 100%;
+    }
+
+    .activity,
+    .reviews {
+
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    nav {
+
+        gap: 12px;
+    }
+
+    nav a {
+
+        font-size: 10px;
+    }
+
+    .hero-section {
+
+        padding: 35px 5%;
+    }
+
+    .hero-card {
+
+        min-height: 570px;
+
+        padding: 35px 22px;
+    }
+
+    .hero-content h1 {
+
+        font-size: 36px;
+    }
+
+    .hero-image {
+
+        width: 220px;
+        height: 220px;
+    }
+
+    .recipes {
+
+        padding:
+            70px 6%
+            90px;
+    }
+
+    .recipe-heading h1 {
+
+        font-size: 34px;
+    }
+
+    .recipe-card {
+
+        height: 560px;
+    }
+
+    .card-content h2 {
+
+        font-size: 24px;
+    }
+
+    .card-back {
+
+        padding: 20px;
+    }
+
+    .back-inner {
+
+        padding: 18px;
+    }
+
+    .quote h2 {
+
+        font-size: 22px;
+    }
+}
+
+
+
+/* =====================================================
+   RATATOUILLE COLOUR THEME — HERO + FLIP CARDS ONLY
+   Layout and all other page sections remain unchanged.
+===================================================== */
+.hero-section {
+    background: #f8efe2;
+}
+
+.hero-card {
+    background:
+        radial-gradient(circle at 18% 28%, rgba(190, 55, 47, 0.18), transparent 27%),
+        radial-gradient(circle at 82% 72%, rgba(91, 125, 74, 0.20), transparent 30%),
+        linear-gradient(135deg, #fff8ed, #f5dfd2, #f0ead9, #fff6e8);
+    border-color: #b7473e;
+    box-shadow: 0 25px 55px rgba(105, 39, 35, 0.18);
+}
+
+.hero-card::before {
+    background: rgba(190, 55, 47, 0.20);
+}
+
+.hero-card::after {
+    background: rgba(91, 125, 74, 0.22);
+}
+
+.hero-small,
+.hero-content h1 span {
+    color: #66804d;
+}
+
+.hero-content h1 {
+    color: #87332f;
+}
+
+.hero-content p {
+    color: #62514b;
+}
+
+.hero-btn {
+    background: #a93632;
+    color: #fff6e9;
+    border-color: #66804d;
+}
+
+.hero-btn:hover {
+    background: #66804d;
+    color: #fff8ed;
+}
+
+.hero-image img {
+    filter: drop-shadow(0 18px 25px rgba(135, 51, 47, 0.24));
+}
+
+.hero-star {
+    color: #b7473e;
+}
+
+/* Flip / split recipe cards */
+.card-front,
+.card-back {
+    border-color: #b7473e;
+    box-shadow: 0 25px 50px rgba(70, 32, 27, 0.28);
+}
+
+.card-front {
+    background: linear-gradient(145deg, #fff8ec, #f6e4d5, #f1eadb);
+}
+
+.card-image {
+    background: #ead7c2;
+}
+
+.card-image::after {
+    background: linear-gradient(to top, rgba(94, 39, 34, 0.46), transparent 55%);
+}
+
+.card-tag {
+    background: #a93632;
+    color: #fff5e8;
+}
+
+.card-content small,
+.front-star {
+    color: #66804d;
+}
+
+.card-content h2 {
+    color: #87332f;
+}
+
+.card-content p {
+    color: #62514b;
+}
+
+.card-info span {
+    background: #f0dfd0;
+    color: #87332f;
+}
+
+.gold-line {
+    background: #66804d;
+}
+
+.card-back {
+    background: linear-gradient(145deg, #f7e6d7, #efd2c4, #e5c2b3);
+    color: #5c3731;
+}
+
+.back-inner {
+    border-color: #b7473e;
+}
+
+
+
+/* Ratatouille Explore Recipes button — mauve theme */
+.hero-btn {
+    background: #735267 !important;
+    color: #FDF6EC !important;
+    border: 1px solid #D8BFD0 !important;
+    box-shadow: 0 8px 20px rgba(77, 53, 71, 0.18);
+}
+.hero-btn:hover {
+    background: #4d3547 !important;
+    color: #F4E5C5 !important;
+    border-color: #F4E5C5 !important;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header>
+    <div class="logo">🍴 The Flavorverse</div>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu" aria-expanded="false" id="menuToggle">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+<aside class="side-menu" id="mainMenu" aria-label="Main navigation">
+    <div class="menu-top">
+        <h2>Explore</h2>
+        <button class="menu-close" onclick="closeMenu()" aria-label="Close Menu">×</button>
+    </div>
+    <div class="menu-links">
+        <a class="menu-link" href="index.html"><span class="menu-icon">🏠</span><span class="menu-text"><strong>Home</strong><small>Welcome to The Flavorverse</small></span></a>
+        <a class="menu-link" href="royal.html"><span class="menu-icon">👑</span><span class="menu-text"><strong>Royal Heritage</strong><small>Traditional recipes and regional flavours</small></span></a>
+        <a class="menu-link" href="movies&cartoons.html"><span class="menu-icon">🎬</span><span class="menu-text"><strong>Movies &amp; Cartoons</strong><small>Recipes inspired by favourite stories</small></span></a>
+        <a class="menu-link" href="worldcuisine.html"><span class="menu-icon">🌍</span><span class="menu-text"><strong>World Cuisine</strong><small>Explore food from around the world</small></span></a>
+        <a class="menu-link" href="desertwrold.html"><span class="menu-icon">🍰</span><span class="menu-text"><strong>Desserts</strong><small>Sweet treats and dessert recipes</small></span></a>
+        <a class="menu-link" href="gallery.html"><span class="menu-icon">🖼️</span><span class="menu-text"><strong>Gallery</strong><small>A collection of delicious creations</small></span></a>
+        <div class="menu-divider"></div>
+        <a class="menu-link" href="favourite.html"><span class="menu-icon">❤️</span><span class="menu-text"><strong>Favourites</strong><small>Your saved recipes</small></span></a>
+        <a class="menu-link" href="order.html"><span class="menu-icon">🛍️</span><span class="menu-text"><strong>Order</strong><small>Explore ingredient kits</small></span></a>
+        <a class="menu-link" href="stamp.html"><span class="menu-icon">📮</span><span class="menu-text"><strong>Stamped</strong><small>Your collected recipe stamps</small></span></a>
+        <a class="menu-link" href="contact.html"><span class="menu-icon">✉️</span><span class="menu-text"><strong>Contact</strong><small>Get in touch with us</small></span></a>
+        <a class="menu-link" href="about.html"><span class="menu-icon">ℹ️</span><span class="menu-text"><strong>About</strong><small>Learn about The Flavorverse</small></span></a>
+    </div>
+</aside>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero-section">
+
+    <div class="hero-card">
+
+        <div class="hero-star one">
+            ✦
+        </div>
+
+        <div class="hero-star two">
+            ✧
+        </div>
+
+        <div class="hero-star three">
+            🍅
+        </div>
+
+        <div class="hero-star four">
+            ✦
+        </div>
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                ✦ REMY'S FRENCH KITCHEN ✦
+            </div>
+
+            <h1>
+
+                A Taste of
+                <span>Ratatouille</span>
+
+            </h1>
+
+            <p>
+
+                Step into Remy's delicious world and
+                discover colourful French-inspired
+                dishes, elegant desserts and the joy
+                of creating something wonderful.
+
+            </p>
+
+            <a
+                href="#recipes"
+                class="hero-btn"
+            >
+
+                ✦ EXPLORE RECIPES
+
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img
+                src="ratatouille.png"
+                alt="Ratatouille French cooking"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RECIPE SECTION
+===================================================== -->
+
+<section
+    class="recipes"
+    id="recipes"
+>
+
+    <!-- MAGIC PARTICLES -->
+
+    <div class="magic">
+        ✦
+    </div>
+
+    <div class="magic">
+        ✧
+    </div>
+
+    <div class="magic">
+        🍅
+    </div>
+
+    <div class="magic">
+        ✦
+    </div>
+
+    <div class="magic">
+        ✧
+    </div>
+
+    <div class="magic">
+        ☯
+    </div>
+
+
+    <!-- HEADING -->
+
+    <div class="recipe-heading">
+
+        <span>
+            ✦ REMY'S KITCHEN ✦
+        </span>
+
+        <h1>
+            French Inspired Recipes
+        </h1>
+
+        <p>
+
+            Discover delicious recipes inspired by Remy's world,
+            from the colourful classic ratatouille to
+            a silky French crème brûlée.
+
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         CARDS
+    ================================================== -->
+
+    <div class="recipe-wrapper">
+
+
+        <!-- =================================================
+             CLASSIC RATATOUILLE
+        ================================================== -->
+
+        <div class="recipe-item">
+
+            <div class="recipe-card">
+                <div class="card-inner">
+
+                    <!-- FRONT -->
+                    <div class="card-front">
+                        <div class="card-image">
+                            <div class="card-tag">✦ REMY'S CLASSIC</div>
+                            <img src="ratatouillefood.png" alt="Classic French ratatouille" onerror="this.onerror=null;this.src='ratatouille.png';">
+                        </div>
+
+                        <div class="card-content">
+                            <small>RECIPE • 01</small>
+                            <h2>🍆 Classic Ratatouille</h2>
+                            <p>A colourful French vegetable dish layered with eggplant, zucchini, peppers and tomatoes with fragrant herbs.</p>
+                            <div class="gold-line"></div>
+                            <div class="card-info">
+                                <span>⏱ 60 MIN</span>
+                                <span>✦ MEDIUM</span>
+                            </div>
+                            <span class="front-star">✦</span>
+                        </div>
+                    </div>
+
+                    <!-- BACK -->
+                    <div class="card-back">
+                        <div class="back-inner">
+                            <h3>🍆 Classic Ratatouille</h3>
+                            <h4>✦ Ingredients</h4>
+                            <ul>
+                                <li>1 medium eggplant, thinly sliced</li>
+                                <li>1 zucchini, thinly sliced</li>
+                                <li>2 tomatoes, thinly sliced</li>
+                                <li>1 red or yellow bell pepper</li>
+                                <li>1 small onion, chopped</li>
+                                <li>2 garlic cloves, minced</li>
+                                <li>1 cup tomato puree</li>
+                                <li>2 tbsp olive oil</li>
+                                <li>Salt, black pepper and mixed herbs</li>
+                                <li>Fresh basil to garnish</li>
+                            </ul>
+                            <h4>✦ Preparation</h4>
+                            <ol>
+                                <li>Preheat the oven to 180°C.</li>
+                                <li>Cook the onion and garlic in olive oil until soft.</li>
+                                <li>Add tomato puree, salt, pepper and herbs; simmer briefly.</li>
+                                <li>Spread the sauce across the bottom of a baking dish.</li>
+                                <li>Arrange the sliced vegetables in alternating layers.</li>
+                                <li>Drizzle with a little olive oil and season lightly.</li>
+                                <li>Cover and bake until the vegetables are tender, then uncover briefly.</li>
+                                <li>Garnish with fresh basil and serve warm.</li>
+                            </ol>
+                            <div class="flip-hint">HOVER TO RETURN ✦</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RATATOUILLE FEATURES -->
+            <div class="recipe-feature-area">
+                <div class="feature-buttons">
+                    <button class="feature-btn favourite-btn" id="fav-ratatouille" onclick="toggleFavourite('ratatouille-ratatouille','Classic Ratatouille',this)">♡ Add to Favourite</button>
+                    <button class="feature-btn stamp-btn" id="stamp-ratatouille" onclick="toggleStamp('ratatouille-ratatouille','Classic Ratatouille',this)">🏷️ Add to Stamp</button>
+                </div>
+                <div class="rating-box">
+                    <div class="rating-title">RATE THIS RECIPE</div>
+                    <div class="stars" id="stars-ratatouille">
+                        <button class="star-btn" onclick="saveRating('ratatouille-ratatouille',1,'Classic Ratatouille')">★</button>
+                        <button class="star-btn" onclick="saveRating('ratatouille-ratatouille',2,'Classic Ratatouille')">★</button>
+                        <button class="star-btn" onclick="saveRating('ratatouille-ratatouille',3,'Classic Ratatouille')">★</button>
+                        <button class="star-btn" onclick="saveRating('ratatouille-ratatouille',4,'Classic Ratatouille')">★</button>
+                        <button class="star-btn" onclick="saveRating('ratatouille-ratatouille',5,'Classic Ratatouille')">★</button>
+                    </div>
+                    <div class="rating-message" id="rating-message-ratatouille"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CREME BRULEE
+        ================================================== -->
+
+        <div class="recipe-item">
+
+            <div class="recipe-card">
+                <div class="card-inner">
+
+                    <!-- FRONT -->
+                    <div class="card-front">
+                        <div class="card-image">
+                            <div class="card-tag">✦ FRENCH DESSERT</div>
+                            <img src="ratatouillecremebrulli.png" alt="Classic French crème brûlée" onerror="this.onerror=null;this.src='ratatouille.png';">
+                        </div>
+                        <div class="card-content">
+                            <small>RECIPE • 02</small>
+                            <h2>🍮 Crème Brûlée</h2>
+                            <p>A silky vanilla custard finished with a delicate, crisp caramelized sugar topping.</p>
+                            <div class="gold-line"></div>
+                            <div class="card-info">
+                                <span>⏱ 50 MIN + CHILL</span>
+                                <span>✦ MEDIUM</span>
+                            </div>
+                            <span class="front-star">✧</span>
+                        </div>
+                    </div>
+
+                    <!-- BACK -->
+                    <div class="card-back">
+                        <div class="back-inner">
+                            <h3>🍮 Crème Brûlée</h3>
+                            <h4>✦ Ingredients</h4>
+                            <ul>
+                                <li>2 cups heavy cream</li>
+                                <li>4 egg yolks</li>
+                                <li>1/3 cup sugar</li>
+                                <li>1 tsp vanilla extract</li>
+                                <li>Extra sugar for the topping</li>
+                            </ul>
+                            <h4>✦ Preparation</h4>
+                            <ol>
+                                <li>Preheat the oven to 150°C.</li>
+                                <li>Warm the cream gently in a saucepan; do not boil.</li>
+                                <li>Whisk the egg yolks and sugar until combined.</li>
+                                <li>Slowly whisk the warm cream into the egg mixture.</li>
+                                <li>Add vanilla, then pour into oven-safe ramekins.</li>
+                                <li>Place ramekins in a baking dish and add hot water around them.</li>
+                                <li>Bake until the custard is just set, then cool.</li>
+                                <li>Refrigerate for at least 4 hours.</li>
+                                <li>Sprinkle a thin layer of sugar on top and caramelize carefully with suitable kitchen equipment.</li>
+                            </ol>
+                            <div class="flip-hint">HOVER TO RETURN ✦</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CREME BRULEE FEATURES -->
+            <div class="recipe-feature-area">
+                <div class="feature-buttons">
+                    <button class="feature-btn favourite-btn" id="fav-creme-brulee" onclick="toggleFavourite('ratatouille-creme-brulee','Crème Brûlée',this)">♡ Add to Favourite</button>
+                    <button class="feature-btn stamp-btn" id="stamp-creme-brulee" onclick="toggleStamp('ratatouille-creme-brulee','Crème Brûlée',this)">🏷️ Add to Stamp</button>
+                </div>
+                <div class="rating-box">
+                    <div class="rating-title">RATE THIS RECIPE</div>
+                    <div class="stars" id="stars-creme-brulee">
+                        <button class="star-btn" onclick="saveRating('ratatouille-creme-brulee',1,'Crème Brûlée')">★</button>
+                        <button class="star-btn" onclick="saveRating('ratatouille-creme-brulee',2,'Crème Brûlée')">★</button>
+                        <button class="star-btn" onclick="saveRating('ratatouille-creme-brulee',3,'Crème Brûlée')">★</button>
+                        <button class="star-btn" onclick="saveRating('ratatouille-creme-brulee',4,'Crème Brûlée')">★</button>
+                        <button class="star-btn" onclick="saveRating('ratatouille-creme-brulee',5,'Crème Brûlée')">★</button>
+                    </div>
+                    <div class="rating-message" id="rating-message-creme-brulee"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FLAVORVERSE ACTIVITY
+    ====================================================== -->
+
+    <div class="activity">
+
+        <h2>
+            ✦ Your Flavorverse Activity ✦
+        </h2>
+
+        <div class="activity-grid">
+
+            <div class="activity-item">
+
+                <div class="icon">
+                    ❤️
+                </div>
+
+                <div
+                    class="count"
+                    id="fav-count"
+                >
+                    0
+                </div>
+
+                <div class="label">
+                    Favourites
+                </div>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="icon">
+                    🏷️
+                </div>
+
+                <div
+                    class="count"
+                    id="stamp-count"
+                >
+                    0
+                </div>
+
+                <div class="label">
+                    Stamped
+                </div>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="icon">
+                    ⭐
+                </div>
+
+                <div
+                    class="count"
+                    id="rating-count"
+                >
+                    0
+                </div>
+
+                <div class="label">
+                    Ratings
+                </div>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="icon">
+                    💬
+                </div>
+
+                <div
+                    class="count"
+                    id="review-count"
+                >
+                    0
+                </div>
+
+                <div class="label">
+                    Reviews
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         REVIEWS
+    ====================================================== -->
+
+    <div class="reviews">
+
+        <h2>
+            💬 Recipe Reviews
+        </h2>
+
+        <div class="review-form">
+
+            <select id="review-recipe">
+
+                <option value="">
+                    Choose a recipe
+                </option>
+
+                <option value="ratatouille-ratatouille">
+                    Classic Ratatouille
+                </option>
+
+                <option value="ratatouille-creme-brulee">
+                    Crème Brûlée
+                </option>
+
+            </select>
+
+
+            <textarea
+                id="review-text"
+                placeholder="Write your review..."
+            ></textarea>
+
+
+            <button
+                class="review-submit"
+                onclick="submitReview()"
+            >
+                Submit Review
+            </button>
+
+        </div>
+
+
+        <div
+            class="review-list"
+            id="review-list"
+        ></div>
+
+    </div>
+
+
+    <!-- =================================================
+         QUOTE
+    ================================================== -->
+
+    <div class="quote">
+
+        <span>
+            ✦ 🍅 ✦
+        </span>
+
+        <h2>
+
+            "Great food begins
+            with curiosity,
+            care and creativity."
+
+        </h2>
+
+        <p>
+            — The Flavorverse
+        </p>
+
+    </div>
+
+
+</section>
+
+
+<!-- BACK TO MOVIES & CARTOONS -->
+
+<div class="back-movies">
+
+    <a href="movies&cartoons.html">
+        ← BACK TO MOVIES & CARTOONS
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        🍴 The Flavorverse
+    </h3>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<!-- =====================================================
+     FIREBASE + FEATURES JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+    authDomain:
+        "the-flavoverse.firebaseapp.com",
+
+    projectId:
+        "the-flavoverse",
+
+    storageBucket:
+        "the-flavoverse.firebasestorage.app",
+
+    messagingSenderId:
+        "1064022248292",
+
+    appId:
+        "1:1064022248292:web:b2084d0ee1b4722d8bc871",
+
+    measurementId:
+        "G-16Z0K1687Z"
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+let currentUser = null;
+
+
+/* =====================================================
+   RECIPE DATA
+===================================================== */
+
+const recipeNames = {
+
+    "ratatouille-ratatouille":
+        "Classic Ratatouille",
+
+    "ratatouille-creme-brulee":
+        "Crème Brûlée"
+
+};
+
+const recipeIds =
+    Object.keys(recipeNames);
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+auth.onAuthStateChanged(
+    async user => {
+
+        currentUser = user;
+
+        if (user) {
+
+            await loadFavouriteStatus();
+
+            await loadStampStatus();
+
+            await loadMyRatings();
+
+            await loadActivity();
+
+            await loadReviews();
+
+        } else {
+
+            resetFeatureUI();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function checkLogin() {
+
+    if (!currentUser) {
+
+        showToast(
+            "Please login first 🔐"
+        );
+
+        setTimeout(
+            () => {
+                window.location.href =
+                    "login.html";
+            },
+            900
+        );
+
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(
+            () => {
+                toast.classList.remove(
+                    "show"
+                );
+            },
+            2200
+        );
+}
+
+
+/* =====================================================
+   FAVOURITE
+===================================================== */
+
+async function toggleFavourite(
+    recipeId,
+    recipeName,
+    button
+) {
+
+    if (!checkLogin()) return;
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("favourites")
+        .doc(recipeId);
+
+    try {
+
+        const snap =
+            await ref.get();
+
+        if (snap.exists) {
+
+            await ref.delete();
+
+            button.innerHTML =
+                "♡ Add to Favourite";
+
+            showToast(
+                recipeName +
+                " removed from Favourite"
+            );
+
+        } else {
+
+            await ref.set({
+
+                recipeId:
+                    recipeId,
+
+                name:
+                    recipeName,
+
+                category:
+                    "Movies & Cartoons",
+
+                page:
+                    window.location.pathname
+                    .split("/")
+                    .pop(),
+
+                addedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+            button.innerHTML =
+                "♥ Added to Favourite";
+
+            showToast(
+                recipeName +
+                " added to Favourite ❤️"
+            );
+        }
+
+        loadActivity();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Could not update Favourite"
+        );
+    }
+}
+
+
+/* =====================================================
+   STAMP
+===================================================== */
+
+async function toggleStamp(
+    recipeId,
+    recipeName,
+    button
+) {
+
+    if (!checkLogin()) return;
+
+    const ref =
+        db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("stamps")
+        .doc(recipeId);
+
+    try {
+
+        const snap =
+            await ref.get();
+
+        if (snap.exists) {
+
+            await ref.delete();
+
+            button.innerHTML =
+                "🏷️ Add to Stamp";
+
+            showToast(
+                recipeName +
+                " removed from Stamped"
+            );
+
+        } else {
+
+            await ref.set({
+
+                recipeId:
+                    recipeId,
+
+                name:
+                    recipeName,
+
+                category:
+                    "Movies & Cartoons",
+
+                page:
+                    window.location.pathname
+                    .split("/")
+                    .pop(),
+
+                stampedAt:
+                    firebase.firestore
+                    .FieldValue
+                    .serverTimestamp()
+
+            });
+
+            button.innerHTML =
+                "🏷️ Stamped";
+
+            showToast(
+                recipeName +
+                " added to Stamped 🏷️"
+            );
+        }
+
+        loadActivity();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Could not update Stamp"
+        );
+    }
+}
+
+
+/* =====================================================
+   LOAD FAVOURITE STATUS
+===================================================== */
+
+async function loadFavouriteStatus() {
+
+    if (!currentUser) return;
+
+    for (const id of recipeIds) {
+
+        const snap =
+            await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("favourites")
+            .doc(id)
+            .get();
+
+        const short =
+            id.replace(
+                "ratatouille-",
+                ""
+            );
+
+        const btn =
+            document.getElementById(
+                "fav-" + short
+            );
+
+        if (btn) {
+
+            btn.innerHTML =
+                snap.exists
+                    ? "♥ Added to Favourite"
+                    : "♡ Add to Favourite";
+        }
+    }
+}
+
+
+/* =====================================================
+   LOAD STAMP STATUS
+===================================================== */
+
+async function loadStampStatus() {
+
+    if (!currentUser) return;
+
+    for (const id of recipeIds) {
+
+        const snap =
+            await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("stamps")
+            .doc(id)
+            .get();
+
+        const short =
+            id.replace(
+                "ratatouille-",
+                ""
+            );
+
+        const btn =
+            document.getElementById(
+                "stamp-" + short
+            );
+
+        if (btn) {
+
+            btn.innerHTML =
+                snap.exists
+                    ? "🏷️ Stamped"
+                    : "🏷️ Add to Stamp";
+        }
+    }
+}
+
+
+/* =====================================================
+   SAVE RATING
+===================================================== */
+
+async function saveRating(
+    recipeId,
+    rating,
+    shortName
+) {
+
+    if (!checkLogin()) return;
+
+    try {
+
+        await db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("ratings")
+        .doc(recipeId)
+        .set({
+
+            rating:
+                rating,
+
+            recipeName:
+                shortName,
+
+            ratedAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+        updateStars(
+            recipeId,
+            rating
+        );
+
+        const short =
+            recipeId.replace(
+                "ratatouille-",
+                ""
+            );
+
+        const msg =
+            document.getElementById(
+                "rating-message-" +
+                short
+            );
+
+        if (msg) {
+
+            msg.textContent =
+                "You rated this recipe " +
+                rating +
+                "/5 ⭐";
+        }
+
+        showToast(
+            "Rating saved ⭐"
+        );
+
+        loadActivity();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Could not save rating"
+        );
+    }
+}
+
+
+/* =====================================================
+   UPDATE STARS
+===================================================== */
+
+function updateStars(
+    recipeId,
+    rating
+) {
+
+    const short =
+        recipeId.replace(
+            "ratatouille-",
+            ""
+        );
+
+    document
+    .querySelectorAll(
+        "#stars-" +
+        short +
+        " .star-btn"
+    )
+    .forEach(
+        (star,index) => {
+
+            star.classList.toggle(
+                "active",
+                index < rating
+            );
+
+        }
+    );
+}
+
+
+/* =====================================================
+   LOAD MY RATINGS
+===================================================== */
+
+async function loadMyRatings() {
+
+    if (!currentUser) return;
+
+    for (const id of recipeIds) {
+
+        const snap =
+            await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .collection("ratings")
+            .doc(id)
+            .get();
+
+        if (snap.exists) {
+
+            updateStars(
+                id,
+                snap.data().rating
+            );
+
+            const short =
+                id.replace(
+                    "ratatouille-",
+                    ""
+                );
+
+            const msg =
+                document.getElementById(
+                    "rating-message-" +
+                    short
+                );
+
+            if (msg) {
+
+                msg.textContent =
+                    "You rated this recipe " +
+                    snap.data().rating +
+                    "/5 ⭐";
+            }
+        }
+    }
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+async function loadActivity() {
+
+    if (!currentUser) {
+
+        [
+            "fav-count",
+            "stamp-count",
+            "rating-count",
+            "review-count"
+        ]
+        .forEach(
+            id => {
+
+                document.getElementById(
+                    id
+                ).textContent = "0";
+
+            }
+        );
+
+        return;
+    }
+
+    try {
+
+        const userRef =
+            db
+            .collection("users")
+            .doc(currentUser.uid);
+
+        const favSnap =
+            await userRef
+            .collection("favourites")
+            .get();
+
+        const stampSnap =
+            await userRef
+            .collection("stamps")
+            .get();
+
+        const ratingSnap =
+            await userRef
+            .collection("ratings")
+            .get();
+
+        let reviewCount = 0;
+
+        for (const id of recipeIds) {
+
+            const snap =
+                await db
+                .collection("recipes")
+                .doc(id)
+                .collection("reviews")
+                .where(
+                    "userId",
+                    "==",
+                    currentUser.uid
+                )
+                .get();
+
+            reviewCount +=
+                snap.size;
+        }
+
+        document.getElementById(
+            "fav-count"
+        ).textContent =
+            favSnap.size;
+
+        document.getElementById(
+            "stamp-count"
+        ).textContent =
+            stampSnap.size;
+
+        document.getElementById(
+            "rating-count"
+        ).textContent =
+            ratingSnap.size;
+
+        document.getElementById(
+            "review-count"
+        ).textContent =
+            reviewCount;
+
+    } catch (error) {
+
+        console.error(error);
+    }
+}
+
+
+/* =====================================================
+   RESET UI
+===================================================== */
+
+function resetFeatureUI() {
+
+    recipeIds.forEach(
+        id => {
+
+            const short =
+                id.replace(
+                    "ratatouille-",
+                    ""
+                );
+
+            const fav =
+                document.getElementById(
+                    "fav-" + short
+                );
+
+            const stamp =
+                document.getElementById(
+                    "stamp-" + short
+                );
+
+            if (fav) {
+
+                fav.innerHTML =
+                    "♡ Add to Favourite";
+            }
+
+            if (stamp) {
+
+                stamp.innerHTML =
+                    "🏷️ Add to Stamp";
+            }
+
+            document
+            .querySelectorAll(
+                "#stars-" +
+                short +
+                " .star-btn"
+            )
+            .forEach(
+                star =>
+                    star.classList
+                    .remove("active")
+            );
+
+            const msg =
+                document.getElementById(
+                    "rating-message-" +
+                    short
+                );
+
+            if (msg) {
+
+                msg.textContent = "";
+            }
+        }
+    );
+
+    [
+        "fav-count",
+        "stamp-count",
+        "rating-count",
+        "review-count"
+    ]
+    .forEach(
+        id => {
+
+            document.getElementById(
+                id
+            ).textContent = "0";
+
+        }
+    );
+
+    document.getElementById(
+        "review-list"
+    ).innerHTML = "";
+}
+
+
+/* =====================================================
+   SUBMIT REVIEW
+===================================================== */
+
+async function submitReview() {
+
+    if (!checkLogin()) return;
+
+    const recipeId =
+        document.getElementById(
+            "review-recipe"
+        ).value;
+
+    const text =
+        document.getElementById(
+            "review-text"
+        ).value.trim();
+
+    if (!recipeId || !text) {
+
+        showToast(
+            "Choose a recipe and write a review 💬"
+        );
+
+        return;
+    }
+
+    const userName =
+        currentUser.displayName ||
+        currentUser.email
+        ?.split("@")[0] ||
+        "Flavorverse User";
+
+    try {
+
+        await db
+        .collection("recipes")
+        .doc(recipeId)
+        .collection("reviews")
+        .add({
+
+            userId:
+                currentUser.uid,
+
+            userName:
+                userName,
+
+            text:
+                text,
+
+            createdAt:
+                firebase.firestore
+                .FieldValue
+                .serverTimestamp()
+
+        });
+
+        document.getElementById(
+            "review-text"
+        ).value = "";
+
+        document.getElementById(
+            "review-recipe"
+        ).value = "";
+
+        showToast(
+            "Review added 💬"
+        );
+
+        await loadReviews();
+
+        loadActivity();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Could not submit review"
+        );
+    }
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(str) {
+
+    return String(str).replace(
+        /[&<>"']/g,
+        m =>
+            ({
+                "&":
+                    "&amp;",
+
+                "<":
+                    "&lt;",
+
+                ">":
+                    "&gt;",
+
+                "\"":
+                    "&quot;",
+
+                "'":
+                    "&#039;"
+            }[m])
+    );
+}
+
+
+/* =====================================================
+   LOAD REVIEWS
+===================================================== */
+
+async function loadReviews() {
+
+    const list =
+        document.getElementById(
+            "review-list"
+        );
+
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    let all = [];
+
+    try {
+
+        for (const id of recipeIds) {
+
+            const snap =
+                await db
+                .collection("recipes")
+                .doc(id)
+                .collection("reviews")
+                .get();
+
+            snap.forEach(
+                doc => {
+
+                    const d =
+                        doc.data();
+
+                    all.push({
+
+                        ...d,
+
+                        recipeName:
+                            recipeNames[id]
+
+                    });
+
+                }
+            );
+        }
+
+
+        all.sort(
+            (a,b) => {
+
+                const ta =
+                    a.createdAt?.toMillis
+                        ? a.createdAt.toMillis()
+                        : 0;
+
+                const tb =
+                    b.createdAt?.toMillis
+                        ? b.createdAt.toMillis()
+                        : 0;
+
+                return tb - ta;
+            }
+        );
+
+
+        if (!all.length) {
+
+            list.innerHTML =
+                '<div class="review-item">' +
+                '<p>No reviews yet. Be the first to review! ✨</p>' +
+                '</div>';
+
+            return;
+        }
+
+
+        all.forEach(
+            r => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+                item.className =
+                    "review-item";
+
+                const date =
+                    r.createdAt?.toDate
+                        ? r.createdAt
+                            .toDate()
+                            .toLocaleDateString()
+                        : "";
+
+                item.innerHTML =
+
+                    `<strong>
+                        ${escapeHTML(
+                            r.userName ||
+                            "Flavorverse User"
+                        )}
+                        •
+                        ${escapeHTML(
+                            r.recipeName
+                        )}
+                    </strong>
+
+                    <p>
+                        ${escapeHTML(
+                            r.text || ""
+                        )}
+                    </p>
+
+                    <small>
+                        ${date}
+                    </small>`;
+
+                list.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        list.innerHTML =
+            '<div class="review-item">' +
+            '<p>Reviews could not be loaded right now.</p>' +
+            '</div>';
+    }
+}
+
+</script>
+
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("mainMenu");
+    const overlay = document.getElementById("menuOverlay");
+    const button = document.getElementById("menuToggle");
+    const isOpen = menu.classList.toggle("show");
+    overlay.classList.toggle("show", isOpen);
+    button.setAttribute("aria-expanded", String(isOpen));
+    document.body.style.overflow = isOpen ? "hidden" : "";
+}
+function closeMenu() {
+    document.getElementById("mainMenu").classList.remove("show");
+    document.getElementById("menuOverlay").classList.remove("show");
+    document.getElementById("menuToggle").setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+}
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") closeMenu();
+});
+</script>
+
+</body>
+
+</html>
