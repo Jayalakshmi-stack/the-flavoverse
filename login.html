@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Flavorverse | Login</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            color: white;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(31, 13, 29, 0.40),
+                    rgba(31, 13, 29, 0.55)
+                ),
+                url("login.png");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            width: 100%;
+            height: 126px;
+
+            padding: 0 5.2%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(137, 99, 133, 0.96);
+
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+
+            position: relative;
+            z-index: 100;
+
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            text-decoration: none;
+
+            color: #fffdf8;
+
+            font-family: "Cormorant Garamond", serif;
+            font-size: 34px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .logo i {
+            color: #f4dfae;
+            font-size: 26px;
+        }
+
+
+        /* NAV LINKS */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 31px;
+        }
+
+        .nav-links a {
+            position: relative;
+
+            text-decoration: none;
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f4dfae;
+        }
+
+
+        /* ACTIVE LOGIN */
+
+        .nav-links a.active {
+            color: #f4dfae;
+        }
+
+        .nav-links a.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: -12px;
+
+            height: 2px;
+
+            background: #f4dfae;
+
+            border-radius: 10px;
+        }
+
+
+        /* =========================
+           MAIN SECTION
+        ========================= */
+
+        .main {
+            min-height: 690px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 55px 20px;
+        }
+
+
+        /* =========================
+           GLASS LOGIN CARD
+        ========================= */
+
+        .login-card {
+            width: 490px;
+            max-width: 95%;
+
+            padding: 40px 48px 42px;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.28),
+                    rgba(255,255,255,0.10)
+                );
+
+            border: 1px solid rgba(255,255,255,0.42);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.42),
+                inset 0 1px 1px rgba(255,255,255,0.35);
+
+            text-align: center;
+
+            animation: cardAppear 0.8s ease;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        /* =========================
+           ORNAMENT
+        ========================= */
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-bottom: 15px;
+        }
+
+        .ornament span {
+            width: 58px;
+            height: 1px;
+
+            background: #f4dfae;
+        }
+
+        .ornament i {
+            color: #f4dfae;
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           BRAND
+        ========================= */
+
+        .small-title {
+            font-size: 11px;
+
+            letter-spacing: 5px;
+
+            font-weight: 600;
+
+            color: rgba(255,255,255,0.95);
+
+            margin-bottom: 5px;
+        }
+
+        .brand {
+            font-family: "Great Vibes", cursive;
+
+            font-size: 48px;
+
+            line-height: 1.1;
+
+            color: #fffdf8;
+
+            text-shadow:
+                0 3px 15px rgba(0,0,0,0.18);
+        }
+
+        .tagline {
+            margin-top: 7px;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 18px;
+
+            font-style: italic;
+
+            color: #fff8ec;
+        }
+
+
+        /* =========================
+           DIVIDER
+        ========================= */
+
+        .divider {
+            width: 80px;
+            height: 1px;
+
+            background: #f4dfae;
+
+            margin: 19px auto;
+        }
+
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        .welcome {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 32px;
+
+            font-weight: 700;
+
+            color: white;
+
+            margin-bottom: 3px;
+        }
+
+        .description {
+            font-size: 13px;
+
+            color: rgba(255,255,255,0.87);
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            text-align: left;
+
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
+            color: white;
+        }
+
+
+        /* INPUT BOX */
+
+        .input-box {
+            width: 100%;
+            height: 57px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 16px;
+
+            border-radius: 14px;
+
+            background: rgba(255,255,255,0.17);
+
+            border: 1px solid rgba(255,255,255,0.38);
+
+            transition: 0.3s ease;
+        }
+
+        .input-box:focus-within {
+            background: rgba(255,255,255,0.23);
+
+            border-color: #f4dfae;
+
+            box-shadow:
+                0 0 0 3px rgba(244,223,174,0.13);
+        }
+
+        .input-box > i:first-child {
+            width: 30px;
+
+            color: #f4dfae;
+
+            font-size: 17px;
+        }
+
+        .input-box input {
+            width: 100%;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: white;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 13px;
+        }
+
+        .input-box input::placeholder {
+            color: rgba(255,255,255,0.72);
+        }
+
+
+        /* PASSWORD EYE */
+
+        .eye {
+            width: auto !important;
+
+            color: rgba(255,255,255,0.82) !important;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .eye:hover {
+            color: #f4dfae !important;
+        }
+
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin: 5px 2px 24px;
+
+            font-size: 11px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            color: rgba(255,255,255,0.90);
+
+            cursor: pointer;
+        }
+
+        .remember input {
+            accent-color: #f4dfae;
+
+            cursor: pointer;
+        }
+
+        .forgot {
+            text-decoration: none;
+
+            color: #f4dfae;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .forgot:hover {
+            color: white;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+            width: 100%;
+            height: 55px;
+
+            border-radius: 14px;
+
+            border: 1px solid #f4dfae;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(139,96,134,0.96),
+                    rgba(159,113,148,0.96)
+                );
+
+            color: white;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.35s ease;
+
+            box-shadow:
+                0 8px 22px rgba(50,20,45,0.25);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4dfae,
+                    #e9cd91
+                );
+
+            color: #5d4058;
+
+            box-shadow:
+                0 12px 30px rgba(244,223,174,0.28);
+        }
+
+        .login-btn i {
+            margin-left: 8px;
+        }
+
+
+        /* =========================
+           SIGN UP
+        ========================= */
+
+        .signup {
+            margin-top: 22px;
+
+            font-size: 12px;
+
+            color: rgba(255,255,255,0.88);
+        }
+
+        .signup a {
+            color: #f4dfae;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .signup a:hover {
+            color: white;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            background:
+                rgba(73,45,69,0.96);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border-top:
+                1px solid rgba(244,223,174,0.25);
+
+            padding:
+                28px 6% 18px;
+
+            position: relative;
+            z-index: 10;
+
+            box-shadow:
+                0 -10px 35px rgba(0,0,0,0.18);
+        }
+
+        .footer-content {
+            max-width: 1250px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+
+        /* FOOTER BRAND */
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            color: white;
+        }
+
+        .footer-brand i {
+            color: #f4dfae;
+        }
+
+
+        /* FOOTER TAGLINE */
+
+        .footer-text {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 16px;
+
+            font-style: italic;
+
+            color: rgba(255,255,255,0.80);
+        }
+
+
+        /* FOOTER LINKS */
+
+        .footer-links {
+            display: flex;
+
+            gap: 22px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.84);
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #f4dfae;
+        }
+
+
+        /* FOOTER BOTTOM */
+
+        .footer-bottom {
+            max-width: 1250px;
+
+            margin: 20px auto 0;
+
+            padding-top: 15px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.12);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 10px;
+
+            color: rgba(255,255,255,0.60);
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .navbar {
+                padding: 0 3%;
+            }
+
+            .nav-links {
+                gap: 18px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .logo {
+                font-size: 29px;
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                height: auto;
+
+                min-height: 100px;
+
+                padding: 18px 20px;
+
+                flex-direction: column;
+
+                gap: 18px;
+            }
+
+            .logo {
+                font-size: 29px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 13px 18px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .main {
+                min-height: 650px;
+
+                padding: 35px 15px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+
+                gap: 8px;
+
+                text-align: center;
+            }
+        }
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            .login-card {
+                padding: 32px 23px 35px;
+
+                border-radius: 22px;
+            }
+
+            .brand {
+                font-size: 40px;
+            }
+
+            .welcome {
+                font-size: 28px;
+            }
+
+            .small-title {
+                letter-spacing: 3px;
+            }
+
+            .tagline {
+                font-size: 16px;
+            }
+
+            .options {
+                font-size: 10px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <nav class="navbar">
+
+        <!-- LOGO -->
+
+        <a href="index.html" class="logo">
+
+            <i class="fa-solid fa-utensils"></i>
+
+            The Flavorverse
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="about.html">About</a>
+
+            <a href="royal.html">Royal</a>
+
+            <a href="movies.html">Movies</a>
+
+            <a href="world.html">World Cuisine</a>
+
+            <a href="desserts.html">Desserts</a>
+
+            <a href="gallery.html">Gallery</a>
+
+            <a href="contact.html">Contact</a>
+
+            <a href="login.html" class="active">Login</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         LOGIN SECTION
+    ====================================================== -->
+
+    <main class="main">
+
+        <div class="login-card">
+
+
+            <!-- TOP ORNAMENT -->
+
+            <div class="ornament">
+
+                <span></span>
+
+                <i class="fa-solid fa-leaf"></i>
+
+                <span></span>
+
+            </div>
+
+
+            <!-- BRAND -->
+
+            <div class="small-title">
+                A UNIVERSE OF FLAVORS
+            </div>
+
+            <div class="brand">
+                The Flavorverse
+            </div>
+
+            <div class="tagline">
+                Where every recipe tells a story
+            </div>
+
+            <div class="divider"></div>
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome">
+                Welcome Back
+            </div>
+
+            <div class="description">
+                Login to continue your delicious journey.
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <i
+                        class="fa-regular fa-eye eye"
+                        id="eyeIcon"
+                        onclick="togglePassword()">
+                    </i>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+
+            <div class="options">
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                    >
+
+                    Remember me
+
+                </label>
+
+
+                <a href="#" class="forgot">
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="button"
+                class="login-btn"
+                onclick="loginUser()">
+
+                Login
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+            <!-- SIGN UP -->
+
+            <div class="signup">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create Account
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+
+            <!-- FOOTER BRAND -->
+
+            <div class="footer-brand">
+
+                <i class="fa-solid fa-utensils"></i>
+
+                <span>
+                    The Flavorverse
+                </span>
+
+            </div>
+
+
+            <!-- TAGLINE -->
+
+            <div class="footer-text">
+
+                Where every recipe tells a story ✨
+
+            </div>
+
+
+            <!-- FOOTER LINKS -->
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="gallery.html">
+                    Gallery
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER BOTTOM -->
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 The Flavorverse
+            </span>
+
+            <span>
+                Made with ♥ & delicious memories
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         FIREBASE
+    ====================================================== -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+
+    <script>
+
+        /* =========================
+           FIREBASE CONFIG
+        ========================= */
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyD0dsVFReTfNXJamLKcGMBGWQYrM0DgYSg",
+
+            authDomain: "the-flavoverse.firebaseapp.com",
+
+            projectId: "the-flavoverse",
+
+            storageBucket: "the-flavoverse.firebasestorage.app",
+
+            messagingSenderId: "1064022248292",
+
+            appId: "1:1064022248292:web:b2084d0ee1b4722d8bc871"
+
+        };
+
+
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+
+
+        /* =========================
+           SHOW / HIDE PASSWORD
+        ========================= */
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const eye =
+                document.getElementById("eyeIcon");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                eye.classList.remove("fa-eye");
+
+                eye.classList.add("fa-eye-slash");
+
+            }
+
+            else {
+
+                password.type = "password";
+
+                eye.classList.remove("fa-eye-slash");
+
+                eye.classList.add("fa-eye");
+
+            }
+
+        }
+
+
+        /* =========================
+           LOGIN USER
+        ========================= */
+
+        async function loginUser() {
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+
+            /* CHECK EMPTY FIELDS */
+
+            if (!email || !password) {
+
+                alert(
+                    "Please enter your email and password."
+                );
+
+                return;
+            }
+
+
+            try {
+
+                /* FIREBASE LOGIN */
+
+                await auth.signInWithEmailAndPassword(
+                    email,
+                    password
+                );
+
+
+                /* SUCCESS MESSAGE */
+
+                alert(
+                    "Welcome back to The Flavorverse! 🍽️✨"
+                );
+
+
+                /* GO TO HOME PAGE */
+
+                window.location.href = "index.html";
+
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                /* USER NOT FOUND */
+
+                if (
+                    error.code ===
+                    "auth/user-not-found"
+                ) {
+
+                    alert(
+                        "No account found with this email."
+                    );
+
+                }
+
+
+                /* WRONG PASSWORD */
+
+                else if (
+                    error.code ===
+                    "auth/wrong-password"
+                ) {
+
+                    alert(
+                        "Incorrect password. Please try again."
+                    );
+
+                }
+
+
+                /* INVALID EMAIL */
+
+                else if (
+                    error.code ===
+                    "auth/invalid-email"
+                ) {
+
+                    alert(
+                        "Please enter a valid email address."
+                    );
+
+                }
+
+
+                /* INVALID CREDENTIAL */
+
+                else if (
+                    error.code ===
+                    "auth/invalid-credential"
+                ) {
+
+                    alert(
+                        "Invalid email or password."
+                    );
+
+                }
+
+
+                /* OTHER ERROR */
+
+                else {
+
+                    alert(
+                        "Login failed. Please try again."
+                    );
+
+                    console.error(
+                        "Firebase Error:",
+                        error
+                    );
+                }
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flavorverse - Home</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#F7E7CE;
+    color:#5B4A45;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#8E6C88;
+    color:#fff;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* NAVIGATION */
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+}
+
+nav a:hover{
+    color:#FDF6EC;
+}
+
+/* MENU BUTTON */
+
+.menu-btn{
+    background:#735267;
+    color:#fff;
+    border:none;
+    padding:11px 17px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.menu-btn:hover{
+    background:#5B4A45;
+}
+
+
+/* =========================
+   MENU PANEL
+========================= */
+
+.menu-panel{
+    position:fixed;
+    top:0;
+    right:-390px;
+
+    width:360px;
+    height:100vh;
+
+    background:#FDF6EC;
+
+    z-index:1001;
+
+    box-shadow:-8px 0 30px rgba(0,0,0,0.15);
+
+    transition:right 0.35s ease;
+
+    overflow-y:auto;
+}
+
+.menu-panel.active{
+    right:0;
+}
+
+
+/* MENU HEADER */
+
+.menu-title{
+    height:86px;
+    background:#8E6C88;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 25px;
+}
+
+.menu-title span{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.close-btn{
+    border:none;
+    background:transparent;
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+}
+
+
+/* MENU ITEMS */
+
+.menu-items{
+    padding:20px;
+}
+
+.menu-items a{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    padding:15px;
+
+    margin-bottom:8px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:#5B4A45;
+
+    transition:0.25s;
+}
+
+.menu-items a:hover{
+    background:#F4E5C5;
+    transform:translateX(4px);
+}
+
+.menu-icon{
+    font-size:25px;
+    width:35px;
+    text-align:center;
+}
+
+.menu-items strong{
+    display:block;
+    font-size:16px;
+    color:#735267;
+}
+
+.menu-items small{
+    display:block;
+    margin-top:3px;
+    font-size:12px;
+    color:#7A6B65;
+}
+
+
+/* DIVIDER */
+
+.menu-divider{
+    height:1px;
+    background:#E4D4C4;
+    margin:15px 5px;
+}
+
+
+/* OVERLAY */
+
+.menu-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(50,35,45,0.35);
+
+    z-index:1000;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:0.3s;
+}
+
+.menu-overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    width:88%;
+    margin:40px auto;
+    background:#FDF6EC;
+    border-radius:20px;
+    padding:40px;
+    display:flex;
+    gap:40px;
+    align-items:center;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.tag{
+    color:#8E6C88;
+    font-weight:bold;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+h1{
+    font-size:46px;
+    color:#7A5C74;
+    margin-bottom:15px;
+}
+
+.hero p{
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.btn{
+    background:#8E6C88;
+    color:#fff;
+    padding:12px 28px;
+    border-radius:30px;
+    text-decoration:none;
+}
+
+.btn:hover{
+    background:#6F4E6E;
+}
+
+.hero img{
+    width:420px;
+    max-width:100%;
+    border-radius:18px;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.intro{
+    text-align:center;
+    width:80%;
+    margin:50px auto;
+}
+
+.intro h2,
+.flavors h2{
+    color:#7A5C74;
+    margin-bottom:15px;
+}
+
+
+/* =========================
+   FLAVORS
+========================= */
+
+.flavors{
+    padding:20px 5% 60px;
+    text-align:center;
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:#fff;
+    width:220px;
+    padding:20px;
+    border-radius:16px;
+    border:1px solid #EADBC8;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.icon{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#8E6C88;
+    color:#fff;
+    text-align:center;
+    padding:20px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    header{
+        padding:16px 5%;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    nav a{
+        display:none;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .menu-panel{
+        width:85%;
+        max-width:360px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🍴 The Flavorverse
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            ☰ Menu
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     MENU PANEL
+========================= -->
+
+<div class="menu-panel" id="menuPanel">
+
+    <div class="menu-title">
+
+        <span>Explore</span>
+
+        <button class="close-btn" onclick="toggleMenu()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="menu-items">
+
+
+        <!-- ROYAL -->
+
+        <a href="royal.html">
+
+            <span class="menu-icon">👑</span>
+
+            <div>
+                <strong>Royal Heritage</strong>
+                <small>Traditional royal recipes</small>
+            </div>
+
+        </a>
+
+
+        <!-- MOVIES -->
+
+        <a href="movies&cartoons.html">
+
+            <span class="menu-icon">🎬</span>
+
+            <div>
+                <strong>Movies & Cartoons</strong>
+                <small>Recipes inspired by magical worlds</small>
+            </div>
+
+        </a>
+
+
+        <!-- WORLD CUISINE -->
+
+        <a href="worldcuisine.html">
+
+            <span class="menu-icon">🌎</span>
+
+            <div>
+                <strong>World Cuisine</strong>
+                <small>Flavours from around the world</small>
+            </div>
+
+        </a>
+
+
+        <!-- DESSERTS -->
+
+        <a href="desertwrold.html">
+
+            <span class="menu-icon">🍰</span>
+
+            <div>
+                <strong>Desserts</strong>
+                <small>Sweet treats and desserts</small>
+            </div>
+
+        </a>
+
+
+        <!-- GALLERY -->
+
+        <a href="gallery.html">
+
+            <span class="menu-icon">🖼️</span>
+
+            <div>
+                <strong>Gallery</strong>
+                <small>Explore our food gallery</small>
+            </div>
+
+        </a>
+
+
+        <div class="menu-divider"></div>
+
+
+        <!-- FAVOURITES -->
+
+        <a href="favourite.html">
+
+            <span class="menu-icon">❤️</span>
+
+            <div>
+                <strong>Favourites</strong>
+                <small>Your favourite recipes</small>
+            </div>
+
+        </a>
+
+
+        <!-- ORDER -->
+
+        <a href="order.html">
+
+            <span class="menu-icon">🛒</span>
+
+            <div>
+                <strong>Order</strong>
+                <small>Order ingredient kits</small>
+            </div>
+
+        </a>
+
+
+        <!-- STAMPED -->
+
+        <a href="stamp.html">
+
+            <span class="menu-icon">🎫</span>
+
+            <div>
+                <strong>Stamped</strong>
+                <small>Your stamped recipes</small>
+            </div>
+
+        </a>
+
+
+        <!-- CONTACT -->
+
+        <a href="contact.html">
+
+            <span class="menu-icon">📩</span>
+
+            <div>
+                <strong>Contact</strong>
+                <small>Get in touch with us</small>
+            </div>
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<!-- DARK OVERLAY -->
+
+<div
+    class="menu-overlay"
+    id="menuOverlay"
+    onclick="toggleMenu()">
+</div>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <div class="tag">
+            A UNIVERSE OF FLAVORS
+        </div>
+
+        <h1>
+            Welcome to<br>
+            The Flavorverse
+        </h1>
+
+        <p>
+            Where tradition meets imagination.
+            Discover royal heritage recipes,
+            movie-inspired dishes, world cuisine
+            and delicious desserts in one place.
+        </p>
+
+        <a class="btn" href="about.html">
+            Explore Recipes
+        </a>
+
+    </div>
+
+
+    <div>
+
+        <img
+            src="firstpageimage2.png"
+            alt="Mixed food collage">
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<section class="intro">
+
+    <h2>
+        ✨ Discover The Flavorverse
+    </h2>
+
+    <p>
+        A delicious universe where food, culture and
+        creativity come together. Explore recipes
+        inspired by royal kitchens, movies, cartoons
+        and famous cuisines from around the world.
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     FLAVORS
+========================= -->
+
+<section class="flavors">
+
+    <h2>
+        Explore Our Flavors
+    </h2>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="icon">👑</div>
+
+            <h3>
+                Royal Heritage
+            </h3>
+
+            <p>
+                Traditional recipes with a royal touch.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🎬</div>
+
+            <h3>
+                Movie & Cartoon
+            </h3>
+
+            <p>
+                Creative dishes inspired by magical worlds.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🌍</div>
+
+            <h3>
+                World Cuisine
+            </h3>
+
+            <p>
+                Travel through international flavors.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🍰</div>
+
+            <h3>
+                Desserts
+            </h3>
+
+            <p>
+                Sweet treats for every celebration.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>
+        The Flavorverse
+    </h3>
+
+    <p>
+        A Universe of Royal Heritage, Reel Magic & World Flavors
+    </p>
+
+    <p>
+        © 2026 The Flavorverse | All Rights Reserved
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById("menuPanel");
+
+    const overlay =
+        document.getElementById("menuOverlay");
+
+    menu.classList.toggle("active");
+
+    overlay.classList.toggle("active");
+
+}
+
+</script>
+
+
+</body>
+</html>
